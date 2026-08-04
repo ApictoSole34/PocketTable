@@ -14,7 +14,7 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
     private final RoomService roomService;
-
+    private final RoomEventService roomEventService;
 
     public Player joinRoom(String roomCode, JoinRoomRequest request) {
 
@@ -37,6 +37,13 @@ public class PlayerService {
                 .build();
 
 
-        return playerRepository.save(player);
+        Player saved = playerRepository.save(player);
+
+        roomEventService.playerJoined(
+                roomCode,
+                saved.getNickname()
+        );
+
+        return saved;
     }
 }
