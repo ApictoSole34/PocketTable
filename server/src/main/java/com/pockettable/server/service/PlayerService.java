@@ -1,0 +1,29 @@
+package com.pockettable.server.service;
+
+import com.pockettable.server.dto.player.JoinRoomRequest;
+import com.pockettable.server.model.Player;
+import com.pockettable.server.model.Room;
+import com.pockettable.server.repository.PlayerRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class PlayerService {
+
+    private final PlayerRepository playerRepository;
+    private final RoomService roomService;
+
+
+    public Player joinRoom(String roomCode, JoinRoomRequest request) {
+
+        Room room = roomService.getRoomByCode(roomCode);
+
+        Player player = Player.builder()
+                .nickname(request.nickname())
+                .room(room)
+                .build();
+
+        return playerRepository.save(player);
+    }
+}
