@@ -25,4 +25,18 @@ public class RoomController {
                 room.getStatus()
         );
     }
+
+    @GetMapping("/{roomCode}")
+    public RoomResponse getRoom(
+            @PathVariable String roomCode
+    ) {
+
+        Room room = roomService.getRoomByCode(roomCode);
+
+        return new RoomResponse(
+                room.getId(),
+                room.getRoomCode(),
+                room.getStatus()
+        );
+    }
 }

@@ -1,5 +1,6 @@
 package com.pockettable.server.service;
 
+import com.pockettable.server.exception.RoomNotFoundException;
 import com.pockettable.server.model.Room;
 import com.pockettable.server.model.enums.RoomStatus;
 import com.pockettable.server.repository.RoomRepository;
@@ -37,5 +38,11 @@ public class RoomService {
         } while (roomRepository.existsByRoomCode(code));
 
         return code;
+    }
+
+    public Room getRoomByCode(String roomCode) {
+
+        return roomRepository.findByRoomCode(roomCode)
+                .orElseThrow(() -> new RoomNotFoundException(roomCode));
     }
 }
