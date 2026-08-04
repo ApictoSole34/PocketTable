@@ -1,6 +1,7 @@
 package com.pockettable.server.service;
 
 import com.pockettable.server.dto.player.JoinRoomRequest;
+import com.pockettable.server.exception.DuplicateNicknameException;
 import com.pockettable.server.model.Player;
 import com.pockettable.server.model.Room;
 import com.pockettable.server.repository.PlayerRepository;
@@ -19,10 +20,22 @@ public class PlayerService {
 
         Room room = roomService.getRoomByCode(roomCode);
 
+
+        if (playerRepository.existsByNicknameAndRoomId(
+                request.nickname(),
+                room.getId()
+        )) {
+            throw new DuplicateNicknameException(
+                    request.nickname()
+            );
+        }
+
+
         Player player = Player.builder()
                 .nickname(request.nickname())
                 .room(room)
                 .build();
+
 
         return playerRepository.save(player);
     }

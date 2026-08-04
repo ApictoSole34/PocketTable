@@ -7,4 +7,8 @@ import java.util.UUID;
 
 public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
+    boolean existsByNicknameAndRoomId(
+            String nickname,
+            UUID roomId
+    );
 }

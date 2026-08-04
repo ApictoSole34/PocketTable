@@ -4,6 +4,7 @@ import com.pockettable.server.dto.player.JoinRoomRequest;
 import com.pockettable.server.dto.player.PlayerResponse;
 import com.pockettable.server.model.Player;
 import com.pockettable.server.service.PlayerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class PlayerController {
     @PostMapping("/{roomCode}/players")
     public PlayerResponse joinRoom(
             @PathVariable String roomCode,
-            @RequestBody JoinRoomRequest request
+            @Valid @RequestBody JoinRoomRequest request
     ) {
 
         Player player = playerService.joinRoom(roomCode, request);
