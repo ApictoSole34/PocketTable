@@ -2,16 +2,15 @@ package com.pockettable.server.model;
 
 import com.pockettable.server.model.base.BaseEntity;
 import com.pockettable.server.model.enums.RoomStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +28,6 @@ public class Room extends BaseEntity {
     @Column(nullable = false)
     private RoomStatus status;
 
+    @OneToMany(mappedBy = "room")
+    private List<Player> players = new ArrayList<>();
 }
