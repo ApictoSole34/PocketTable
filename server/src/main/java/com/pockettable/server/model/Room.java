@@ -1,6 +1,7 @@
 package com.pockettable.server.model;
 
 import com.pockettable.server.model.base.BaseEntity;
+import com.pockettable.server.model.enums.GameType;
 import com.pockettable.server.model.enums.RoomStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,14 @@ public class Room extends BaseEntity {
     @Column(nullable = false)
     private RoomStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private GameType gameType;
+
+    @Column(nullable = false)
+    private Integer maxPlayers;
+
     @OneToMany(mappedBy = "room")
+    @Builder.Default
     private List<Player> players = new ArrayList<>();
 }

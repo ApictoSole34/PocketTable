@@ -1,7 +1,9 @@
 package com.pockettable.server.service;
 
+import com.pockettable.server.dto.room.CreateRoomRequest;
 import com.pockettable.server.exception.RoomNotFoundException;
 import com.pockettable.server.model.Room;
+import com.pockettable.server.model.enums.GameType;
 import com.pockettable.server.model.enums.RoomStatus;
 import com.pockettable.server.repository.RoomRepository;
 import com.pockettable.server.util.RoomCodeGenerator;
@@ -16,16 +18,28 @@ public class RoomService {
     private final RoomCodeGenerator roomCodeGenerator;
 
 
-    public Room createRoom() {
-
-        String roomCode = generateUniqueRoomCode();
+    public Room createRoom(CreateRoomRequest request) {
 
         Room room = Room.builder()
-                .roomCode(roomCode)
+                .roomCode(generateUniqueRoomCode())
                 .status(RoomStatus.WAITING)
+                .gameType(request.gameType())
+                .maxPlayers(getDefaultMaxPlayers(request.gameType()))
                 .build();
 
         return roomRepository.save(room);
+    }
+
+    private int getDefaultMaxPlayers(GameType gameType) {
+
+        return switch (gameType) {
+
+            case POKER -> 6;
+
+            case UNO -> 10;
+
+            case MAKAO -> 4;
+        };
     }
 
 
