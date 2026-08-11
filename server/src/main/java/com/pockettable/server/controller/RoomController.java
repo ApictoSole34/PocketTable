@@ -40,6 +40,14 @@ public class RoomController {
         return mapToResponse(room);
     }
 
+    @GetMapping
+    public List<RoomResponse> getRooms() {
+
+        return roomService.getAvaiableRooms()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
 
     private RoomResponse mapToResponse(Room room) {
 

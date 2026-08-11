@@ -10,6 +10,8 @@ import com.pockettable.server.util.RoomCodeGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RoomService {
@@ -58,5 +60,10 @@ public class RoomService {
 
         return roomRepository.findByRoomCode(roomCode)
                 .orElseThrow(() -> new RoomNotFoundException(roomCode));
+    }
+
+    public List<Room> getAvaiableRooms() {
+
+        return roomRepository.findByStatus(RoomStatus.WAITING);
     }
 }

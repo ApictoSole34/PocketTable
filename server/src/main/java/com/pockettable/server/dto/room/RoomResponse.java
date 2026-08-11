@@ -11,7 +11,7 @@ public record RoomResponse(
         UUID id,
         String roomCode,
         RoomStatus status,
-        GameType gametype,
+        GameType gameType,
         int maxPlayers,
         List<PlayerSummaryResponse> players
 ) {
