@@ -45,10 +45,12 @@ public class PlayerService {
             );
         }
 
+        boolean firstPlayer = room.getPlayers().isEmpty();
 
         Player player = Player.builder()
                 .nickname(request.nickname())
                 .room(room)
+                .host(firstPlayer)
                 .build();
 
 

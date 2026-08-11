@@ -24,9 +24,11 @@ public class Player extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String nickname;
 
-
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
+
+    @Column(nullable = false)
+    private boolean host;
 
 }

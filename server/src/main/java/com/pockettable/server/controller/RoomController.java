@@ -56,7 +56,8 @@ public class RoomController {
                         .stream()
                         .map(player -> new PlayerSummaryResponse(
                                 player.getId(),
-                                player.getNickname()
+                                player.getNickname(),
+                                player.isHost()
                         ))
                         .toList();
 

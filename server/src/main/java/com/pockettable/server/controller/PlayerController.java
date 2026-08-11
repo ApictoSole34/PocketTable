@@ -27,7 +27,8 @@ public class PlayerController {
         return new PlayerResponse(
                 player.getId(),
                 player.getNickname(),
-                player.getRoom().getId()
+                player.getRoom().getId(),
+                player.isHost()
         );
     }
 }
