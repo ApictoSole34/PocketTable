@@ -2,8 +2,10 @@ package com.pockettable.server.service;
 
 import com.pockettable.server.dto.player.JoinRoomRequest;
 import com.pockettable.server.exception.DuplicateNicknameException;
+import com.pockettable.server.exception.RoomUnavailableException;
 import com.pockettable.server.model.Player;
 import com.pockettable.server.model.Room;
+import com.pockettable.server.model.enums.RoomStatus;
 import com.pockettable.server.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,19 @@ public class PlayerService {
 
         Room room = roomService.getRoomByCode(roomCode);
 
+        if(room.getStatus() != RoomStatus.WAITING) {
+
+            throw new RoomUnavailableException(
+              "Room" + roomCode + " is not accepting players"
+            );
+        }
+
+        if(room.getPlayers().size() >= room.getMaxPlayers()) {
+
+            throw new RoomUnavailableException(
+                    "Room " + roomCode + " is full"
+            );
+        }
 
         if (playerRepository.existsByNicknameAndRoomId(
                 request.nickname(),

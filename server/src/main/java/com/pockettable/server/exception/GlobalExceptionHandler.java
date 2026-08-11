@@ -19,4 +19,13 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(exception.getMessage());
     }
+
+    @ExceptionHandler(RoomUnavailableException.class)
+    public ResponseEntity<String> handleRoomUnavailable(
+            RoomUnavailableException exception
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(exception.getMessage());
+    }
 }
