@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -69,5 +70,15 @@ public class RoomController {
                 room.getMaxPlayers(),
                 players
         );
+    }
+
+    @PostMapping("/{roomCode}/start")
+    public RoomResponse startRoom(
+            @PathVariable String roomCode,
+            @RequestParam UUID playerId
+    ) {
+
+        Room room = roomService.startGame(roomCode, playerId);
+        return mapToResponse(room);
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
     @ExceptionHandler(DuplicateNicknameException.class)
     public ResponseEntity<String> handleDuplicateNickname(
             DuplicateNicknameException exception
@@ -20,12 +19,36 @@ public class GlobalExceptionHandler {
                 .body(exception.getMessage());
     }
 
+
     @ExceptionHandler(RoomUnavailableException.class)
     public ResponseEntity<String> handleRoomUnavailable(
             RoomUnavailableException exception
     ) {
+
         return ResponseEntity
                 .status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(exception.getMessage());
+    }
+
+
+    @ExceptionHandler(RoomNotFoundException.class)
+    public ResponseEntity<String> handleRoomNotFound(
+            RoomNotFoundException exception
+    ) {
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+
+
+    @ExceptionHandler(InvalidRoomStateException.class)
+    public ResponseEntity<String> handleInvalidRoomState(
+            InvalidRoomStateException exception
+    ) {
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
                 .body(exception.getMessage());
     }
 }
