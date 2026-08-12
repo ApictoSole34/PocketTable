@@ -23,6 +23,7 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomCodeGenerator roomCodeGenerator;
     private final PlayerRepository playerRepository;
+    private final RoomEventService roomEventService;
 
 
     public Room createRoom(CreateRoomRequest request) {
@@ -111,6 +112,10 @@ public class RoomService {
 
         room.setStatus(RoomStatus.PLAYING);
 
-        return roomRepository.save(room);
+        Room savedRoom = roomRepository.save(room);
+
+        roomEventService.gameStarted(roomCode);
+
+        return savedRoom;
     }
 }

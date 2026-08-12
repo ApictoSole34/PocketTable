@@ -6,7 +6,10 @@ import com.pockettable.server.model.Player;
 import com.pockettable.server.service.PlayerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -30,5 +33,16 @@ public class PlayerController {
                 player.getRoom().getId(),
                 player.isHost()
         );
+    }
+
+    @DeleteMapping("/{roomCode}/players/{playerId}")
+    public ResponseEntity<Void> leaveRoom(
+            @PathVariable String roomCode,
+            @PathVariable UUID playerId
+    ) {
+
+        playerService.leaveRoom(roomCode, playerId);
+
+        return ResponseEntity.noContent().build();
     }
 }
