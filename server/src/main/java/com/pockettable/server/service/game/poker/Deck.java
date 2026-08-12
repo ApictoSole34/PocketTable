@@ -36,4 +36,15 @@ public class Deck {
     public int size() {
         return cards.size();
     }
+
+    public void reset() {
+
+        cards.clear();
+
+        for (CardSuit suit : CardSuit.values()) {
+            for (CardRank rank : CardRank.values()) {
+                cards.add(new Card(suit, rank));
+            }
+        }
+    }
 }

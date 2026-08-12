@@ -44,15 +44,15 @@ public class PokerGameEngine implements GameEngine{
 
         System.out.println(
                 "Starting Poker game for room "
-                    + game.getRoom().getRoomCode()
+                        + game.getRoom().getRoomCode()
         );
 
         for (PokerPlayer player : pokerGame.getPlayers()) {
 
             System.out.println(
                     player.getPlayerId()
-                    + " -> "
-                    + player.getHand()
+                            + " -> "
+                            + player.getHand()
             );
         }
 

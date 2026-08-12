@@ -1,5 +1,5 @@
 # PocketTable
-<<<<<<< HEAD
+ HEAD
 
 PocketTable is a platform for local multiplayer tabletop games.
 
@@ -9,19 +9,20 @@ Players use their Android devices as private game screens while the server manag
 
 - Java 21
 - Spring Boot
-- PostgreSQL
+- PostgreSQL(?)
 - Spring WebSocket
 - Android (Java)
 - Git
 
 ## Planned Games
 
-- Poker
+- Poker +
 - Uno
 - Makao
+- War
 - Blackjack
-- Mafia
-- Custom Games
+- Mafia (?)
+- Custom Games (?)
 
 ## Status
 
@@ -31,5 +32,3 @@ Players use their Android devices as private game screens while the server manag
 - [ ] Lobby
 - [ ] Poker
 =======
-A platform for local multiplayer tabletop games using Android and Spring Boot.
->>>>>>> 4bfb17c4c9514c960712282df97368d9d591e7e5
