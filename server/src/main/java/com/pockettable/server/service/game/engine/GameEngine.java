@@ -1,4 +1,4 @@
-package com.pockettable.server.service.game;
+package com.pockettable.server.service.game.engine;
 
 import com.pockettable.server.model.Game;
 import com.pockettable.server.model.enums.GameType;

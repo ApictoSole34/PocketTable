@@ -11,11 +11,10 @@ import com.pockettable.server.model.enums.RoomStatus;
 import com.pockettable.server.repository.GameRepository;
 import com.pockettable.server.repository.PlayerRepository;
 import com.pockettable.server.repository.RoomRepository;
-import com.pockettable.server.service.game.GameEngine;
-import com.pockettable.server.service.game.GameEngineFactory;
+import com.pockettable.server.service.game.engine.GameEngine;
+import com.pockettable.server.service.game.engine.GameEngineFactory;
 import com.pockettable.server.util.RoomCodeGenerator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,6 +81,13 @@ public class RoomService {
 
     public Room startGame(String roomCode, UUID playerId) {
         Room room = getRoomByCode(roomCode);
+
+        if (gameRepository.findByRoomId(room.getId()).isPresent()) {
+
+            throw new InvalidRoomStateException(
+                    "Game for room " + roomCode + " already exists"
+            );
+        }
 
         if (room.getStatus() != RoomStatus.WAITING) {
 

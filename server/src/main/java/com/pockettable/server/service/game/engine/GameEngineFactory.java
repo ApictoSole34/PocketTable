@@ -1,6 +1,5 @@
-package com.pockettable.server.service.game;
+package com.pockettable.server.service.game.engine;
 
-import com.pockettable.server.model.Room;
 import com.pockettable.server.model.enums.GameType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
