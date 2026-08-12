@@ -3,14 +3,19 @@ package com.pockettable.server.service;
 import com.pockettable.server.dto.room.CreateRoomRequest;
 import com.pockettable.server.exception.InvalidRoomStateException;
 import com.pockettable.server.exception.RoomNotFoundException;
+import com.pockettable.server.model.Game;
 import com.pockettable.server.model.Player;
 import com.pockettable.server.model.Room;
 import com.pockettable.server.model.enums.GameType;
 import com.pockettable.server.model.enums.RoomStatus;
+import com.pockettable.server.repository.GameRepository;
 import com.pockettable.server.repository.PlayerRepository;
 import com.pockettable.server.repository.RoomRepository;
+import com.pockettable.server.service.game.GameEngine;
+import com.pockettable.server.service.game.GameEngineFactory;
 import com.pockettable.server.util.RoomCodeGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +29,8 @@ public class RoomService {
     private final RoomCodeGenerator roomCodeGenerator;
     private final PlayerRepository playerRepository;
     private final RoomEventService roomEventService;
+    private final GameRepository gameRepository;
+    private final GameEngineFactory gameEngineFactory;
 
 
     public Room createRoom(CreateRoomRequest request) {
@@ -109,6 +116,19 @@ public class RoomService {
                     "At least 2 players are required"
             );
         }
+
+        Game game = Game.builder()
+                .room(room)
+                .gameType(room.getGameType())
+                .build();
+
+        gameRepository.save(game);
+
+        GameEngine engine = gameEngineFactory.getEngine(
+                game.getGameType()
+        );
+
+        engine.start(game);
 
         room.setStatus(RoomStatus.PLAYING);
 
