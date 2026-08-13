@@ -1,6 +1,8 @@
 package com.pockettable.server.service.game.poker;
 
+import com.pockettable.server.dto.game.poker.PokerGameState;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -10,6 +12,8 @@ import java.util.UUID;
 public class PokerActionService {
 
     private final PokerGameService gameService;
+    private final PokerTimerService timerService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     public void performAction(
             PokerGame game,
@@ -104,6 +108,8 @@ public class PokerActionService {
                     .filter(p -> !p.isFolded())
                     .count();
 
+
+
             if (activePlayers == 1) {
                 gameService.finishGame(game);
                 return;
@@ -113,8 +119,11 @@ public class PokerActionService {
                 advanceUntilActionOrShowdown(game);
             } else {
                 game.nextPlayer();
+                timerService.startTimer(game.getRoomCode(), game.getCurrentPlayer().getPlayerId());
             }
         }
+
+        broadcastGameState(game);
     }
 
     private void advanceUntilActionOrShowdown(PokerGame game) {
@@ -123,6 +132,7 @@ public class PokerActionService {
 
             if (game.getRound() == PokerRound.SHOWDOWN) {
                 gameService.finishGame(game);
+                broadcastGameState(game);
                 return;
             }
 
@@ -132,6 +142,8 @@ public class PokerActionService {
                     .count();
 
             if (playersWhoCanAct >= 2) {
+                timerService.startTimer(game.getRoomCode(), game.getCurrentPlayer().getPlayerId());
+                broadcastGameState(game);
                 return;
             }
         }
@@ -142,5 +154,11 @@ public class PokerActionService {
             throw new IllegalStateException("Current hand has not finished");
         }
         game.resetForNewHand();
+        broadcastGameState(game);
+    }
+
+    private void broadcastGameState(PokerGame game) {
+        PokerGameState state = PokerGameState.fromGame(game, null); // null = broadcast
+        messagingTemplate.convertAndSend("/topic/game/" + game.getRoomCode(), state);
     }
 }

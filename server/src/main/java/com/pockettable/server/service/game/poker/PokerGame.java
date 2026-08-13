@@ -14,6 +14,7 @@ public class PokerGame {
     private final Deck deck;
     private final List<Card> communityCards = new ArrayList<>();
     private int totalPot = 0;
+    private final String roomCode;
 
     private static final int SMALL_BLIND = 50;
     private static final int BIG_BLIND = 100;
@@ -24,15 +25,17 @@ public class PokerGame {
 
     private int currentPlayerIndex = 0;
 
-    public PokerGame(List<UUID> playersIds) {
+    public PokerGame(String roomCode, List<UUID> playersIds) {
 
         this.players = playersIds.stream()
                 .map(PokerPlayer::new)
                 .collect(Collectors.toCollection(ArrayList::new));
-
+        this.roomCode = roomCode;
         this.deck = new Deck();
         this.deck.shuffle();
     }
+
+    public String getRoomCode() { return roomCode; }
 
     private PokerRound round = PokerRound.PRE_FLOP;
 

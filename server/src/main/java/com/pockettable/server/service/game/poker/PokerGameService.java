@@ -6,6 +6,7 @@ import com.pockettable.server.model.enums.GameType;
 import com.pockettable.server.model.game.Card;
 import com.pockettable.server.model.game.poker.PokerHand;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class PokerGameService {
 
     private final PokerHandEvaluator handEvaluator;
     private final PokerGameManager gameManager;
+    private final SimpMessagingTemplate messagingTemplate;
 
     public PokerGame startGame(Room room) {
 
@@ -46,6 +48,8 @@ public class PokerGameService {
                 room.getRoomCode(),
                 game
         );
+
+        messagingTemplate.convertAndSend("/topic/game/" + room.getRoomCode(), game);
 
         return game;
     }
