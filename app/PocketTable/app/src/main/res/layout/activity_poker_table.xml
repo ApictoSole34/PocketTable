@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvGameTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="♠️ Poker"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvPot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pot: 0"
+                android:textSize="20sp"
+                android:textColor="#FFD700"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTablePlayers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/llCommunityCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/imgCommunity1"
+                android:layout_width="72dp"
+                android:layout_height="100dp"
+                android:src="@drawable/card_back"
+                android:scaleType="fitCenter"
+                android:layout_margin="4dp"/>
+
+            <ImageView
+                android:id="@+id/imgCommunity2"
+                android:layout_width="72dp"
+                android:layout_height="100dp"
+                android:src="@drawable/card_back"
+                android:scaleType="fitCenter"
+                android:layout_margin="4dp"/>
+
+            <ImageView
+                android:id="@+id/imgCommunity3"
+                android:layout_width="72dp"
+                android:layout_height="100dp"
+                android:src="@drawable/card_back"
+                android:scaleType="fitCenter"
+                android:layout_margin="4dp"/>
+
+            <ImageView
+                android:id="@+id/imgCommunity4"
+                android:layout_width="72dp"
+                android:layout_height="100dp"
+                android:src="@drawable/card_back"
+                android:scaleType="fitCenter"
+                android:layout_margin="4dp"/>
+
+            <ImageView
+                android:id="@+id/imgCommunity5"
+                android:layout_width="72dp"
+                android:layout_height="100dp"
+                android:src="@drawable/card_back"
+                android:scaleType="fitCenter"
+                android:layout_margin="4dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTurnInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waiting for players..."
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btnNextHand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NEW HAND"
+            android:textSize="16sp"
+            android:backgroundTint="#FFD700"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgMyCard1"
+                    android:layout_width="96dp"
+                    android:layout_height="134dp"
+                    android:src="@drawable/card_back"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="8dp"/>
+
+                <ImageView
+                    android:id="@+id/imgMyCard2"
+                    android:layout_width="96dp"
+                    android:layout_height="134dp"
+                    android:src="@drawable/card_back"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="8dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvMyStack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your chips: 1000"
+                android:textSize="16sp"
+                android:textColor="#FFD700"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvMyBet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your bet this round: 0"
+                android:textSize="13sp"
+                android:textColor="#CCCCCC"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnCheck"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="CHECK"
+                android:textSize="14sp"
+                android:backgroundTint="#4CAF50"
+                android:layout_margin="4dp"
+                android:enabled="false"/>
+
+            <Button
+                android:id="@+id/btnCall"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="CALL"
+                android:textSize="14sp"
+                android:backgroundTint="#2196F3"
+                android:layout_margin="4dp"
+                android:enabled="false"/>
+
+            <Button
+                android:id="@+id/btnFold"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="FOLD"
+                android:textSize="14sp"
+                android:backgroundTint="#F44336"
+                android:layout_margin="4dp"
+                android:enabled="false"/>
+
+            <Button
+                android:id="@+id/btnBet"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="BET"
+                android:textSize="14sp"
+                android:backgroundTint="#FF9800"
+                android:layout_margin="4dp"
+                android:enabled="false"/>
+
+            <Button
+                android:id="@+id/btnRaise"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="RAISE"
+                android:textSize="14sp"
+                android:backgroundTint="#9C27B0"
+                android:layout_margin="4dp"
+                android:enabled="false"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
