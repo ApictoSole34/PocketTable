@@ -40,20 +40,23 @@ One device hosts the game and acts as the game server; other players join as cli
 - In-game player list showing chip counts, dealer position, and status (folded / all-in)
 - Slider-based bet/raise input with quick pot-sized bet shortcuts
 
-## Testing
+## Installation
 
-The core game engine (hand evaluation, betting logic, side pot calculation, blind/elimination rules) is covered by JUnit unit tests, located under `app/src/test/java`. These run on the JVM without requiring an emulator or device:
+1. Download the APK from the [Releases page](https://github.com/ApictoSole34/PocketTable/releases).
+2. Transfer it to your Android device.
+3. Open the file and install (enable "Install from unknown sources" if prompted).
 
-```bash
-./gradlew test
-```
-
-## Running the Project
-
-1. Open the project in Android Studio.
-2. Build and install the app on two or more Android devices connected to the same Wi-Fi network.
-3. On one device, tap **Create Room** to host a game.
-4. On the other device(s), tap **Connect via code** and enter the room code shown on the host's screen.
+> [!WARNING]
+> **Some devices aggressively restrict background apps**
+>
+> Xiaomi, Oppo, Realme, Huawei, Vivo, and other brands may kill PocketTable in the background, causing disconnections during gameplay.
+>
+> **Fix:**
+> 1. Go to **Settings → Battery → App battery management**
+> 2. Find **PocketTable**
+> 3. Select **Don't optimize** or **Allow background activity**
+>
+> For detailed instructions per device: [Don't Kill My App](https://dontkillmyapp.com/)
 
 ## Status
 
@@ -62,6 +65,14 @@ The core game engine (hand evaluation, betting logic, side pot calculation, blin
 - [x] Android client/host UI
 - [x] Unit tests (game engine)
 - [ ] Additional games
+
+## Testing
+
+The core game engine (hand evaluation, betting logic, side pot calculation, blind/elimination rules) is covered by JUnit unit tests, located under `app/src/test/java`. These run on the JVM without requiring an emulator or device:
+
+```bash
+./gradlew test
+```
 
 ## License
 
