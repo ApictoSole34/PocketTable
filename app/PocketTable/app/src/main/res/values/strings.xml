@@ -1,3 +1,107 @@
 <resources>
+    <!-- ==================== APP ==================== -->
     <string name="app_name">PocketTable</string>
+    <string name="app_about">Developed by Fizzy Coyote Studio</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Nickname</string>
+    <string name="create_room">🃏 Create Room</string>
+    <string name="join_room">🔗 Connect via code</string>
+    <string name="scan_qr">📷 Scan QR</string>
+    <string name="enter_nickname">Enter your nickname!</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Code: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Players: </string>
+    <string name="show_qr">Show QR</string>
+    <string name="start_game">START</string>
+    <string name="qr_title">QR code for room </string>
+    <string name="qr_error">QR generation error</string>
+    <string name="ok">OK</string>
+    <string name="game_settings_title">Settings</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Join room</string>
+    <string name="join_hint">Enter code (e.g. ABC123)</string>
+    <string name="join_search">Search</string>
+    <string name="join_cancel">Cancel</string>
+    <string name="code_required">Code must be 6 characters!</string>
+    <string name="searching_host">Searching for host with code: </string>
+    <string name="host_found">Host found!</string>
+    <string name="host_not_found">Host not found for code: </string>
+    <string name="scan_qr_from_host">Scan QR from host screen</string>
+    <string name="invalid_qr">Invalid QR code</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Game settings</string>
+    <string name="small_blind_hint">Small Blind (default 50)</string>
+    <string name="big_blind_hint">Big Blind (default 100)</string>
+    <string name="starting_chips_hint">Starting chips (default 1000)</string>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Poker</string>
+    <string name="pot_label">Pot: </string>
+    <string name="pot_label_placeholder">Pot: 0</string>
+    <string name="your_chips_label">Your chips: %d</string>
+    <string name="your_chips_placeholder">Your chips: 1000</string>
+    <string name="your_bet_label">Your bet this round: %d</string>
+    <string name="your_bet_placeholder">Your bet this round: 0</string>
+    <string name="your_turn">YOUR TURN!</string>
+    <string name="waiting_for_players">Waiting for players...</string>
+    <string name="waiting_for_move">Waiting for move...</string>
+    <string name="new_hand">NEW HAND</string>
+    <string name="game_started">Game started!</string>
+    <string name="game_over">Game over!</string>
+    <string name="tie">Tie</string>
+    <string name="you_are_host">You are the host. Game ready!</string>
+    <string name="connected">Connected!</string>
+    <string name="connecting">Connecting with host...</string>
+    <string name="connection_error">Connection error: %s</string>
+    <string name="no_connection">No connection to game!</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">CALL</string>
+    <string name="btn_fold">FOLD</string>
+    <string name="btn_bet">BET</string>
+    <string name="btn_raise">RAISE</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Bet</string>
+    <string name="raise_title">Raise</string>
+    <string name="enter_amount_manually">Enter amount manually</string>
+    <string name="half_pot">1/2 POT</string>
+    <string name="pot">POT</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">You can only ALL-IN: %d</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Player</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">FOLD</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(You)</string>
+    <string name="host_suffix">(Host)</string>
+    <string name="winner">🏆 %s WINS! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">High card</string>
+    <string name="hand_pair">Pair</string>
+    <string name="hand_two_pair">Two pair</string>
+    <string name="hand_three_of_a_kind">Three of a kind</string>
+    <string name="hand_straight">Straight</string>
+    <string name="hand_flush">Flush</string>
+    <string name="hand_full_house">Full house</string>
+    <string name="hand_four_of_a_kind">Four of a kind</string>
+    <string name="hand_straight_flush">Straight flush</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Winner (others folded)</string>
+    <string name="no_data">no data</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Some devices aggressively restrict background apps</string>
 </resources>

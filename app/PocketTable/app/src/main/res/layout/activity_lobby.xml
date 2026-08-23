@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Tło -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,99 +15,99 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-    <TextView
-        android:id="@+id/tvRoomCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code: ABC123"
-        android:textSize="28sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/tvHostIp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="IP: ..."
-        android:textSize="16sp"
-        android:textColor="#AAAAAA"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
-        android:id="@+id/btnShowQR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pokaż QR"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/tvPlayerCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Players: 0"
-        android:textSize="16sp"
-        android:textColor="#AAAAAA"
-        android:layout_marginBottom="16dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPlayers"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <LinearLayout
-        android:id="@+id/llGameSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone">
-
         <TextView
+            android:id="@+id/tvRoomCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
+            android:text="@string/code_label"
+            android:textSize="28sp"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
-        <EditText
-            android:id="@+id/etSmallBlind"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvHostIp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Small Blind (default 50)"
-            android:inputType="number"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#888888"/>
+            android:text="@string/ip_label"
+            android:textSize="16sp"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="16dp"/>
 
-        <EditText
-            android:id="@+id/etBigBlind"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnShowQR"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Big Blind (default 100)"
-            android:inputType="number"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#888888"/>
+            android:text="@string/show_qr"
+            android:visibility="gone"/>
 
-        <EditText
-            android:id="@+id/etStartingChips"
+        <TextView
+            android:id="@+id/tvPlayerCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/players_label"
+            android:textSize="16sp"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/llGameSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Starting chips (default 1000)"
-            android:inputType="number"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#888888"/>
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_settings_title"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/etSmallBlind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/small_blind_hint"
+                android:inputType="number"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"/>
+
+            <EditText
+                android:id="@+id/etBigBlind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/big_blind_hint"
+                android:inputType="number"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"/>
+
+            <EditText
+                android:id="@+id/etStartingChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/starting_chips_hint"
+                android:inputType="number"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_game"
+            android:textSize="18sp"
+            android:backgroundTint="#6200EE"
+            android:visibility="gone"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="START"
-        android:textSize="18sp"
-        android:backgroundTint="#6200EE"
-        android:visibility="gone"/>
-</LinearLayout>
 </FrameLayout>

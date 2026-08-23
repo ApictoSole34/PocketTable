@@ -51,8 +51,10 @@ public class TablePlayerAdapter extends RecyclerView.Adapter<TablePlayerAdapter.
         Entry entry = entries.get(position);
         PokerGameState.PlayerState p = entry.player;
 
-        String name = p.playerName() != null ? p.playerName() : "Player";
-        if (entry.isMe) name = name + " (You)";
+        String name = p.playerName() != null ? p.playerName() : holder.itemView.getContext().getString(R.string.player_name_default);
+        if (entry.isMe) {
+            name = name + " " + holder.itemView.getContext().getString(R.string.you_suffix);
+        }
         holder.tvName.setText(name);
         holder.tvChips.setText(String.valueOf(p.chips()));
 
@@ -60,12 +62,12 @@ public class TablePlayerAdapter extends RecyclerView.Adapter<TablePlayerAdapter.
 
         if (p.folded()) {
             holder.tvStatus.setVisibility(View.VISIBLE);
-            holder.tvStatus.setText("FOLD");
+            holder.tvStatus.setText(holder.itemView.getContext().getString(R.string.status_folded));
             holder.tvStatus.setTextColor(0xFF888888);
             holder.root.setAlpha(0.5f);
         } else if (p.allIn()) {
             holder.tvStatus.setVisibility(View.VISIBLE);
-            holder.tvStatus.setText("ALL-IN");
+            holder.tvStatus.setText(holder.itemView.getContext().getString(R.string.status_all_in));
             holder.tvStatus.setTextColor(0xFFF44336);
             holder.root.setAlpha(1f);
         } else {

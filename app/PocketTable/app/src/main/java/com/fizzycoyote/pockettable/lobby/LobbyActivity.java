@@ -99,7 +99,7 @@ public class LobbyActivity extends AppCompatActivity {
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
         playerName = getIntent().getStringExtra("playerName");
         if (playerName == null || playerName.isEmpty()) {
-            playerName = "Player";
+            playerName = getString(R.string.player_name_default);
         }
         isHost = getIntent().getBooleanExtra("isHost", false);
         serverIp = getIntent().getStringExtra("serverIp");
@@ -109,7 +109,7 @@ public class LobbyActivity extends AppCompatActivity {
             roomCode = generator.generate();
         }
 
-        tvRoomCode.setText("Code: " + roomCode);
+        tvRoomCode.setText(getString(R.string.code_label) + roomCode);
 
         adapter = new PlayersAdapter(players);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
@@ -117,7 +117,7 @@ public class LobbyActivity extends AppCompatActivity {
 
         if (isHost) {
             String myIp = NetworkUtils.getLocalIpAddress();
-            tvIp.setText("IP: " + myIp);
+            tvIp.setText(getString(R.string.ip_label) + myIp);
             tvIp.setVisibility(View.VISIBLE);
 
             DiscoveryService.broadcastHost(roomCode, myIp);
@@ -143,7 +143,7 @@ public class LobbyActivity extends AppCompatActivity {
 
             players.add(playerName + " (Host)");
             adapter.notifyDataSetChanged();
-            tvPlayerCount.setText("Players: 1");
+            tvPlayerCount.setText(getString(R.string.players_label) + "1");
         } else {
             tvIp.setVisibility(View.GONE);
             btnStart.setVisibility(View.GONE);
@@ -212,14 +212,14 @@ public class LobbyActivity extends AppCompatActivity {
             layout.addView(qrView);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Code QR for room " + roomCode);
+            builder.setTitle(getString(R.string.qr_title) + roomCode);
             builder.setView(layout);
-            builder.setPositiveButton("OK", null);
+            builder.setPositiveButton(getString(R.string.ok), null);
             builder.show();
 
         } catch (WriterException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error during generating QR code", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.qr_error), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -229,16 +229,16 @@ public class LobbyActivity extends AppCompatActivity {
             for (PokerGameState.PlayerState ps : state.players().values()) {
                 String name = ps.playerName();
                 if (name == null || name.isEmpty()) {
-                    name = "Player " + ps.playerId().toString().substring(0, 4);
+                    name = getString(R.string.player_name_default) + " " + ps.playerId().toString().substring(0, 4);
                 }
                 if (ps.playerId().equals(playerId)) {
-                    name = name + " (You)";
+                    name = name + " " + getString(R.string.you_suffix);
                 }
                 players.add(name);
             }
         }
         adapter.notifyDataSetChanged();
-        tvPlayerCount.setText("Players: " + players.size());
+        tvPlayerCount.setText(getString(R.string.players_label) + " " + players.size());
     }
 
     private int parseIntOrDefault(String text, int defaultValue) {

@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Wpisz kwotę ręcznie"
+        android:hint="@string/enter_amount_manually"
         android:gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"/>
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="1/2 POT"
+            android:text="@string/half_pot"
             android:textSize="12sp"
             android:layout_margin="2dp"/>
 
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="POT"
+            android:text="@string/pot"
             android:textSize="12sp"
             android:layout_margin="2dp"/>
 
@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ALL-IN"
+            android:text="@string/all_in"
             android:textSize="12sp"
             android:backgroundTint="#F44336"
             android:layout_margin="2dp"/>

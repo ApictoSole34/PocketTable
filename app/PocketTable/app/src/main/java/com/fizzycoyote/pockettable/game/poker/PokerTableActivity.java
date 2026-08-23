@@ -65,7 +65,6 @@ public class PokerTableActivity extends AppCompatActivity {
     private PokerClient client;
     private PokerGame game;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +74,7 @@ public class PokerTableActivity extends AppCompatActivity {
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
         playerName = getIntent().getStringExtra("playerName");
         if (playerName == null || playerName.isEmpty()) {
-            playerName = "Player";
+            playerName = getString(R.string.player_name_default);
         }
         isHost = getIntent().getBooleanExtra("isHost", false);
         serverIp = getIntent().getStringExtra("serverIp");
@@ -125,7 +124,7 @@ public class PokerTableActivity extends AppCompatActivity {
                 hostServer.setStateListener(state -> runOnUiThread(() -> updateUI(state)));
             }
 
-            tvTurnInfo.setText("You are the host. Game ready!");
+            tvTurnInfo.setText(getString(R.string.you_are_host));
             PokerGameState initialState = PokerGameState.fromGame(game, playerId);
             updateUI(initialState);
         }
@@ -141,13 +140,13 @@ public class PokerTableActivity extends AppCompatActivity {
 
                 @Override
                 public void onGameStarted() {
-                    runOnUiThread(() -> tvTurnInfo.setText("Game started!"));
+                    runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.game_started)));
                 }
 
                 @Override
                 public void onGameOver() {
                     runOnUiThread(() -> {
-                        tvTurnInfo.setText("Game over!");
+                        tvTurnInfo.setText(getString(R.string.game_over));
                         enableButtons(false);
                     });
                 }
@@ -157,22 +156,22 @@ public class PokerTableActivity extends AppCompatActivity {
                 client = existingClient;
                 client.setListener(listener);
                 client.send("GET_STATE");
-                tvTurnInfo.setText("Connected !");
+                tvTurnInfo.setText(getString(R.string.connected));
             } else {
                 try {
                     client = new PokerClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
                     client.setListener(listener);
                     client.connect();
-                    tvTurnInfo.setText("Connecting with host...");
+                    tvTurnInfo.setText(getString(R.string.connecting));
                 } catch (Exception e) {
                     e.printStackTrace();
-                    tvTurnInfo.setText("Connection error: " + e.getMessage());
+                    tvTurnInfo.setText(String.format(getString(R.string.connection_error), e.getMessage()));
                 }
             }
         } else if (isHost) {
             PokerGameState initialState = PokerGameState.fromGame(game, playerId);
             updateUI(initialState);
-            tvTurnInfo.setText("You are the host. Game ready!");
+            tvTurnInfo.setText(getString(R.string.you_are_host));
         }
     }
 
@@ -184,13 +183,13 @@ public class PokerTableActivity extends AppCompatActivity {
         if (state == null) return;
 
         lastState = state;
-        tvPot.setText("Pot: " + state.totalPot());
+        tvPot.setText(getString(R.string.pot_label) + state.totalPot());
         updateTablePlayers(state);
 
         PokerGameState.PlayerState myState = state.players().get(playerId);
         if (myState != null) {
-            tvMyStack.setText("Your chips: " + myState.chips());
-            tvMyBet.setText("Your bet this round: " + myState.currentBet());
+            tvMyStack.setText(String.format(getString(R.string.your_chips_label), myState.chips()));
+            tvMyBet.setText(String.format(getString(R.string.your_bet_label), myState.currentBet()));
         }
 
         List<Card> community = state.communityCards();
@@ -222,11 +221,11 @@ public class PokerTableActivity extends AppCompatActivity {
                 PokerGameState.PlayerState winnerState = state.players().get(winnerId);
                 String winnerName = winnerState != null ? winnerState.playerName() : "Unknown";
                 String handDesc = state.winnerHandDesc();
-                if (handDesc == null) handDesc = "no data";
+                if (handDesc == null) handDesc = getString(R.string.no_data);
                 String displayHand = formatHandName(handDesc);
-                tvTurnInfo.setText("\uD83C\uDFC6 " + winnerName + " Win! \uD83C\uDFC6\n" + displayHand);
+                tvTurnInfo.setText(String.format(getString(R.string.winner), winnerName) + "\n" + displayHand);
             } else {
-                tvTurnInfo.setText("Draw");
+                tvTurnInfo.setText(getString(R.string.tie));
             }
             enableButtons(false);
             btnNextHand.setVisibility(isHost ? View.VISIBLE : View.GONE);
@@ -235,14 +234,14 @@ public class PokerTableActivity extends AppCompatActivity {
 
         UUID currentPlayer = state.currentPlayerId();
         if (currentPlayer != null && currentPlayer.equals(playerId)) {
-            tvTurnInfo.setText("YOUR TURN!");
+            tvTurnInfo.setText(getString(R.string.your_turn));
             enableButtons(true);
         } else {
             String turnPlayerName = "?";
             if (currentPlayer != null && state.players().containsKey(currentPlayer)) {
                 turnPlayerName = state.players().get(currentPlayer).playerName();
             }
-            tvTurnInfo.setText("Waiting for ove.. (" + turnPlayerName + ")");
+            tvTurnInfo.setText(getString(R.string.waiting_for_move) + " (" + turnPlayerName + ")");
             enableButtons(false);
         }
         btnNextHand.setVisibility(View.GONE);
@@ -275,14 +274,14 @@ public class PokerTableActivity extends AppCompatActivity {
                 PokerGameState state = PokerGameState.fromGame(game, playerId);
                 updateUI(state);
             } catch (Exception e) {
-                tvTurnInfo.setText("Error: " + e.getMessage());
+                tvTurnInfo.setText(String.format(getString(R.string.error_prefix), e.getMessage()));
                 e.printStackTrace();
             }
         } else if (client != null) {
             PokerActionRequest request = new PokerActionRequest(playerId, action, amount);
             client.sendAction(request);
         } else {
-            tvTurnInfo.setText("No connection to game!");
+            tvTurnInfo.setText(getString(R.string.no_connection));
         }
     }
 
@@ -297,7 +296,7 @@ public class PokerTableActivity extends AppCompatActivity {
 
         int min = 1;
         int max = myState.chips();
-        showBetRaiseDialog("BET", min, max, PokerAction.BET);
+        showBetRaiseDialog(getString(R.string.bet_title), min, max, PokerAction.BET);
     }
 
     private void showRaiseDialog() {
@@ -312,7 +311,7 @@ public class PokerTableActivity extends AppCompatActivity {
             return;
         }
 
-        showBetRaiseDialog("RAISE", minTotal, maxTotal, PokerAction.RAISE);
+        showBetRaiseDialog(getString(R.string.raise_title), minTotal, maxTotal, PokerAction.RAISE);
     }
 
     private void showBetRaiseDialog(String title, int min, int max, PokerAction action) {
@@ -321,9 +320,9 @@ public class PokerTableActivity extends AppCompatActivity {
         if (max <= min) {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
             builder.setTitle(title);
-            builder.setMessage("You can only ALL-IN: " + max);
-            builder.setPositiveButton("ALL-IN", (dialog, which) -> sendAction(action, max));
-            builder.setNegativeButton("Cansel", null);
+            builder.setMessage(String.format(getString(R.string.all_in_only), max));
+            builder.setPositiveButton(getString(R.string.all_in), (dialog, which) -> sendAction(action, max));
+            builder.setNegativeButton(getString(R.string.cancel), null);
             builder.show();
             return;
         }
@@ -409,11 +408,11 @@ public class PokerTableActivity extends AppCompatActivity {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setView(dialogView);
-        builder.setPositiveButton("Confirm", (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
             int finalAmount = Math.round(slider.getValue());
             sendAction(action, finalAmount);
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
     }
 
@@ -424,7 +423,7 @@ public class PokerTableActivity extends AppCompatActivity {
                 PokerGameState state = PokerGameState.fromGame(game, playerId);
                 updateUI(state);
             } catch (Exception e) {
-                tvTurnInfo.setText("Error: " + e.getMessage());
+                tvTurnInfo.setText(String.format(getString(R.string.error_prefix), e.getMessage()));
                 e.printStackTrace();
             }
         }
@@ -459,15 +458,15 @@ public class PokerTableActivity extends AppCompatActivity {
 
     private String formatHandName(String rankName) {
         return switch (rankName) {
-            case "HIGH_CARD" -> "High card";
-            case "PAIR" -> "Pair";
-            case "TWO_PAIR" -> "Two pair";
-            case "THREE_OF_A_KIND" -> "Three of a kind";
-            case "STRAIGHT" -> "Straight";
-            case "FLUSH" -> "Flush";
-            case "FULL_HOUSE" -> "Full house";
-            case "FOUR_OF_A_KIND" -> "Four of a kind";
-            case "STRAIGHT_FLUSH" -> "Straight flush";
+            case "HIGH_CARD" -> getString(R.string.hand_high_card);
+            case "PAIR" -> getString(R.string.hand_pair);
+            case "TWO_PAIR" -> getString(R.string.hand_two_pair);
+            case "THREE_OF_A_KIND" -> getString(R.string.hand_three_of_a_kind);
+            case "STRAIGHT" -> getString(R.string.hand_straight);
+            case "FLUSH" -> getString(R.string.hand_flush);
+            case "FULL_HOUSE" -> getString(R.string.hand_full_house);
+            case "FOUR_OF_A_KIND" -> getString(R.string.hand_four_of_a_kind);
+            case "STRAIGHT_FLUSH" -> getString(R.string.hand_straight_flush);
             default -> rankName;
         };
     }

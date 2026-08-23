@@ -34,7 +34,7 @@
                 android:id="@+id/etNickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="NickName"
+                android:hint="@string/nickname_hint"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:inputType="textCapWords"
@@ -46,7 +46,7 @@
             android:id="@+id/btnCreateRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🃏 Create Room"
+            android:text="@string/create_room"
             android:textSize="18sp"
             android:backgroundTint="@color/purple"
             android:layout_marginBottom="12dp"/>
@@ -55,7 +55,7 @@
             android:id="@+id/btnJoinRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🔗 Connect via code"
+            android:text="@string/join_room"
             android:textSize="18sp"
             android:backgroundTint="@color/dark_purple"
             android:layout_marginBottom="12dp"/>
@@ -64,7 +64,7 @@
             android:id="@+id/btnScanQR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📷 Scan  QR"
+            android:text="@string/scan_qr"
             android:textSize="18sp"
             android:backgroundTint="#4CAF50"/>
 

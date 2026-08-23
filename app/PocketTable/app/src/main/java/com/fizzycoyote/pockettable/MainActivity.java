@@ -21,7 +21,7 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     private EditText etNickname;
-    private Button btnCreateRoom, btnJoinRoom, btnScanQR ;
+    private Button btnCreateRoom, btnJoinRoom, btnScanQR;
     private SharedPreferences prefs;
 
     private void saveNickname(String nickname) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnCreateRoom.setOnClickListener(v -> {
             String nickname = etNickname.getText().toString().trim();
             if (nickname.isEmpty()) {
-                Toast.makeText(this, "Enter your nickname!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.enter_nickname), Toast.LENGTH_SHORT).show();
                 return;
             }
             saveNickname(nickname);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         btnJoinRoom.setOnClickListener(v -> {
             String nickname = etNickname.getText().toString().trim();
             if (nickname.isEmpty()) {
-                Toast.makeText(this, "Enter your nickname!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.enter_nickname), Toast.LENGTH_SHORT).show();
                 return;
             }
             saveNickname(nickname);
@@ -88,29 +88,29 @@ public class MainActivity extends AppCompatActivity {
         final String finalNickname = nickname;
 
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setTitle("Join room");
+        builder.setTitle(getString(R.string.join_title));
 
         final EditText input = new EditText(this);
-        input.setHint("Enter code (np. ABC123)");
+        input.setHint(getString(R.string.join_hint));
         input.setMaxLines(1);
         input.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
         builder.setView(input);
 
-        builder.setPositiveButton("Search", (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.join_search), (dialog, which) -> {
             String code = input.getText().toString().trim().toUpperCase();
             if (code.length() != 6) {
-                Toast.makeText(this, "Code must be 6 characters!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.code_required), Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Toast.makeText(this, "Searching for host with code: " + code, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.searching_host) + code, Toast.LENGTH_SHORT).show();
 
             UUID playerId = UUID.randomUUID();
             DiscoveryService.discoverHost(code, new DiscoveryService.DiscoveryListener() {
                 @Override
                 public void onHostFound(String ip, String roomCode) {
                     runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Host found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.host_found), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, LobbyActivity.class);
                         intent.putExtra("roomCode", roomCode);
                         intent.putExtra("playerId", playerId.toString());
@@ -124,20 +124,20 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onHostNotFound() {
                     runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Host not found for code: " + code, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.host_not_found) + code, Toast.LENGTH_LONG).show();
                     });
                 }
             });
         });
 
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getString(R.string.join_cancel), null);
         builder.show();
     }
 
     private void scanQR() {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scan QR from host screen");
+        integrator.setPrompt(getString(R.string.scan_qr_from_host));
         integrator.setCameraId(0);
         integrator.setBeepEnabled(true);
         integrator.setBarcodeImageEnabled(true);
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     String port = parts.length >= 3 ? parts[2] : "8888";
 
                     String nickname = etNickname.getText().toString().trim();
-                    if (nickname.isEmpty()) nickname = "Gracz";
+                    if (nickname.isEmpty()) nickname = getString(R.string.player_name_default);
 
                     UUID playerId = UUID.randomUUID();
 
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("serverIp", serverIp);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(this, "Incorrect QR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.invalid_qr), Toast.LENGTH_SHORT).show();
                 }
             }
         }
