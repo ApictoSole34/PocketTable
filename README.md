@@ -22,14 +22,14 @@ One device hosts the game and acts as the game server; other players join as cli
 
 ## Games
 
-| Game    | Status      |
-|---------|-------------|
-| Poker   | ✅ Playable |
-| Uno     | Planned     |
-| Makao   | Planned     |
-| War     | Planned     |
-| Blackjack | Planned   |
-| Mafia   | Considering |
+| Game        | Status      |
+|-------------|-------------|
+| Poker       | ✅ Playable |
+| Color Clash | Planned     |
+| Makao       | Planned     |
+| War         | Planned     |
+| Blackjack   | Planned   |
+| Mafia       | Considering |
 
 ## Poker — Current Features
 
