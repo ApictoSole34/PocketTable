@@ -1,7 +1,6 @@
 <resources>
     <!-- ==================== APP ==================== -->
     <string name="app_name">PocketTable</string>
-    <string name="app_about">Developed by Fizzy Coyote Studio</string>
 
     <!-- ==================== MAIN ACTIVITY ==================== -->
     <string name="nickname_hint">Nickname</string>
@@ -59,6 +58,12 @@
     <string name="connecting">Connecting with host...</string>
     <string name="connection_error">Connection error: %s</string>
     <string name="no_connection">No connection to game!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Error: %1$s</string>
+    <string name="reconnecting_message">Connection lost, attempt %1$d…</string>
+    <string name="reconnected_message">Reconnected!</string>
+    <string name="reconnect_failed_message">Could not reconnect. Please return to the lobby.</string>
 
     <!-- ==================== BUTTONS ==================== -->
     <string name="btn_check">CHECK</string>

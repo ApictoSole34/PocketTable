@@ -278,6 +278,6 @@ public class LobbyActivity extends AppCompatActivity {
         if (!startingGame && hostServer != null) {
             hostServer.stopServer();
         }
-        if (client != null) client.close();
+        if (client != null) client.requestClose();
     }
 }

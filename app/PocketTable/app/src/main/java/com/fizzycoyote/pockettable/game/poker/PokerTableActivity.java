@@ -1,6 +1,5 @@
 package com.fizzycoyote.pockettable.game.poker;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -149,6 +148,33 @@ public class PokerTableActivity extends AppCompatActivity {
                         tvTurnInfo.setText(getString(R.string.game_over));
                         enableButtons(false);
                     });
+                }
+
+                @Override
+                public void onReconnecting(int attempt) {
+                    runOnUiThread(() -> tvTurnInfo.setText(
+                            getString(R.string.reconnecting_message, attempt)
+                    ));
+                }
+
+                @Override
+                public void onReconnected() {
+                    runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.reconnected_message)));
+                }
+
+                @Override
+                public void onReconnectFailed() {
+                    runOnUiThread(() -> {
+                        tvTurnInfo.setText(getString(R.string.reconnect_failed_message));
+                        enableButtons(false);
+                    });
+                }
+
+                @Override
+                public void onActionError(String message) {
+                    runOnUiThread(() -> tvTurnInfo.setText(
+                            getString(R.string.action_error_label, message)
+                    ));
                 }
             };
 
@@ -474,7 +500,7 @@ public class PokerTableActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (client != null) client.close();
+        if (client != null) client.requestClose();
         ClientHolder.getInstance().clear();
     }
 }

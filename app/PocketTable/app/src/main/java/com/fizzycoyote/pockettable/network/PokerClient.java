@@ -16,15 +16,29 @@ import java.util.UUID;
  *
  * <p>Receives {@link PokerGameState} updates and sends {@link PokerActionRequest}.</p>
  *
+ * <p>Uses the underlying WebSocket ping/pong mechanism ({@link #setConnectionLostTimeout})
+ * to detect dead connections quickly, and automatically attempts to reconnect with
+ * exponential backoff if the connection is lost unexpectedly (as opposed to being
+ * closed intentionally via {@link #requestClose()}).</p>
+ *
  * @see PokerHostServer
  * @see PokerGameState
  * @see PokerActionRequest
  */
 public class PokerClient extends WebSocketClient {
+    private static final int CONNECTION_LOST_TIMEOUT_SECONDS = 20;
+    private static final int MAX_RECONNECT_ATTEMPTS = 10;
+    private static final long BASE_RECONNECT_DELAY_MS = 2000;
+    private static final long MAX_RECONNECT_DELAY_MS = 15000;
+
     private final Gson gson = new Gson();
     private final UUID playerId;
     private final String playerName;
     private MessageListener listener;
+
+    private volatile boolean manualClose = false;
+    private volatile boolean reconnecting = false;
+    private Thread reconnectThread;
 
     public interface MessageListener {
         void onState(PokerGameState state);
@@ -33,12 +47,18 @@ public class PokerClient extends WebSocketClient {
     public interface GameMessageListener extends MessageListener {
         void onGameStarted();
         void onGameOver();
+
+        default void onReconnecting(int attempt) {}
+        default void onReconnected() {}
+        default void onReconnectFailed() {}
+        default void onActionError(String message) {}
     }
 
     public PokerClient(URI uri, UUID playerId, String playerName) {
         super(uri, getHeaders(playerId, playerName));
         this.playerId = playerId;
         this.playerName = playerName;
+        setConnectionLostTimeout(CONNECTION_LOST_TIMEOUT_SECONDS);
     }
 
     private static Map<String, String> getHeaders(UUID playerId, String playerName) {
@@ -61,6 +81,14 @@ public class PokerClient extends WebSocketClient {
     public void onMessage(String message) {
         System.out.println("CLIENT RECEIVED: " + message);
         if (listener == null) return;
+
+        if (message.startsWith(PokerHostServer.ERROR_PREFIX)) {
+            String errorMsg = message.substring(PokerHostServer.ERROR_PREFIX.length()).trim();
+            if (listener instanceof GameMessageListener) {
+                ((GameMessageListener) listener).onActionError(errorMsg);
+            }
+            return;
+        }
         try {
             GameMessage gameMessage = gson.fromJson(message, GameMessage.class);
             MessageType type = gameMessage.getType();
@@ -90,7 +118,10 @@ public class PokerClient extends WebSocketClient {
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        System.out.println("CLIENT: connection closed code=" + code + " reason=" + reason);
+        System.out.println("CLIENT: connection closed code=" + code + " reason=" + reason + " manualClose=" + manualClose);
+        if (!manualClose) {
+            startReconnectLoop();
+        }
     }
 
     @Override
@@ -103,11 +134,88 @@ public class PokerClient extends WebSocketClient {
         send(gson.toJson(request));
     }
 
+    /**
+     * Call this when the player intentionally leaves the game (e.g. leaving the
+     * activity). Prevents the automatic reconnect loop from starting.
+     */
+    public void requestClose() {
+        manualClose = true;
+        if (reconnectThread != null) {
+            reconnectThread.interrupt();
+        }
+        close();
+    }
+
     public void close() {
         try {
             super.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void startReconnectLoop() {
+        if (reconnecting) return;
+        reconnecting = true;
+
+        reconnectThread = new Thread(() -> {
+            int attempt = 0;
+            while (attempt < MAX_RECONNECT_ATTEMPTS && !manualClose) {
+                attempt++;
+                long delay = Math.min(
+                        BASE_RECONNECT_DELAY_MS * (1L << Math.min(attempt - 1, 4)),
+                        MAX_RECONNECT_DELAY_MS
+                );
+
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException e) {
+                    return;
+                }
+
+                if (manualClose) return;
+
+                notifyReconnecting(attempt);
+                System.out.println("CLIENT: reconnect attempt #" + attempt);
+
+                try {
+                    boolean success = reconnectBlocking();
+                    if (success) {
+                        System.out.println("CLIENT: reconnect succeeded");
+                        reconnecting = false;
+                        notifyReconnected();
+                        return;
+                    }
+                } catch (InterruptedException e) {
+                    return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            reconnecting = false;
+            System.out.println("CLIENT: reconnect failed after " + MAX_RECONNECT_ATTEMPTS + " attempts");
+            notifyReconnectFailed();
+        });
+        reconnectThread.setDaemon(true);
+        reconnectThread.start();
+    }
+
+    private void notifyReconnecting(int attempt) {
+        if (listener instanceof GameMessageListener) {
+            ((GameMessageListener) listener).onReconnecting(attempt);
+        }
+    }
+
+    private void notifyReconnected() {
+        if (listener instanceof GameMessageListener) {
+            ((GameMessageListener) listener).onReconnected();
+        }
+    }
+
+    private void notifyReconnectFailed() {
+        if (listener instanceof GameMessageListener) {
+            ((GameMessageListener) listener).onReconnectFailed();
         }
     }
 }

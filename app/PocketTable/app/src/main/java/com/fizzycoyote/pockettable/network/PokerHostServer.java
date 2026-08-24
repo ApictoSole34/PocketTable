@@ -14,6 +14,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -27,11 +31,18 @@ import java.util.concurrent.ConcurrentHashMap;
  * @see PokerGameState
  */
 public class PokerHostServer extends WebSocketServer {
+    private static final int CONNECTION_LOST_TIMEOUT_SECONDS = 20;
+    private static final int DISCONNECT_GRACE_PERIOD_SECONDS = 20;
+    public static final String ERROR_PREFIX = "ERROR:";
+
     private final Set<WebSocket> clients = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final Map<WebSocket, UUID> clientPlayerMap = new ConcurrentHashMap<>();
     private final Gson gson = new Gson();
     private PokerGame game;
     private final UUID hostPlayerId;
+
+    private final Map<UUID, ScheduledFuture<?>> pendingFolds = new ConcurrentHashMap<>();
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     public interface StateChangeListener {
         void onStateChanged(PokerGameState state);
@@ -42,6 +53,7 @@ public class PokerHostServer extends WebSocketServer {
         super(new InetSocketAddress(port));
         this.game = game;
         this.hostPlayerId = hostPlayerId;
+        setConnectionLostTimeout(CONNECTION_LOST_TIMEOUT_SECONDS);
     }
 
     public void setStateListener(StateChangeListener listener) {
@@ -50,7 +62,7 @@ public class PokerHostServer extends WebSocketServer {
 
     private void notifyStateChanged() {
         if (stateListener != null) {
-            PokerGameState state = PokerGameState.fromGame(game, null);
+            PokerGameState state = PokerGameState.fromGame(game, hostPlayerId);
             stateListener.onStateChanged(state);
         }
     }
@@ -72,6 +84,12 @@ public class PokerHostServer extends WebSocketServer {
             playerId = UUID.fromString(playerIdStr);
         } catch (Exception e) {
             playerId = UUID.randomUUID();
+        }
+
+        ScheduledFuture<?> pendingFold = pendingFolds.remove(playerId);
+        if (pendingFold != null) {
+            pendingFold.cancel(false);
+            System.out.println("Player " + playerId + " reconnected before grace period expired - fold cancelled");
         }
 
         boolean exists = false;
@@ -100,17 +118,40 @@ public class PokerHostServer extends WebSocketServer {
         System.out.println("SOCKET CLOSED code=" + code + " reason=" + reason + " remote=" + remote);
         clients.remove(conn);
         UUID playerId = clientPlayerMap.remove(conn);
+
         if (playerId != null) {
+            scheduleDelayedFold(playerId);
+        }
+    }
+
+    /**
+     * Instead of folding a disconnected player immediately, gives them a grace
+     * period to reconnect (see {@link #onOpen}). If they don't reconnect in time,
+     * the fold is applied and the game continues.
+     */
+    private void scheduleDelayedFold(UUID playerId) {
+        if (pendingFolds.containsKey(playerId)) return;
+
+        System.out.println("Player " + playerId + " disconnected - grace period " + DISCONNECT_GRACE_PERIOD_SECONDS + "s");
+
+        ScheduledFuture<?> future = scheduler.schedule(() -> {
+            pendingFolds.remove(playerId);
+
+            boolean reconnected = clientPlayerMap.containsValue(playerId);
+            if (reconnected) return;
+
             try {
                 PokerPlayer player = game.getPlayer(playerId);
-                if (!player.isFolded()) {
+                if (!player.isFolded() && !game.isGameOver()) {
                     player.fold();
-                    System.out.println("Player " + playerId + " folded (disconnected)");
+                    System.out.println("Player " + playerId + " folded (grace period expired)");
                     broadcastState();
                     notifyStateChanged();
                 }
             } catch (Exception ignored) {}
-        }
+        }, DISCONNECT_GRACE_PERIOD_SECONDS, TimeUnit.SECONDS);
+
+        pendingFolds.put(playerId, future);
     }
 
     @Override
@@ -127,7 +168,7 @@ public class PokerHostServer extends WebSocketServer {
             notifyStateChanged();
         } catch (Exception e) {
             e.printStackTrace();
-            conn.send("ERROR: " + e.getMessage());
+            conn.send(ERROR_PREFIX + e.getMessage());
         }
     }
 
@@ -137,7 +178,6 @@ public class PokerHostServer extends WebSocketServer {
     }
 
     public void broadcastState() {
-
         for (Map.Entry<WebSocket, UUID> entry : clientPlayerMap.entrySet()) {
             WebSocket conn = entry.getKey();
             UUID viewerId = entry.getValue();
@@ -166,6 +206,12 @@ public class PokerHostServer extends WebSocketServer {
 
     public void stopServer() {
         try {
+            for (ScheduledFuture<?> future : pendingFolds.values()) {
+                future.cancel(false);
+            }
+            pendingFolds.clear();
+            scheduler.shutdownNow();
+
             for (WebSocket c : clients) c.close();
             clients.clear();
             clientPlayerMap.clear();
