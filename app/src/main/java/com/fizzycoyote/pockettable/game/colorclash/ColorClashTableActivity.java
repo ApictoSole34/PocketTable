@@ -22,6 +22,7 @@ import com.fizzycoyote.pockettable.engine.colorclash.CardColor;
 import com.fizzycoyote.pockettable.engine.colorclash.CardType;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashCard;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
+import com.fizzycoyote.pockettable.engine.colorclash.ColorClashRules;
 import com.fizzycoyote.pockettable.models.colorclash.ColorClashState;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashClient;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashHostServer;
@@ -257,27 +258,12 @@ public class ColorClashTableActivity extends AppCompatActivity {
 
     private boolean canPlayCard(ColorClashCard card) {
         if (lastState == null) return false;
-        ColorClashCard topCard = lastState.topCard();
-        CardColor currentColor = lastState.currentColor();
-        if (topCard == null) return false;
-        int drawStack = lastState.drawStack();
-
-        if (card.isWild()) {
-            if (drawStack > 0 && card.type() != CardType.WILD_DRAW_FOUR) {
-                return false;
-            }
-            return true;
-        }
-
-        if (drawStack > 0) {
-            return card.type() == CardType.DRAW_TWO;
-        }
-
-        return card.color() == currentColor ||
-                (card.type() == CardType.NUMBER && card.value() == topCard.value()) ||
-                (card.type() == CardType.SKIP && topCard.type() == CardType.SKIP) ||
-                (card.type() == CardType.REVERSE && topCard.type() == CardType.REVERSE) ||
-                (card.type() == CardType.DRAW_TWO && topCard.type() == CardType.DRAW_TWO);
+        return ColorClashRules.isPlayable(
+                card,
+                lastState.topCard(),
+                lastState.currentColor(),
+                lastState.drawStack()
+        );
     }
 
     private void tryPlayCard(ColorClashCard card) {

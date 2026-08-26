@@ -41,6 +41,10 @@ public class ColorClashDeck {
         }
     }
 
+    public void addCardToBottom(ColorClashCard card) {
+        drawPile.add(0, card);
+    }
+
     public void shuffle() {
         Collections.shuffle(drawPile);
     }
