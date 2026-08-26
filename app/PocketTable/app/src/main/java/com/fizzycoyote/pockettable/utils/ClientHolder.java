@@ -1,11 +1,11 @@
 package com.fizzycoyote.pockettable.utils;
 
 
-import com.fizzycoyote.pockettable.network.PokerClient;
+import com.fizzycoyote.pockettable.network.common.GenericGameClient;
 
 public class ClientHolder {
     private static ClientHolder instance;
-    private PokerClient client;
+    private GenericGameClient client;
 
     private ClientHolder() {}
 
@@ -14,11 +14,11 @@ public class ClientHolder {
         return instance;
     }
 
-    public void setClient(PokerClient client) {
+    public void setClient(GenericGameClient client) {
         this.client = client;
     }
 
-    public PokerClient getClient() {
+    public GenericGameClient getClient() {
         return client;
     }
 

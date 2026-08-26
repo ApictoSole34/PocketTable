@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -6,78 +8,150 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/background"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:alpha="0.9"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:paddingTop="60dp">
+        android:fillViewport="true">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/name_logo"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginBottom="24dp"/>
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/name_logo"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNickname"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nickname_hint"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:inputType="textCapWords"
-                android:maxLength="20"/>
+                android:layout_marginBottom="24dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nickname_hint"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:inputType="textCapWords"
+                    android:maxLength="20"/>
 
-        <Button
-            android:id="@+id/btnCreateRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_room"
-            android:textSize="18sp"
-            android:backgroundTint="@color/purple"
-            android:layout_marginBottom="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnJoinRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/join_room"
-            android:textSize="18sp"
-            android:backgroundTint="@color/dark_purple"
-            android:layout_marginBottom="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/join_host_title"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"/>
 
-        <Button
-            android:id="@+id/btnScanQR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/scan_qr"
-            android:textSize="18sp"
-            android:backgroundTint="#4CAF50"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btnJoinRoom"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="@string/join_via_code"
+                    android:textSize="14sp"
+                    android:backgroundTint="#FF9800"
+                    android:layout_marginEnd="6dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRooms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+                <Button
+                    android:id="@+id/btnScanQR"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="@string/scan_qr"
+                    android:textSize="14sp"
+                    android:backgroundTint="#4CAF50"
+                    android:layout_marginStart="6dp"/>
 
-    </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/host_game_title"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="1">
+
+                <LinearLayout
+                    android:id="@+id/llPoker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivPoker"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/icon_poker"
+                        android:scaleType="fitCenter"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llColorClash"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivColorClash"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/icon_colorclash"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
+
+            </GridLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

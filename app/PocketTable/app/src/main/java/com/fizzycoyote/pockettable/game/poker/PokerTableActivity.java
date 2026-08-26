@@ -20,8 +20,8 @@ import com.fizzycoyote.pockettable.engine.poker.PokerGame;
 import com.fizzycoyote.pockettable.engine.poker.PokerRound;
 import com.fizzycoyote.pockettable.models.poker.PokerActionRequest;
 import com.fizzycoyote.pockettable.models.poker.PokerGameState;
-import com.fizzycoyote.pockettable.network.PokerClient;
-import com.fizzycoyote.pockettable.network.PokerHostServer;
+import com.fizzycoyote.pockettable.network.poker.PokerClient;
+import com.fizzycoyote.pockettable.network.poker.PokerHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
 import com.google.android.material.slider.Slider;
@@ -110,8 +110,8 @@ public class PokerTableActivity extends AppCompatActivity {
         btnNextHand.setOnClickListener(v -> startNextHand());
 
         if (isHost) {
-            game = GameHolder.getInstance().getGame();
-            hostServer = GameHolder.getInstance().getServer();
+            game = (PokerGame) GameHolder.getInstance().getGame();
+            hostServer = (PokerHostServer) GameHolder.getInstance().getServer();
             if (game == null) {
                 List<UUID> playerIds = new ArrayList<>();
                 playerIds.add(playerId);
@@ -129,7 +129,7 @@ public class PokerTableActivity extends AppCompatActivity {
         }
 
         if (!isHost && serverIp != null) {
-            PokerClient existingClient = ClientHolder.getInstance().getClient();
+            PokerClient existingClient = (PokerClient) ClientHolder.getInstance().getClient();
 
             PokerClient.GameMessageListener listener = new PokerClient.GameMessageListener() {
                 @Override
@@ -178,7 +178,7 @@ public class PokerTableActivity extends AppCompatActivity {
                 }
             };
 
-            if (existingClient != null) {
+            if (existingClient != null && existingClient.isOpen()) {
                 client = existingClient;
                 client.setListener(listener);
                 client.send("GET_STATE");
@@ -187,17 +187,14 @@ public class PokerTableActivity extends AppCompatActivity {
                 try {
                     client = new PokerClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
                     client.setListener(listener);
-                    client.connect();
-                    tvTurnInfo.setText(getString(R.string.connecting));
+                    client.connectBlocking();
+                    client.send("GET_STATE");
+                    tvTurnInfo.setText(getString(R.string.connected));
                 } catch (Exception e) {
                     e.printStackTrace();
                     tvTurnInfo.setText(String.format(getString(R.string.connection_error), e.getMessage()));
                 }
             }
-        } else if (isHost) {
-            PokerGameState initialState = PokerGameState.fromGame(game, playerId);
-            updateUI(initialState);
-            tvTurnInfo.setText(getString(R.string.you_are_host));
         }
     }
 

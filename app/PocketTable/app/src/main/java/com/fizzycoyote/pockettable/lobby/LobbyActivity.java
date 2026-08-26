@@ -1,11 +1,11 @@
 package com.fizzycoyote.pockettable.lobby;
 
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +19,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fizzycoyote.pockettable.R;
+import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
+import com.fizzycoyote.pockettable.engine.common.GameEngine;
+import com.fizzycoyote.pockettable.engine.common.GameType;
 import com.fizzycoyote.pockettable.engine.poker.PokerGame;
+import com.fizzycoyote.pockettable.game.colorclash.ColorClashTableActivity;
 import com.fizzycoyote.pockettable.game.poker.PokerTableActivity;
+import com.fizzycoyote.pockettable.models.colorclash.ColorClashState;
 import com.fizzycoyote.pockettable.models.poker.PokerGameState;
-import com.fizzycoyote.pockettable.network.DiscoveryService;
-import com.fizzycoyote.pockettable.network.PokerClient;
-import com.fizzycoyote.pockettable.network.PokerHostServer;
+import com.fizzycoyote.pockettable.network.colorclash.ColorClashClient;
+import com.fizzycoyote.pockettable.network.colorclash.ColorClashHostServer;
+import com.fizzycoyote.pockettable.network.common.DiscoveryService;
+import com.fizzycoyote.pockettable.network.common.GenericGameClient;
+import com.fizzycoyote.pockettable.network.common.GenericHostServer;
+import com.fizzycoyote.pockettable.network.poker.PokerClient;
+import com.fizzycoyote.pockettable.network.poker.PokerHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
 import com.fizzycoyote.pockettable.utils.NetworkUtils;
@@ -33,8 +42,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.encoder.QRCode;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -43,21 +50,29 @@ import java.util.UUID;
 
 /**
  * Lobby screen where players join the game room.
- * Host can start the game and adjust blinds/starting chips.
+ * Host can start the game and adjust game-specific settings (e.g. blinds for poker).
  * Client waits for host to start.
  *
- * <p>Communication:
- * <ul>
- *   <li>Host: Runs {@link PokerHostServer}</li>
- *   <li>Client: Connects via {@link PokerClient}</li>
- * </ul>
- * </p>
+ * <p>The host server is created and started as soon as the lobby opens (not
+ * when START is clicked), so clients can connect and see the live player
+ * list while waiting. Clicking START finalizes game settings and actually
+ * begins the round.</p>
+ *
+ * <p><b>Important:</b> the client object created here is reused (via
+ * {@link ClientHolder}) by the table activity after the game starts. It must
+ * be a plain {@link PokerClient}/{@link ColorClashClient} - never wrap it in
+ * an anonymous subclass overriding {@code onRawMessage}, since that would
+ * permanently replace the client's own message-parsing logic and break the
+ * table activity's ability to receive state updates after reuse.</p>
  *
  * @see PokerGame
  * @see PokerHostServer
  * @see PokerClient
+ * @see ColorClashGame
+ * @see ColorClashHostServer
  */
 public class LobbyActivity extends AppCompatActivity {
+
     private TextView tvRoomCode, tvPlayerCount, tvIp;
     private RecyclerView rvPlayers;
     private Button btnStart;
@@ -73,10 +88,17 @@ public class LobbyActivity extends AppCompatActivity {
     private boolean isHost;
     private String serverIp;
 
-    private PokerHostServer hostServer;
-    private PokerClient client;
-    private PokerGame game;
+    private GenericHostServer hostServer;
+    private GenericGameClient client;
+    private GameEngine game;
     private boolean startingGame = false;
+
+    private PokerGame pokerGame;
+    private ColorClashGame colorClashGame;
+
+    private GameType gameType;
+
+    private static final String TAG = "LobbyActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +126,9 @@ public class LobbyActivity extends AppCompatActivity {
         isHost = getIntent().getBooleanExtra("isHost", false);
         serverIp = getIntent().getStringExtra("serverIp");
 
+        String gameTypeStr = getIntent().getStringExtra("gameType");
+        gameType = GameType.valueOf(gameTypeStr != null ? gameTypeStr : GameType.POKER.name());
+
         if (roomCode == null) {
             RoomCodeGenerator generator = new RoomCodeGenerator();
             roomCode = generator.generate();
@@ -120,26 +145,20 @@ public class LobbyActivity extends AppCompatActivity {
             tvIp.setText(getString(R.string.ip_label) + myIp);
             tvIp.setVisibility(View.VISIBLE);
 
-            DiscoveryService.broadcastHost(roomCode, myIp);
+            DiscoveryService.broadcastHost(roomCode, myIp, gameType.name());
 
-            llGameSettings.setVisibility(View.VISIBLE);
+            if (gameType == GameType.POKER) {
+                llGameSettings.setVisibility(View.VISIBLE);
+            } else {
+                llGameSettings.setVisibility(View.GONE);
+            }
+
             btnStart.setVisibility(View.VISIBLE);
             btnShowQR.setVisibility(View.VISIBLE);
             btnShowQR.setOnClickListener(v -> showQRCode());
             btnStart.setOnClickListener(v -> startGame());
 
-            try {
-                List<UUID> playerIds = new ArrayList<>();
-                playerIds.add(playerId);
-                game = new PokerGame(roomCode, playerIds);
-                game.getPlayer(playerId).setPlayerName(playerName);
-                hostServer = new PokerHostServer(8888, game, playerId);
-                hostServer.start();
-
-                hostServer.setStateListener(state -> runOnUiThread(() -> updatePlayersFromState(state)));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            setupHostServer();
 
             players.add(playerName + " (Host)");
             adapter.notifyDataSetChanged();
@@ -148,44 +167,160 @@ public class LobbyActivity extends AppCompatActivity {
             tvIp.setVisibility(View.GONE);
             btnStart.setVisibility(View.GONE);
             llGameSettings.setVisibility(View.GONE);
+            connectAsClient();
+        }
+    }
 
-            try {
-                client = new PokerClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
-                client.setListener(new PokerClient.GameMessageListener() {
+    /**
+     * Creates the concrete client for this game type and connects.
+     *
+     * <p>Critical: this must be a plain {@code new PokerClient(...)} /
+     * {@code new ColorClashClient(...)} - NOT wrapped in an anonymous
+     * subclass overriding {@code onRawMessage}. Doing so would permanently
+     * shadow the client's real message-parsing logic (which the table
+     * activity depends on after reusing this same client via
+     * {@link ClientHolder}), silently breaking all state updates.</p>
+     */
+    private void connectAsClient() {
+        try {
+            if (gameType == GameType.POKER) {
+                PokerClient pokerClient = new PokerClient(
+                        new URI("ws://" + serverIp + ":8888"), playerId, playerName);
+
+                pokerClient.setListener(new PokerClient.GameMessageListener() {
                     @Override
                     public void onState(PokerGameState state) {
-                        runOnUiThread(() -> updatePlayersFromState(state));
+                        runOnUiThread(() -> updatePlayersFromPokerState(state));
                     }
 
                     @Override
                     public void onGameStarted() {
-                        runOnUiThread(() -> {
-                            ClientHolder.getInstance().setClient(client);
-                            client = null;
+                        runOnUiThread(() -> startGameActivity(GameType.POKER.name()));
+                    }
 
-                            Intent intent = new Intent(LobbyActivity.this, PokerTableActivity.class);
-                            intent.putExtra("roomCode", roomCode);
-                            intent.putExtra("playerId", playerId.toString());
-                            intent.putExtra("playerName", playerName);
-                            intent.putExtra("isHost", false);
-                            intent.putExtra("serverIp", serverIp);
-                            startActivity(intent);
-                            finish();
-                        });
+                    @Override public void onGameOver() {}
+                    @Override public void onReconnecting(int attempt) {}
+                    @Override public void onReconnected() {}
+                    @Override public void onReconnectFailed() {}
+                    @Override public void onActionError(String message) {}
+                });
+
+                pokerClient.connectBlocking();
+                client = pokerClient;
+
+            } else {
+                ColorClashClient colorClient = new ColorClashClient(
+                        new URI("ws://" + serverIp + ":8888"), playerId, playerName);
+
+                colorClient.setListener(new ColorClashClient.MessageListener() {
+                    @Override
+                    public void onState(ColorClashState state) {
+                        runOnUiThread(() -> updatePlayersFromColorClashState(state));
                     }
 
                     @Override
-                    public void onGameOver() {}
+                    public void onGameStarted() {
+                        runOnUiThread(() -> startGameActivity(GameType.COLOR_CLASH.name()));
+                    }
+
+                    @Override public void onGameOver() {}
+                    @Override public void onReconnecting(int attempt) {}
+                    @Override public void onReconnected() {}
+                    @Override public void onReconnectFailed() {}
+                    @Override public void onActionError(String message) {}
                 });
-                client.connect();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+                colorClient.connectBlocking();
+                client = colorClient;
             }
+
+            ClientHolder.getInstance().setClient(client);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show();
         }
     }
 
+    private void setupHostServer() {
+        if (gameType == GameType.POKER) {
+            pokerGame = new PokerGame(roomCode, List.of(playerId));
+            pokerGame.getPlayer(playerId).setPlayerName(playerName);
+            game = pokerGame;
+
+            PokerHostServer server = new PokerHostServer(8888, pokerGame, playerId);
+            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromPokerState(state)));
+            hostServer = server;
+
+        } else if (gameType == GameType.COLOR_CLASH) {
+            colorClashGame = new ColorClashGame(List.of(playerId));
+            colorClashGame.getPlayer(playerId).setPlayerName(playerName);
+            game = colorClashGame;
+
+            ColorClashHostServer server = new ColorClashHostServer(8888, colorClashGame, playerId);
+            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromColorClashState(state)));
+            hostServer = server;
+        }
+
+        try {
+            hostServer.start();
+            System.out.println("LOBBY HOST: server started");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updatePlayersFromPokerState(PokerGameState state) {
+        if (state == null || state.players() == null) return;
+        players.clear();
+        for (PokerGameState.PlayerState p : state.players().values()) {
+            String name = p.playerName();
+            if (p.playerId().equals(playerId)) {
+                name = name + " " + getString(R.string.you_suffix);
+            }
+            players.add(name);
+        }
+        adapter.notifyDataSetChanged();
+        tvPlayerCount.setText(getString(R.string.players_label) + " " + players.size());
+    }
+
+    private void updatePlayersFromColorClashState(ColorClashState state) {
+        if (state == null || state.players() == null) return;
+        players.clear();
+        for (ColorClashState.PlayerInfo p : state.players().values()) {
+            String name = p.playerName();
+            if (p.playerId().equals(playerId)) {
+                name = name + " " + getString(R.string.you_suffix);
+            }
+            players.add(name);
+        }
+        adapter.notifyDataSetChanged();
+        tvPlayerCount.setText(getString(R.string.players_label) + " " + players.size());
+    }
+
+    private void startGameActivity(String gameTypeStr) {
+        if (startingGame) return;
+        startingGame = true;
+
+        Log.d(TAG, "startGameActivity: " + gameTypeStr);
+
+        Intent intent;
+        if (GameType.POKER.name().equals(gameTypeStr)) {
+            intent = new Intent(this, PokerTableActivity.class);
+        } else {
+            intent = new Intent(this, ColorClashTableActivity.class);
+        }
+        intent.putExtra("roomCode", roomCode);
+        intent.putExtra("playerId", playerId.toString());
+        intent.putExtra("playerName", playerName);
+        intent.putExtra("isHost", false);
+        intent.putExtra("serverIp", serverIp);
+        startActivity(intent);
+        finish();
+    }
+
     private void showQRCode() {
-        String data = roomCode + ":" + NetworkUtils.getLocalIpAddress();
+        String data = roomCode + ":" + NetworkUtils.getLocalIpAddress() + ":" + gameType.name();
 
         try {
             int size = 800;
@@ -223,24 +358,6 @@ public class LobbyActivity extends AppCompatActivity {
         }
     }
 
-    private void updatePlayersFromState(PokerGameState state) {
-        players.clear();
-        if (state != null && state.players() != null) {
-            for (PokerGameState.PlayerState ps : state.players().values()) {
-                String name = ps.playerName();
-                if (name == null || name.isEmpty()) {
-                    name = getString(R.string.player_name_default) + " " + ps.playerId().toString().substring(0, 4);
-                }
-                if (ps.playerId().equals(playerId)) {
-                    name = name + " " + getString(R.string.you_suffix);
-                }
-                players.add(name);
-            }
-        }
-        adapter.notifyDataSetChanged();
-        tvPlayerCount.setText(getString(R.string.players_label) + " " + players.size());
-    }
-
     private int parseIntOrDefault(String text, int defaultValue) {
         try {
             int value = Integer.parseInt(text.trim());
@@ -253,17 +370,20 @@ public class LobbyActivity extends AppCompatActivity {
     private void startGame() {
         startingGame = true;
 
-        int smallBlind = parseIntOrDefault(etSmallBlind.getText().toString(), 50);
-        int bigBlind = parseIntOrDefault(etBigBlind.getText().toString(), 100);
-        int startingChips = parseIntOrDefault(etStartingChips.getText().toString(), 1000);
-
-        game.applySettings(smallBlind, bigBlind, startingChips);
+        if (gameType == GameType.POKER) {
+            int smallBlind = parseIntOrDefault(etSmallBlind.getText().toString(), 50);
+            int bigBlind = parseIntOrDefault(etBigBlind.getText().toString(), 100);
+            int startingChips = parseIntOrDefault(etStartingChips.getText().toString(), 1000);
+            pokerGame.applySettings(smallBlind, bigBlind, startingChips);
+        }
 
         GameHolder.getInstance().setGame(game, hostServer);
         game.startGame();
-        hostServer.broadcastGameStart();
+        hostServer.broadcastGameStartWithType(gameType.name());
 
-        Intent intent = new Intent(this, PokerTableActivity.class);
+        Intent intent = gameType == GameType.POKER
+                ? new Intent(this, PokerTableActivity.class)
+                : new Intent(this, ColorClashTableActivity.class);
         intent.putExtra("roomCode", roomCode);
         intent.putExtra("playerId", playerId.toString());
         intent.putExtra("playerName", playerName);
@@ -275,9 +395,15 @@ public class LobbyActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!startingGame && hostServer != null) {
-            hostServer.stopServer();
+        Log.d(TAG, "onDestroy: startingGame=" + startingGame);
+        if (!startingGame) {
+            if (hostServer != null) {
+                hostServer.stopServer();
+            }
+            if (client != null) {
+                client.requestClose();
+                ClientHolder.getInstance().clear();
+            }
         }
-        if (client != null) client.requestClose();
     }
 }

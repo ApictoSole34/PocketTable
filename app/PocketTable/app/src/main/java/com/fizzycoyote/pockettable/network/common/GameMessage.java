@@ -1,4 +1,4 @@
-package com.fizzycoyote.pockettable.network;
+package com.fizzycoyote.pockettable.network.common;
 
 import com.fizzycoyote.pockettable.models.poker.PokerGameState;
 

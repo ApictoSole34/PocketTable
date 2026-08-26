@@ -1,4 +1,4 @@
-package com.fizzycoyote.pockettable.network;
+package com.fizzycoyote.pockettable.network.common;
 
 import android.util.Log;
 import java.net.DatagramPacket;
@@ -12,18 +12,18 @@ public class DiscoveryService {
     private static Thread broadcastThread;
 
     public interface DiscoveryListener {
-        void onHostFound(String ip, String roomCode);
+        void onHostFound(String ip, String roomCode, String gameType);
         void onHostNotFound();
     }
 
-    public static void broadcastHost(String roomCode, String hostIp) {
+    public static void broadcastHost(String roomCode, String hostIp, String gameType) {
         if (broadcasting) return;
         broadcasting = true;
 
         broadcastThread = new Thread(() -> {
             try (DatagramSocket socket = new DatagramSocket()) {
                 socket.setBroadcast(true);
-                String message = "POCKETTABLE_HOST:" + roomCode + ":" + hostIp;
+                String message = "POCKETTABLE_HOST:" + roomCode + ":" + hostIp + ":" + gameType;
                 DatagramPacket packet = new DatagramPacket(
                         message.getBytes(),
                         message.length(),
@@ -64,9 +64,10 @@ public class DiscoveryService {
                         String data = new String(packet.getData(), 0, packet.getLength());
                         if (data.startsWith("POCKETTABLE_HOST:")) {
                             String[] parts = data.split(":");
-                            if (parts.length >= 3 && parts[1].equals(targetRoomCode)) {
+                            if (parts.length >= 4 && parts[1].equals(targetRoomCode)) {
                                 String ip = parts[2];
-                                listener.onHostFound(ip, targetRoomCode);
+                                String gameType = parts[3];
+                                listener.onHostFound(ip, targetRoomCode, gameType);
                                 return;
                             }
                         }

@@ -1,4 +1,4 @@
-package com.fizzycoyote.pockettable.network;
+package com.fizzycoyote.pockettable.network.common;
 
 public enum MessageType {
     STATE_UPDATE,

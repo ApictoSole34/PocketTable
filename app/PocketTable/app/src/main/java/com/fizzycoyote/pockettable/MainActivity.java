@@ -1,17 +1,17 @@
 package com.fizzycoyote.pockettable;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;import android.os.Bundle;import android.widget.Button;import android.widget.EditText;import android.widget.Toast;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.fizzycoyote.pockettable.engine.common.GameType;
 import com.fizzycoyote.pockettable.lobby.LobbyActivity;
-import com.fizzycoyote.pockettable.network.DiscoveryService;
+import com.fizzycoyote.pockettable.network.common.DiscoveryService;
 import com.fizzycoyote.pockettable.utils.RoomCodeGenerator;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -21,18 +21,8 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     private EditText etNickname;
-    private Button btnCreateRoom, btnJoinRoom, btnScanQR;
-    private SharedPreferences prefs;
-
-    private void saveNickname(String nickname) {
-        SharedPreferences prefs = getSharedPreferences("PocketTable", MODE_PRIVATE);
-        prefs.edit().putString("nickname", nickname).apply();
-    }
-
-    private String loadNickname() {
-        SharedPreferences prefs = getSharedPreferences("PocketTable", MODE_PRIVATE);
-        return prefs.getString("nickname", "");
-    }
+    private Button btnJoinRoom, btnScanQR;
+    private LinearLayout llPoker, llColorClash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,38 +30,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         etNickname = findViewById(R.id.etNickname);
-        btnCreateRoom = findViewById(R.id.btnCreateRoom);
         btnJoinRoom = findViewById(R.id.btnJoinRoom);
         btnScanQR = findViewById(R.id.btnScanQR);
-        if (btnScanQR != null) {
-            btnScanQR.setOnClickListener(v -> scanQR());
-        }
+        llPoker = findViewById(R.id.llPoker);
+        llColorClash = findViewById(R.id.llColorClash);
 
-        prefs = getSharedPreferences("PocketTablePrefs", Context.MODE_PRIVATE);
-        String savedNick = loadNickname();
+        String savedNick = getSharedPreferences("PocketTable", MODE_PRIVATE)
+                .getString("nickname", "");
         if (!savedNick.isEmpty()) {
             etNickname.setText(savedNick);
         }
 
-        btnCreateRoom.setOnClickListener(v -> {
-            String nickname = etNickname.getText().toString().trim();
-            if (nickname.isEmpty()) {
-                Toast.makeText(this, getString(R.string.enter_nickname), Toast.LENGTH_SHORT).show();
-                return;
-            }
-            saveNickname(nickname);
-
-            RoomCodeGenerator generator = new RoomCodeGenerator();
-            String roomCode = generator.generate();
-            UUID playerId = UUID.randomUUID();
-
-            Intent intent = new Intent(this, LobbyActivity.class);
-            intent.putExtra("roomCode", roomCode);
-            intent.putExtra("playerName", nickname);
-            intent.putExtra("playerId", playerId.toString());
-            intent.putExtra("isHost", true);
-            startActivity(intent);
-        });
+        llPoker.setOnClickListener(v -> startLobby(GameType.POKER));
+        llColorClash.setOnClickListener(v -> startLobby(GameType.COLOR_CLASH));
 
         btnJoinRoom.setOnClickListener(v -> {
             String nickname = etNickname.getText().toString().trim();
@@ -82,6 +53,43 @@ public class MainActivity extends AppCompatActivity {
             saveNickname(nickname);
             showJoinDialog(nickname);
         });
+
+        btnScanQR.setOnClickListener(v -> {
+            String nickname = etNickname.getText().toString().trim();
+            if (nickname.isEmpty()) {
+                Toast.makeText(this, getString(R.string.enter_nickname), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            saveNickname(nickname);
+            scanQR();
+        });
+    }
+
+    private void startLobby(GameType gameType) {
+        String nickname = etNickname.getText().toString().trim();
+        if (nickname.isEmpty()) {
+            Toast.makeText(this, getString(R.string.enter_nickname), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        saveNickname(nickname);
+
+        String roomCode = new RoomCodeGenerator().generate();
+        UUID playerId = UUID.randomUUID();
+
+        Intent intent = new Intent(this, LobbyActivity.class);
+        intent.putExtra("roomCode", roomCode);
+        intent.putExtra("playerId", playerId.toString());
+        intent.putExtra("playerName", nickname);
+        intent.putExtra("isHost", true);
+        intent.putExtra("gameType", gameType.name());
+        startActivity(intent);
+    }
+
+    private void saveNickname(String nickname) {
+        getSharedPreferences("PocketTable", MODE_PRIVATE)
+                .edit()
+                .putString("nickname", nickname)
+                .apply();
     }
 
     private void showJoinDialog(String nickname) {
@@ -108,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             UUID playerId = UUID.randomUUID();
             DiscoveryService.discoverHost(code, new DiscoveryService.DiscoveryListener() {
                 @Override
-                public void onHostFound(String ip, String roomCode) {
+                public void onHostFound(String ip, String roomCode, String gameType) {
                     runOnUiThread(() -> {
                         Toast.makeText(MainActivity.this, getString(R.string.host_found), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, LobbyActivity.class);
@@ -117,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("playerName", finalNickname);
                         intent.putExtra("isHost", false);
                         intent.putExtra("serverIp", ip);
+                        intent.putExtra("gameType", gameType);
                         startActivity(intent);
                     });
                 }
@@ -152,10 +161,10 @@ public class MainActivity extends AppCompatActivity {
             if (result.getContents() != null) {
                 String qrData = result.getContents();
                 String[] parts = qrData.split(":");
-                if (parts.length >= 2) {
+                if (parts.length >= 3) {
                     String roomCode = parts[0];
                     String serverIp = parts[1];
-                    String port = parts.length >= 3 ? parts[2] : "8888";
+                    String gameType = parts[2];
 
                     String nickname = etNickname.getText().toString().trim();
                     if (nickname.isEmpty()) nickname = getString(R.string.player_name_default);
@@ -168,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("playerName", nickname);
                     intent.putExtra("isHost", false);
                     intent.putExtra("serverIp", serverIp);
+                    intent.putExtra("gameType", gameType);
                     startActivity(intent);
                 } else {
                     Toast.makeText(this, getString(R.string.invalid_qr), Toast.LENGTH_SHORT).show();

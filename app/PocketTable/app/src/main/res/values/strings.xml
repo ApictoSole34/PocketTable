@@ -8,6 +8,11 @@
     <string name="join_room">🔗 Connect via code</string>
     <string name="scan_qr">📷 Scan QR</string>
     <string name="enter_nickname">Enter your nickname!</string>
+    <string name="join_host_title">Join host</string>
+    <string name="host_game_title">Host game</string>
+    <string name="join_via_code">Join via code</string>
+    <string name="game_poker">Poker</string>
+    <string name="game_colorclash">Color Clash</string>
 
     <!-- ==================== LOBBY ==================== -->
     <string name="code_label">Code: </string>

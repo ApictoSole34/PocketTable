@@ -1,12 +1,12 @@
 package com.fizzycoyote.pockettable.utils;
 
-import com.fizzycoyote.pockettable.engine.poker.PokerGame;
-import com.fizzycoyote.pockettable.network.PokerHostServer;
+import com.fizzycoyote.pockettable.engine.common.GameEngine;
+import com.fizzycoyote.pockettable.network.common.GenericHostServer;
 
 public class GameHolder {
     private static GameHolder instance;
-    private PokerGame game;
-    private PokerHostServer server;
+    private GameEngine game;
+    private GenericHostServer server;
 
     private GameHolder() {}
 
@@ -15,16 +15,16 @@ public class GameHolder {
         return instance;
     }
 
-    public void setGame(PokerGame game, PokerHostServer server) {
+    public void setGame(GameEngine game, GenericHostServer server) {
         this.game = game;
         this.server = server;
     }
 
-    public PokerGame getGame() {
+    public GameEngine getGame() {
         return game;
     }
 
-    public PokerHostServer getServer() {
+    public GenericHostServer getServer() {
         return server;
     }
 
