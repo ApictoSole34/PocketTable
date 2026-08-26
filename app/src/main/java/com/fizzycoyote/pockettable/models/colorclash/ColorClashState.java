@@ -4,6 +4,7 @@ import com.fizzycoyote.pockettable.engine.colorclash.CardColor;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashCard;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashPlayer;
+import com.fizzycoyote.pockettable.engine.colorclash.ColorClashRules;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,8 @@ public record ColorClashState(
         boolean clockwise,
         int drawStack,
         UUID winnerId,
-        UUID viewerId
+        UUID viewerId,
+        ColorClashRules rules
 ) {
     public static ColorClashState fromGame(ColorClashGame game, UUID viewerId) {
         Map<UUID, PlayerInfo> playerInfos = game.getPlayers().stream()
@@ -45,7 +47,8 @@ public record ColorClashState(
                 game.isClockwise(),
                 game.getDrawStack(),
                 game.getWinnerId(),
-                viewerId
+                viewerId,
+                game.getRules()
         );
     }
 

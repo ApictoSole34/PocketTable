@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class ColorClashTableActivity extends AppCompatActivity {
 
@@ -67,7 +68,7 @@ public class ColorClashTableActivity extends AppCompatActivity {
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
         playerName = getIntent().getStringExtra("playerName");
         if (playerName == null || playerName.isEmpty()) {
-            playerName = "Player";
+            playerName = getString(R.string.player_name_default);
         }
         isHost = getIntent().getBooleanExtra("isHost", false);
         serverIp = getIntent().getStringExtra("serverIp");
@@ -113,18 +114,28 @@ public class ColorClashTableActivity extends AppCompatActivity {
             }
             hostServer.setStateListener(state -> runOnUiThread(() -> updateUI(state)));
             updateUI(ColorClashState.fromGame(game, playerId));
-            tvTurnInfo.setText("You are the host. Game ready!");
+            tvTurnInfo.setText(getString(R.string.colorclash_host_ready));
         } else {
             ColorClashClient existingClient = (ColorClashClient) ClientHolder.getInstance().getClient();
             ColorClashClient.MessageListener listener = new ColorClashClient.MessageListener() {
                 @Override public void onState(ColorClashState state) { runOnUiThread(() -> updateUI(state)); }
-                @Override public void onGameStarted() { runOnUiThread(() -> tvTurnInfo.setText("Game started!")); }
-                @Override public void onGameOver() { runOnUiThread(() -> tvTurnInfo.setText("Game over!")); }
-                @Override public void onReconnecting(int attempt) {}
-                @Override public void onReconnected() {}
-                @Override public void onReconnectFailed() {}
+                @Override public void onGameStarted() { runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.colorclash_game_started))); }
+                @Override public void onGameOver() { runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.colorclash_game_over))); }
+                @Override public void onReconnecting(int attempt) {
+                    runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.reconnecting_message, attempt)));
+                }
+                @Override public void onReconnected() {
+                    runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.reconnected_message)));
+                }
+                @Override public void onReconnectFailed() {
+                    runOnUiThread(() -> {
+                        tvTurnInfo.setText(getString(R.string.reconnect_failed_message));
+                        btnDraw.setEnabled(false);
+                    });
+                }
                 @Override public void onActionError(String message) {
-                    runOnUiThread(() -> Toast.makeText(ColorClashTableActivity.this, message, Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(ColorClashTableActivity.this,
+                            getString(R.string.colorclash_error, message), Toast.LENGTH_SHORT).show());
                 }
             };
 
@@ -137,10 +148,10 @@ public class ColorClashTableActivity extends AppCompatActivity {
                     client = new ColorClashClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
                     client.setListener(listener);
                     client.connect();
-                    tvTurnInfo.setText("Connecting...");
+                    tvTurnInfo.setText(getString(R.string.colorclash_connecting));
                 } catch (Exception e) {
                     e.printStackTrace();
-                    tvTurnInfo.setText("Connection error");
+                    tvTurnInfo.setText(getString(R.string.colorclash_connection_error));
                 }
             }
         }
@@ -152,10 +163,10 @@ public class ColorClashTableActivity extends AppCompatActivity {
 
         ColorClashCard topCard = state.topCard();
         if (topCard != null) {
-            tvTopCard.setText("Top: " + topCard.color() + " " + topCard.type());
+            tvTopCard.setText(getString(R.string.colorclash_top_card_label, topCard.color().name(), topCard.type().name()));
             imgTopCard.setImageResource(ColorClashCardResourceHelper.getCardResource(this, topCard));
         }
-        tvDrawPile.setText("Draw: " + state.drawPileSize());
+        tvDrawPile.setText(getString(R.string.colorclash_draw_pile_label, state.drawPileSize()));
 
         if (state.viewerId() != null && state.viewerId().equals(playerId) && state.hands() != null) {
             List<ColorClashCard> hand = state.hands().get(playerId);
@@ -169,15 +180,15 @@ public class ColorClashTableActivity extends AppCompatActivity {
         }
 
         if (current != null && current.equals(playerId)) {
-            tvTurnInfo.setText("YOUR TURN!");
+            tvTurnInfo.setText(getString(R.string.your_turn));
             btnDraw.setEnabled(true);
         } else {
-            tvTurnInfo.setText("Waiting for " + currentName);
+            tvTurnInfo.setText(getString(R.string.colorclash_waiting_for, currentName));
             btnDraw.setEnabled(false);
         }
 
         if (state.drawStack() > 0) {
-            tvTurnInfo.setText(tvTurnInfo.getText() + " (Draw " + state.drawStack() + " cards)");
+            tvTurnInfo.append(getString(R.string.colorclash_draw_stack_info, state.drawStack()));
         }
 
         updateOpponentsBar(state);
@@ -188,12 +199,11 @@ public class ColorClashTableActivity extends AppCompatActivity {
             if (state.players() != null && state.players().containsKey(state.winnerId())) {
                 winnerName = state.players().get(state.winnerId()).playerName();
             }
-            tvTurnInfo.setText("\uD83C\uDFC6 " + winnerName + " WINS! \uD83C\uDFC6");
+            tvTurnInfo.setText(getString(R.string.colorclash_winner_message, winnerName));
             btnDraw.setEnabled(false);
             if (isHost) {
                 btnNextRound.setVisibility(View.VISIBLE);
             }
-            btnDraw.setEnabled(false);
         } else {
             btnNextRound.setVisibility(View.GONE);
         }
@@ -235,7 +245,7 @@ public class ColorClashTableActivity extends AppCompatActivity {
 
             if (info.handSize() == 1 && !info.calledLastCard() && !info.eliminated()) {
                 Button btnCatch = new Button(this);
-                btnCatch.setText("Catch!");
+                btnCatch.setText(getString(R.string.colorclash_catch_button));
                 btnCatch.setTextColor(Color.WHITE);
                 btnCatch.setBackgroundColor(Color.parseColor("#D32F2F"));
                 btnCatch.setOnClickListener(v -> sendAction("CATCH:" + id));
@@ -257,8 +267,8 @@ public class ColorClashTableActivity extends AppCompatActivity {
     }
 
     private boolean canPlayCard(ColorClashCard card) {
-        if (lastState == null) return false;
-        return ColorClashRules.isPlayable(
+        if (lastState == null || lastState.rules() == null) return false;
+        return lastState.rules().canPlay(
                 card,
                 lastState.topCard(),
                 lastState.currentColor(),
@@ -266,14 +276,45 @@ public class ColorClashTableActivity extends AppCompatActivity {
         );
     }
 
+    private boolean canJumpIn(ColorClashCard card) {
+        if (lastState == null || lastState.rules() == null || !lastState.rules().jumpIn()) return false;
+        if (lastState.drawStack() > 0) return false;
+        ColorClashCard topCard = lastState.topCard();
+        return topCard != null && !card.isWild() && card.equals(topCard);
+    }
+
+    private void showTargetChooser(Consumer<UUID> onTargetChosen) {
+        if (lastState == null || lastState.players() == null) return;
+
+        List<UUID> ids = new ArrayList<>();
+        List<String> names = new ArrayList<>();
+        for (var entry : lastState.players().entrySet()) {
+            if (entry.getKey().equals(playerId)) continue;
+            if (entry.getValue().eliminated()) continue;
+            ids.add(entry.getKey());
+            names.add(entry.getValue().playerName());
+        }
+        if (ids.isEmpty()) return;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.colorclash_swap_cards_with));
+        builder.setCancelable(false);
+        builder.setItems(names.toArray(new String[0]), (dialog, which) -> onTargetChosen.accept(ids.get(which)));
+        builder.show();
+    }
+
     private void tryPlayCard(ColorClashCard card) {
         if (lastState == null) return;
-        if (!isMyTurn()) {
-            Toast.makeText(this, "It's not your turn!", Toast.LENGTH_SHORT).show();
+
+        boolean myTurn = isMyTurn();
+        boolean jumpingIn = !myTurn && canJumpIn(card);
+
+        if (!myTurn && !jumpingIn) {
+            Toast.makeText(this, getString(R.string.colorclash_not_your_turn), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!canPlayCard(card)) {
-            Toast.makeText(this, "You cannot play this card", Toast.LENGTH_SHORT).show();
+        if (myTurn && !canPlayCard(card)) {
+            Toast.makeText(this, getString(R.string.colorclash_cannot_play_card), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -281,20 +322,36 @@ public class ColorClashTableActivity extends AppCompatActivity {
         if (hand == null) return;
         int index = hand.indexOf(card);
         if (index == -1) {
-            Toast.makeText(this, "Card not in hand", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.colorclash_card_not_in_hand), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (card.isWild()) {
+        boolean isSeven = card.type() == CardType.NUMBER && card.value() == 7;
+        boolean sevenSwapActive = lastState.rules() != null && lastState.rules().sevenSwap();
+
+        if (jumpingIn) {
+            sendAction("JUMP_IN:" + index);
+        } else if (card.isWild()) {
             showColorChooser(() -> {
                 List<ColorClashCard> currentHand = lastState.hands().get(playerId);
                 if (currentHand == null) return;
                 int currentIndex = currentHand.indexOf(card);
                 if (currentIndex == -1) {
-                    Toast.makeText(this, "Card no longer in hand", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.colorclash_card_no_longer_in_hand), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 sendAction("PLAY:" + currentIndex + ":" + chosenColor.name());
+            });
+        } else if (isSeven && sevenSwapActive && hand.size() > 1) {
+            showTargetChooser(targetId -> {
+                List<ColorClashCard> currentHand = lastState.hands().get(playerId);
+                if (currentHand == null) return;
+                int currentIndex = currentHand.indexOf(card);
+                if (currentIndex == -1) {
+                    Toast.makeText(this, getString(R.string.colorclash_card_no_longer_in_hand), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                sendAction("PLAY:" + currentIndex + ":TARGET:" + targetId);
             });
         } else {
             sendAction("PLAY:" + index);
@@ -310,7 +367,7 @@ public class ColorClashTableActivity extends AppCompatActivity {
     private void showColorChooser(Runnable onColorChosen) {
         String[] colors = {"RED", "YELLOW", "GREEN", "BLUE"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose color");
+        builder.setTitle(getString(R.string.colorclash_choose_color));
         builder.setItems(colors, (dialog, which) -> {
             chosenColor = CardColor.valueOf(colors[which]);
             if (onColorChosen != null) onColorChosen.run();
@@ -329,7 +386,7 @@ public class ColorClashTableActivity extends AppCompatActivity {
                 hostServer.broadcastState();
                 updateUI(ColorClashState.fromGame(game, playerId));
             } catch (Exception e) {
-                Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.colorclash_error, e.getMessage()), Toast.LENGTH_SHORT).show();
             }
         } else if (client != null) {
             client.sendAction(action, 0);

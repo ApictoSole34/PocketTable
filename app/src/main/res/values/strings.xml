@@ -43,6 +43,12 @@
     <string name="big_blind_hint">Big Blind (default 100)</string>
     <string name="starting_chips_hint">Starting chips (default 1000)</string>
 
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">Stack +2 / +4</string>
+    <string name="colorclash_jump_in">Jump-in (play identical card out of turn)</string>
+    <string name="colorclash_seven_swap">7 swaps hands with a chosen player</string>
+    <string name="colorclash_zero_rotate">0 rotates all hands around the table</string>
+
     <!-- ==================== POKER TABLE ==================== -->
     <string name="poker_title">♠️ Poker</string>
     <string name="pot_label">Pot: </string>
@@ -114,4 +120,31 @@
 
     <!-- ==================== README ==================== -->
     <string name="warning_background_apps">Some devices aggressively restrict background apps</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">You are the host. Game ready!</string>
+    <string name="colorclash_top_card_label">Top: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Draw: %1$d</string>
+    <string name="colorclash_waiting_for">Waiting for %1$s</string>
+    <string name="colorclash_draw_stack_info"> (Draw %1$d cards)</string>
+    <string name="colorclash_winner_message">🏆 %1$s WINS! 🏆</string>
+    <string name="colorclash_catch_button">Catch!</string>
+    <string name="colorclash_choose_color">Choose color</string>
+    <string name="colorclash_swap_cards_with">Swap cards with...</string>
+    <string name="colorclash_not_your_turn">It\'s not your turn!</string>
+    <string name="colorclash_cannot_play_card">You cannot play this card</string>
+    <string name="colorclash_card_not_in_hand">Card not in hand</string>
+    <string name="colorclash_card_no_longer_in_hand">Card no longer in hand</string>
+    <string name="colorclash_error">Error: %1$s</string>
+    <string name="colorclash_draw">DRAW</string>
+    <string name="colorclash_last_card">LAST CARD!</string>
+    <string name="colorclash_next_round">NEXT ROUND</string>
+    <string name="colorclash_your_hand">Your hand</string>
+    <string name="colorclash_top_card_default">Top: </string>
+    <string name="colorclash_draw_pile_default">Draw: 0</string>
+    <string name="colorclash_waiting_players">Waiting for players...</string>
+    <string name="colorclash_game_started">Game started!</string>
+    <string name="colorclash_game_over">Game over!</string>
+    <string name="colorclash_connecting">Connecting...</string>
+    <string name="colorclash_connection_error">Connection error</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.fizzycoyote.pockettable.engine.colorclash;
 
-
 import androidx.annotation.VisibleForTesting;
 
 import com.fizzycoyote.pockettable.engine.common.GameEngine;
@@ -20,13 +19,18 @@ public class ColorClashGame implements GameEngine {
     private int drawStack = 0;
     private UUID winnerId = null;
     private boolean gameOver = false;
+    private ColorClashRules rules;
 
     public ColorClashGame(List<UUID> playerIds) {
+        this(playerIds, ColorClashRules.DEFAULT);
+    }
+
+    public ColorClashGame(List<UUID> playerIds, ColorClashRules rules) {
         this.players = new ArrayList<>();
         for (UUID id : playerIds) {
-            ColorClashPlayer player = new ColorClashPlayer(id);
-            this.players.add(player);
+            this.players.add(new ColorClashPlayer(id));
         }
+        this.rules = rules;
         this.deck = new ColorClashDeck();
         dealCards();
         startDiscardPile();
@@ -57,12 +61,14 @@ public class ColorClashGame implements GameEngine {
         } else {
             currentPlayerIndex = (currentPlayerIndex - 1 + players.size()) % players.size();
         }
-        while (players.get(currentPlayerIndex).isEliminated()) {
+        int safety = 0;
+        while (players.get(currentPlayerIndex).isEliminated() && safety < players.size()) {
             if (clockwise) {
                 currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
             } else {
                 currentPlayerIndex = (currentPlayerIndex - 1 + players.size()) % players.size();
             }
+            safety++;
         }
     }
 
@@ -90,6 +96,40 @@ public class ColorClashGame implements GameEngine {
         nextPlayer();
     }
 
+    private void rotateAllHands() {
+        if (players.size() < 2) return;
+        List<List<ColorClashCard>> hands = new ArrayList<>();
+        List<ColorClashPlayer> activePlayers = new ArrayList<>();
+        for (ColorClashPlayer p : players) {
+            if (!p.isEliminated()) {
+                hands.add(new ArrayList<>(p.getHand()));
+                activePlayers.add(p);
+            }
+        }
+        if (hands.size() < 2) return;
+
+        int n = activePlayers.size();
+        if (clockwise) {
+            for (int i = 0; i < n; i++) {
+                activePlayers.get(i).clearHand();
+                activePlayers.get(i).addCards(hands.get((i - 1 + n) % n));
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                activePlayers.get(i).clearHand();
+                activePlayers.get(i).addCards(hands.get((i + 1) % n));
+            }
+        }
+    }
+
+    private void swapHands(ColorClashPlayer p1, ColorClashPlayer p2) {
+        List<ColorClashCard> temp = new ArrayList<>(p1.getHand());
+        p1.clearHand();
+        p1.addCards(new ArrayList<>(p2.getHand()));
+        p2.clearHand();
+        p2.addCards(temp);
+    }
+
     public void dealCardsToPlayer(ColorClashPlayer player, int count) {
         for (int i = 0; i < count; i++) {
             if (deck.isEmpty()) refillDeckIfNeeded();
@@ -114,6 +154,14 @@ public class ColorClashGame implements GameEngine {
         }
     }
 
+    public void setRules(ColorClashRules rules) {
+        this.rules = rules != null ? rules : ColorClashRules.DEFAULT;
+    }
+
+    public ColorClashRules getRules() {
+        return rules;
+    }
+
     @Override
     public void startGame() {}
 
@@ -124,6 +172,38 @@ public class ColorClashGame implements GameEngine {
         }
 
         ColorClashPlayer player = getPlayer(playerId);
+
+        // JUMP_IN:index
+        if (action.startsWith("JUMP_IN:")) {
+            if (!rules.jumpIn()) {
+                throw new IllegalStateException("Jump-in is disabled");
+            }
+            if (drawStack > 0) {
+                throw new IllegalStateException("Cannot jump in when draw stack is active");
+            }
+            if (getCurrentPlayer().getPlayerId().equals(playerId)) {
+                throw new IllegalStateException("It is your turn – use PLAY");
+            }
+            int index = Integer.parseInt(action.substring("JUMP_IN:".length()));
+            if (index < 0 || index >= player.getHand().size()) {
+                throw new IllegalArgumentException("Invalid card index");
+            }
+            ColorClashCard card = player.getHand().get(index);
+            if (!card.equals(topCard)) {
+                throw new IllegalArgumentException("Jump-in requires identical card to top of pile");
+            }
+            player.removeCard(card);
+            discardPile.add(card);
+            topCard = card;
+            if (!card.isWild()) currentColor = card.color();
+            checkWinner(player);
+            if (gameOver) return;
+
+            // Gracz, który się wbił, staje się bieżącym
+            currentPlayerIndex = players.indexOf(player);
+            refillDeckIfNeeded();
+            return;
+        }
 
         if (action.equals("CALL_LAST_CARD")) {
             if (player.getHandSize() != 1) {
@@ -150,15 +230,24 @@ public class ColorClashGame implements GameEngine {
         if (!getCurrentPlayer().getPlayerId().equals(playerId)) {
             throw new IllegalStateException("It is not this player's turn");
         }
-
         if (player.isEliminated()) {
             throw new IllegalStateException("Player is eliminated");
         }
 
+        // PLAY
         if (action.startsWith("PLAY:")) {
             String[] parts = action.split(":");
             int cardIndex = Integer.parseInt(parts[1]);
-            CardColor chosenColor = parts.length > 2 ? CardColor.valueOf(parts[2]) : null;
+            CardColor chosenColor = null;
+            UUID swapTarget = null;
+
+            if (parts.length > 2) {
+                if ("TARGET".equals(parts[2]) && parts.length > 3) {
+                    swapTarget = UUID.fromString(parts[3]);
+                } else {
+                    chosenColor = CardColor.valueOf(parts[2]);
+                }
+            }
 
             if (cardIndex < 0 || cardIndex >= player.getHand().size()) {
                 throw new IllegalArgumentException("Invalid card index");
@@ -166,10 +255,7 @@ public class ColorClashGame implements GameEngine {
 
             ColorClashCard card = player.getHand().get(cardIndex);
 
-            if (drawStack > 0) {
-                throw new IllegalArgumentException("You must draw " + drawStack + " cards first!");
-            }
-            if (!ColorClashRules.isPlayable(card, topCard, currentColor, drawStack)) {
+            if (!rules.canPlay(card, topCard, currentColor, drawStack)) {
                 throw new IllegalArgumentException("Card cannot be played");
             }
 
@@ -177,8 +263,12 @@ public class ColorClashGame implements GameEngine {
                 throw new IllegalArgumentException("You must choose a color for wild card");
             }
 
-            player.removeCard(card);
+            boolean isSeven = card.type() == CardType.NUMBER && card.value() == 7;
+            if (isSeven && rules.sevenSwap() && player.getHandSize() > 1 && swapTarget == null) {
+                throw new IllegalArgumentException("Choose a player to swap hands with");
+            }
 
+            player.removeCard(card);
             discardPile.add(card);
             topCard = card;
 
@@ -193,8 +283,19 @@ public class ColorClashGame implements GameEngine {
                 currentColor = card.color();
             }
 
+            // Seven swap wykonujemy przed checkWinner
+            if (isSeven && rules.sevenSwap() && swapTarget != null && !player.hasWon()) {
+                ColorClashPlayer target = getPlayer(swapTarget);
+                swapHands(player, target);
+            }
+
             checkWinner(player);
             if (gameOver) return;
+
+            boolean isZero = card.type() == CardType.NUMBER && card.value() == 0;
+            if (isZero && rules.zeroRotate() && !gameOver) {
+                rotateAllHands();
+            }
 
             if (drawStack == 0) {
                 switch (card.type()) {
@@ -206,16 +307,10 @@ public class ColorClashGame implements GameEngine {
                 }
             } else {
                 if (card.type() == CardType.DRAW_TWO || card.type() == CardType.WILD_DRAW_FOUR) {
-                    int drawn = card.type() == CardType.WILD_DRAW_FOUR ? 4 : 2;
-                    drawStack += drawn;
-                    if (drawStack == 0) {
-                        nextPlayer();
-                    } else {
-                        nextPlayer();
-                    }
-                } else {
-                    nextPlayer();
+                    int additional = card.type() == CardType.WILD_DRAW_FOUR ? 4 : 2;
+                    drawStack += additional;
                 }
+                nextPlayer();
             }
 
             refillDeckIfNeeded();
@@ -258,14 +353,10 @@ public class ColorClashGame implements GameEngine {
         currentPlayerIndex = 0;
         clockwise = true;
 
-        List<ColorClashCard> allCards = new ArrayList<>();
         for (ColorClashPlayer p : players) {
-            allCards.addAll(p.getHand());
             p.clearHand();
         }
-        allCards.addAll(discardPile);
         discardPile.clear();
-
         deck.reset();
 
         for (ColorClashPlayer p : players) {
@@ -328,37 +419,23 @@ public class ColorClashGame implements GameEngine {
 
     // ============= for testing ========================
     @VisibleForTesting
-    void setTopCardForTest(ColorClashCard card) {
-        this.topCard = card;
-    }
+    void setTopCardForTest(ColorClashCard card) { this.topCard = card; }
 
     @VisibleForTesting
-    void setCurrentColorForTest(CardColor color) {
-        this.currentColor = color;
-    }
+    void setCurrentColorForTest(CardColor color) { this.currentColor = color; }
 
     @VisibleForTesting
-    void setCurrentPlayerIndexForTest(int index) {
-        this.currentPlayerIndex = index;
-    }
+    void setCurrentPlayerIndexForTest(int index) { this.currentPlayerIndex = index; }
 
     @VisibleForTesting
-    void setDrawStackForTest(int stack) {
-        this.drawStack = stack;
-    }
+    void setDrawStackForTest(int stack) { this.drawStack = stack; }
 
     @VisibleForTesting
-    void setClockwiseForTest(boolean clockwise) {
-        this.clockwise = clockwise;
-    }
+    void setClockwiseForTest(boolean clockwise) { this.clockwise = clockwise; }
 
     @VisibleForTesting
-    void setGameOverForTest(boolean gameOver) {
-        this.gameOver = gameOver;
-    }
+    void setGameOverForTest(boolean gameOver) { this.gameOver = gameOver; }
 
     @VisibleForTesting
-    void setWinnerIdForTest(UUID winnerId) {
-        this.winnerId = winnerId;
-    }
+    void setWinnerIdForTest(UUID winnerId) { this.winnerId = winnerId; }
 }

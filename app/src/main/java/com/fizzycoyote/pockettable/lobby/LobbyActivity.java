@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
+import com.fizzycoyote.pockettable.engine.colorclash.ColorClashRules;
 import com.fizzycoyote.pockettable.engine.common.GameEngine;
 import com.fizzycoyote.pockettable.engine.common.GameType;
 import com.fizzycoyote.pockettable.engine.poker.PokerGame;
@@ -79,8 +81,11 @@ public class LobbyActivity extends AppCompatActivity {
     private PlayersAdapter adapter;
     private List<String> players = new ArrayList<>();
 
-    private LinearLayout llGameSettings;
+    private LinearLayout llGameSettings, llColorClashSettings;
+    // ====== poker ==============
     private EditText etSmallBlind, etBigBlind, etStartingChips;
+    // ====== color clash ========
+    private CheckBox cbStacking, cbJumpIn, cbSevenSwap, cbZeroRotate;
 
     private String roomCode;
     private UUID playerId;
@@ -117,6 +122,12 @@ public class LobbyActivity extends AppCompatActivity {
         etBigBlind = findViewById(R.id.etBigBlind);
         etStartingChips = findViewById(R.id.etStartingChips);
 
+        llColorClashSettings = findViewById(R.id.llColorClashSettings);
+        cbStacking = findViewById(R.id.cbStacking);
+        cbJumpIn = findViewById(R.id.cbJumpIn);
+        cbSevenSwap = findViewById(R.id.cbSevenSwap);
+        cbZeroRotate = findViewById(R.id.cbZeroRotate);
+
         roomCode = getIntent().getStringExtra("roomCode");
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
         playerName = getIntent().getStringExtra("playerName");
@@ -149,8 +160,9 @@ public class LobbyActivity extends AppCompatActivity {
 
             if (gameType == GameType.POKER) {
                 llGameSettings.setVisibility(View.VISIBLE);
-            } else {
+            } else if (gameType == GameType.COLOR_CLASH) {
                 llGameSettings.setVisibility(View.GONE);
+                llColorClashSettings.setVisibility(View.VISIBLE);
             }
 
             btnStart.setVisibility(View.VISIBLE);
@@ -310,6 +322,7 @@ public class LobbyActivity extends AppCompatActivity {
         } else {
             intent = new Intent(this, ColorClashTableActivity.class);
         }
+
         intent.putExtra("roomCode", roomCode);
         intent.putExtra("playerId", playerId.toString());
         intent.putExtra("playerName", playerName);
@@ -375,6 +388,15 @@ public class LobbyActivity extends AppCompatActivity {
             int bigBlind = parseIntOrDefault(etBigBlind.getText().toString(), 100);
             int startingChips = parseIntOrDefault(etStartingChips.getText().toString(), 1000);
             pokerGame.applySettings(smallBlind, bigBlind, startingChips);
+        } else if (gameType == GameType.COLOR_CLASH) {
+            boolean stacking = cbStacking.isChecked();
+            boolean jumpIn = cbJumpIn.isChecked();
+            boolean sevenSwap = cbSevenSwap.isChecked();
+            boolean zeroRotate = cbZeroRotate.isChecked();
+            ColorClashRules rules = new ColorClashRules(stacking, jumpIn, sevenSwap, zeroRotate);
+            if (colorClashGame != null) {
+                colorClashGame.setRules(rules);
+            }
         }
 
         GameHolder.getInstance().setGame(game, hostServer);

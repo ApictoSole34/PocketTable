@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Top: "
+                android:text="@string/colorclash_top_card_default"
                 android:textSize="18sp"
                 android:textColor="#FFFFFF"/>
 
@@ -35,7 +35,7 @@
                 android:id="@+id/tvDrawPile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Draw: 0"
+                android:text="@string/colorclash_draw_pile_default"
                 android:textSize="18sp"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
@@ -58,7 +58,7 @@
             android:id="@+id/tvTurnInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Waiting for players..."
+            android:text="@string/colorclash_waiting_players"
             android:textSize="20sp"
             android:textColor="#FFD700"
             android:layout_gravity="center"
@@ -90,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your hand"
+            android:text="@string/colorclash_your_hand"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:layout_marginTop="8dp"/>
@@ -114,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="DRAW"
+                android:text="@string/colorclash_draw"
                 android:layout_margin="4dp"
                 android:enabled="false"/>
 
@@ -123,7 +123,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="LAST CARD!"
+                android:text="@string/colorclash_last_card"
                 android:backgroundTint="#D32F2F"
                 android:textColor="#FFFFFF"
                 android:layout_margin="4dp"
@@ -134,7 +134,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="NEXT ROUND"
+                android:text="@string/colorclash_next_round"
                 android:layout_margin="4dp"
                 android:visibility="gone"/>
         </LinearLayout>

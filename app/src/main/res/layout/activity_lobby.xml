@@ -56,6 +56,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
+        <!-- poker -->
         <LinearLayout
             android:id="@+id/llGameSettings"
             android:layout_width="match_parent"
@@ -99,6 +100,53 @@
                 android:inputType="number"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#888888"/>
+        </LinearLayout>
+
+        <!-- Color Clash -->
+        <LinearLayout
+            android:id="@+id/llColorClashSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_settings_title"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <CheckBox
+                android:id="@+id/cbStacking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/colorclash_stacking"
+                android:textColor="#FFFFFF"/>
+
+            <CheckBox
+                android:id="@+id/cbJumpIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/colorclash_jump_in"
+                android:textColor="#FFFFFF"/>
+
+            <CheckBox
+                android:id="@+id/cbSevenSwap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/colorclash_seven_swap"
+                android:textColor="#FFFFFF"/>
+
+            <CheckBox
+                android:id="@+id/cbZeroRotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/colorclash_zero_rotate"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
 
         <Button

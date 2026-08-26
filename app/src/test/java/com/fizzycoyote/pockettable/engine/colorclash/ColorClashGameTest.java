@@ -469,4 +469,108 @@ public class ColorClashGameTest {
         assertEquals(game.getTopCard(), state.topCard());
         assertEquals(game.getCurrentColor(), state.currentColor());
     }
+
+    @Test
+    public void stackingEnabled_allowPlayingDrawTwoOnStack() throws Exception {
+        ColorClashGame gameWithRules = new ColorClashGame(List.of(p0, p1, p2),
+                new ColorClashRules(true, false, false, false));
+
+        gameWithRules.setTopCardForTest(ColorClashCard.drawTwo(CardColor.RED));
+        gameWithRules.setCurrentColorForTest(CardColor.RED);
+        gameWithRules.setCurrentPlayerIndexForTest(0);
+        gameWithRules.setDrawStackForTest(2);
+
+        ColorClashPlayer player = gameWithRules.getPlayer(p0);
+        player.clearHand();
+        player.addCard(ColorClashCard.drawTwo(CardColor.RED));
+        player.addCard(ColorClashCard.number(CardColor.RED, 1));
+
+        gameWithRules.performAction(p0, "PLAY:0", 0);
+
+        assertEquals(4, gameWithRules.getDrawStack());
+        assertEquals(p1, gameWithRules.getCurrentPlayer().getPlayerId());
+    }
+
+    @Test
+    public void jumpInEnabled_allowPlayingIdenticalCardOutOfTurn() throws Exception {
+        ColorClashGame gameWithRules = new ColorClashGame(List.of(p0, p1, p2),
+                new ColorClashRules(false, true, false, false));
+
+        gameWithRules.setTopCardForTest(ColorClashCard.number(CardColor.RED, 5));
+        gameWithRules.setCurrentColorForTest(CardColor.RED);
+        gameWithRules.setCurrentPlayerIndexForTest(0);
+
+        ColorClashPlayer player1 = gameWithRules.getPlayer(p1);
+        player1.clearHand();
+        player1.addCard(ColorClashCard.number(CardColor.RED, 5));
+        player1.addCard(ColorClashCard.number(CardColor.BLUE, 3));
+
+        gameWithRules.performAction(p1, "JUMP_IN:0", 0);
+
+        assertEquals(p1, gameWithRules.getCurrentPlayer().getPlayerId());
+        assertEquals(1, player1.getHandSize());
+    }
+
+    @Test
+    public void sevenSwapEnabled_swapsHandsWithTarget() throws Exception {
+        ColorClashGame gameWithRules = new ColorClashGame(List.of(p0, p1, p2),
+                new ColorClashRules(false, false, true, false));
+
+        gameWithRules.setTopCardForTest(ColorClashCard.number(CardColor.RED, 5));
+        gameWithRules.setCurrentColorForTest(CardColor.RED);
+        gameWithRules.setCurrentPlayerIndexForTest(0);
+
+        ColorClashPlayer player = gameWithRules.getPlayer(p0);
+        player.clearHand();
+        player.addCard(ColorClashCard.number(CardColor.RED, 7));
+        player.addCard(ColorClashCard.number(CardColor.BLUE, 3));
+
+        ColorClashPlayer target = gameWithRules.getPlayer(p1);
+        target.clearHand();
+        target.addCard(ColorClashCard.number(CardColor.YELLOW, 2));
+        target.addCard(ColorClashCard.number(CardColor.GREEN, 4));
+
+        gameWithRules.performAction(p0, "PLAY:0:TARGET:" + p1, 0);
+
+        assertEquals(2, player.getHandSize());
+        assertEquals(1, target.getHandSize());
+
+        assertTrue(player.getHand().stream().anyMatch(c -> c.value() == 2 || c.value() == 4));
+        assertTrue(target.getHand().stream().anyMatch(c -> c.value() == 3));
+    }
+
+    @Test
+    public void zeroRotateEnabled_rotatesAllHands() throws Exception {
+        ColorClashGame gameWithRules = new ColorClashGame(List.of(p0, p1, p2),
+                new ColorClashRules(false, false, false, true));
+
+        gameWithRules.setTopCardForTest(ColorClashCard.number(CardColor.RED, 5));
+        gameWithRules.setCurrentColorForTest(CardColor.RED);
+        gameWithRules.setCurrentPlayerIndexForTest(0);
+
+        ColorClashPlayer p0Player = gameWithRules.getPlayer(p0);
+        p0Player.clearHand();
+        p0Player.addCard(ColorClashCard.number(CardColor.RED, 0));
+        p0Player.addCard(ColorClashCard.number(CardColor.BLUE, 1));
+
+        ColorClashPlayer p1Player = gameWithRules.getPlayer(p1);
+        p1Player.clearHand();
+        p1Player.addCard(ColorClashCard.number(CardColor.YELLOW, 2));
+        p1Player.addCard(ColorClashCard.number(CardColor.GREEN, 3));
+
+        ColorClashPlayer p2Player = gameWithRules.getPlayer(p2);
+        p2Player.clearHand();
+        p2Player.addCard(ColorClashCard.number(CardColor.BLUE, 4));
+        p2Player.addCard(ColorClashCard.number(CardColor.RED, 5));
+
+        gameWithRules.performAction(p0, "PLAY:0", 0);
+
+        assertEquals(2, p0Player.getHandSize());
+        assertEquals(1, p1Player.getHandSize());
+        assertEquals(2, p2Player.getHandSize());
+
+        assertTrue(p0Player.getHand().stream().anyMatch(c -> c.value() == 4));
+        assertTrue(p1Player.getHand().stream().anyMatch(c -> c.value() == 1));
+        assertTrue(p2Player.getHand().stream().anyMatch(c -> c.value() == 2));
+    }
 }
