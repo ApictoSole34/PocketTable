@@ -24,16 +24,25 @@ import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashRules;
 import com.fizzycoyote.pockettable.engine.common.GameEngine;
 import com.fizzycoyote.pockettable.engine.common.GameType;
+import com.fizzycoyote.pockettable.engine.mafia.MafiaGame;
+import com.fizzycoyote.pockettable.engine.mafia.MafiaRole;
+import com.fizzycoyote.pockettable.engine.mafia.MafiaRoleConfig;
+import com.fizzycoyote.pockettable.engine.mafia.MafiaRules;
+import com.fizzycoyote.pockettable.engine.mafia.TimedMafiaGame;
 import com.fizzycoyote.pockettable.engine.poker.PokerGame;
 import com.fizzycoyote.pockettable.game.colorclash.ColorClashTableActivity;
+import com.fizzycoyote.pockettable.game.mafia.MafiaTableActivity;
 import com.fizzycoyote.pockettable.game.poker.PokerTableActivity;
 import com.fizzycoyote.pockettable.models.colorclash.ColorClashState;
+import com.fizzycoyote.pockettable.models.mafia.MafiaState;
 import com.fizzycoyote.pockettable.models.poker.PokerGameState;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashClient;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashHostServer;
 import com.fizzycoyote.pockettable.network.common.DiscoveryService;
 import com.fizzycoyote.pockettable.network.common.GenericGameClient;
 import com.fizzycoyote.pockettable.network.common.GenericHostServer;
+import com.fizzycoyote.pockettable.network.mafia.MafiaClient;
+import com.fizzycoyote.pockettable.network.mafia.MafiaHostServer;
 import com.fizzycoyote.pockettable.network.poker.PokerClient;
 import com.fizzycoyote.pockettable.network.poker.PokerHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
@@ -72,6 +81,11 @@ import java.util.UUID;
  * @see PokerClient
  * @see ColorClashGame
  * @see ColorClashHostServer
+ * @see ColorClashClient
+ * @see MafiaGame
+ * @see TimedMafiaGame
+ * @see MafiaClient
+ * @see MafiaHostServer
  */
 public class LobbyActivity extends AppCompatActivity {
 
@@ -81,11 +95,20 @@ public class LobbyActivity extends AppCompatActivity {
     private PlayersAdapter adapter;
     private List<String> players = new ArrayList<>();
 
-    private LinearLayout llGameSettings, llColorClashSettings;
     // ====== poker ==============
+    private LinearLayout llGameSettings;
     private EditText etSmallBlind, etBigBlind, etStartingChips;
     // ====== color clash ========
+    private LinearLayout llColorClashSettings;
     private CheckBox cbStacking, cbJumpIn, cbSevenSwap, cbZeroRotate;
+    // ====== mafia ==============
+    private LinearLayout llMafiaSettings;
+    private EditText etMafiaCount, etNeutralCount;
+    private CheckBox cbDetective, cbDoctor, cbVigilante, cbMayor, cbJester, cbSerialKiller;
+    private EditText etNightSeconds, etDaySeconds, etTrialSeconds;
+    private CheckBox cbMafiaTimerEnabled;
+    private MafiaGame mafiaGame;
+    //===========================
 
     private String roomCode;
     private UUID playerId;
@@ -128,6 +151,20 @@ public class LobbyActivity extends AppCompatActivity {
         cbSevenSwap = findViewById(R.id.cbSevenSwap);
         cbZeroRotate = findViewById(R.id.cbZeroRotate);
 
+        llMafiaSettings = findViewById(R.id.llMafiaSettings);
+        etMafiaCount = findViewById(R.id.etMafiaCount);
+        etNeutralCount = findViewById(R.id.etNeutralCount);
+        cbDetective = findViewById(R.id.cbDetective);
+        cbDoctor = findViewById(R.id.cbDoctor);
+        cbVigilante = findViewById(R.id.cbVigilante);
+        cbMayor = findViewById(R.id.cbMayor);
+        cbJester = findViewById(R.id.cbJester);
+        cbSerialKiller = findViewById(R.id.cbSerialKiller);
+        etNightSeconds = findViewById(R.id.etNightSeconds);
+        etDaySeconds = findViewById(R.id.etDaySeconds);
+        etTrialSeconds = findViewById(R.id.etTrialSeconds);
+        cbMafiaTimerEnabled = findViewById(R.id.cbMafiaTimerEnabled);
+
         roomCode = getIntent().getStringExtra("roomCode");
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
         playerName = getIntent().getStringExtra("playerName");
@@ -163,6 +200,10 @@ public class LobbyActivity extends AppCompatActivity {
             } else if (gameType == GameType.COLOR_CLASH) {
                 llGameSettings.setVisibility(View.GONE);
                 llColorClashSettings.setVisibility(View.VISIBLE);
+            }  else if (gameType == GameType.MAFIA) {
+                llGameSettings.setVisibility(View.GONE);
+                llColorClashSettings.setVisibility(View.GONE);
+                llMafiaSettings.setVisibility(View.VISIBLE);
             }
 
             btnStart.setVisibility(View.VISIBLE);
@@ -220,7 +261,7 @@ public class LobbyActivity extends AppCompatActivity {
                 pokerClient.connectBlocking();
                 client = pokerClient;
 
-            } else {
+            } else if (gameType == GameType.COLOR_CLASH){
                 ColorClashClient colorClient = new ColorClashClient(
                         new URI("ws://" + serverIp + ":8888"), playerId, playerName);
 
@@ -244,13 +285,26 @@ public class LobbyActivity extends AppCompatActivity {
 
                 colorClient.connectBlocking();
                 client = colorClient;
+            } else if (gameType == GameType.MAFIA) {
+                MafiaClient mafiaClient = new MafiaClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
+                mafiaClient.setListener(new MafiaClient.MessageListener() {
+                    @Override public void onState(MafiaState state) { runOnUiThread(() -> updatePlayersFromMafiaState(state)); }
+                    @Override public void onGameStarted() { runOnUiThread(() -> startGameActivity(GameType.MAFIA.name())); }
+                    @Override public void onGameOver() {}
+                    @Override public void onReconnecting(int attempt) {}
+                    @Override public void onReconnected() {}
+                    @Override public void onReconnectFailed() {}
+                    @Override public void onActionError(String message) {}
+                });
+                mafiaClient.connectBlocking();
+                client = mafiaClient;
             }
 
             ClientHolder.getInstance().setClient(client);
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.lobby_con_error), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -272,14 +326,33 @@ public class LobbyActivity extends AppCompatActivity {
             ColorClashHostServer server = new ColorClashHostServer(8888, colorClashGame, playerId);
             server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromColorClashState(state)));
             hostServer = server;
+        }   else if (gameType == GameType.MAFIA) {
+            mafiaGame = new TimedMafiaGame(this, List.of(playerId));
+            mafiaGame.getPlayer(playerId).setPlayerName(playerName);
+            game = mafiaGame;
+
+            MafiaHostServer server = new MafiaHostServer(8888, mafiaGame, playerId);
+            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromMafiaState(state)));
+            hostServer = server;
         }
 
         try {
             hostServer.start();
-            System.out.println("LOBBY HOST: server started");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void updatePlayersFromMafiaState(MafiaState state) {
+        if (state == null || state.players() == null) return;
+        players.clear();
+        for (MafiaState.PlayerInfo p : state.players().values()) {
+            String name = p.playerName();
+            if (p.playerId().equals(playerId)) name += getString(R.string.lobby_you);
+            players.add(name);
+        }
+        adapter.notifyDataSetChanged();
+        tvPlayerCount.setText(getString(R.string.players_label) + players.size());
     }
 
     private void updatePlayersFromPokerState(PokerGameState state) {
@@ -319,8 +392,10 @@ public class LobbyActivity extends AppCompatActivity {
         Intent intent;
         if (GameType.POKER.name().equals(gameTypeStr)) {
             intent = new Intent(this, PokerTableActivity.class);
-        } else {
+        } else if (GameType.COLOR_CLASH.name().equals(gameTypeStr)) {
             intent = new Intent(this, ColorClashTableActivity.class);
+        } else {
+            intent = new Intent(this, MafiaTableActivity.class);
         }
 
         intent.putExtra("roomCode", roomCode);
@@ -381,13 +456,12 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        startingGame = true;
-
         if (gameType == GameType.POKER) {
             int smallBlind = parseIntOrDefault(etSmallBlind.getText().toString(), 50);
             int bigBlind = parseIntOrDefault(etBigBlind.getText().toString(), 100);
             int startingChips = parseIntOrDefault(etStartingChips.getText().toString(), 1000);
             pokerGame.applySettings(smallBlind, bigBlind, startingChips);
+
         } else if (gameType == GameType.COLOR_CLASH) {
             boolean stacking = cbStacking.isChecked();
             boolean jumpIn = cbJumpIn.isChecked();
@@ -397,15 +471,75 @@ public class LobbyActivity extends AppCompatActivity {
             if (colorClashGame != null) {
                 colorClashGame.setRules(rules);
             }
+
+        } else if (gameType == GameType.MAFIA) {
+            int mafiaCount = parseIntOrDefault(etMafiaCount.getText().toString(), 1);
+            boolean hasDetective = cbDetective.isChecked();
+            boolean hasDoctor = cbDoctor.isChecked();
+            boolean hasVigilante = cbVigilante.isChecked();
+            boolean hasMayor = cbMayor.isChecked();
+            int neutralCount = parseIntOrDefault(etNeutralCount.getText().toString(), 0);
+            boolean hasJester = cbJester.isChecked();
+            boolean hasSerialKiller = cbSerialKiller.isChecked();
+
+            int allowedNeutralClasses = (hasJester ? 1 : 0) + (hasSerialKiller ? 1 : 0);
+            if (neutralCount > allowedNeutralClasses) {
+                Toast.makeText(this,
+                        getString(R.string.lobby_toast_mafia_neutral),
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            MafiaRoleConfig cfg = new MafiaRoleConfig(this);
+            cfg.setCount(MafiaRole.MAFIA, mafiaCount);
+            cfg.setCount(MafiaRole.DETECTIVE, hasDetective ? 1 : 0);
+            cfg.setCount(MafiaRole.DOCTOR, hasDoctor ? 1 : 0);
+            cfg.setCount(MafiaRole.VIGILANTE, hasVigilante ? 1 : 0);
+            cfg.setCount(MafiaRole.MAYOR, hasMayor ? 1 : 0);
+
+            cfg.setNeutralCount(neutralCount);
+            List<MafiaRole> allowedNeutrals = new ArrayList<>();
+            if (hasJester) allowedNeutrals.add(MafiaRole.JESTER);
+            if (hasSerialKiller) allowedNeutrals.add(MafiaRole.SERIAL_KILLER);
+            cfg.setAllowedNeutralRoles(allowedNeutrals);
+
+            try {
+                cfg.validateForPlayerCount(mafiaGame.getPlayers().size());
+            } catch (IllegalStateException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            int night = parseIntOrDefault(etNightSeconds.getText().toString(), 45);
+            int day = parseIntOrDefault(etDaySeconds.getText().toString(), 90);
+            int trial = parseIntOrDefault(etTrialSeconds.getText().toString(), 30);
+            boolean timer = cbMafiaTimerEnabled.isChecked();
+
+            mafiaGame.setRoleConfig(cfg);
+            mafiaGame.setRules(new MafiaRules(timer, night, day, trial));
         }
 
+        GameHolder.getInstance().clear();
+
+        try {
+            game.startGame();
+        } catch (IllegalStateException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        startingGame = true;
         GameHolder.getInstance().setGame(game, hostServer);
-        game.startGame();
         hostServer.broadcastGameStartWithType(gameType.name());
 
-        Intent intent = gameType == GameType.POKER
-                ? new Intent(this, PokerTableActivity.class)
-                : new Intent(this, ColorClashTableActivity.class);
+        Intent intent;
+        if (gameType == GameType.POKER) {
+            intent = new Intent(this, PokerTableActivity.class);
+        } else if (gameType == GameType.COLOR_CLASH) {
+            intent = new Intent(this, ColorClashTableActivity.class);
+        } else {
+            intent = new Intent(this, MafiaTableActivity.class);
+        }
         intent.putExtra("roomCode", roomCode);
         intent.putExtra("playerId", playerId.toString());
         intent.putExtra("playerName", playerName);

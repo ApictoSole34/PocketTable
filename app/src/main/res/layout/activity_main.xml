@@ -87,6 +87,15 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnDevConnect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DEV CONNECT"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:columnCount="2"
                 android:rowCount="1">
+
 
                 <LinearLayout
                     android:id="@+id/llPoker"
@@ -142,6 +152,26 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:src="@drawable/icon_colorclash"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llMafia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivMafia"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/icon_mafia"
                         android:scaleType="fitCenter"/>
                 </LinearLayout>
 

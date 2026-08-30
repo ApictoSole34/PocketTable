@@ -18,12 +18,15 @@
     <string name="code_label">Code: </string>
     <string name="ip_label">IP: </string>
     <string name="players_label">Players: </string>
+    <string name="lobby_you"> (YOU)</string>
     <string name="show_qr">Show QR</string>
     <string name="start_game">START</string>
     <string name="qr_title">QR code for room </string>
     <string name="qr_error">QR generation error</string>
     <string name="ok">OK</string>
     <string name="game_settings_title">Settings</string>
+    <string name="lobby_toast_mafia_neutral">Not enough neutral classes have been selected for the required neutral count.</string>
+    <string name="lobby_con_error">Connection error</string>
 
     <!-- ==================== JOIN DIALOG ==================== -->
     <string name="join_title">Join room</string>
@@ -147,4 +150,123 @@
     <string name="colorclash_game_over">Game over!</string>
     <string name="colorclash_connecting">Connecting...</string>
     <string name="colorclash_connection_error">Connection error</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Mafia Settings</string>
+    <string name="mafia_role_count">Roles (0 = off)</string>
+    <string name="mafia_timer">Use timers (otherwise manual ready-up only)</string>
+    <string name="mafia_night_length">Night length (s)</string>
+    <string name="mafia_day_length">Day length (s)</string>
+    <string name="mafia_trial_length">Trial lengths (s)</string>
+    <string name="mafia_neutral_size">How many neutral players</string>
+    <string name="mafia_neutral">Neutral players</string>
+    <string name="mafia_town_role">Town Role (max 1 each)</string>
+    <string name="mafia_mafia">Mafia players</string>
+    <!-- role -->
+    <string name="mafia_role_civilian">Civilian</string>
+    <string name="mafia_role_mafia">Mafia</string>
+    <string name="mafia_role_detective">Detective</string>
+    <string name="mafia_role_doctor">Doctor</string>
+    <string name="mafia_role_vigilante">Vigilante</string>
+    <string name="mafia_role_mayor">Mayor</string>
+    <string name="mafia_role_jester">Jester</string>
+    <string name="mafia_role_serial_killer">Serial Killer</string>
+    <string name="mafia_skip">Skip</string>
+    <string name="mafia_vote_button_label">Vote</string>
+    <string name="role_icon_desc">desc</string>
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Role Guide</string>
+    <string name="mafia_role_dialog_close">Close</string>
+        <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">At night, the mafia collectively chooses a victim to kill. They know the other mafia members.</string>
+        <!-- town -->
+    <string name="mafia_role_dialog_detective">At night, investigates one person and learns if they are mafia.</string>
+    <string name="mafia_role_dialog_doctor">At night, protects one person from being killed.</string>
+    <string name="mafia_role_dialog_vigilante">Has only one bullet for the entire game – may shoot someone at night.</string>
+    <string name="mafia_role_dialog_mayor">May reveal themselves during the day – their vote then counts double in nominations and trials.</string>
+    <string name="mafia_role_dialog_civilian">No special abilities. Votes during the day like any other town member.</string>
+        <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Has no night action. Wins immediately if the town decides to lynch them during the day</string>
+    <string name="mafia_role_dialog_serial_killer">Kills solo at night, independent of the mafia. Wins when they are the only living player.</string>
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Candidate</string>
+    <string name="mafia_phase">Phase: %s</string>
+    <string name="mafia_your_role">Your role: %s</string>
+    <string name="mafia_dead">DEAD</string>
+    <string name="mafia_voted_badge">VOTED</string>
+    <string name="mafia_phase_label">Phase: %s</string>
+    <string name="mafia_your_role_label">Your role: %s</string>
+    <string name="mafia_game_started">Game started!</string>
+    <string name="mafia_host_ended_game">Host ended the game</string>
+    <string name="mafia_voting_unavailable">Voting is not available now</string>
+    <string name="mafia_night_result">Night result: %s</string>
+    <string name="mafia_someone_died">%s died</string>
+    <string name="mafia_no_one_died">No one died</string>
+    <string name="mafia_nominated">Nominated: %s</string>
+    <string name="mafia_eliminated_by_day">Eliminated: %s</string>
+    <string name="mafia_unknown_player">Unknown player</string>
+    <string name="mafia_is_mafia">is Mafia!</string>
+    <string name="mafia_not_mafia">is not Mafia</string>
+    <string name="mafia_investigation_results">Investigation Results</string>
+    <string name="mafia_ok">OK</string>
+    <string name="mafia_night_death_title">☠️ %s died during the night</string>
+    <string name="mafia_role_label">Role: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s was eliminated by the town</string>
+    <string name="mafia_notes_title">Notes for %s</string>
+    <string name="mafia_no_notes">(no notes)</string>
+    <string name="mafia_kill_confirm">Kill %s?</string>
+    <string name="mafia_save_confirm">Save %s?</string>
+    <string name="mafia_investigate_confirm">Investigate %s?</string>
+    <string name="mafia_shoot_confirm">Shoot %s?</string>
+    <string name="mafia_no_night_action">You have no night action</string>
+    <string name="mafia_notes_hint">Write your notes here...</string>
+    <string name="mafia_my_notes">My Notes</string>
+    <string name="mafia_save">Save</string>
+    <string name="mafia_cancel">Cancel</string>
+    <string name="mafia_confirm">Confirm</string>
+    <string name="mafia_yes">Yes</string>
+    <string name="mafia_no">No</string>
+    <string name="mafia_town_wins">🏛️ Town Wins!</string>
+    <string name="mafia_mafia_wins">🔪 Mafia Wins!</string>
+    <string name="mafia_jester_wins">🤡 Jester Wins!</string>
+    <string name="mafia_serial_killer_wins">🔪 Serial Killer Wins!</string>
+    <string name="mafia_waiting_for_host">\n\nWaiting for host to start next round...</string>
+    <string name="mafia_new_round">New Round</string>
+    <string name="mafia_end_game">End Game</string>
+    <string name="mafia_phase_label_short">Phase:</string>
+    <string name="mafia_role_info_button">Role Info</string>
+    <string name="mafia_notes_button">Notes</string>
+    <string name="mafia_your_role_label_short">Your role:</string>
+    <string name="mafia_candidate_label">Candidate</string>
+    <string name="mafia_guilty_content_desc">Guilty</string>
+    <string name="mafia_not_guilty_content_desc">Not guilty</string>
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">Player not found: %s</string>
+    <string name="mafia_target_not_alive">Target is not alive</string>
+    <string name="mafia_cannot_target_self">You cannot target yourself</string>
+    <string name="mafia_min_players">Mafia needs at least 4 players</string>
+    <string name="mafia_need_mafia_role">Need at least 1 Mafia role configured</string>
+    <string name="mafia_dead_cannot_act">Dead players cannot act</string>
+    <string name="mafia_notes_too_long">Notes too long (max 1000 chars)</string>
+    <string name="mafia_no_behavior">No behavior for role: %s</string>
+    <string name="mafia_unknown_action">Unknown action: %s</string>
+    <string name="mafia_game_inactive">Game is not currently active</string>
+    <string name="mafia_game_over">Game is over</string>
+    <string name="mafia_error_unknown_detective_action">Unknown detective action</string>
+    <string name="mafia_error_unknown_doctor_action">Unknown doctor action</string>
+    <string name="mafia_error_unknown_mafia_action">Unknown mafia action</string>
+    <string name="mafia_error_unknown_mayor_day_action">Unknown mayor day action</string>
+    <string name="mafia_error_unknown_sk_action">Unknown serial killer action</string>
+    <string name="mafia_error_unknown_vigilante_action">Unknown vigilante action</string>
+    <string name="mafia_error_no_charges">You already used your only bullet</string>
+    <string name="mafia_error_no_special_day_action">This role has no special day action</string>
+    <string name="mafia_status_dead">DEAD</string>
+    <string name="mafia_config_count_negative">Count cannot be negative</string>
+    <string name="mafia_config_role_at_most_1">%s can be at most 1</string>
+    <string name="mafia_config_cannot_set_neutral_directly">Cannot set count for neutral role directly. Use setNeutralCount and setAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">Neutral count (%1$d) exceeds allowed neutral classes (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">Only neutral roles allowed</string>
+    <string name="mafia_config_neutral_count_negative">Neutral count cannot be negative</string>
+    <string name="mafia_config_roles_exceed_players">Configured %1$d special roles, but there are only %2$d players in the game. Reduce the number of roles or add more players.</string>
+
 </resources>

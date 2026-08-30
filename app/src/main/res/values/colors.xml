@@ -7,4 +7,7 @@
     <color name="dark_purple">#3700B3</color>
     <color name="main_background">#121212</color>
     <color name="gray">#AAAAAA</color>
+    <color name="grey">#AAAAAA</color>
+    <color name="blue">#0000FF</color>
+    <color name="gold">#FFD700</color>
 </resources>

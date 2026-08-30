@@ -9,153 +9,364 @@
         android:src="@drawable/background"
         android:scaleType="centerCrop" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tvRoomCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/code_label"
-            android:textSize="28sp"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tvHostIp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ip_label"
-            android:textSize="16sp"
-            android:textColor="#AAAAAA"
-            android:layout_marginBottom="16dp"/>
-
-        <Button
-            android:id="@+id/btnShowQR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_qr"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/tvPlayerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/players_label"
-            android:textSize="16sp"
-            android:textColor="#AAAAAA"
-            android:layout_marginBottom="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPlayers"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <!-- poker -->
         <LinearLayout
-            android:id="@+id/llGameSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone">
+            android:padding="24dp">
 
             <TextView
+                android:id="@+id/tvRoomCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_settings_title"
+                android:text="@string/code_label"
+                android:textSize="28sp"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
 
-            <EditText
-                android:id="@+id/etSmallBlind"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvHostIp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/small_blind_hint"
-                android:inputType="number"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#888888"/>
+                android:text="@string/ip_label"
+                android:textSize="16sp"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="16dp"/>
 
-            <EditText
-                android:id="@+id/etBigBlind"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnShowQR"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/big_blind_hint"
-                android:inputType="number"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#888888"/>
-
-            <EditText
-                android:id="@+id/etStartingChips"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/starting_chips_hint"
-                android:inputType="number"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#888888"/>
-        </LinearLayout>
-
-        <!-- Color Clash -->
-        <LinearLayout
-            android:id="@+id/llColorClashSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone">
+                android:text="@string/show_qr"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/tvPlayerCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_settings_title"
-                android:textColor="#FFFFFF"
+                android:text="@string/players_label"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="16dp"/>
 
-            <CheckBox
-                android:id="@+id/cbStacking"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPlayers"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/colorclash_stacking"
-                android:textColor="#FFFFFF"/>
+                android:maxHeight="200dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"/>
 
-            <CheckBox
-                android:id="@+id/cbJumpIn"
-                android:layout_width="wrap_content"
+            <!-- poker -->
+            <LinearLayout
+                android:id="@+id/llGameSettings"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/colorclash_jump_in"
-                android:textColor="#FFFFFF"/>
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
 
-            <CheckBox
-                android:id="@+id/cbSevenSwap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/colorclash_seven_swap"
-                android:textColor="#FFFFFF"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_settings_title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
 
-            <CheckBox
-                android:id="@+id/cbZeroRotate"
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/etSmallBlind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/small_blind_hint"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"/>
+
+                <EditText
+                    android:id="@+id/etBigBlind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/big_blind_hint"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"/>
+
+                <EditText
+                    android:id="@+id/etStartingChips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/starting_chips_hint"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"/>
+            </LinearLayout>
+
+            <!-- Color Clash -->
+            <LinearLayout
+                android:id="@+id/llColorClashSettings"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/colorclash_zero_rotate"
-                android:textColor="#FFFFFF"/>
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_settings_title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <CheckBox
+                    android:id="@+id/cbStacking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colorclash_stacking"
+                    android:textColor="#FFFFFF"/>
+
+                <CheckBox
+                    android:id="@+id/cbJumpIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colorclash_jump_in"
+                    android:textColor="#FFFFFF"/>
+
+                <CheckBox
+                    android:id="@+id/cbSevenSwap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colorclash_seven_swap"
+                    android:textColor="#FFFFFF"/>
+
+                <CheckBox
+                    android:id="@+id/cbZeroRotate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colorclash_zero_rotate"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
+
+            <!-- Mafia -->
+            <LinearLayout
+                android:id="@+id/llMafiaSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/game_settings_title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <!-- mafia -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mafia_mafia"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center_vertical"/>
+                    <EditText
+                        android:id="@+id/etMafiaCount"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="1"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <!-- Town role -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_town_role"
+                    android:textColor="#AAAAAA"
+                    android:textSize="13sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <CheckBox
+                    android:id="@+id/cbDetective"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_detective"
+                    android:textColor="#FFFFFF"
+                    android:checked="true"/>
+
+                <CheckBox
+                    android:id="@+id/cbDoctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_doctor"
+                    android:textColor="#FFFFFF"
+                    android:checked="true"/>
+
+                <CheckBox
+                    android:id="@+id/cbVigilante"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_vigilante"
+                    android:textColor="#FFFFFF"/>
+
+                <CheckBox
+                    android:id="@+id/cbMayor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_mayor"
+                    android:textColor="#FFFFFF"/>
+
+                <!-- Neutral -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_neutral"
+                    android:textColor="#AAAAAA"
+                    android:textSize="13sp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mafia_neutral_size"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center_vertical"/>
+                    <EditText
+                        android:id="@+id/etNeutralCount"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="0"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cbJester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_jester"
+                    android:textColor="#FFFFFF"/>
+
+                <CheckBox
+                    android:id="@+id/cbSerialKiller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_serial_killer"
+                    android:textColor="#FFFFFF"/>
+
+                <!-- Timer -->
+                <CheckBox
+                    android:id="@+id/cbMafiaTimerEnabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_timer"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mafia_night_length"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center_vertical"/>
+                    <EditText
+                        android:id="@+id/etNightSeconds"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="45"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mafia_day_length"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center_vertical"/>
+                    <EditText
+                        android:id="@+id/etDaySeconds"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="90"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mafia_trial_length"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center_vertical"/>
+                    <EditText
+                        android:id="@+id/etTrialSeconds"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="30"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/start_game"
+                android:textSize="18sp"
+                android:backgroundTint="#6200EE"
+                android:visibility="gone"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnStart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/start_game"
-            android:textSize="18sp"
-            android:backgroundTint="#6200EE"
-            android:visibility="gone"/>
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

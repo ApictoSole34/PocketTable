@@ -2,9 +2,13 @@ package com.fizzycoyote.pockettable;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +17,7 @@ import com.fizzycoyote.pockettable.engine.common.GameType;
 import com.fizzycoyote.pockettable.lobby.LobbyActivity;
 import com.fizzycoyote.pockettable.network.common.DiscoveryService;
 import com.fizzycoyote.pockettable.utils.RoomCodeGenerator;
+import com.fizzycoyote.pockettable.BuildConfig;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -22,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNickname;
     private Button btnJoinRoom, btnScanQR;
-    private LinearLayout llPoker, llColorClash;
+    private LinearLayout llPoker, llColorClash, llMafia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btnScanQR = findViewById(R.id.btnScanQR);
         llPoker = findViewById(R.id.llPoker);
         llColorClash = findViewById(R.id.llColorClash);
+        llMafia = findViewById(R.id.llMafia);
 
         String savedNick = getSharedPreferences("PocketTable", MODE_PRIVATE)
                 .getString("nickname", "");
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         llPoker.setOnClickListener(v -> startLobby(GameType.POKER));
         llColorClash.setOnClickListener(v -> startLobby(GameType.COLOR_CLASH));
+        llMafia.setOnClickListener(v -> startLobby(GameType.MAFIA));
 
         btnJoinRoom.setOnClickListener(v -> {
             String nickname = etNickname.getText().toString().trim();
@@ -63,7 +70,102 @@ public class MainActivity extends AppCompatActivity {
             saveNickname(nickname);
             scanQR();
         });
+
+        // ==================== DEV DEBUG =====================================
+        Button btnDevConnect = findViewById(R.id.btnDevConnect);
+        if (BuildConfig.DEBUG) {
+            btnDevConnect.setVisibility(View.VISIBLE);
+            btnDevConnect.setOnClickListener(v -> showDevConnectDialog());
+        }
     }
+
+    //============================================ DEV        ======================================================
+
+    private void showDevConnectDialog() {
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(48, 16, 48, 8);
+
+        // IP
+        EditText etIp = new EditText(this);
+        etIp.setHint("Host IP");
+        etIp.setSingleLine(true);
+        etIp.setInputType(InputType.TYPE_CLASS_TEXT);
+        layout.addView(etIp);
+
+        // Room Code
+        EditText etRoomCode = new EditText(this);
+        etRoomCode.setHint("Room Code");
+        etRoomCode.setSingleLine(true);
+        etRoomCode.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        layout.addView(etRoomCode);
+
+        // Game Type
+        Spinner spinnerGame = new Spinner(this);
+        String[] gameTypes = {
+                GameType.POKER.name(),
+                GameType.COLOR_CLASH.name(),
+                GameType.MAFIA.name()
+        };
+        ArrayAdapter<String> gameAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, gameTypes);
+        gameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGame.setAdapter(gameAdapter);
+        layout.addView(spinnerGame);
+
+        // Player Name
+        EditText etPlayerName = new EditText(this);
+        etPlayerName.setHint("Player name");
+        etPlayerName.setSingleLine(true);
+        etPlayerName.setText(etNickname.getText().toString().trim());
+        layout.addView(etPlayerName);
+
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("DEV CONNECT")
+                .setMessage("Direct WebSocket connection")
+                .setView(layout)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Connect", (dialog, which) -> {
+                    String ip = etIp.getText().toString().trim();
+                    String roomCode = etRoomCode.getText().toString().trim().toUpperCase();
+                    String playerName = etPlayerName.getText().toString().trim();
+                    String gameType = spinnerGame.getSelectedItem().toString();
+
+                    if (ip.isEmpty()) {
+                        Toast.makeText(this, "Enter host IP", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (roomCode.length() != 6) {
+                        Toast.makeText(this, "Room code must contain 6 characters", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (playerName.isEmpty()) {
+                        Toast.makeText(this, getString(R.string.enter_nickname), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    saveNickname(playerName);
+                    connectDevClient(ip, roomCode, gameType, playerName);
+                })
+                .show();
+    }
+
+    private void connectDevClient(String serverIp, String roomCode, String gameType, String playerName) {
+        UUID playerId = UUID.randomUUID();
+
+        Intent intent = new Intent(MainActivity.this, LobbyActivity.class);
+        intent.putExtra("roomCode", roomCode);
+        intent.putExtra("playerId", playerId.toString());
+        intent.putExtra("playerName", playerName);
+        intent.putExtra("isHost", false);
+        intent.putExtra("serverIp", serverIp);
+        intent.putExtra("gameType", gameType);
+        intent.putExtra("devConnection", true);
+
+        Toast.makeText(this, "Connecting to " + serverIp + ":8888", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+    }
+
+    //==============================================================================================================
 
     private void startLobby(GameType gameType) {
         String nickname = etNickname.getText().toString().trim();

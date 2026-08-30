@@ -31,6 +31,7 @@
         <activity android:name=".lobby.LobbyActivity" />
         <activity android:name=".game.poker.PokerTableActivity" />
         <activity android:name=".game.colorclash.ColorClashTableActivity" />
+        <activity android:name=".game.mafia.MafiaTableActivity" />
     </application>
 
 </manifest>

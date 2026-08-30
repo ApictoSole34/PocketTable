@@ -29,7 +29,7 @@ One device hosts the game and acts as the game server; other players join as cli
 | Makao       | Planned       |
 | War         | Planned       |
 | Blackjack   | Planned       |
-| Mafia       | Considering   |
+| Mafia       | ✅ Playable   |
 
 ## Poker — Current Features
 
@@ -57,14 +57,6 @@ One device hosts the game and acts as the game server; other players join as cli
 > 3. Select **Don't optimize** or **Allow background activity**
 >
 > For detailed instructions per device: [Don't Kill My App](https://dontkillmyapp.com/)
-
-## Status
-
-- [x] Poker game engine
-- [x] Lobby & local discovery
-- [x] Android client/host UI
-- [x] Unit tests (game engine)
-- [ ] Additional games
 
 ## Testing
 
