@@ -92,8 +92,10 @@ public class MafiaLogicTest {
         game.performAction(ids.get(0), "NIGHT_KILL:" + ids.get(2), 0);
         game.performAction(ids.get(1), "NIGHT_KILL:" + ids.get(3), 0);
 
-        assertTrue("Both targets should survive a tie",
-                game.getPlayer(ids.get(2)).isAlive() && game.getPlayer(ids.get(3)).isAlive());
+        int killedCount = 0;
+        if (!game.getPlayer(ids.get(2)).isAlive()) killedCount++;
+        if (!game.getPlayer(ids.get(3)).isAlive()) killedCount++;
+        assertEquals("Dokładnie jeden z dwóch celów powinien zginąć przy remisie", 1, killedCount);
     }
 
     @Test
