@@ -1,5 +1,9 @@
 package com.fizzycoyote.pockettable.engine.colorclash;
 
+import android.content.Context;
+
+import com.fizzycoyote.pockettable.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,15 +15,28 @@ import java.util.UUID;
  */
 public class ColorClashPlayer {
 
+    private final Context context;
     private final UUID playerId;
     private String playerName;
     private final List<ColorClashCard> hand = new ArrayList<>();
     private boolean calledLastCard = false;
     private boolean eliminated = false;
 
-    public ColorClashPlayer(UUID playerId) {
+    public ColorClashPlayer(Context context, UUID playerId) {
+        this.context = (context != null) ? context.getApplicationContext() : null;
         this.playerId = playerId;
         this.playerName = "Player " + playerId;
+    }
+
+    public ColorClashPlayer(UUID playerId) {
+        this(null, playerId);
+    }
+
+    private String getString(int resId, Object... args) {
+        if (context != null) {
+            return context.getString(resId, args);
+        }
+        return "?";
     }
 
     public UUID getPlayerId() {
@@ -54,7 +71,7 @@ public class ColorClashPlayer {
 
     public ColorClashCard removeCard(ColorClashCard card) {
         if (!hand.remove(card)) {
-            throw new IllegalArgumentException("Player does not hold this card");
+            throw new IllegalArgumentException(getString(R.string.colorclash_error_card_not_held));
         }
         if (hand.size() != 1) {
             calledLastCard = false;

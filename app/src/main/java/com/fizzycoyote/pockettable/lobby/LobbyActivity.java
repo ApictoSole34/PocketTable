@@ -317,7 +317,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
 
     private void setupHostServer() {
         if (gameType == GameType.POKER) {
-            pokerGame = new PokerGame(roomCode, List.of(playerId));
+            pokerGame = new PokerGame(this, roomCode, List.of(playerId));
             pokerGame.getPlayer(playerId).setPlayerName(playerName);
             game = pokerGame;
 
@@ -326,7 +326,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
             hostServer = server;
 
         } else if (gameType == GameType.COLOR_CLASH) {
-            colorClashGame = new ColorClashGame(List.of(playerId));
+            colorClashGame = new ColorClashGame(this, List.of(playerId));
             colorClashGame.getPlayer(playerId).setPlayerName(playerName);
             game = colorClashGame;
 

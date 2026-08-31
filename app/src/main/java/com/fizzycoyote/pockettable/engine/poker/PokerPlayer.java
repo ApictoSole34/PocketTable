@@ -1,5 +1,8 @@
 package com.fizzycoyote.pockettable.engine.poker;
 
+import android.content.Context;
+
+import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.common.Card;
 
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.UUID;
 
 public class PokerPlayer {
 
+    private final Context context;
     private final UUID playerId;
     private String playerName;
     private final List<Card> hand = new ArrayList<>();
@@ -18,16 +22,26 @@ public class PokerPlayer {
     private boolean allIn = false;
     private int totalContribution = 0;
 
-    public PokerPlayer(UUID playerId, int startingChips) {
+    public PokerPlayer(Context context, UUID playerId, int startingChips) {
+        this.context = (context != null) ? context.getApplicationContext() : null;
         this.playerId = playerId;
         this.playerName = "Player " + playerId;
         this.chips = startingChips;
     }
 
+    public PokerPlayer(UUID playerId, int startingChips) {
+        this(null, playerId, startingChips);
+    }
+
     public PokerPlayer(UUID playerId) {
-        this.playerId = playerId;
-        this.playerName = "Player " + playerId;
-        this.chips = 1000;
+        this(null, playerId, 1000);
+    }
+
+    private String getString(int resId, Object... args) {
+        if (context != null) {
+            return context.getString(resId, args);
+        }
+        return "?";
     }
 
     public UUID getPlayerId() {
@@ -64,7 +78,7 @@ public class PokerPlayer {
 
     public void resetChips(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Amount cannot be negative");
+            throw new IllegalArgumentException(getString(R.string.poker_error_amount_cannot_be_negative));
         }
         this.chips = amount;
     }
@@ -81,7 +95,7 @@ public class PokerPlayer {
 
         if (amount <= 0) {
             throw new IllegalArgumentException(
-                    "Bet amount must be positive"
+                    getString(R.string.poker_error_bet_must_be_positive)
             );
         }
 
@@ -121,13 +135,13 @@ public class PokerPlayer {
 
         if (amount <= 0) {
             throw new IllegalArgumentException(
-                    "Amount must be positive"
+                    getString(R.string.poker_error_amount_must_be_positive)
             );
         }
 
         if (chips < amount) {
             throw new IllegalStateException(
-                    "Not enough chips"
+                    getString(R.string.poker_error_not_enough_chips)
             );
         }
 
@@ -138,7 +152,7 @@ public class PokerPlayer {
 
         if (amount <= 0) {
             throw new IllegalArgumentException(
-                    "Amount must be positive"
+                    getString(R.string.poker_error_amount_must_be_positive)
             );
         }
 
@@ -156,7 +170,7 @@ public class PokerPlayer {
 
         if (amount <= 0) {
             throw new IllegalArgumentException(
-                    "Amount must be positive"
+                    getString(R.string.poker_error_amount_must_be_positive)
             );
         }
 

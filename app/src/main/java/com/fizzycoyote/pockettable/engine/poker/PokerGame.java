@@ -1,5 +1,8 @@
 package com.fizzycoyote.pockettable.engine.poker;
 
+import android.content.Context;
+
+import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.common.Card;
 import com.fizzycoyote.pockettable.engine.common.GameEngine;
 import com.fizzycoyote.pockettable.models.poker.PokerGameState;
@@ -29,6 +32,7 @@ import java.util.stream.Collectors;
  */
 public class PokerGame implements GameEngine {
 
+    private final Context context;
     private final List<PokerPlayer> players;
     private final Deck deck;
     private final List<Card> communityCards = new ArrayList<>();
@@ -50,13 +54,29 @@ public class PokerGame implements GameEngine {
 
     private final PokerHandEvaluator handEvaluator = new PokerHandEvaluator();
 
-    public PokerGame(String roomCode, List<UUID> playersIds) {
+    public PokerGame(Context context, String roomCode, List<UUID> playersIds) {
+        this.context = (context != null) ? context.getApplicationContext() : null;
         this.players = new ArrayList<>();
         for (UUID id : playersIds) {
-            this.players.add(new PokerPlayer(id, startingChips));
+            this.players.add(new PokerPlayer(this.context, id, startingChips));
         }
         this.deck = new Deck();
         this.deck.shuffle();
+    }
+
+    public PokerGame(String roomCode, List<UUID> playersIds) {
+        this(null, roomCode, playersIds);
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public String getString(int resId, Object... args) {
+        if (context != null) {
+            return context.getString(resId, args);
+        }
+        return "?";
     }
 
     public int getSmallBlind() { return smallBlind; }
@@ -98,19 +118,19 @@ public class PokerGame implements GameEngine {
         PokerPlayer player = getPlayer(playerId);
 
         if (round == PokerRound.SHOWDOWN) {
-            throw new IllegalStateException("Game is already in showdown");
+            throw new IllegalStateException(getString(R.string.poker_error_showdown_already));
         }
 
         if (!getCurrentPlayer().getPlayerId().equals(playerId)) {
-            throw new IllegalStateException("It is not this player's turn");
+            throw new IllegalStateException(getString(R.string.poker_error_not_your_turn));
         }
 
         if (player.isFolded()) {
-            throw new IllegalStateException("Player has already folded");
+            throw new IllegalStateException(getString(R.string.poker_error_already_folded));
         }
 
         if (player.isAllIn()) {
-            throw new IllegalStateException("Player is already all-in and cannot act");
+            throw new IllegalStateException(getString(R.string.poker_error_already_all_in));
         }
 
         PokerAction pokerAction = PokerAction.valueOf(action);
@@ -123,16 +143,16 @@ public class PokerGame implements GameEngine {
 
             case CHECK:
                 if (player.getCurrentBet() != currentBet) {
-                    throw new IllegalStateException("Cannot check while current bet is higher");
+                    throw new IllegalStateException(getString(R.string.poker_error_cannot_check));
                 }
                 break;
 
             case BET:
                 if (currentBet != 0) {
-                    throw new IllegalStateException("Cannot bet when there is already a bet");
+                    throw new IllegalStateException(getString(R.string.poker_error_cannot_bet_existing));
                 }
                 if (amount <= 0) {
-                    throw new IllegalArgumentException("Bet amount must be positive");
+                    throw new IllegalArgumentException(getString(R.string.poker_error_bet_must_be_positive));
                 }
                 int actualBet = player.removeChipsUpTo(amount);
                 player.addBet(actualBet);
@@ -144,7 +164,7 @@ public class PokerGame implements GameEngine {
             case CALL:
                 int amountToCall = currentBet - player.getCurrentBet();
                 if (amountToCall <= 0) {
-                    throw new IllegalStateException("Nothing to call");
+                    throw new IllegalStateException(getString(R.string.poker_error_nothing_to_call));
                 }
                 int actualCall = player.removeChipsUpTo(amountToCall);
                 player.addBet(actualCall);
@@ -153,11 +173,11 @@ public class PokerGame implements GameEngine {
 
             case RAISE:
                 if (amount <= currentBet) {
-                    throw new IllegalArgumentException("Raise must be higher than current bet");
+                    throw new IllegalArgumentException(getString(R.string.poker_error_raise_too_low));
                 }
                 int amountToAdd = amount - player.getCurrentBet();
                 if (amountToAdd <= 0) {
-                    throw new IllegalStateException("Player has already bet enough");
+                    throw new IllegalStateException(getString(R.string.poker_error_already_bet_enough));
                 }
                 int actualRaise = player.removeChipsUpTo(amountToAdd);
                 player.addBet(actualRaise);
@@ -310,7 +330,7 @@ public class PokerGame implements GameEngine {
         }
 
         if (winner == null || bestHand == null) {
-            throw new IllegalStateException("No eligible active players");
+            throw new IllegalStateException(getString(R.string.poker_error_no_eligible_players));
         }
 
         return new WinnerResult(winner, bestHand);
@@ -376,7 +396,7 @@ public class PokerGame implements GameEngine {
 
     public void dealRiver() {
         if (round != PokerRound.TURN) {
-            throw new IllegalStateException("Cannot deal river during " + round);
+            throw new IllegalStateException(getString(R.string.poker_error_cannot_deal_river, round));
         }
         deck.draw();
         communityCards.add(deck.draw());
@@ -385,7 +405,7 @@ public class PokerGame implements GameEngine {
 
     public void dealTurn() {
         if (round != PokerRound.FLOP) {
-            throw new IllegalStateException("Cannot deal turn during " + round);
+            throw new IllegalStateException(getString(R.string.poker_error_cannot_deal_turn, round));
         }
         deck.draw();
         communityCards.add(deck.draw());
@@ -406,7 +426,7 @@ public class PokerGame implements GameEngine {
                 return p;
             }
         }
-        throw new IllegalArgumentException("Player not found");
+        throw new IllegalArgumentException(getString(R.string.poker_error_player_not_found));
     }
 
     public void setCurrentBet(int currentBet) {
@@ -472,7 +492,7 @@ public class PokerGame implements GameEngine {
                 round = PokerRound.SHOWDOWN;
                 break;
             case SHOWDOWN:
-                throw new IllegalStateException("Game is already in showdown");
+                throw new IllegalStateException(getString(R.string.poker_error_showdown_already));
         }
     }
 
@@ -576,7 +596,7 @@ public class PokerGame implements GameEngine {
 
     public void addToPot(int amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("Amount must be positive");
+            throw new IllegalArgumentException(getString(R.string.poker_error_amount_must_be_positive));
         }
         this.totalPot += amount;
     }

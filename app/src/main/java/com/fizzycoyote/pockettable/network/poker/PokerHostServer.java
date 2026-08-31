@@ -59,10 +59,9 @@ public class PokerHostServer extends GenericHostServer {
             PokerPlayer player = game.getPlayer(playerId);
             player.setPlayerName(playerName);
         } catch (IllegalArgumentException e) {
-            PokerPlayer newPlayer = new PokerPlayer(playerId, game.getStartingChips());
+            PokerPlayer newPlayer = new PokerPlayer(game.getContext(), playerId, game.getStartingChips());
             newPlayer.setPlayerName(playerName);
             game.addPlayer(newPlayer);
-            System.out.println("Player added: " + playerId + " (" + playerName + ")");
         }
     }
 
@@ -72,7 +71,6 @@ public class PokerHostServer extends GenericHostServer {
             PokerPlayer player = game.getPlayer(playerId);
             if (!player.isFolded() && !game.isGameOver()) {
                 player.fold();
-                System.out.println("Player " + playerId + " folded (disconnected)");
                 PokerGameState state = PokerGameState.fromGame(game, hostPlayerId);
                 notifyStateChanged(state);
             }

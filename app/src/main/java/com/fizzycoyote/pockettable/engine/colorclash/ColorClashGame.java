@@ -1,7 +1,10 @@
 package com.fizzycoyote.pockettable.engine.colorclash;
 
+import android.content.Context;
+
 import androidx.annotation.VisibleForTesting;
 
+import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.common.GameEngine;
 import com.fizzycoyote.pockettable.models.colorclash.ColorClashState;
 
@@ -9,6 +12,7 @@ import java.util.*;
 
 public class ColorClashGame implements GameEngine {
 
+    private final Context context;
     private final List<ColorClashPlayer> players;
     private final ColorClashDeck deck;
     private final List<ColorClashCard> discardPile = new ArrayList<>();
@@ -21,20 +25,40 @@ public class ColorClashGame implements GameEngine {
     private boolean gameOver = false;
     private ColorClashRules rules;
 
-    public ColorClashGame(List<UUID> playerIds) {
-        this(playerIds, ColorClashRules.DEFAULT);
+    public ColorClashGame(Context context, List<UUID> playerIds) {
+        this(context, playerIds, ColorClashRules.DEFAULT);
     }
 
-    public ColorClashGame(List<UUID> playerIds, ColorClashRules rules) {
+    public ColorClashGame(List<UUID> playerIds) {
+        this(null, playerIds, ColorClashRules.DEFAULT);
+    }
+
+    public ColorClashGame(Context context, List<UUID> playerIds, ColorClashRules rules) {
+        this.context = (context != null) ? context.getApplicationContext() : null;
         this.players = new ArrayList<>();
         for (UUID id : playerIds) {
-            this.players.add(new ColorClashPlayer(id));
+            this.players.add(new ColorClashPlayer(this.context, id));
         }
         this.rules = rules;
         this.deck = new ColorClashDeck();
         dealCards();
         startDiscardPile();
         currentColor = topCard.color();
+    }
+
+    public ColorClashGame(List<UUID> playerIds, ColorClashRules rules) {
+        this(null, playerIds, rules);
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public String getString(int resId, Object... args) {
+        if (context != null) {
+            return context.getString(resId, args);
+        }
+        return "?";
     }
 
     private void dealCards() {
@@ -168,29 +192,28 @@ public class ColorClashGame implements GameEngine {
     @Override
     public void performAction(UUID playerId, String action, int amount) {
         if (gameOver) {
-            throw new IllegalStateException("Game is already over");
+            throw new IllegalStateException(getString(R.string.colorclash_error_game_over));
         }
 
         ColorClashPlayer player = getPlayer(playerId);
 
-        // JUMP_IN:index
         if (action.startsWith("JUMP_IN:")) {
             if (!rules.jumpIn()) {
-                throw new IllegalStateException("Jump-in is disabled");
+                throw new IllegalStateException(getString(R.string.colorclash_error_jumpin_disabled));
             }
             if (drawStack > 0) {
-                throw new IllegalStateException("Cannot jump in when draw stack is active");
+                throw new IllegalStateException(getString(R.string.colorclash_error_jumpin_draw_active));
             }
             if (getCurrentPlayer().getPlayerId().equals(playerId)) {
-                throw new IllegalStateException("It is your turn – use PLAY");
+                throw new IllegalStateException(getString(R.string.colorclash_error_use_play));
             }
             int index = Integer.parseInt(action.substring("JUMP_IN:".length()));
             if (index < 0 || index >= player.getHand().size()) {
-                throw new IllegalArgumentException("Invalid card index");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_invalid_card_index));
             }
             ColorClashCard card = player.getHand().get(index);
             if (!card.equals(topCard)) {
-                throw new IllegalArgumentException("Jump-in requires identical card to top of pile");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_jumpin_requires_match));
             }
             player.removeCard(card);
             discardPile.add(card);
@@ -199,7 +222,6 @@ public class ColorClashGame implements GameEngine {
             checkWinner(player);
             if (gameOver) return;
 
-            // Gracz, który się wbił, staje się bieżącym
             currentPlayerIndex = players.indexOf(player);
             refillDeckIfNeeded();
             return;
@@ -207,7 +229,7 @@ public class ColorClashGame implements GameEngine {
 
         if (action.equals("CALL_LAST_CARD")) {
             if (player.getHandSize() != 1) {
-                throw new IllegalArgumentException("You can only call Last Card with exactly one card in hand");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_last_card_single_only));
             }
             player.callLastCard();
             return;
@@ -216,11 +238,13 @@ public class ColorClashGame implements GameEngine {
         if (action.startsWith("CATCH:")) {
             UUID targetId = UUID.fromString(action.substring("CATCH:".length()));
             if (targetId.equals(playerId)) {
-                throw new IllegalArgumentException("You cannot catch yourself");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_cannot_catch_self));
             }
             ColorClashPlayer target = getPlayer(targetId);
             if (target.getHandSize() != 1 || target.isCalledLastCard()) {
-                throw new IllegalArgumentException(target.getPlayerName() + " has nothing to catch right now");
+                throw new IllegalArgumentException(
+                        getString(R.string.colorclash_error_nothing_to_catch, target.getPlayerName())
+                );
             }
             dealCardsToPlayer(target, 2);
             target.callLastCard();
@@ -228,13 +252,12 @@ public class ColorClashGame implements GameEngine {
         }
 
         if (!getCurrentPlayer().getPlayerId().equals(playerId)) {
-            throw new IllegalStateException("It is not this player's turn");
+            throw new IllegalStateException(getString(R.string.colorclash_error_not_your_turn));
         }
         if (player.isEliminated()) {
-            throw new IllegalStateException("Player is eliminated");
+            throw new IllegalStateException(getString(R.string.colorclash_error_player_eliminated));
         }
 
-        // PLAY
         if (action.startsWith("PLAY:")) {
             String[] parts = action.split(":");
             int cardIndex = Integer.parseInt(parts[1]);
@@ -250,22 +273,22 @@ public class ColorClashGame implements GameEngine {
             }
 
             if (cardIndex < 0 || cardIndex >= player.getHand().size()) {
-                throw new IllegalArgumentException("Invalid card index");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_invalid_card_index));
             }
 
             ColorClashCard card = player.getHand().get(cardIndex);
 
             if (!rules.canPlay(card, topCard, currentColor, drawStack)) {
-                throw new IllegalArgumentException("Card cannot be played");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_card_cannot_be_played));
             }
 
             if (card.isWild() && chosenColor == null) {
-                throw new IllegalArgumentException("You must choose a color for wild card");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_choose_wild_color));
             }
 
             boolean isSeven = card.type() == CardType.NUMBER && card.value() == 7;
             if (isSeven && rules.sevenSwap() && player.getHandSize() > 1 && swapTarget == null) {
-                throw new IllegalArgumentException("Choose a player to swap hands with");
+                throw new IllegalArgumentException(getString(R.string.colorclash_error_choose_swap_target));
             }
 
             player.removeCard(card);
@@ -283,7 +306,6 @@ public class ColorClashGame implements GameEngine {
                 currentColor = card.color();
             }
 
-            // Seven swap wykonujemy przed checkWinner
             if (isSeven && rules.sevenSwap() && swapTarget != null && !player.hasWon()) {
                 ColorClashPlayer target = getPlayer(swapTarget);
                 swapHands(player, target);
@@ -332,7 +354,7 @@ public class ColorClashGame implements GameEngine {
             currentColor = chosenColor;
 
         } else {
-            throw new IllegalArgumentException("Unknown action: " + action);
+            throw new IllegalArgumentException(getString(R.string.colorclash_error_unknown_action, action));
         }
     }
 
@@ -377,7 +399,7 @@ public class ColorClashGame implements GameEngine {
         for (ColorClashPlayer p : players) {
             if (p.getPlayerId().equals(playerId)) return p;
         }
-        throw new IllegalArgumentException("Player not found: " + playerId);
+        throw new IllegalArgumentException(getString(R.string.colorclash_error_player_not_found, playerId));
     }
 
     public ColorClashPlayer getCurrentPlayer() {

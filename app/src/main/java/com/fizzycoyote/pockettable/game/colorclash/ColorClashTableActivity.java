@@ -121,7 +121,7 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
             if (game == null) {
                 List<UUID> playerIds = new ArrayList<>();
                 playerIds.add(playerId);
-                game = new ColorClashGame(playerIds);
+                game = new ColorClashGame(this, playerIds);
                 hostServer = new ColorClashHostServer(8888, game, playerId);
                 try { hostServer.start(); } catch (Exception e) { e.printStackTrace(); }
             }
@@ -271,7 +271,8 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
             chip.addView(tvName);
 
             TextView tvCount = new TextView(this);
-            tvCount.setText(info.handSize() + " card" + (info.handSize() == 1 ? "" : "s"));
+            tvCount.setText(getResources().getQuantityString(
+                    R.plurals.card_count, info.handSize(), info.handSize()));
             tvCount.setTextColor(isCurrentTurn ? Color.BLACK : Color.WHITE);
             tvCount.setGravity(Gravity.CENTER);
             chip.addView(tvCount);
@@ -398,11 +399,17 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
     }
 
     private void showColorChooser(Runnable onColorChosen) {
-        String[] colors = {"RED", "YELLOW", "GREEN", "BLUE"};
+        CardColor[] colorValues = {CardColor.RED, CardColor.YELLOW, CardColor.GREEN, CardColor.BLUE};
+        String[] displayLabels = {
+                getString(R.string.color_red),
+                getString(R.string.color_yellow),
+                getString(R.string.color_green),
+                getString(R.string.color_blue)
+        };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.colorclash_choose_color));
-        builder.setItems(colors, (dialog, which) -> {
-            chosenColor = CardColor.valueOf(colors[which]);
+        builder.setItems(displayLabels, (dialog, which) -> {
+            chosenColor = colorValues[which];
             if (onColorChosen != null) onColorChosen.run();
         });
         builder.show();

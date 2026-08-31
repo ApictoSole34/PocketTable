@@ -132,7 +132,7 @@ public class PokerTableActivity extends BaseImmersiveActivity {
             if (game == null) {
                 List<UUID> playerIds = new ArrayList<>();
                 playerIds.add(playerId);
-                game = new PokerGame(roomCode, playerIds);
+                game = new PokerGame(this, roomCode, playerIds);
                 game.getPlayer(playerId).setPlayerName(playerName);
             }
 
@@ -274,7 +274,7 @@ public class PokerTableActivity extends BaseImmersiveActivity {
 
             if (winnerId != null) {
                 PokerGameState.PlayerState winnerState = state.players().get(winnerId);
-                String winnerName = winnerState != null ? winnerState.playerName() : "Unknown";
+                String winnerName = winnerState != null ? winnerState.playerName() : getString(R.string.unknown_player);
                 String handDesc = state.winnerHandDesc();
                 if (handDesc == null) handDesc = getString(R.string.no_data);
                 String displayHand = formatHandName(handDesc);

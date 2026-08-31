@@ -50,11 +50,10 @@ public class ColorClashHostServer extends GenericHostServer {
                 game.dealCardsToPlayer(player, 7);
             }
         } catch (IllegalArgumentException e) {
-            ColorClashPlayer newPlayer = new ColorClashPlayer(playerId);
+            ColorClashPlayer newPlayer = new ColorClashPlayer(game.getContext(), playerId);
             newPlayer.setPlayerName(playerName);
             game.addPlayer(newPlayer);
             game.dealCardsToPlayer(newPlayer, 7);
-            System.out.println("Player added: " + playerId + " (" + playerName + ")");
         }
     }
 
@@ -63,7 +62,6 @@ public class ColorClashHostServer extends GenericHostServer {
         try {
             ColorClashPlayer player = game.getPlayer(playerId);
             player.eliminate();
-            System.out.println("Player " + playerId + " eliminated (disconnected)");
             broadcastState();
         } catch (Exception ignored) {}
     }
