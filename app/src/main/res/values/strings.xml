@@ -52,6 +52,16 @@
     <string name="colorclash_seven_swap">7 swaps hands with a chosen player</string>
     <string name="colorclash_zero_rotate">0 rotates all hands around the table</string>
 
+    <string name="color_red">RED</string>
+    <string name="color_yellow">YELLOW</string>
+    <string name="color_green">GREEN</string>
+    <string name="color_blue">BLUE</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d card</item>
+        <item quantity="other">%d cards</item>
+    </plurals>
+
     <!-- ==================== POKER TABLE ==================== -->
     <string name="poker_title">♠️ Poker</string>
     <string name="pot_label">Pot: </string>
@@ -78,6 +88,48 @@
     <string name="reconnecting_message">Connection lost, attempt %1$d…</string>
     <string name="reconnected_message">Reconnected!</string>
     <string name="reconnect_failed_message">Could not reconnect. Please return to the lobby.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">Game is already in showdown</string>
+    <string name="poker_error_not_your_turn">It is not this player\'s turn</string>
+    <string name="poker_error_already_folded">Player has already folded</string>
+    <string name="poker_error_already_all_in">Player is already all-in and cannot act</string>
+    <string name="poker_error_cannot_check">Cannot check while current bet is higher</string>
+    <string name="poker_error_cannot_bet_existing">Cannot bet when there is already a bet</string>
+    <string name="poker_error_bet_must_be_positive">Bet amount must be positive</string>
+    <string name="poker_error_nothing_to_call">Nothing to call</string>
+    <string name="poker_error_raise_too_low">Raise must be higher than current bet</string>
+    <string name="poker_error_already_bet_enough">Player has already bet enough</string>
+    <string name="poker_error_no_eligible_players">No eligible active players</string>
+    <string name="poker_error_player_not_found">Player not found</string>
+    <string name="poker_error_cannot_deal_river">Cannot deal river during %s</string>
+    <string name="poker_error_cannot_deal_turn">Cannot deal turn during %s</string>
+    <string name="poker_error_amount_must_be_positive">Amount must be positive</string>
+    <string name="poker_error_not_enough_chips">Not enough chips</string>
+    <string name="poker_error_amount_cannot_be_negative">Amount cannot be negative</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">Game is already over</string>
+    <string name="colorclash_error_jumpin_disabled">Jump-in is disabled</string>
+    <string name="colorclash_error_jumpin_draw_active">Cannot jump in when draw stack is active</string>
+    <string name="colorclash_error_use_play">It is your turn – use PLAY</string>
+    <string name="colorclash_error_invalid_card_index">Invalid card index</string>
+    <string name="colorclash_error_jumpin_requires_match">Jump-in requires an identical card to the top of the pile</string>
+    <string name="colorclash_error_last_card_single_only">You can only call Last Card with exactly one card in hand</string>
+    <string name="colorclash_error_cannot_catch_self">You cannot catch yourself</string>
+    <string name="colorclash_error_nothing_to_catch">%s has nothing to catch right now</string>
+    <string name="colorclash_error_not_your_turn">It is not this player\'s turn</string>
+    <string name="colorclash_error_player_eliminated">Player is eliminated</string>
+    <string name="colorclash_error_card_cannot_be_played">Card cannot be played</string>
+    <string name="colorclash_error_choose_wild_color">You must choose a color for the wild card</string>
+    <string name="colorclash_error_choose_swap_target">Choose a player to swap hands with</string>
+    <string name="colorclash_error_unknown_action">Unknown action: %s</string>
+    <string name="colorclash_error_player_not_found">Player not found: %s</string>
+    <string name="colorclash_error_card_not_held">Player does not hold this card</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Unknown</string>
+    <string name="colorclash_eliminated_suffix"> (out)</string>
 
     <!-- ==================== BUTTONS ==================== -->
     <string name="btn_check">CHECK</string>
@@ -269,4 +321,14 @@
     <string name="mafia_config_neutral_count_negative">Neutral count cannot be negative</string>
     <string name="mafia_config_roles_exceed_players">Configured %1$d special roles, but there are only %2$d players in the game. Reduce the number of roles or add more players.</string>
 
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Leave</string>
+    <string name="leave_button_desc">Leave</string>
+    <string name="leave_confirm_title">Leave?</string>
+    <string name="leave_confirm_message_host_lobby">You\'re the host. Leaving now will close the lobby for everyone.</string>
+    <string name="leave_confirm_message_host_game">You\'re the host. Leaving now will end the game for everyone.</string>
+    <string name="leave_confirm_message_player">Are you sure you want to leave? You\'ll be disconnected from the game.</string>
+    <string name="leave_confirm_positive">Leave</string>
+    <string name="leave_confirm_negative">Cancel</string>
+    <string name="host_ended_game">The host ended the game.</string>
 </resources>

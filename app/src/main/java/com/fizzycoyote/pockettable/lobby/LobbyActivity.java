@@ -15,10 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fizzycoyote.pockettable.BaseImmersiveActivity;
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashRules;
@@ -47,6 +48,7 @@ import com.fizzycoyote.pockettable.network.poker.PokerClient;
 import com.fizzycoyote.pockettable.network.poker.PokerHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
+import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
 import com.fizzycoyote.pockettable.utils.NetworkUtils;
 import com.fizzycoyote.pockettable.utils.RoomCodeGenerator;
 import com.google.zxing.BarcodeFormat;
@@ -69,29 +71,17 @@ import java.util.UUID;
  * list while waiting. Clicking START finalizes game settings and actually
  * begins the round.</p>
  *
- * <p><b>Important:</b> the client object created here is reused (via
- * {@link ClientHolder}) by the table activity after the game starts. It must
- * be a plain {@link PokerClient}/{@link ColorClashClient} - never wrap it in
- * an anonymous subclass overriding {@code onRawMessage}, since that would
- * permanently replace the client's own message-parsing logic and break the
- * table activity's ability to receive state updates after reuse.</p>
- *
- * @see PokerGame
- * @see PokerHostServer
- * @see PokerClient
- * @see ColorClashGame
- * @see ColorClashHostServer
- * @see ColorClashClient
- * @see MafiaGame
- * @see TimedMafiaGame
- * @see MafiaClient
- * @see MafiaHostServer
+ * <p>Leaving the lobby (via the on-screen "Leave" button or system back) is
+ * gated behind a confirmation dialog: for the host this closes the lobby
+ * for everyone (the server is stopped in {@link #onDestroy()}); for a
+ * regular player it simply disconnects them.</p>
  */
-public class LobbyActivity extends AppCompatActivity {
+public class LobbyActivity extends BaseImmersiveActivity {
 
     private TextView tvRoomCode, tvPlayerCount, tvIp;
     private RecyclerView rvPlayers;
     private Button btnStart;
+    private Button btnLeave;
     private PlayersAdapter adapter;
     private List<String> players = new ArrayList<>();
 
@@ -138,6 +128,7 @@ public class LobbyActivity extends AppCompatActivity {
         tvPlayerCount = findViewById(R.id.tvPlayerCount);
         rvPlayers = findViewById(R.id.rvPlayers);
         btnStart = findViewById(R.id.btnStart);
+        btnLeave = findViewById(R.id.btnLeave);
         Button btnShowQR = findViewById(R.id.btnShowQR);
 
         llGameSettings = findViewById(R.id.llGameSettings);
@@ -188,6 +179,15 @@ public class LobbyActivity extends AppCompatActivity {
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
         rvPlayers.setAdapter(adapter);
 
+        applyTopInsetPadding(btnLeave);
+        btnLeave.setOnClickListener(v -> confirmLeave());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                confirmLeave();
+            }
+        });
+
         if (isHost) {
             String myIp = NetworkUtils.getLocalIpAddress();
             tvIp.setText(getString(R.string.ip_label) + myIp);
@@ -222,6 +222,13 @@ public class LobbyActivity extends AppCompatActivity {
             llGameSettings.setVisibility(View.GONE);
             connectAsClient();
         }
+    }
+
+    private void confirmLeave() {
+        int messageRes = isHost
+                ? R.string.leave_confirm_message_host_lobby
+                : R.string.leave_confirm_message_player;
+        LeaveConfirmationHelper.show(this, messageRes, this::finish);
     }
 
     /**

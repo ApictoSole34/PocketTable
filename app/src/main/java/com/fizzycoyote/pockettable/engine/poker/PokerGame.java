@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
  *   <li>Determine winner using {@link PokerHandEvaluator}</li>
  * </ul>
  *
- * @author Your Name
- * @version 1.0
  * @see PokerPlayer
  * @see PokerHandEvaluator
  * @see PokerGameState

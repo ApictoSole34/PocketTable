@@ -77,7 +77,7 @@ public class MafiaLogicTest {
     }
 
     @Test
-    public void testMafiaTieNoKill() {
+    public void testMafiaTieKill() {
         List<UUID> ids = ids(6);
         MafiaRoleConfig cfg = new MafiaRoleConfig();
         cfg.setCount(MafiaRole.MAFIA, 2);
@@ -95,7 +95,7 @@ public class MafiaLogicTest {
         int killedCount = 0;
         if (!game.getPlayer(ids.get(2)).isAlive()) killedCount++;
         if (!game.getPlayer(ids.get(3)).isAlive()) killedCount++;
-        assertEquals("Dokładnie jeden z dwóch celów powinien zginąć przy remisie", 1, killedCount);
+        assertEquals("One player from two players should be killed", 1, killedCount);
     }
 
     @Test
@@ -434,7 +434,6 @@ public class MafiaLogicTest {
         } catch (Exception e) {
             selfNominateThrew = true;
         }
-        // Dokumentacja aktualnego zachowania: nominowanie siebie jest dozwolone w DAY_NOMINATION
         assertFalse("Self-nomination currently allowed (no self-check)", selfNominateThrew);
     }
 

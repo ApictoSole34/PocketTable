@@ -23,7 +23,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseImmersiveActivity {
 
     private EditText etNickname;
     private Button btnJoinRoom, btnScanQR;

@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fizzycoyote.pockettable.BaseImmersiveActivity;
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.common.Card;
 import com.fizzycoyote.pockettable.engine.poker.PokerAction;
@@ -24,6 +27,7 @@ import com.fizzycoyote.pockettable.network.poker.PokerClient;
 import com.fizzycoyote.pockettable.network.poker.PokerHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
+import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
 import com.google.android.material.slider.Slider;
 
 import java.net.URI;
@@ -41,15 +45,18 @@ import java.util.UUID;
  *   <li>Player actions (CHECK, CALL, FOLD, BET, RAISE)</li>
  *   <li>Showdown winner display</li>
  *   <li>New hand (host only)</li>
+ *   <li>Leaving mid-game (host ends the session for everyone; a regular
+ *       player just disconnects) via {@link #confirmLeave()}</li>
  * </ul>
  * </p>
  */
-public class PokerTableActivity extends AppCompatActivity {
+public class PokerTableActivity extends BaseImmersiveActivity {
 
     private TextView tvPot, tvTurnInfo, tvMyStack, tvMyBet;
     private ImageView[] communityViews = new ImageView[5];
     private ImageView myCard1, myCard2;
     private Button btnCheck, btnCall, btnFold, btnBet, btnRaise, btnNextHand;
+    private Button btnLeave;
     private RecyclerView rvTablePlayers;
     private TablePlayerAdapter tablePlayerAdapter;
     private PokerGameState lastState;
@@ -96,6 +103,7 @@ public class PokerTableActivity extends AppCompatActivity {
         btnBet = findViewById(R.id.btnBet);
         btnRaise = findViewById(R.id.btnRaise);
         btnNextHand = findViewById(R.id.btnNextHand);
+        btnLeave = findViewById(R.id.btnLeave);
 
         rvTablePlayers = findViewById(R.id.rvTablePlayers);
         rvTablePlayers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -108,6 +116,15 @@ public class PokerTableActivity extends AppCompatActivity {
         btnBet.setOnClickListener(v -> showBetDialog());
         btnRaise.setOnClickListener(v -> showRaiseDialog());
         btnNextHand.setOnClickListener(v -> startNextHand());
+
+        applyTopInsetPadding(btnLeave);
+        btnLeave.setOnClickListener(v -> confirmLeave());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                confirmLeave();
+            }
+        });
 
         if (isHost) {
             game = (PokerGame) GameHolder.getInstance().getGame();
@@ -145,8 +162,9 @@ public class PokerTableActivity extends AppCompatActivity {
                 @Override
                 public void onGameOver() {
                     runOnUiThread(() -> {
-                        tvTurnInfo.setText(getString(R.string.game_over));
-                        enableButtons(false);
+                        Toast.makeText(PokerTableActivity.this,
+                                getString(R.string.host_ended_game), Toast.LENGTH_LONG).show();
+                        finish();
                     });
                 }
 
@@ -196,6 +214,20 @@ public class PokerTableActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void confirmLeave() {
+        int messageRes = isHost
+                ? R.string.leave_confirm_message_host_game
+                : R.string.leave_confirm_message_player;
+        LeaveConfirmationHelper.show(this, messageRes, this::leaveGame);
+    }
+
+    private void leaveGame() {
+        if (isHost && hostServer != null) {
+            hostServer.broadcastGameOver();
+        }
+        finish();
     }
 
     private void onStateReceived(PokerGameState state) {
@@ -499,5 +531,9 @@ public class PokerTableActivity extends AppCompatActivity {
         super.onDestroy();
         if (client != null) client.requestClose();
         ClientHolder.getInstance().clear();
+        if (isHost && hostServer != null) {
+            hostServer.stopServer();
+        }
+        GameHolder.getInstance().clear();
     }
 }

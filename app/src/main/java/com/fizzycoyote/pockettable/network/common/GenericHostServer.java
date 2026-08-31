@@ -198,6 +198,12 @@ public abstract class GenericHostServer extends WebSocketServer {
         broadcastRaw(json);
     }
 
+    public void broadcastGameOver() {
+        GameMessage msg = new GameMessage(MessageType.GAME_OVER, null);
+        String json = new Gson().toJson(msg);
+        broadcastRaw(json);
+    }
+
     public void stopServer() {
         try {
             for (ScheduledFuture<?> future : pendingDisconnects.values()) {

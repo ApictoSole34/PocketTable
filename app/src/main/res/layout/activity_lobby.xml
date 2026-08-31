@@ -369,4 +369,17 @@
                 android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:id="@+id/btnLeave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_margin="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/btn_leave"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:background="@drawable/btn_mafia_rounded"
+        android:contentDescription="@string/leave_button_desc"/>
 </FrameLayout>

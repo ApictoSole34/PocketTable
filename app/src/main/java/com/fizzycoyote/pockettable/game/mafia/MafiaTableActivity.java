@@ -11,10 +11,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fizzycoyote.pockettable.BaseImmersiveActivity;
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.mafia.MafiaGame;
 import com.fizzycoyote.pockettable.engine.mafia.MafiaPhase;
@@ -24,6 +25,7 @@ import com.fizzycoyote.pockettable.network.mafia.MafiaClient;
 import com.fizzycoyote.pockettable.network.mafia.MafiaHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
+import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class MafiaTableActivity extends AppCompatActivity {
+public class MafiaTableActivity extends BaseImmersiveActivity {
 
     private static final int GRID_COLUMNS = 3;
 
@@ -40,6 +42,7 @@ public class MafiaTableActivity extends AppCompatActivity {
     private View candidatePanel;
     private RecyclerView rvPlayers;
     private Button btnSkip, btnRoleInfo, btnNotes;
+    private Button btnLeave;
     private ImageButton btnGuilty, btnNotGuilty;
     private MafiaPlayerAdapter adapter;
 
@@ -86,6 +89,7 @@ public class MafiaTableActivity extends AppCompatActivity {
         btnRoleInfo.setOnClickListener(v -> RoleInfoHelper.show(this));
         btnNotes = findViewById(R.id.btnNotes);
         btnNotes.setOnClickListener(v -> showNotesDialog());
+        btnLeave = findViewById(R.id.btnLeave);
 
         roomCode = getIntent().getStringExtra("roomCode");
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
@@ -96,6 +100,15 @@ public class MafiaTableActivity extends AppCompatActivity {
         adapter = new MafiaPlayerAdapter(new ArrayList<>(), this::onPlayerClick);
         rvPlayers.setLayoutManager(new GridLayoutManager(this, GRID_COLUMNS));
         rvPlayers.setAdapter(adapter);
+
+        applyTopInsetPadding(btnLeave);
+        btnLeave.setOnClickListener(v -> confirmLeave());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                confirmLeave();
+            }
+        });
 
         btnSkip.setOnClickListener(v -> {
             if (lastState == null) return;
@@ -147,6 +160,20 @@ public class MafiaTableActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void confirmLeave() {
+        int messageRes = isHost
+                ? R.string.leave_confirm_message_host_game
+                : R.string.leave_confirm_message_player;
+        LeaveConfirmationHelper.show(this, messageRes, this::leaveGame);
+    }
+
+    private void leaveGame() {
+        if (isHost && hostServer != null) {
+            hostServer.broadcastGameOver();
+        }
+        finish();
     }
 
     private MafiaState snapshotFor(UUID viewerId) {
@@ -547,5 +574,6 @@ public class MafiaTableActivity extends AppCompatActivity {
         if (client != null) client.requestClose();
         ClientHolder.getInstance().clear();
         if (hostServer != null) hostServer.stopServer();
+        GameHolder.getInstance().clear();
     }
 }

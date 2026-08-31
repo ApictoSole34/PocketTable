@@ -13,10 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fizzycoyote.pockettable.BaseImmersiveActivity;
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.colorclash.CardColor;
 import com.fizzycoyote.pockettable.engine.colorclash.CardType;
@@ -28,6 +29,7 @@ import com.fizzycoyote.pockettable.network.colorclash.ColorClashClient;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashHostServer;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
+import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -36,12 +38,13 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-public class ColorClashTableActivity extends AppCompatActivity {
+public class ColorClashTableActivity extends BaseImmersiveActivity {
 
     private TextView tvTopCard, tvDrawPile, tvTurnInfo;
     private ImageView imgTopCard, imgDrawPile;
     private RecyclerView rvHand;
     private Button btnDraw, btnNextRound, btnLastCard;
+    private Button btnLeave;
     private LinearLayout llOpponents;
 
     private ColorClashHandAdapter handAdapter;
@@ -82,6 +85,7 @@ public class ColorClashTableActivity extends AppCompatActivity {
         btnDraw = findViewById(R.id.btnDraw);
         btnNextRound = findViewById(R.id.btnNextRound);
         btnLastCard = findViewById(R.id.btnLastCard);
+        btnLeave = findViewById(R.id.btnLeave);
         llOpponents = findViewById(R.id.llOpponents);
 
         imgDrawPile.setImageResource(R.drawable.card_back);
@@ -99,6 +103,15 @@ public class ColorClashTableActivity extends AppCompatActivity {
                 hostServer.broadcastState();
                 updateUI(ColorClashState.fromGame(game, playerId));
                 btnNextRound.setVisibility(View.GONE);
+            }
+        });
+
+        applyTopInsetPadding(btnLeave);
+        btnLeave.setOnClickListener(v -> confirmLeave());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                confirmLeave();
             }
         });
 
@@ -120,7 +133,13 @@ public class ColorClashTableActivity extends AppCompatActivity {
             ColorClashClient.MessageListener listener = new ColorClashClient.MessageListener() {
                 @Override public void onState(ColorClashState state) { runOnUiThread(() -> updateUI(state)); }
                 @Override public void onGameStarted() { runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.colorclash_game_started))); }
-                @Override public void onGameOver() { runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.colorclash_game_over))); }
+                @Override public void onGameOver() {
+                    runOnUiThread(() -> {
+                        Toast.makeText(ColorClashTableActivity.this,
+                                getString(R.string.host_ended_game), Toast.LENGTH_LONG).show();
+                        finish();
+                    });
+                }
                 @Override public void onReconnecting(int attempt) {
                     runOnUiThread(() -> tvTurnInfo.setText(getString(R.string.reconnecting_message, attempt)));
                 }
@@ -155,6 +174,20 @@ public class ColorClashTableActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void confirmLeave() {
+        int messageRes = isHost
+                ? R.string.leave_confirm_message_host_game
+                : R.string.leave_confirm_message_player;
+        LeaveConfirmationHelper.show(this, messageRes, this::leaveGame);
+    }
+
+    private void leaveGame() {
+        if (isHost && hostServer != null) {
+            hostServer.broadcastGameOver();
+        }
+        finish();
     }
 
     private void updateUI(ColorClashState state) {
@@ -399,5 +432,6 @@ public class ColorClashTableActivity extends AppCompatActivity {
         if (client != null) client.requestClose();
         ClientHolder.getInstance().clear();
         if (hostServer != null) hostServer.stopServer();
+        GameHolder.getInstance().clear();
     }
 }
