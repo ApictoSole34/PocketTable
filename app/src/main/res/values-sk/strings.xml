@@ -1,0 +1,370 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Prezývka</string>
+    <string name="create_room">🃏 Vytvoriť miestnosť</string>
+    <string name="join_room">🔗 Pripojiť sa pomocou kódu</string>
+    <string name="scan_qr">📷 Naskenovať QR</string>
+    <string name="enter_nickname">Zadajte svoju prezývku!</string>
+    <string name="join_host_title">Pripojiť sa k hostiteľovi</string>
+    <string name="host_game_title">Hostiť hru</string>
+    <string name="join_via_code">Pripojiť sa pomocou kódu</string>
+    <string name="game_poker">Poker</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">Možnosti</string>
+    <string name="options_title">Možnosti</string>
+    <string name="options_change_language">Zmeniť jazyk</string>
+    <string name="options_exit_app">Ukončiť aplikáciu</string>
+    <string name="options_exit_confirm_title">Ukončiť aplikáciu?</string>
+    <string name="options_exit_confirm_message">Naozaj chcete ukončiť PocketTable?</string>
+    <string name="options_exit_confirm_positive">Ukončiť</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Kód: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Hráči: </string>
+    <string name="lobby_you"> (VY)</string>
+    <string name="show_qr">Zobraziť QR</string>
+    <string name="start_game">SPUSTIŤ</string>
+    <string name="qr_title">QR kód miestnosti </string>
+    <string name="qr_error">Chyba pri generovaní QR</string>
+    <string name="ok">OK</string>
+    <string name="game_settings_title">Nastavenia</string>
+    <string name="lobby_toast_mafia_neutral">Nebolo vybraných dostatok neutrálnych rolí pre požadovaný počet neutrálnych hráčov.</string>
+    <string name="lobby_con_error">Chyba pripojenia</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Pripojiť sa do miestnosti</string>
+    <string name="join_hint">Zadajte kód (napr. ABC123)</string>
+    <string name="join_search">Hľadať</string>
+    <string name="join_cancel">Zrušiť</string>
+    <string name="code_required">Kód musí mať 6 znakov!</string>
+    <string name="searching_host">Hľadá sa hostiteľ s kódom: </string>
+    <string name="host_found">Hostiteľ nájdený!</string>
+    <string name="host_not_found">Hostiteľ s kódom nebol nájdený: </string>
+    <string name="scan_qr_from_host">Naskenujte QR kód z obrazovky hostiteľa</string>
+    <string name="invalid_qr">Neplatný QR kód</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Nastavenia hry</string>
+    <string name="small_blind_hint">Small Blind (predvolené 50)</string>
+    <string name="big_blind_hint">Big Blind (predvolené 100)</string>
+    <string name="starting_chips_hint">Počiatočné žetóny (predvolené 1000)</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">Sčítavanie +2 / +4</string>
+    <string name="colorclash_jump_in">Jump-in (zahrajte rovnakú kartu mimo svojho ťahu)</string>
+    <string name="colorclash_seven_swap">7 vymení karty s vybraným hráčom</string>
+    <string name="colorclash_zero_rotate">0 otočí všetky karty v rukách okolo stola</string>
+
+    <string name="color_red">ČERVENÁ</string>
+    <string name="color_yellow">ŽLTÁ</string>
+    <string name="color_green">ZELENÁ</string>
+    <string name="color_blue">MODRÁ</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d karta</item>
+        <item quantity="few">%d karty</item>
+        <item quantity="many">%d kariet</item>
+        <item quantity="other">%d kariet</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Poker</string>
+    <string name="pot_label">Bank: </string>
+    <string name="pot_label_placeholder">Bank: 0</string>
+    <string name="your_chips_label">Vaše žetóny: %d</string>
+    <string name="your_chips_placeholder">Vaše žetóny: 1000</string>
+    <string name="your_bet_label">Vaša stávka v tomto kole: %d</string>
+    <string name="your_bet_placeholder">Vaša stávka v tomto kole: 0</string>
+    <string name="your_turn">STE NA RADE!</string>
+    <string name="waiting_for_players">Čaká sa na hráčov...</string>
+    <string name="waiting_for_move">Čaká sa na ťah...</string>
+    <string name="new_hand">NOVÁ HRA</string>
+    <string name="game_started">Hra začala!</string>
+    <string name="game_over">Koniec hry!</string>
+    <string name="tie">Remíza</string>
+    <string name="you_are_host">Ste hostiteľ. Hra je pripravená!</string>
+    <string name="connected">Pripojené!</string>
+    <string name="connecting">Pripája sa k hostiteľovi...</string>
+    <string name="connection_error">Chyba pripojenia: %s</string>
+    <string name="no_connection">Žiadne pripojenie k hre!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Chyba: %1$s</string>
+    <string name="reconnecting_message">Pripojenie bolo stratené, pokus %1$d…</string>
+    <string name="reconnected_message">Znova pripojené!</string>
+    <string name="reconnect_failed_message">Nepodarilo sa znova pripojiť. Vráťte sa do lobby.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">Hra už je vo fáze showdown</string>
+    <string name="poker_error_not_your_turn">Nie je na rade tento hráč</string>
+    <string name="poker_error_already_folded">Hráč už zložil karty</string>
+    <string name="poker_error_already_all_in">Hráč je už all-in a nemôže vykonať ďalšiu akciu</string>
+    <string name="poker_error_cannot_check">Nie je možné checknúť, keď je aktuálna stávka vyššia</string>
+    <string name="poker_error_cannot_bet_existing">Nie je možné staviť, keď už bola vykonaná stávka</string>
+    <string name="poker_error_bet_must_be_positive">Výška stávky musí byť kladná</string>
+    <string name="poker_error_nothing_to_call">Nie je čo dorovnať</string>
+    <string name="poker_error_raise_too_low">Raise musí byť vyšší ako aktuálna stávka</string>
+    <string name="poker_error_already_bet_enough">Hráč už vsadil dostatočnú sumu</string>
+    <string name="poker_error_no_eligible_players">Žiadni aktívni hráči, ktorí môžu pokračovať</string>
+    <string name="poker_error_player_not_found">Hráč nebol nájdený</string>
+    <string name="poker_error_cannot_deal_river">Nie je možné rozdať river počas %s</string>
+    <string name="poker_error_cannot_deal_turn">Nie je možné rozdať turn počas %s</string>
+    <string name="poker_error_amount_must_be_positive">Suma musí byť kladná</string>
+    <string name="poker_error_not_enough_chips">Nedostatok žetónov</string>
+    <string name="poker_error_amount_cannot_be_negative">Suma nemôže byť záporná</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">Hra už skončila</string>
+    <string name="colorclash_error_jumpin_disabled">Jump-in je vypnutý</string>
+    <string name="colorclash_error_jumpin_draw_active">Nie je možné použiť jump-in, keď je aktívna hromada kariet na doberanie</string>
+    <string name="colorclash_error_use_play">Ste na rade – použite PLAY</string>
+    <string name="colorclash_error_invalid_card_index">Neplatný index karty</string>
+    <string name="colorclash_error_jumpin_requires_match">Jump-in vyžaduje rovnakú kartu ako karta na vrchu kôpky</string>
+    <string name="colorclash_error_last_card_single_only">„Posledná karta“ môžete zahlásiť iba vtedy, keď máte v ruke presne jednu kartu</string>
+    <string name="colorclash_error_cannot_catch_self">Nemôžete chytiť sami seba</string>
+    <string name="colorclash_error_nothing_to_catch">%s momentálne nemá čo chytiť</string>
+    <string name="colorclash_error_not_your_turn">Nie je na rade tento hráč</string>
+    <string name="colorclash_error_player_eliminated">Hráč bol vyradený</string>
+    <string name="colorclash_error_card_cannot_be_played">Túto kartu nie je možné zahrať</string>
+    <string name="colorclash_error_choose_wild_color">Pre divokú kartu musíte vybrať farbu</string>
+    <string name="colorclash_error_choose_swap_target">Vyberte hráča, s ktorým chcete vymeniť karty</string>
+    <string name="colorclash_error_unknown_action">Neznáma akcia: %s</string>
+    <string name="colorclash_error_player_not_found">Hráč nebol nájdený: %s</string>
+    <string name="colorclash_error_card_not_held">Hráč nemá túto kartu</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Neznámy</string>
+    <string name="colorclash_eliminated_suffix"> (vyradený)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">CALL</string>
+    <string name="btn_fold">FOLD</string>
+    <string name="btn_bet">STAVIŤ</string>
+    <string name="btn_raise">ZVÝŠIŤ</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Stávka</string>
+    <string name="raise_title">Zvýšenie</string>
+    <string name="enter_amount_manually">Zadať sumu ručne</string>
+    <string name="half_pot">1/2 BANKU</string>
+    <string name="pot">BANK</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">Môžete ísť iba ALL-IN: %d</string>
+    <string name="confirm">Potvrdiť</string>
+    <string name="cancel">Zrušiť</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Hráč</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">FOLD</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(Vy)</string>
+    <string name="host_suffix">(Hostiteľ)</string>
+    <string name="winner">🏆 %s VYHRÁVA! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">Vysoká karta</string>
+    <string name="hand_pair">Pár</string>
+    <string name="hand_two_pair">Dva páry</string>
+    <string name="hand_three_of_a_kind">Trojica</string>
+    <string name="hand_straight">Postupka</string>
+    <string name="hand_flush">Farba</string>
+    <string name="hand_full_house">Full house</string>
+    <string name="hand_four_of_a_kind">Štvorica</string>
+    <string name="hand_straight_flush">Straight flush</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Víťaz (ostatní zložili karty)</string>
+    <string name="no_data">žiadne údaje</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Niektoré zariadenia agresívne obmedzujú aplikácie bežiace na pozadí</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">Ste hostiteľ. Hra je pripravená!</string>
+    <string name="colorclash_top_card_label">Vrchná: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Doberať: %1$d</string>
+    <string name="colorclash_waiting_for">Čaká sa na %1$s</string>
+    <string name="colorclash_draw_stack_info"> (doberať %1$d kariet)</string>
+    <string name="colorclash_winner_message">🏆 %1$s VYHRÁVA! 🏆</string>
+    <string name="colorclash_catch_button">Chytiť!</string>
+    <string name="colorclash_choose_color">Vyberte farbu</string>
+    <string name="colorclash_swap_cards_with">Vymeniť karty s...</string>
+    <string name="colorclash_not_your_turn">Nie ste na rade!</string>
+    <string name="colorclash_cannot_play_card">Túto kartu nemôžete zahrať</string>
+    <string name="colorclash_card_not_in_hand">Karta nie je v ruke</string>
+    <string name="colorclash_card_no_longer_in_hand">Karta už nie je v ruke</string>
+    <string name="colorclash_error">Chyba: %1$s</string>
+    <string name="colorclash_draw">DOBRAŤ</string>
+    <string name="colorclash_last_card">POSLEDNÁ KARTA!</string>
+    <string name="colorclash_next_round">ĎALŠIE KOLO</string>
+    <string name="colorclash_your_hand">Vaše karty</string>
+    <string name="colorclash_top_card_default">Vrchná: </string>
+    <string name="colorclash_draw_pile_default">Doberať: 0</string>
+    <string name="colorclash_waiting_players">Čaká sa na hráčov...</string>
+    <string name="colorclash_game_started">Hra začala!</string>
+    <string name="colorclash_game_over">Koniec hry!</string>
+    <string name="colorclash_connecting">Pripájanie...</string>
+    <string name="colorclash_connection_error">Chyba pripojenia</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Nastavenia Mafie</string>
+    <string name="mafia_role_count">Roly (0 = vypnuté)</string>
+    <string name="mafia_timer">Použiť časovače (inak iba manuálne potvrdenie pripravenosti)</string>
+    <string name="mafia_night_length">Dĺžka noci (s)</string>
+    <string name="mafia_day_length">Dĺžka dňa (s)</string>
+    <string name="mafia_trial_length">Dĺžka súdu (s)</string>
+    <string name="mafia_neutral_size">Počet neutrálnych hráčov</string>
+    <string name="mafia_neutral">Neutrálni hráči</string>
+    <string name="mafia_town_role">Rola mesta (max. 1 z každej)</string>
+    <string name="mafia_mafia">Hráči Mafie</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">Civilista</string>
+    <string name="mafia_role_mafia">Mafia</string>
+    <string name="mafia_role_detective">Detektív</string>
+    <string name="mafia_role_doctor">Lekár</string>
+    <string name="mafia_role_vigilante">Vigilante</string>
+    <string name="mafia_role_mayor">Starosta</string>
+    <string name="mafia_role_jester">Šašo</string>
+    <string name="mafia_role_serial_killer">Sériový vrah</string>
+    <string name="mafia_skip">Preskočiť</string>
+    <string name="mafia_vote_button_label">Hlasovať</string>
+    <string name="role_icon_desc">popis</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Sprievodca rolami</string>
+    <string name="mafia_role_dialog_close">Zavrieť</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">V noci Mafia spoločne vyberie obeť, ktorú zabije. Poznajú ostatných členov Mafie.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">V noci vyšetruje jednu osobu a zistí, či patrí k Mafii.</string>
+    <string name="mafia_role_dialog_doctor">V noci chráni jednu osobu pred zabitím.</string>
+    <string name="mafia_role_dialog_vigilante">Má iba jednu guľku na celú hru – môže v noci niekoho zastreliť.</string>
+    <string name="mafia_role_dialog_mayor">Počas dňa môže odhaliť svoju identitu – jeho hlas potom má pri nomináciách a súdoch dvojnásobnú váhu.</string>
+    <string name="mafia_role_dialog_civilian">Nemá žiadne špeciálne schopnosti. Počas dňa hlasuje ako ktorýkoľvek iný člen mesta.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Nemá nočnú akciu. Okamžite vyhrá, ak sa mesto počas dňa rozhodne ho popraviť.</string>
+    <string name="mafia_role_dialog_serial_killer">V noci zabíja sám, nezávisle od Mafie. Vyhrá, keď je jediným žijúcim hráčom.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Kandidát</string>
+    <string name="mafia_phase">Fáza: %s</string>
+    <string name="mafia_your_role">Vaša rola: %s</string>
+    <string name="mafia_dead">MŔTVY</string>
+    <string name="mafia_voted_badge">HLASOVAL</string>
+    <string name="mafia_phase_label">Fáza: %s</string>
+    <string name="mafia_your_role_label">Vaša rola: %s</string>
+    <string name="mafia_game_started">Hra začala!</string>
+    <string name="mafia_host_ended_game">Hostiteľ ukončil hru</string>
+    <string name="mafia_voting_unavailable">Hlasovanie momentálne nie je dostupné</string>
+    <string name="mafia_night_result">Výsledok noci: %s</string>
+    <string name="mafia_someone_died">%s zomrel</string>
+    <string name="mafia_no_one_died">Nikto nezomrel</string>
+    <string name="mafia_nominated">Nominovaný: %s</string>
+    <string name="mafia_eliminated_by_day">Vyradený: %s</string>
+    <string name="mafia_unknown_player">Neznámy hráč</string>
+    <string name="mafia_is_mafia">je Mafia!</string>
+    <string name="mafia_not_mafia">nie je Mafia</string>
+    <string name="mafia_investigation_results">Výsledky vyšetrovania</string>
+    <string name="mafia_ok">OK</string>
+    <string name="mafia_night_death_title">☠️ %s zomrel počas noci</string>
+    <string name="mafia_role_label">Rola: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s bol vyradený mestom</string>
+    <string name="mafia_notes_title">Poznámky pre %s</string>
+    <string name="mafia_no_notes">(žiadne poznámky)</string>
+    <string name="mafia_kill_confirm">Zabiť %s?</string>
+    <string name="mafia_save_confirm">Zachrániť %s?</string>
+    <string name="mafia_investigate_confirm">Vyšetriť %s?</string>
+    <string name="mafia_shoot_confirm">Zastreliť %s?</string>
+    <string name="mafia_no_night_action">Nemáte žiadnu nočnú akciu</string>
+    <string name="mafia_notes_hint">Napíšte sem svoje poznámky...</string>
+    <string name="mafia_my_notes">Moje poznámky</string>
+    <string name="mafia_save">Uložiť</string>
+    <string name="mafia_cancel">Zrušiť</string>
+    <string name="mafia_confirm">Potvrdiť</string>
+    <string name="mafia_yes">Áno</string>
+    <string name="mafia_no">Nie</string>
+    <string name="mafia_town_wins">🏛️ Mesto vyhráva!</string>
+    <string name="mafia_mafia_wins">🔪 Mafia vyhráva!</string>
+    <string name="mafia_jester_wins">🤡 Šašo vyhráva!</string>
+    <string name="mafia_serial_killer_wins">🔪 Sériový vrah vyhráva!</string>
+    <string name="mafia_waiting_for_host">\n\nČaká sa, kým hostiteľ spustí ďalšie kolo...</string>
+    <string name="mafia_new_round">Nové kolo</string>
+    <string name="mafia_end_game">Ukončiť hru</string>
+    <string name="mafia_phase_label_short">Fáza:</string>
+    <string name="mafia_role_info_button">Informácie o role</string>
+    <string name="mafia_notes_button">Poznámky</string>
+    <string name="mafia_your_role_label_short">Vaša rola:</string>
+    <string name="mafia_candidate_label">Kandidát</string>
+    <string name="mafia_guilty_content_desc">Vinný</string>
+    <string name="mafia_not_guilty_content_desc">Nevinný</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">Hráč nebol nájdený: %s</string>
+    <string name="mafia_target_not_alive">Cieľ nie je nažive</string>
+    <string name="mafia_cannot_target_self">Nemôžete zvoliť sami seba ako cieľ</string>
+    <string name="mafia_min_players">Mafia potrebuje aspoň 4 hráčov</string>
+    <string name="mafia_need_mafia_role">Musí byť nastavená aspoň 1 rola Mafie</string>
+    <string name="mafia_dead_cannot_act">Mŕtvi hráči nemôžu konať</string>
+    <string name="mafia_notes_too_long">Poznámky sú príliš dlhé (max. 1000 znakov)</string>
+    <string name="mafia_no_behavior">Pre rolu neexistuje správanie: %s</string>
+    <string name="mafia_unknown_action">Neznáma akcia: %s</string>
+    <string name="mafia_game_inactive">Hra momentálne nie je aktívna</string>
+    <string name="mafia_game_over">Hra sa skončila</string>
+    <string name="mafia_error_unknown_detective_action">Neznáma akcia detektíva</string>
+    <string name="mafia_error_unknown_doctor_action">Neznáma akcia lekára</string>
+    <string name="mafia_error_unknown_mafia_action">Neznáma akcia Mafie</string>
+    <string name="mafia_error_unknown_mayor_day_action">Neznáma denná akcia starostu</string>
+    <string name="mafia_error_unknown_sk_action">Neznáma akcia sériového vraha</string>
+    <string name="mafia_error_unknown_vigilante_action">Neznáma akcia vigilante</string>
+    <string name="mafia_error_no_charges">Svoju jedinú guľku ste už použili</string>
+    <string name="mafia_error_no_special_day_action">Táto rola nemá špeciálnu dennú akciu</string>
+    <string name="mafia_status_dead">MŔTVY</string>
+    <string name="mafia_config_count_negative">Počet nemôže byť záporný</string>
+    <string name="mafia_config_role_at_most_1">%s môže byť najviac 1</string>
+    <string name="mafia_config_cannot_set_neutral_directly">Počet neutrálnej role nie je možné nastaviť priamo. Použite setNeutralCount a setAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">Počet neutrálnych hráčov (%1$d) prekračuje počet povolených neutrálnych rolí (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">Povolené sú iba neutrálne role</string>
+    <string name="mafia_config_neutral_count_negative">Počet neutrálnych hráčov nemôže byť záporný</string>
+    <string name="mafia_config_roles_exceed_players">Je nastavených %1$d špeciálnych rolí, ale v hre sú iba %2$d hráči. Znížte počet rolí alebo pridajte ďalších hráčov.</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Opustiť</string>
+    <string name="leave_button_desc">Opustiť</string>
+    <string name="leave_confirm_title">Opustiť?</string>
+    <string name="leave_confirm_message_host_lobby">Ste hostiteľ. Ak teraz odídete, lobby sa zatvorí pre všetkých.</string>
+    <string name="leave_confirm_message_host_game">Ste hostiteľ. Ak teraz odídete, hra sa ukončí pre všetkých.</string>
+    <string name="leave_confirm_message_player">Naozaj chcete odísť? Budete odpojení od hry.</string>
+    <string name="leave_confirm_positive">Opustiť</string>
+    <string name="leave_confirm_negative">Zrušiť</string>
+    <string name="host_ended_game">Hostiteľ ukončil hru.</string>
+</resources>

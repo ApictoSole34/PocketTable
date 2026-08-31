@@ -1,0 +1,368 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">ニックネーム</string>
+    <string name="create_room">🃏 ルームを作成</string>
+    <string name="join_room">🔗 コードで接続</string>
+    <string name="scan_qr">📷 QRをスキャン</string>
+    <string name="enter_nickname">ニックネームを入力してください！</string>
+    <string name="join_host_title">ホストに参加</string>
+    <string name="host_game_title">ゲームをホスト</string>
+    <string name="join_via_code">コードで参加</string>
+    <string name="game_poker">ポーカー</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">オプション</string>
+    <string name="options_title">オプション</string>
+    <string name="options_change_language">言語を変更</string>
+    <string name="options_exit_app">アプリを終了</string>
+    <string name="options_exit_confirm_title">アプリを終了しますか？</string>
+    <string name="options_exit_confirm_message">PocketTableを終了してもよろしいですか？</string>
+    <string name="options_exit_confirm_positive">終了</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">コード: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">プレイヤー: </string>
+    <string name="lobby_you"> (あなた)</string>
+    <string name="show_qr">QRを表示</string>
+    <string name="start_game">スタート</string>
+    <string name="qr_title">ルームのQRコード </string>
+    <string name="qr_error">QRコードの生成エラー</string>
+    <string name="ok">OK</string>
+    <string name="game_settings_title">設定</string>
+    <string name="lobby_toast_mafia_neutral">必要な中立役職数に対して、選択された中立役職が不足しています。</string>
+    <string name="lobby_con_error">接続エラー</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">ルームに参加</string>
+    <string name="join_hint">コードを入力（例：ABC123）</string>
+    <string name="join_search">検索</string>
+    <string name="join_cancel">キャンセル</string>
+    <string name="code_required">コードは6文字である必要があります！</string>
+    <string name="searching_host">コードでホストを検索中: </string>
+    <string name="host_found">ホストが見つかりました！</string>
+    <string name="host_not_found">このコードのホストが見つかりません: </string>
+    <string name="scan_qr_from_host">ホスト画面のQRをスキャン</string>
+    <string name="invalid_qr">無効なQRコード</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">ゲーム設定</string>
+    <string name="small_blind_hint">スモールブラインド（デフォルト50）</string>
+    <string name="big_blind_hint">ビッグブラインド（デフォルト100）</string>
+    <string name="starting_chips_hint">開始チップ（デフォルト1000）</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">+2 / +4 の重ね出し</string>
+    <string name="colorclash_jump_in">ジャンプイン（同じカードを手番外で出す）</string>
+    <string name="colorclash_seven_swap">7で選択したプレイヤーと手札を交換</string>
+    <string name="colorclash_zero_rotate">0ですべてのプレイヤーの手札を時計回りに回す</string>
+
+    <string name="color_red">赤</string>
+    <string name="color_yellow">黄</string>
+    <string name="color_green">緑</string>
+    <string name="color_blue">青</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d枚</item>
+        <item quantity="other">%d枚</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ ポーカー</string>
+    <string name="pot_label">ポット: </string>
+    <string name="pot_label_placeholder">ポット: 0</string>
+    <string name="your_chips_label">あなたのチップ: %d</string>
+    <string name="your_chips_placeholder">あなたのチップ: 1000</string>
+    <string name="your_bet_label">このラウンドのあなたのベット: %d</string>
+    <string name="your_bet_placeholder">このラウンドのあなたのベット: 0</string>
+    <string name="your_turn">あなたの番です！</string>
+    <string name="waiting_for_players">プレイヤーを待っています...</string>
+    <string name="waiting_for_move">操作を待っています...</string>
+    <string name="new_hand">新しいハンド</string>
+    <string name="game_started">ゲーム開始！</string>
+    <string name="game_over">ゲーム終了！</string>
+    <string name="tie">引き分け</string>
+    <string name="you_are_host">あなたがホストです。ゲームの準備ができました！</string>
+    <string name="connected">接続しました！</string>
+    <string name="connecting">ホストに接続中...</string>
+    <string name="connection_error">接続エラー: %s</string>
+    <string name="no_connection">ゲームに接続できません！</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">エラー: %1$s</string>
+    <string name="reconnecting_message">接続が切断されました。再接続を試行中 %1$d…</string>
+    <string name="reconnected_message">再接続しました！</string>
+    <string name="reconnect_failed_message">再接続できませんでした。ロビーに戻ってください。</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">ゲームはすでにショーダウン中です</string>
+    <string name="poker_error_not_your_turn">このプレイヤーの番ではありません</string>
+    <string name="poker_error_already_folded">このプレイヤーはすでにフォールドしています</string>
+    <string name="poker_error_already_all_in">このプレイヤーはすでにオールインしており、行動できません</string>
+    <string name="poker_error_cannot_check">現在のベット額が高いため、チェックできません</string>
+    <string name="poker_error_cannot_bet_existing">すでにベットがあるため、ベットできません</string>
+    <string name="poker_error_bet_must_be_positive">ベット額は正の値である必要があります</string>
+    <string name="poker_error_nothing_to_call">コールする必要はありません</string>
+    <string name="poker_error_raise_too_low">レイズ額は現在のベット額より高くする必要があります</string>
+    <string name="poker_error_already_bet_enough">このプレイヤーはすでに十分な額をベットしています</string>
+    <string name="poker_error_no_eligible_players">アクティブなプレイヤーがいません</string>
+    <string name="poker_error_player_not_found">プレイヤーが見つかりません</string>
+    <string name="poker_error_cannot_deal_river">%s中はリバーを配ることができません</string>
+    <string name="poker_error_cannot_deal_turn">%s中はターンを配ることができません</string>
+    <string name="poker_error_amount_must_be_positive">金額は正の値である必要があります</string>
+    <string name="poker_error_not_enough_chips">チップが不足しています</string>
+    <string name="poker_error_amount_cannot_be_negative">金額を負の値にすることはできません</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">ゲームはすでに終了しています</string>
+    <string name="colorclash_error_jumpin_disabled">ジャンプインは無効になっています</string>
+    <string name="colorclash_error_jumpin_draw_active">ドロースタックが有効なときはジャンプインできません</string>
+    <string name="colorclash_error_use_play">あなたの番です – PLAYを使用してください</string>
+    <string name="colorclash_error_invalid_card_index">無効なカードインデックスです</string>
+    <string name="colorclash_error_jumpin_requires_match">ジャンプインには山札の一番上と同じカードが必要です</string>
+    <string name="colorclash_error_last_card_single_only">「ラストカード」は手札が1枚のときだけ宣言できます</string>
+    <string name="colorclash_error_cannot_catch_self">自分自身をキャッチすることはできません</string>
+    <string name="colorclash_error_nothing_to_catch">%sには現在キャッチできるものがありません</string>
+    <string name="colorclash_error_not_your_turn">このプレイヤーの番ではありません</string>
+    <string name="colorclash_error_player_eliminated">プレイヤーは脱落しています</string>
+    <string name="colorclash_error_card_cannot_be_played">このカードは出せません</string>
+    <string name="colorclash_error_choose_wild_color">ワイルドカードの色を選択してください</string>
+    <string name="colorclash_error_choose_swap_target">手札を交換するプレイヤーを選択してください</string>
+    <string name="colorclash_error_unknown_action">不明なアクション: %s</string>
+    <string name="colorclash_error_player_not_found">プレイヤーが見つかりません: %s</string>
+    <string name="colorclash_error_card_not_held">プレイヤーはこのカードを持っていません</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">不明</string>
+    <string name="colorclash_eliminated_suffix"> (脱落)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">CALL</string>
+    <string name="btn_fold">FOLD</string>
+    <string name="btn_bet">BET</string>
+    <string name="btn_raise">RAISE</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">ベット</string>
+    <string name="raise_title">レイズ</string>
+    <string name="enter_amount_manually">金額を手動で入力</string>
+    <string name="half_pot">ポットの1/2</string>
+    <string name="pot">ポット</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">ALL-INのみ可能です: %d</string>
+    <string name="confirm">確認</string>
+    <string name="cancel">キャンセル</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">プレイヤー</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">FOLD</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(あなた)</string>
+    <string name="host_suffix">(ホスト)</string>
+    <string name="winner">🏆 %s の勝利！ 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">ハイカード</string>
+    <string name="hand_pair">ワンペア</string>
+    <string name="hand_two_pair">ツーペア</string>
+    <string name="hand_three_of_a_kind">スリーカード</string>
+    <string name="hand_straight">ストレート</string>
+    <string name="hand_flush">フラッシュ</string>
+    <string name="hand_full_house">フルハウス</string>
+    <string name="hand_four_of_a_kind">フォーカード</string>
+    <string name="hand_straight_flush">ストレートフラッシュ</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">勝者（他のプレイヤーはフォールド）</string>
+    <string name="no_data">データなし</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">一部の端末ではバックグラウンドアプリが厳しく制限されます</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">あなたがホストです。ゲームの準備ができました！</string>
+    <string name="colorclash_top_card_label">トップ: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">ドロー: %1$d</string>
+    <string name="colorclash_waiting_for">%1$sを待っています</string>
+    <string name="colorclash_draw_stack_info">（%1$d枚ドロー）</string>
+    <string name="colorclash_winner_message">🏆 %1$s の勝利！ 🏆</string>
+    <string name="colorclash_catch_button">キャッチ！</string>
+    <string name="colorclash_choose_color">色を選択</string>
+    <string name="colorclash_swap_cards_with">カードを交換する相手...</string>
+    <string name="colorclash_not_your_turn">あなたの番ではありません！</string>
+    <string name="colorclash_cannot_play_card">このカードは出せません</string>
+    <string name="colorclash_card_not_in_hand">手札にカードがありません</string>
+    <string name="colorclash_card_no_longer_in_hand">そのカードはもう手札にありません</string>
+    <string name="colorclash_error">エラー: %1$s</string>
+    <string name="colorclash_draw">ドロー</string>
+    <string name="colorclash_last_card">ラストカード！</string>
+    <string name="colorclash_next_round">次のラウンド</string>
+    <string name="colorclash_your_hand">あなたの手札</string>
+    <string name="colorclash_top_card_default">トップ: </string>
+    <string name="colorclash_draw_pile_default">ドロー: 0</string>
+    <string name="colorclash_waiting_players">プレイヤーを待っています...</string>
+    <string name="colorclash_game_started">ゲーム開始！</string>
+    <string name="colorclash_game_over">ゲーム終了！</string>
+    <string name="colorclash_connecting">接続中...</string>
+    <string name="colorclash_connection_error">接続エラー</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Mafiaの設定</string>
+    <string name="mafia_role_count">役職（0 = オフ）</string>
+    <string name="mafia_timer">タイマーを使用（使用しない場合は手動の準備完了のみ）</string>
+    <string name="mafia_night_length">夜の長さ（秒）</string>
+    <string name="mafia_day_length">昼の長さ（秒）</string>
+    <string name="mafia_trial_length">裁判の長さ（秒）</string>
+    <string name="mafia_neutral_size">中立プレイヤーの人数</string>
+    <string name="mafia_neutral">中立プレイヤー</string>
+    <string name="mafia_town_role">市民側の役職（各最大1人）</string>
+    <string name="mafia_mafia">Mafiaプレイヤー</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">市民</string>
+    <string name="mafia_role_mafia">Mafia</string>
+    <string name="mafia_role_detective">探偵</string>
+    <string name="mafia_role_doctor">医師</string>
+    <string name="mafia_role_vigilante">自警団</string>
+    <string name="mafia_role_mayor">市長</string>
+    <string name="mafia_role_jester">道化師</string>
+    <string name="mafia_role_serial_killer">連続殺人犯</string>
+    <string name="mafia_skip">スキップ</string>
+    <string name="mafia_vote_button_label">投票</string>
+    <string name="role_icon_desc">説明</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">役職ガイド</string>
+    <string name="mafia_role_dialog_close">閉じる</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">夜になると、Mafiaは協力して殺す相手を1人選びます。他のMafiaメンバーを知っています。</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">夜になると、1人を調査し、その人物がMafiaかどうかを知ることができます。</string>
+    <string name="mafia_role_dialog_doctor">夜になると、1人を殺害から守ります。</string>
+    <string name="mafia_role_dialog_vigilante">ゲーム全体で弾丸を1発だけ持ち、夜に誰かを撃つことができます。</string>
+    <string name="mafia_role_dialog_mayor">昼の間に自分の正体を明かすことができ、その後、指名と裁判での投票が2票分になります。</string>
+    <string name="mafia_role_dialog_civilian">特殊能力はありません。他の市民と同様に昼に投票します。</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">夜の行動はありません。昼に市民から処刑されると即座に勝利します。</string>
+    <string name="mafia_role_dialog_serial_killer">Mafiaとは無関係に、夜に1人で殺害します。自分以外のプレイヤーが全員死亡すると勝利します。</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">候補者</string>
+    <string name="mafia_phase">フェーズ: %s</string>
+    <string name="mafia_your_role">あなたの役職: %s</string>
+    <string name="mafia_dead">死亡</string>
+    <string name="mafia_voted_badge">投票済み</string>
+    <string name="mafia_phase_label">フェーズ: %s</string>
+    <string name="mafia_your_role_label">あなたの役職: %s</string>
+    <string name="mafia_game_started">ゲーム開始！</string>
+    <string name="mafia_host_ended_game">ホストがゲームを終了しました</string>
+    <string name="mafia_voting_unavailable">現在、投票できません</string>
+    <string name="mafia_night_result">夜の結果: %s</string>
+    <string name="mafia_someone_died">%sが死亡しました</string>
+    <string name="mafia_no_one_died">誰も死亡しませんでした</string>
+    <string name="mafia_nominated">指名: %s</string>
+    <string name="mafia_eliminated_by_day">処刑: %s</string>
+    <string name="mafia_unknown_player">不明なプレイヤー</string>
+    <string name="mafia_is_mafia">はMafiaです！</string>
+    <string name="mafia_not_mafia">はMafiaではありません</string>
+    <string name="mafia_investigation_results">調査結果</string>
+    <string name="mafia_ok">OK</string>
+    <string name="mafia_night_death_title">☠️ %sは夜に死亡しました</string>
+    <string name="mafia_role_label">役職: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %sは市民によって処刑されました</string>
+    <string name="mafia_notes_title">%sのメモ</string>
+    <string name="mafia_no_notes">（メモなし）</string>
+    <string name="mafia_kill_confirm">%sを殺しますか？</string>
+    <string name="mafia_save_confirm">%sを救いますか？</string>
+    <string name="mafia_investigate_confirm">%sを調査しますか？</string>
+    <string name="mafia_shoot_confirm">%sを撃ちますか？</string>
+    <string name="mafia_no_night_action">夜の行動はありません</string>
+    <string name="mafia_notes_hint">ここにメモを書いてください...</string>
+    <string name="mafia_my_notes">自分のメモ</string>
+    <string name="mafia_save">保存</string>
+    <string name="mafia_cancel">キャンセル</string>
+    <string name="mafia_confirm">確認</string>
+    <string name="mafia_yes">はい</string>
+    <string name="mafia_no">いいえ</string>
+    <string name="mafia_town_wins">🏛️ 市民の勝利！</string>
+    <string name="mafia_mafia_wins">🔪 Mafiaの勝利！</string>
+    <string name="mafia_jester_wins">🤡 道化師の勝利！</string>
+    <string name="mafia_serial_killer_wins">🔪 連続殺人犯の勝利！</string>
+    <string name="mafia_waiting_for_host">\n\nホストが次のラウンドを開始するのを待っています...</string>
+    <string name="mafia_new_round">新しいラウンド</string>
+    <string name="mafia_end_game">ゲームを終了</string>
+    <string name="mafia_phase_label_short">フェーズ:</string>
+    <string name="mafia_role_info_button">役職情報</string>
+    <string name="mafia_notes_button">メモ</string>
+    <string name="mafia_your_role_label_short">あなたの役職:</string>
+    <string name="mafia_candidate_label">候補者</string>
+    <string name="mafia_guilty_content_desc">有罪</string>
+    <string name="mafia_not_guilty_content_desc">無罪</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">プレイヤーが見つかりません: %s</string>
+    <string name="mafia_target_not_alive">対象は生存していません</string>
+    <string name="mafia_cannot_target_self">自分自身を対象にすることはできません</string>
+    <string name="mafia_min_players">Mafiaには最低4人のプレイヤーが必要です</string>
+    <string name="mafia_need_mafia_role">少なくとも1つのMafia役職を設定する必要があります</string>
+    <string name="mafia_dead_cannot_act">死亡したプレイヤーは行動できません</string>
+    <string name="mafia_notes_too_long">メモが長すぎます（最大1000文字）</string>
+    <string name="mafia_no_behavior">この役職の行動がありません: %s</string>
+    <string name="mafia_unknown_action">不明なアクション: %s</string>
+    <string name="mafia_game_inactive">ゲームは現在アクティブではありません</string>
+    <string name="mafia_game_over">ゲームは終了しています</string>
+    <string name="mafia_error_unknown_detective_action">不明な探偵アクション</string>
+    <string name="mafia_error_unknown_doctor_action">不明な医師アクション</string>
+    <string name="mafia_error_unknown_mafia_action">不明なMafiaアクション</string>
+    <string name="mafia_error_unknown_mayor_day_action">不明な市長の昼アクション</string>
+    <string name="mafia_error_unknown_sk_action">不明な連続殺人犯アクション</string>
+    <string name="mafia_error_unknown_vigilante_action">不明な自警団アクション</string>
+    <string name="mafia_error_no_charges">すでに唯一の弾丸を使用しました</string>
+    <string name="mafia_error_no_special_day_action">この役職には特殊な昼のアクションがありません</string>
+    <string name="mafia_status_dead">死亡</string>
+    <string name="mafia_config_count_negative">人数は負の値にできません</string>
+    <string name="mafia_config_role_at_most_1">%sは最大1人までです</string>
+    <string name="mafia_config_cannot_set_neutral_directly">中立役職の人数を直接設定することはできません。setNeutralCountとsetAllowedNeutralRolesを使用してください</string>
+    <string name="mafia_config_neutral_count_exceeds">中立人数（%1$d）が許可されている中立役職数（%2$d）を超えています</string>
+    <string name="mafia_config_only_neutral_allowed">中立役職のみ使用できます</string>
+    <string name="mafia_config_neutral_count_negative">中立人数は負の値にできません</string>
+    <string name="mafia_config_roles_exceed_players">%1$d個の特殊役職が設定されていますが、ゲームには%2$d人のプレイヤーしかいません。役職数を減らすか、プレイヤーを追加してください。</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">退出</string>
+    <string name="leave_button_desc">退出</string>
+    <string name="leave_confirm_title">退出しますか？</string>
+    <string name="leave_confirm_message_host_lobby">あなたはホストです。今退出すると、全員のロビーが閉じられます。</string>
+    <string name="leave_confirm_message_host_game">あなたはホストです。今退出すると、全員のゲームが終了します。</string>
+    <string name="leave_confirm_message_player">本当に退出しますか？ゲームから切断されます。</string>
+    <string name="leave_confirm_positive">退出</string>
+    <string name="leave_confirm_negative">キャンセル</string>
+    <string name="host_ended_game">ホストがゲームを終了しました。</string>
+</resources>

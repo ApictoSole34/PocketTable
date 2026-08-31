@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">الاسم المستعار</string>
+    <string name="create_room">🃏 إنشاء غرفة</string>
+    <string name="join_room">🔗 الدخول باستخدام الكود</string>
+    <string name="scan_qr">📷 مسح QR</string>
+    <string name="enter_nickname">اكتب اسمك المستعار!</string>
+    <string name="join_host_title">الانضمام إلى المضيف</string>
+    <string name="host_game_title">إنشاء لعبة</string>
+    <string name="join_via_code">الانضمام باستخدام الكود</string>
+    <string name="game_poker">بوكر</string>
+    <string name="game_colorclash">Color Clash</string>
+
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">الإعدادات</string>
+    <string name="options_title">الإعدادات</string>
+    <string name="options_change_language">تغيير اللغة</string>
+    <string name="options_exit_app">الخروج من التطبيق</string>
+    <string name="options_exit_confirm_title">الخروج من التطبيق؟</string>
+    <string name="options_exit_confirm_message">هل أنت متأكد إنك عايز تخرج من PocketTable؟</string>
+    <string name="options_exit_confirm_positive">خروج</string>
+
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">الكود: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">اللاعبين: </string>
+    <string name="lobby_you"> (أنت)</string>
+    <string name="show_qr">عرض QR</string>
+    <string name="start_game">ابدأ</string>
+    <string name="qr_title">كود QR للغرفة </string>
+    <string name="qr_error">خطأ في إنشاء كود QR</string>
+    <string name="ok">حسنًا</string>
+    <string name="game_settings_title">الإعدادات</string>
+    <string name="lobby_toast_mafia_neutral">لم يتم اختيار عدد كافٍ من الأدوار المحايدة للعدد المطلوب.</string>
+    <string name="lobby_con_error">خطأ في الاتصال</string>
+
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">الانضمام إلى الغرفة</string>
+    <string name="join_hint">اكتب الكود (مثال: ABC123)</string>
+    <string name="join_search">بحث</string>
+    <string name="join_cancel">إلغاء</string>
+    <string name="code_required">الكود لازم يكون 6 أحرف!</string>
+    <string name="searching_host">جاري البحث عن المضيف بالكود: </string>
+    <string name="host_found">تم العثور على المضيف!</string>
+    <string name="host_not_found">لم يتم العثور على مضيف بالكود: </string>
+    <string name="scan_qr_from_host">امسح كود QR من شاشة المضيف</string>
+    <string name="invalid_qr">كود QR غير صالح</string>
+
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">إعدادات اللعبة</string>
+    <string name="small_blind_hint">الرهان الصغير (الافتراضي 50)</string>
+    <string name="big_blind_hint">الرهان الكبير (الافتراضي 100)</string>
+    <string name="starting_chips_hint">الرقائق الابتدائية (الافتراضي 1000)</string>
+
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">تجميع +2 / +4</string>
+    <string name="colorclash_jump_in">دخول سريع (لعب كارت مطابق خارج دورك)</string>
+    <string name="colorclash_seven_swap">رقم 7 يبدّل الأوراق مع لاعب تختاره</string>
+    <string name="colorclash_zero_rotate">رقم 0 يدوّر كل الأيادي حول الطاولة</string>
+
+    <string name="color_red">أحمر</string>
+    <string name="color_yellow">أصفر</string>
+    <string name="color_green">أخضر</string>
+    <string name="color_blue">أزرق</string>
+
+
+    <plurals name="card_count">
+        <item quantity="zero">%d كارت</item>
+        <item quantity="one">%d كارت</item>
+        <item quantity="two">%d كارتين</item>
+        <item quantity="few">%d كروت</item>
+        <item quantity="many">%d كارت</item>
+        <item quantity="other">%d كارت</item>
+    </plurals>
+
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ بوكر</string>
+    <string name="pot_label">البوت: </string>
+    <string name="pot_label_placeholder">البوت: 0</string>
+    <string name="your_chips_label">رقائقك: %d</string>
+    <string name="your_chips_placeholder">رقائقك: 1000</string>
+    <string name="your_bet_label">رهانك في الجولة: %d</string>
+    <string name="your_bet_placeholder">رهانك في الجولة: 0</string>
+    <string name="your_turn">دورك!</string>
+    <string name="waiting_for_players">في انتظار اللاعبين...</string>
+    <string name="waiting_for_move">في انتظار الحركة...</string>
+    <string name="new_hand">يد جديدة</string>
+    <string name="game_started">بدأت اللعبة!</string>
+    <string name="game_over">انتهت اللعبة!</string>
+    <string name="tie">تعادل</string>
+    <string name="you_are_host">أنت المضيف. اللعبة جاهزة!</string>
+    <string name="connected">تم الاتصال!</string>
+    <string name="connecting">جاري الاتصال بالمضيف...</string>
+    <string name="connection_error">خطأ في الاتصال: %s</string>
+    <string name="no_connection">لا يوجد اتصال باللعبة!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">خطأ: %1$s</string>
+    <string name="reconnecting_message">انقطع الاتصال، المحاولة رقم %1$d…</string>
+    <string name="reconnected_message">تم إعادة الاتصال!</string>
+    <string name="reconnect_failed_message">تعذّر إعادة الاتصال. من فضلك ارجع للّوبي.</string>
+
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">اللعبة بالفعل في مرحلة كشف الأوراق</string>
+    <string name="poker_error_not_your_turn">مش دور اللاعب ده</string>
+    <string name="poker_error_already_folded">اللاعب انسحب بالفعل</string>
+    <string name="poker_error_already_all_in">اللاعب دخل بكل رقائقه ومش قادر يعمل حركة</string>
+    <string name="poker_error_cannot_check">مينفعش تعمل Check والرهان الحالي أعلى</string>
+    <string name="poker_error_cannot_bet_existing">مينفعش تراهن لما يكون فيه رهان موجود بالفعل</string>
+    <string name="poker_error_bet_must_be_positive">مبلغ الرهان لازم يكون أكبر من صفر</string>
+    <string name="poker_error_nothing_to_call">مفيش حاجة تتعمل لها Call</string>
+    <string name="poker_error_raise_too_low">الـ Raise لازم يكون أعلى من الرهان الحالي</string>
+    <string name="poker_error_already_bet_enough">اللاعب راهن بالمبلغ الكافي بالفعل</string>
+    <string name="poker_error_no_eligible_players">مفيش لاعبين نشطين مؤهلين</string>
+    <string name="poker_error_player_not_found">اللاعب مش موجود</string>
+    <string name="poker_error_cannot_deal_river">مينفعش توزيع الـ River أثناء %s</string>
+    <string name="poker_error_cannot_deal_turn">مينفعش توزيع الـ Turn أثناء %s</string>
+    <string name="poker_error_amount_must_be_positive">المبلغ لازم يكون أكبر من صفر</string>
+    <string name="poker_error_not_enough_chips">الرقائق مش كفاية</string>
+    <string name="poker_error_amount_cannot_be_negative">المبلغ مينفعش يكون بالسالب</string>
+
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">اللعبة انتهت بالفعل</string>
+    <string name="colorclash_error_jumpin_disabled">الدخول السريع غير مفعّل</string>
+    <string name="colorclash_error_jumpin_draw_active">مينفعش تعمل دخول سريع أثناء وجود مجموعة سحب</string>
+    <string name="colorclash_error_use_play">دورك – استخدم PLAY</string>
+    <string name="colorclash_error_invalid_card_index">رقم الكارت غير صالح</string>
+    <string name="colorclash_error_jumpin_requires_match">الدخول السريع يحتاج كارت مطابق للكارت الموجود فوق الكومة</string>
+    <string name="colorclash_error_last_card_single_only">تقدر تنادي Last Card بس لما يكون معاك كارت واحد بالضبط</string>
+    <string name="colorclash_error_cannot_catch_self">مينفعش تمسك نفسك</string>
+    <string name="colorclash_error_nothing_to_catch">%s مفيش عنده حاجة تمسكها دلوقتي</string>
+    <string name="colorclash_error_not_your_turn">مش دور اللاعب ده</string>
+    <string name="colorclash_error_player_eliminated">اللاعب خرج من اللعبة</string>
+    <string name="colorclash_error_card_cannot_be_played">مينفعش تلعب الكارت ده</string>
+    <string name="colorclash_error_choose_wild_color">لازم تختار لون للكارت الـ Wild</string>
+    <string name="colorclash_error_choose_swap_target">اختار لاعب تبدّل معاه الأوراق</string>
+    <string name="colorclash_error_unknown_action">حركة غير معروفة: %s</string>
+    <string name="colorclash_error_player_not_found">اللاعب مش موجود: %s</string>
+    <string name="colorclash_error_card_not_held">اللاعب مش معاه الكارت ده</string>
+
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">غير معروف</string>
+    <string name="colorclash_eliminated_suffix"> (خرج)</string>
+
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">CALL</string>
+    <string name="btn_fold">FOLD</string>
+    <string name="btn_bet">BET</string>
+    <string name="btn_raise">RAISE</string>
+
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">الرهان</string>
+    <string name="raise_title">رفع الرهان</string>
+    <string name="enter_amount_manually">اكتب المبلغ يدويًا</string>
+    <string name="half_pot">نص البوت</string>
+    <string name="pot">البوت</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">تقدر تعمل ALL-IN بس: %d</string>
+    <string name="confirm">تأكيد</string>
+    <string name="cancel">إلغاء</string>
+
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">لاعب</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">FOLD</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(أنت)</string>
+    <string name="host_suffix">(المضيف)</string>
+    <string name="winner">🏆 %s فاز! 🏆</string>
+
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">أعلى كارت</string>
+    <string name="hand_pair">زوج</string>
+    <string name="hand_two_pair">زوجان</string>
+    <string name="hand_three_of_a_kind">ثلاثة من نفس النوع</string>
+    <string name="hand_straight">تسلسل</string>
+    <string name="hand_flush">Flush</string>
+    <string name="hand_full_house">Full House</string>
+    <string name="hand_four_of_a_kind">أربعة من نفس النوع</string>
+    <string name="hand_straight_flush">Straight Flush</string>
+
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">الفائز (الباقي انسحب)</string>
+    <string name="no_data">لا توجد بيانات</string>
+
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">بعض الأجهزة بتقيّد التطبيقات اللي بتشتغل في الخلفية بشكل كبير</string>
+
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">أنت المضيف. اللعبة جاهزة!</string>
+    <string name="colorclash_top_card_label">أعلى كارت: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">السحب: %1$d</string>
+    <string name="colorclash_waiting_for">في انتظار %1$s</string>
+    <string name="colorclash_draw_stack_info"> (اسحب %1$d كارت)</string>
+    <string name="colorclash_winner_message">🏆 %1$s فاز! 🏆</string>
+    <string name="colorclash_catch_button">Catch!</string>
+    <string name="colorclash_choose_color">اختار لون</string>
+    <string name="colorclash_swap_cards_with">بدّل الأوراق مع...</string>
+    <string name="colorclash_not_your_turn">مش دورك!</string>
+    <string name="colorclash_cannot_play_card">مينفعش تلعب الكارت ده</string>
+    <string name="colorclash_card_not_in_hand">الكارت مش في إيدك</string>
+    <string name="colorclash_card_no_longer_in_hand">الكارت مش موجود في إيدك دلوقتي</string>
+    <string name="colorclash_error">خطأ: %1$s</string>
+    <string name="colorclash_draw">اسحب</string>
+    <string name="colorclash_last_card">آخر كارت!</string>
+    <string name="colorclash_next_round">الجولة الجاية</string>
+    <string name="colorclash_your_hand">أوراقك</string>
+    <string name="colorclash_top_card_default">أعلى كارت: </string>
+    <string name="colorclash_draw_pile_default">السحب: 0</string>
+    <string name="colorclash_waiting_players">في انتظار اللاعبين...</string>
+    <string name="colorclash_game_started">بدأت اللعبة!</string>
+    <string name="colorclash_game_over">انتهت اللعبة!</string>
+    <string name="colorclash_connecting">جاري الاتصال...</string>
+    <string name="colorclash_connection_error">خطأ في الاتصال</string>
+
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">إعدادات المافيا</string>
+    <string name="mafia_role_count">الأدوار (0 = إيقاف)</string>
+    <string name="mafia_timer">استخدم المؤقتات (وإلا فالتأكيد اليدوي على الجاهزية فقط)</string>
+    <string name="mafia_night_length">مدة الليل (بالثواني)</string>
+    <string name="mafia_day_length">مدة النهار (بالثواني)</string>
+    <string name="mafia_trial_length">مدة المحاكمة (بالثواني)</string>
+    <string name="mafia_neutral_size">عدد اللاعبين المحايدين</string>
+    <string name="mafia_neutral">اللاعبون المحايدون</string>
+    <string name="mafia_town_role">دور المدينة (بحد أقصى 1 لكل دور)</string>
+    <string name="mafia_mafia">لاعبو المافيا</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">مدني</string>
+    <string name="mafia_role_mafia">مافيا</string>
+    <string name="mafia_role_detective">محقق</string>
+    <string name="mafia_role_doctor">طبيب</string>
+    <string name="mafia_role_vigilante">حارس مسلح</string>
+    <string name="mafia_role_mayor">عمدة</string>
+    <string name="mafia_role_jester">مهرج</string>
+    <string name="mafia_role_serial_killer">قاتل متسلسل</string>
+    <string name="mafia_skip">تخطي</string>
+    <string name="mafia_vote_button_label">تصويت</string>
+    <string name="role_icon_desc">وصف</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">دليل الأدوار</string>
+    <string name="mafia_role_dialog_close">إغلاق</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">بالليل، المافيا بتختار ضحية عشان تقتلها مع بعض. وكل واحد في المافيا يعرف باقي أعضاء المافيا.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">بالليل، المحقق بيحقق مع شخص واحد وبيعرف إذا كان من المافيا.</string>
+    <string name="mafia_role_dialog_doctor">بالليل، الطبيب بيحمي شخص واحد من القتل.</string>
+    <string name="mafia_role_dialog_vigilante">معاه رصاصة واحدة طول اللعبة – يقدر يضرب بيها شخص بالليل.</string>
+    <string name="mafia_role_dialog_mayor">يقدر يكشف عن نفسه بالنهار – وساعتها صوته بيتحسب مرتين في الترشيحات والمحاكمات.</string>
+    <string name="mafia_role_dialog_civilian">مفيش عنده قدرات خاصة. بيصوّت بالنهار زي أي فرد من المدينة.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">مفيش عنده حركة بالليل. بيفوز فورًا لو المدينة قررت تعدمه بالنهار.</string>
+    <string name="mafia_role_dialog_serial_killer">بيقتل لوحده بالليل، بشكل مستقل عن المافيا. بيفوز لما يكون هو آخر لاعب عايش.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">المرشح</string>
+    <string name="mafia_phase">المرحلة: %s</string>
+    <string name="mafia_your_role">دورك: %s</string>
+    <string name="mafia_dead">ميت</string>
+    <string name="mafia_voted_badge">تم التصويت</string>
+    <string name="mafia_phase_label">المرحلة: %s</string>
+    <string name="mafia_your_role_label">دورك: %s</string>
+    <string name="mafia_game_started">بدأت اللعبة!</string>
+    <string name="mafia_host_ended_game">المضيف أنهى اللعبة</string>
+    <string name="mafia_voting_unavailable">التصويت غير متاح دلوقتي</string>
+    <string name="mafia_night_result">نتيجة الليل: %s</string>
+    <string name="mafia_someone_died">%s مات</string>
+    <string name="mafia_no_one_died">محدش مات</string>
+    <string name="mafia_nominated">تم ترشيح: %s</string>
+    <string name="mafia_eliminated_by_day">تم استبعاد: %s</string>
+    <string name="mafia_unknown_player">لاعب غير معروف</string>
+    <string name="mafia_is_mafia">هو من المافيا!</string>
+    <string name="mafia_not_mafia">مش من المافيا</string>
+    <string name="mafia_investigation_results">نتائج التحقيق</string>
+    <string name="mafia_ok">حسنًا</string>
+    <string name="mafia_night_death_title">☠️ %s مات أثناء الليل</string>
+    <string name="mafia_role_label">الدور: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s تم استبعاده من المدينة</string>
+    <string name="mafia_notes_title">ملاحظات لـ %s</string>
+    <string name="mafia_no_notes">(مفيش ملاحظات)</string>
+    <string name="mafia_kill_confirm">تقتل %s؟</string>
+    <string name="mafia_save_confirm">تنقذ %s؟</string>
+    <string name="mafia_investigate_confirm">تحقق مع %s؟</string>
+    <string name="mafia_shoot_confirm">تضرب %s؟</string>
+    <string name="mafia_no_night_action">مفيش عندك حركة بالليل</string>
+    <string name="mafia_notes_hint">اكتب ملاحظاتك هنا...</string>
+    <string name="mafia_my_notes">ملاحظاتي</string>
+    <string name="mafia_save">حفظ</string>
+    <string name="mafia_cancel">إلغاء</string>
+    <string name="mafia_confirm">تأكيد</string>
+    <string name="mafia_yes">نعم</string>
+    <string name="mafia_no">لا</string>
+    <string name="mafia_town_wins">🏛️ المدينة فازت!</string>
+    <string name="mafia_mafia_wins">🔪 المافيا فازت!</string>
+    <string name="mafia_jester_wins">🤡 المهرج فاز!</string>
+    <string name="mafia_serial_killer_wins">🔪 القاتل المتسلسل فاز!</string>
+    <string name="mafia_waiting_for_host">\n\nفي انتظار المضيف لبدء الجولة التالية...</string>
+    <string name="mafia_new_round">جولة جديدة</string>
+    <string name="mafia_end_game">إنهاء اللعبة</string>
+    <string name="mafia_phase_label_short">المرحلة:</string>
+    <string name="mafia_role_info_button">معلومات الدور</string>
+    <string name="mafia_notes_button">ملاحظات</string>
+    <string name="mafia_your_role_label_short">دورك:</string>
+    <string name="mafia_candidate_label">المرشح</string>
+    <string name="mafia_guilty_content_desc">مذنب</string>
+    <string name="mafia_not_guilty_content_desc">غير مذنب</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">اللاعب مش موجود: %s</string>
+    <string name="mafia_target_not_alive">الهدف مش عايش</string>
+    <string name="mafia_cannot_target_self">مينفعش تختار نفسك كهدف</string>
+    <string name="mafia_min_players">المافيا محتاجة 4 لاعبين على الأقل</string>
+    <string name="mafia_need_mafia_role">لازم يكون فيه دور مافيا واحد على الأقل متظبط</string>
+    <string name="mafia_dead_cannot_act">اللاعبين الميتين مينفعش يتحركوا</string>
+    <string name="mafia_notes_too_long">الملاحظات طويلة جدًا (الحد الأقصى 1000 حرف)</string>
+    <string name="mafia_no_behavior">مفيش حركة للدور: %s</string>
+    <string name="mafia_unknown_action">حركة غير معروفة: %s</string>
+    <string name="mafia_game_inactive">اللعبة مش شغالة حاليًا</string>
+    <string name="mafia_game_over">اللعبة انتهت</string>
+    <string name="mafia_error_unknown_detective_action">حركة محقق غير معروفة</string>
+    <string name="mafia_error_unknown_doctor_action">حركة طبيب غير معروفة</string>
+    <string name="mafia_error_unknown_mafia_action">حركة مافيا غير معروفة</string>
+    <string name="mafia_error_unknown_mayor_day_action">حركة العمدة بالنهار غير معروفة</string>
+    <string name="mafia_error_unknown_sk_action">حركة قاتل متسلسل غير معروفة</string>
+    <string name="mafia_error_unknown_vigilante_action">حركة الحارس المسلح غير معروفة</string>
+    <string name="mafia_error_no_charges">إنت استخدمت رصاصتك الوحيدة بالفعل</string>
+    <string name="mafia_error_no_special_day_action">الدور ده مفيش له حركة خاصة بالنهار</string>
+    <string name="mafia_status_dead">ميت</string>
+    <string name="mafia_config_count_negative">العدد مينفعش يكون بالسالب</string>
+    <string name="mafia_config_role_at_most_1">%s ممكن يكون بحد أقصى 1</string>
+    <string name="mafia_config_cannot_set_neutral_directly">مينفعش تحدد عدد دور محايد مباشرة. استخدم setNeutralCount وsetAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">عدد المحايدين (%1$d) أكبر من عدد الأدوار المحايدة المسموح بها (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">مسموح بالأدوار المحايدة فقط</string>
+    <string name="mafia_config_neutral_count_negative">عدد المحايدين مينفعش يكون بالسالب</string>
+    <string name="mafia_config_roles_exceed_players">تم إعداد %1$d أدوار خاصة، لكن عدد اللاعبين %2$d فقط. قلّل عدد الأدوار أو زوّد عدد اللاعبين.</string>
+
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">مغادرة</string>
+    <string name="leave_button_desc">مغادرة</string>
+    <string name="leave_confirm_title">مغادرة؟</string>
+    <string name="leave_confirm_message_host_lobby">إنت المضيف. لو خرجت دلوقتي، الغرفة هتقفل عند كل اللاعبين.</string>
+    <string name="leave_confirm_message_host_game">إنت المضيف. لو خرجت دلوقتي، اللعبة هتنتهي عند كل اللاعبين.</string>
+    <string name="leave_confirm_message_player">متأكد إنك عايز تخرج؟ هيتقطع اتصالك باللعبة.</string>
+    <string name="leave_confirm_positive">مغادرة</string>
+    <string name="leave_confirm_negative">إلغاء</string>
+    <string name="host_ended_game">المضيف أنهى اللعبة.</string>
+
+</resources>

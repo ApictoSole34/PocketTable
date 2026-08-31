@@ -1,0 +1,368 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Becenév</string>
+    <string name="create_room">🃏 Szoba létrehozása</string>
+    <string name="join_room">🔗 Csatlakozás kóddal</string>
+    <string name="scan_qr">📷 QR-kód beolvasása</string>
+    <string name="enter_nickname">Add meg a beceneved!</string>
+    <string name="join_host_title">Csatlakozás a házigazdához</string>
+    <string name="host_game_title">Játék indítása házigazdaként</string>
+    <string name="join_via_code">Csatlakozás kóddal</string>
+    <string name="game_poker">Póker</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">Beállítások</string>
+    <string name="options_title">Beállítások</string>
+    <string name="options_change_language">Nyelv módosítása</string>
+    <string name="options_exit_app">Kilépés az alkalmazásból</string>
+    <string name="options_exit_confirm_title">Kilépés az alkalmazásból?</string>
+    <string name="options_exit_confirm_message">Biztosan ki szeretnél lépni a PocketTable alkalmazásból?</string>
+    <string name="options_exit_confirm_positive">Kilépés</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Kód: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Játékosok: </string>
+    <string name="lobby_you"> (TE)</string>
+    <string name="show_qr">QR-kód megjelenítése</string>
+    <string name="start_game">INDÍTÁS</string>
+    <string name="qr_title">A szoba QR-kódja </string>
+    <string name="qr_error">Hiba a QR-kód létrehozásakor</string>
+    <string name="ok">OK</string>
+    <string name="game_settings_title">Beállítások</string>
+    <string name="lobby_toast_mafia_neutral">Nincs elegendő semleges szerep kiválasztva a szükséges számú semleges játékoshoz.</string>
+    <string name="lobby_con_error">Kapcsolati hiba</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Csatlakozás a szobához</string>
+    <string name="join_hint">Add meg a kódot (pl. ABC123)</string>
+    <string name="join_search">Keresés</string>
+    <string name="join_cancel">Mégse</string>
+    <string name="code_required">A kódnak 6 karakterből kell állnia!</string>
+    <string name="searching_host">Házigazda keresése ezzel a kóddal: </string>
+    <string name="host_found">Házigazda megtalálva!</string>
+    <string name="host_not_found">Nem található házigazda ehhez a kódhoz: </string>
+    <string name="scan_qr_from_host">Olvasd be a QR-kódot a házigazda képernyőjéről</string>
+    <string name="invalid_qr">Érvénytelen QR-kód</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Játékbeállítások</string>
+    <string name="small_blind_hint">Kisvak (alapértelmezett: 50)</string>
+    <string name="big_blind_hint">Nagyvak (alapértelmezett: 100)</string>
+    <string name="starting_chips_hint">Kezdő zsetonok (alapértelmezett: 1000)</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">+2 / +4 halmozása</string>
+    <string name="colorclash_jump_in">Közbeszólás (azonos lap kijátszása körön kívül)</string>
+    <string name="colorclash_seven_swap">A 7-es lapot kijátszó játékos kezet cserél egy választott játékossal</string>
+    <string name="colorclash_zero_rotate">A 0-s lap minden kezet körbeforgat az asztal körül</string>
+
+    <string name="color_red">PIROS</string>
+    <string name="color_yellow">SÁRGA</string>
+    <string name="color_green">ZÖLD</string>
+    <string name="color_blue">KÉK</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d lap</item>
+        <item quantity="other">%d lap</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Póker</string>
+    <string name="pot_label">Pot: </string>
+    <string name="pot_label_placeholder">Pot: 0</string>
+    <string name="your_chips_label">Zsetonjaid: %d</string>
+    <string name="your_chips_placeholder">Zsetonjaid: 1000</string>
+    <string name="your_bet_label">Téted ebben a körben: %d</string>
+    <string name="your_bet_placeholder">Téted ebben a körben: 0</string>
+    <string name="your_turn">TE JÖSSZ!</string>
+    <string name="waiting_for_players">Várakozás a játékosokra...</string>
+    <string name="waiting_for_move">Várakozás a lépésre...</string>
+    <string name="new_hand">ÚJ LEOSZTÁS</string>
+    <string name="game_started">A játék elkezdődött!</string>
+    <string name="game_over">A játék véget ért!</string>
+    <string name="tie">Döntetlen</string>
+    <string name="you_are_host">Te vagy a házigazda. A játék készen áll!</string>
+    <string name="connected">Csatlakozva!</string>
+    <string name="connecting">Csatlakozás a házigazdához...</string>
+    <string name="connection_error">Kapcsolati hiba: %s</string>
+    <string name="no_connection">Nincs kapcsolat a játékkal!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Hiba: %1$s</string>
+    <string name="reconnecting_message">A kapcsolat megszakadt, kísérlet: %1$d…</string>
+    <string name="reconnected_message">Újracsatlakozva!</string>
+    <string name="reconnect_failed_message">Nem sikerült újracsatlakozni. Térj vissza az előcsarnokba.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">A játék már showdown szakaszban van</string>
+    <string name="poker_error_not_your_turn">Nem ennek a játékosnak a köre</string>
+    <string name="poker_error_already_folded">A játékos már bedobta a lapjait</string>
+    <string name="poker_error_already_all_in">A játékos már all-inben van, és nem léphet</string>
+    <string name="poker_error_cannot_check">Nem lehet passzolni, ha az aktuális tét magasabb</string>
+    <string name="poker_error_cannot_bet_existing">Nem lehet tétet tenni, ha már van tét</string>
+    <string name="poker_error_bet_must_be_positive">A tét összegének pozitívnak kell lennie</string>
+    <string name="poker_error_nothing_to_call">Nincs mit megadni</string>
+    <string name="poker_error_raise_too_low">A visszaemelésnek magasabbnak kell lennie az aktuális tétnél</string>
+    <string name="poker_error_already_bet_enough">A játékos már eleget tett</string>
+    <string name="poker_error_no_eligible_players">Nincs aktív, játékra jogosult játékos</string>
+    <string name="poker_error_player_not_found">A játékos nem található</string>
+    <string name="poker_error_cannot_deal_river">Nem lehet rivert osztani ebben a szakaszban: %s</string>
+    <string name="poker_error_cannot_deal_turn">Nem lehet turnt osztani ebben a szakaszban: %s</string>
+    <string name="poker_error_amount_must_be_positive">Az összegnek pozitívnak kell lennie</string>
+    <string name="poker_error_not_enough_chips">Nincs elég zseton</string>
+    <string name="poker_error_amount_cannot_be_negative">Az összeg nem lehet negatív</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">A játék már véget ért</string>
+    <string name="colorclash_error_jumpin_disabled">A közbeszólás ki van kapcsolva</string>
+    <string name="colorclash_error_jumpin_draw_active">Nem lehet közbeszólni, amikor húzópakli van érvényben</string>
+    <string name="colorclash_error_use_play">Te jössz – használd a JÁTSZÁS gombot</string>
+    <string name="colorclash_error_invalid_card_index">Érvénytelen lapindex</string>
+    <string name="colorclash_error_jumpin_requires_match">A közbeszóláshoz a pakli tetején lévővel azonos lap szükséges</string>
+    <string name="colorclash_error_last_card_single_only">Az „Utolsó lap” csak akkor hívható be, ha pontosan egy lap van a kezedben</string>
+    <string name="colorclash_error_cannot_catch_self">Nem kaphatod el saját magadat</string>
+    <string name="colorclash_error_nothing_to_catch">%s-nek jelenleg nincs mit elkapnia</string>
+    <string name="colorclash_error_not_your_turn">Nem ennek a játékosnak a köre</string>
+    <string name="colorclash_error_player_eliminated">A játékos kiesett</string>
+    <string name="colorclash_error_card_cannot_be_played">Ez a lap nem játszható ki</string>
+    <string name="colorclash_error_choose_wild_color">Választanod kell egy színt a színválasztó laphoz</string>
+    <string name="colorclash_error_choose_swap_target">Válassz egy játékost, akivel kezet cserélsz</string>
+    <string name="colorclash_error_unknown_action">Ismeretlen művelet: %s</string>
+    <string name="colorclash_error_player_not_found">A játékos nem található: %s</string>
+    <string name="colorclash_error_card_not_held">A játékosnál nincs ez a lap</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Ismeretlen</string>
+    <string name="colorclash_eliminated_suffix"> (kiesett)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">PASSZ</string>
+    <string name="btn_call">MEGADÁS</string>
+    <string name="btn_fold">DOBÁS</string>
+    <string name="btn_bet">TÉT</string>
+    <string name="btn_raise">VISSZAEMELÉS</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Tét</string>
+    <string name="raise_title">Visszaemelés</string>
+    <string name="enter_amount_manually">Összeg megadása kézzel</string>
+    <string name="half_pot">1/2 POT</string>
+    <string name="pot">POT</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">Csak ALL-IN-t tehetsz: %d</string>
+    <string name="confirm">Megerősítés</string>
+    <string name="cancel">Mégse</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Játékos</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">DOBOTT</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(Te)</string>
+    <string name="host_suffix">(Házigazda)</string>
+    <string name="winner">🏆 %s NYERT! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">Magas lap</string>
+    <string name="hand_pair">Egy pár</string>
+    <string name="hand_two_pair">Két pár</string>
+    <string name="hand_three_of_a_kind">Drill</string>
+    <string name="hand_straight">Sor</string>
+    <string name="hand_flush">Szín</string>
+    <string name="hand_full_house">Full house</string>
+    <string name="hand_four_of_a_kind">Póker</string>
+    <string name="hand_straight_flush">Színsor</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Győztes (a többiek bedobták)</string>
+    <string name="no_data">nincs adat</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Egyes eszközök agresszívan korlátozzák a háttérben futó alkalmazásokat</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">Te vagy a házigazda. A játék készen áll!</string>
+    <string name="colorclash_top_card_label">Felül: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Húzópakli: %1$d</string>
+    <string name="colorclash_waiting_for">Várakozás erre: %1$s</string>
+    <string name="colorclash_draw_stack_info"> (%1$d lap húzása)</string>
+    <string name="colorclash_winner_message">🏆 %1$s NYERT! 🏆</string>
+    <string name="colorclash_catch_button">Elkapás!</string>
+    <string name="colorclash_choose_color">Szín választása</string>
+    <string name="colorclash_swap_cards_with">Lapok cseréje vele...</string>
+    <string name="colorclash_not_your_turn">Nem te jössz!</string>
+    <string name="colorclash_cannot_play_card">Nem játszhatod ki ezt a lapot</string>
+    <string name="colorclash_card_not_in_hand">A lap nincs a kezedben</string>
+    <string name="colorclash_card_no_longer_in_hand">A lap már nincs a kezedben</string>
+    <string name="colorclash_error">Hiba: %1$s</string>
+    <string name="colorclash_draw">HÚZÁS</string>
+    <string name="colorclash_last_card">UTOLSÓ LAP!</string>
+    <string name="colorclash_next_round">KÖVETKEZŐ KÖR</string>
+    <string name="colorclash_your_hand">Kezedben lévő lapok</string>
+    <string name="colorclash_top_card_default">Felül: </string>
+    <string name="colorclash_draw_pile_default">Húzópakli: 0</string>
+    <string name="colorclash_waiting_players">Várakozás a játékosokra...</string>
+    <string name="colorclash_game_started">A játék elkezdődött!</string>
+    <string name="colorclash_game_over">A játék véget ért!</string>
+    <string name="colorclash_connecting">Csatlakozás...</string>
+    <string name="colorclash_connection_error">Kapcsolati hiba</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Maffia beállítások</string>
+    <string name="mafia_role_count">Szerepek (0 = kikapcsolva)</string>
+    <string name="mafia_timer">Időzítők használata (különben csak kézi készenléti jelzés)</string>
+    <string name="mafia_night_length">Éjszaka hossza (s)</string>
+    <string name="mafia_day_length">Nappal hossza (s)</string>
+    <string name="mafia_trial_length">Tárgyalás hossza (s)</string>
+    <string name="mafia_neutral_size">Semleges játékosok száma</string>
+    <string name="mafia_neutral">Semleges játékosok</string>
+    <string name="mafia_town_role">Városi szerepek (mindegyikből max. 1)</string>
+    <string name="mafia_mafia">Maffiajátékosok</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">Civil</string>
+    <string name="mafia_role_mafia">Maffia</string>
+    <string name="mafia_role_detective">Detektív</string>
+    <string name="mafia_role_doctor">Orvos</string>
+    <string name="mafia_role_vigilante">Vigilante</string>
+    <string name="mafia_role_mayor">Polgármester</string>
+    <string name="mafia_role_jester">Bolond</string>
+    <string name="mafia_role_serial_killer">Sorozatgyilkos</string>
+    <string name="mafia_skip">Kihagyás</string>
+    <string name="mafia_vote_button_label">Szavazás</string>
+    <string name="role_icon_desc">leírás</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Szerepek útmutatója</string>
+    <string name="mafia_role_dialog_close">Bezárás</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">Éjszaka a maffia közösen választ ki egy áldozatot, akit megölnek. Ismerik a maffia többi tagját.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">Éjszaka megvizsgál egy személyt, és megtudja, hogy a maffiához tartozik-e.</string>
+    <string name="mafia_role_dialog_doctor">Éjszaka megvéd egy személyt attól, hogy megöljék.</string>
+    <string name="mafia_role_dialog_vigilante">Az egész játék során csak egy golyója van – éjszaka lelőhet valakit.</string>
+    <string name="mafia_role_dialog_mayor">Napközben felfedheti magát – szavazata ezután kétszer számít a jelöléseknél és a tárgyalásokon.</string>
+    <string name="mafia_role_dialog_civilian">Nincsenek különleges képességei. Napközben ugyanúgy szavaz, mint a város többi tagja.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Nincs éjszakai akciója. Azonnal nyer, ha a város úgy dönt, hogy napközben felakasztja.</string>
+    <string name="mafia_role_dialog_serial_killer">Éjszaka egyedül öl, a maffiától függetlenül. Akkor nyer, amikor ő az egyetlen életben maradt játékos.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Jelölt</string>
+    <string name="mafia_phase">Fázis: %s</string>
+    <string name="mafia_your_role">Szereped: %s</string>
+    <string name="mafia_dead">HALOTT</string>
+    <string name="mafia_voted_badge">SZAVAZOTT</string>
+    <string name="mafia_phase_label">Fázis: %s</string>
+    <string name="mafia_your_role_label">Szereped: %s</string>
+    <string name="mafia_game_started">A játék elkezdődött!</string>
+    <string name="mafia_host_ended_game">A házigazda befejezte a játékot</string>
+    <string name="mafia_voting_unavailable">A szavazás jelenleg nem érhető el</string>
+    <string name="mafia_night_result">Éjszakai eredmény: %s</string>
+    <string name="mafia_someone_died">%s meghalt</string>
+    <string name="mafia_no_one_died">Senki sem halt meg</string>
+    <string name="mafia_nominated">Jelölve: %s</string>
+    <string name="mafia_eliminated_by_day">Kiesett: %s</string>
+    <string name="mafia_unknown_player">Ismeretlen játékos</string>
+    <string name="mafia_is_mafia">Maffia!</string>
+    <string name="mafia_not_mafia">nem maffia</string>
+    <string name="mafia_investigation_results">Nyomozás eredménye</string>
+    <string name="mafia_ok">OK</string>
+    <string name="mafia_night_death_title">☠️ %s meghalt az éjszaka során</string>
+    <string name="mafia_role_label">Szerep: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s a város áldozata lett</string>
+    <string name="mafia_notes_title">Jegyzetek: %s</string>
+    <string name="mafia_no_notes">(nincs jegyzet)</string>
+    <string name="mafia_kill_confirm">Megölöd %s játékost?</string>
+    <string name="mafia_save_confirm">Megmented %s játékost?</string>
+    <string name="mafia_investigate_confirm">Megvizsgálod %s játékost?</string>
+    <string name="mafia_shoot_confirm">Lelőd %s játékost?</string>
+    <string name="mafia_no_night_action">Nincs éjszakai akciód</string>
+    <string name="mafia_notes_hint">Írd ide a jegyzeteidet...</string>
+    <string name="mafia_my_notes">Jegyzeteim</string>
+    <string name="mafia_save">Mentés</string>
+    <string name="mafia_cancel">Mégse</string>
+    <string name="mafia_confirm">Megerősítés</string>
+    <string name="mafia_yes">Igen</string>
+    <string name="mafia_no">Nem</string>
+    <string name="mafia_town_wins">🏛️ A város nyert!</string>
+    <string name="mafia_mafia_wins">🔪 A maffia nyert!</string>
+    <string name="mafia_jester_wins">🤡 A Bolond nyert!</string>
+    <string name="mafia_serial_killer_wins">🔪 A Sorozatgyilkos nyert!</string>
+    <string name="mafia_waiting_for_host">\n\nVárakozás a házigazdára a következő kör indításához...</string>
+    <string name="mafia_new_round">Új kör</string>
+    <string name="mafia_end_game">Játék befejezése</string>
+    <string name="mafia_phase_label_short">Fázis:</string>
+    <string name="mafia_role_info_button">Szerepinformáció</string>
+    <string name="mafia_notes_button">Jegyzetek</string>
+    <string name="mafia_your_role_label_short">Szereped:</string>
+    <string name="mafia_candidate_label">Jelölt</string>
+    <string name="mafia_guilty_content_desc">Bűnös</string>
+    <string name="mafia_not_guilty_content_desc">Nem bűnös</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">A játékos nem található: %s</string>
+    <string name="mafia_target_not_alive">A célpont nincs életben</string>
+    <string name="mafia_cannot_target_self">Nem célozhatod meg saját magadat</string>
+    <string name="mafia_min_players">A Maffiához legalább 4 játékos szükséges</string>
+    <string name="mafia_need_mafia_role">Legalább 1 Maffia-szerepet be kell állítani</string>
+    <string name="mafia_dead_cannot_act">A halott játékosok nem cselekedhetnek</string>
+    <string name="mafia_notes_too_long">A jegyzet túl hosszú (max. 1000 karakter)</string>
+    <string name="mafia_no_behavior">Nincs viselkedés ehhez a szerephez: %s</string>
+    <string name="mafia_unknown_action">Ismeretlen művelet: %s</string>
+    <string name="mafia_game_inactive">A játék jelenleg nem aktív</string>
+    <string name="mafia_game_over">A játék véget ért</string>
+    <string name="mafia_error_unknown_detective_action">Ismeretlen detektívakció</string>
+    <string name="mafia_error_unknown_doctor_action">Ismeretlen orvosi akció</string>
+    <string name="mafia_error_unknown_mafia_action">Ismeretlen maffiaakció</string>
+    <string name="mafia_error_unknown_mayor_day_action">Ismeretlen polgármesteri nappali akció</string>
+    <string name="mafia_error_unknown_sk_action">Ismeretlen sorozatgyilkos-akció</string>
+    <string name="mafia_error_unknown_vigilante_action">Ismeretlen Vigilante-akció</string>
+    <string name="mafia_error_no_charges">Már felhasználtad az egyetlen golyódat</string>
+    <string name="mafia_error_no_special_day_action">Ennek a szerepnek nincs különleges nappali akciója</string>
+    <string name="mafia_status_dead">HALOTT</string>
+    <string name="mafia_config_count_negative">A szám nem lehet negatív</string>
+    <string name="mafia_config_role_at_most_1">%s legfeljebb 1 lehet</string>
+    <string name="mafia_config_cannot_set_neutral_directly">A semleges szerepek számát nem lehet közvetlenül beállítani. Használd a setNeutralCount és setAllowedNeutralRoles beállításokat</string>
+    <string name="mafia_config_neutral_count_exceeds">A semleges játékosok száma (%1$d) meghaladja az engedélyezett semleges osztályok számát (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">Csak semleges szerepek engedélyezettek</string>
+    <string name="mafia_config_neutral_count_negative">A semleges játékosok száma nem lehet negatív</string>
+    <string name="mafia_config_roles_exceed_players">%1$d különleges szerep van beállítva, de a játékban csak %2$d játékos van. Csökkentsd a szerepek számát, vagy adj hozzá több játékost.</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Kilépés</string>
+    <string name="leave_button_desc">Kilépés</string>
+    <string name="leave_confirm_title">Kilépsz?</string>
+    <string name="leave_confirm_message_host_lobby">Te vagy a házigazda. Ha most kilépsz, az előcsarnok mindenki számára bezárul.</string>
+    <string name="leave_confirm_message_host_game">Te vagy a házigazda. Ha most kilépsz, a játék mindenki számára véget ér.</string>
+    <string name="leave_confirm_message_player">Biztosan ki szeretnél lépni? Megszakad a kapcsolatod a játékkal.</string>
+    <string name="leave_confirm_positive">Kilépés</string>
+    <string name="leave_confirm_negative">Mégse</string>
+    <string name="host_ended_game">A házigazda befejezte a játékot.</string>
+</resources>

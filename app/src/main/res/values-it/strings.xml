@@ -1,0 +1,368 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Nickname</string>
+    <string name="create_room">🃏 Crea stanza</string>
+    <string name="join_room">🔗 Connettiti tramite codice</string>
+    <string name="scan_qr">📷 Scansiona QR</string>
+    <string name="enter_nickname">Inserisci il tuo nickname!</string>
+    <string name="join_host_title">Unisciti all\'host</string>
+    <string name="host_game_title">Ospita la partita</string>
+    <string name="join_via_code">Unisciti tramite codice</string>
+    <string name="game_poker">Poker</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">Opzioni</string>
+    <string name="options_title">Opzioni</string>
+    <string name="options_change_language">Cambia lingua</string>
+    <string name="options_exit_app">Esci dall\'app</string>
+    <string name="options_exit_confirm_title">Uscire dall\'app?</string>
+    <string name="options_exit_confirm_message">Sei sicuro di voler uscire da PocketTable?</string>
+    <string name="options_exit_confirm_positive">Esci</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Codice: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Giocatori: </string>
+    <string name="lobby_you"> (TU)</string>
+    <string name="show_qr">Mostra QR</string>
+    <string name="start_game">INIZIA</string>
+    <string name="qr_title">Codice QR della stanza </string>
+    <string name="qr_error">Errore nella generazione del QR</string>
+    <string name="ok">OK</string>
+    <string name="game_settings_title">Impostazioni</string>
+    <string name="lobby_toast_mafia_neutral">Non sono stati selezionati abbastanza ruoli neutrali per il numero richiesto di neutrali.</string>
+    <string name="lobby_con_error">Errore di connessione</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Unisciti alla stanza</string>
+    <string name="join_hint">Inserisci il codice (es. ABC123)</string>
+    <string name="join_search">Cerca</string>
+    <string name="join_cancel">Annulla</string>
+    <string name="code_required">Il codice deve contenere 6 caratteri!</string>
+    <string name="searching_host">Ricerca dell\'host con il codice: </string>
+    <string name="host_found">Host trovato!</string>
+    <string name="host_not_found">Nessun host trovato per il codice: </string>
+    <string name="scan_qr_from_host">Scansiona il QR dalla schermata dell\'host</string>
+    <string name="invalid_qr">Codice QR non valido</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Impostazioni della partita</string>
+    <string name="small_blind_hint">Small Blind (predefinito 50)</string>
+    <string name="big_blind_hint">Big Blind (predefinito 100)</string>
+    <string name="starting_chips_hint">Fiches iniziali (predefinito 1000)</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">Accumula +2 / +4</string>
+    <string name="colorclash_jump_in">Jump-in (gioca una carta identica fuori turno)</string>
+    <string name="colorclash_seven_swap">Il 7 scambia la mano con un giocatore scelto</string>
+    <string name="colorclash_zero_rotate">Lo 0 fa ruotare tutte le mani attorno al tavolo</string>
+
+    <string name="color_red">ROSSO</string>
+    <string name="color_yellow">GIALLO</string>
+    <string name="color_green">VERDE</string>
+    <string name="color_blue">BLU</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d carta</item>
+        <item quantity="other">%d carte</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Poker</string>
+    <string name="pot_label">Piatti: </string>
+    <string name="pot_label_placeholder">Piatto: 0</string>
+    <string name="your_chips_label">Le tue fiches: %d</string>
+    <string name="your_chips_placeholder">Le tue fiches: 1000</string>
+    <string name="your_bet_label">La tua puntata in questo round: %d</string>
+    <string name="your_bet_placeholder">La tua puntata in questo round: 0</string>
+    <string name="your_turn">TOCCA A TE!</string>
+    <string name="waiting_for_players">In attesa dei giocatori...</string>
+    <string name="waiting_for_move">In attesa della mossa...</string>
+    <string name="new_hand">NUOVA MANO</string>
+    <string name="game_started">Partita iniziata!</string>
+    <string name="game_over">Partita terminata!</string>
+    <string name="tie">Pareggio</string>
+    <string name="you_are_host">Sei l\'host. La partita è pronta!</string>
+    <string name="connected">Connesso!</string>
+    <string name="connecting">Connessione all\'host...</string>
+    <string name="connection_error">Errore di connessione: %s</string>
+    <string name="no_connection">Nessuna connessione alla partita!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Errore: %1$s</string>
+    <string name="reconnecting_message">Connessione persa, tentativo %1$d…</string>
+    <string name="reconnected_message">Riconnesso!</string>
+    <string name="reconnect_failed_message">Impossibile riconnettersi. Torna alla lobby.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">La partita è già in fase di showdown</string>
+    <string name="poker_error_not_your_turn">Non è il turno di questo giocatore</string>
+    <string name="poker_error_already_folded">Il giocatore ha già passato</string>
+    <string name="poker_error_already_all_in">Il giocatore è già all-in e non può agire</string>
+    <string name="poker_error_cannot_check">Non puoi fare check quando la puntata attuale è più alta</string>
+    <string name="poker_error_cannot_bet_existing">Non puoi puntare quando esiste già una puntata</string>
+    <string name="poker_error_bet_must_be_positive">L\'importo della puntata deve essere positivo</string>
+    <string name="poker_error_nothing_to_call">Non c\'è nulla da vedere</string>
+    <string name="poker_error_raise_too_low">Il rilancio deve essere superiore alla puntata attuale</string>
+    <string name="poker_error_already_bet_enough">Il giocatore ha già puntato abbastanza</string>
+    <string name="poker_error_no_eligible_players">Nessun giocatore attivo idoneo</string>
+    <string name="poker_error_player_not_found">Giocatore non trovato</string>
+    <string name="poker_error_cannot_deal_river">Non è possibile distribuire il river durante %s</string>
+    <string name="poker_error_cannot_deal_turn">Non è possibile distribuire il turn durante %s</string>
+    <string name="poker_error_amount_must_be_positive">L\'importo deve essere positivo</string>
+    <string name="poker_error_not_enough_chips">Fiches insufficienti</string>
+    <string name="poker_error_amount_cannot_be_negative">L\'importo non può essere negativo</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">La partita è già terminata</string>
+    <string name="colorclash_error_jumpin_disabled">Il Jump-in è disabilitato</string>
+    <string name="colorclash_error_jumpin_draw_active">Non puoi fare Jump-in quando è attivo un accumulo di pesca</string>
+    <string name="colorclash_error_use_play">È il tuo turno – usa GIOCA</string>
+    <string name="colorclash_error_invalid_card_index">Indice della carta non valido</string>
+    <string name="colorclash_error_jumpin_requires_match">Il Jump-in richiede una carta identica a quella in cima alla pila</string>
+    <string name="colorclash_error_last_card_single_only">Puoi chiamare Ultima Carta solo quando hai esattamente una carta in mano</string>
+    <string name="colorclash_error_cannot_catch_self">Non puoi catturare te stesso</string>
+    <string name="colorclash_error_nothing_to_catch">%s non ha nulla da catturare al momento</string>
+    <string name="colorclash_error_not_your_turn">Non è il turno di questo giocatore</string>
+    <string name="colorclash_error_player_eliminated">Il giocatore è stato eliminato</string>
+    <string name="colorclash_error_card_cannot_be_played">La carta non può essere giocata</string>
+    <string name="colorclash_error_choose_wild_color">Devi scegliere un colore per la carta Jolly</string>
+    <string name="colorclash_error_choose_swap_target">Scegli un giocatore con cui scambiare la mano</string>
+    <string name="colorclash_error_unknown_action">Azione sconosciuta: %s</string>
+    <string name="colorclash_error_player_not_found">Giocatore non trovato: %s</string>
+    <string name="colorclash_error_card_not_held">Il giocatore non possiede questa carta</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Sconosciuto</string>
+    <string name="colorclash_eliminated_suffix"> (fuori)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">CALL</string>
+    <string name="btn_fold">FOLD</string>
+    <string name="btn_bet">PUNTA</string>
+    <string name="btn_raise">RILANCIA</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Puntata</string>
+    <string name="raise_title">Rilancio</string>
+    <string name="enter_amount_manually">Inserisci manualmente l\'importo</string>
+    <string name="half_pot">1/2 PIATTO</string>
+    <string name="pot">PIATTO</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">Puoi fare solo ALL-IN: %d</string>
+    <string name="confirm">Conferma</string>
+    <string name="cancel">Annulla</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Giocatore</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">FOLD</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(Tu)</string>
+    <string name="host_suffix">(Host)</string>
+    <string name="winner">🏆 %s VINCE! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">Carta alta</string>
+    <string name="hand_pair">Coppia</string>
+    <string name="hand_two_pair">Doppia coppia</string>
+    <string name="hand_three_of_a_kind">Tris</string>
+    <string name="hand_straight">Scala</string>
+    <string name="hand_flush">Colore</string>
+    <string name="hand_full_house">Full house</string>
+    <string name="hand_four_of_a_kind">Poker</string>
+    <string name="hand_straight_flush">Scala colore</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Vincitore (gli altri hanno passato)</string>
+    <string name="no_data">nessun dato</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Alcuni dispositivi limitano aggressivamente le app in background</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">Sei l\'host. La partita è pronta!</string>
+    <string name="colorclash_top_card_label">In cima: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Pesca: %1$d</string>
+    <string name="colorclash_waiting_for">In attesa di %1$s</string>
+    <string name="colorclash_draw_stack_info"> (Pesca %1$d carte)</string>
+    <string name="colorclash_winner_message">🏆 %1$s VINCE! 🏆</string>
+    <string name="colorclash_catch_button">Cattura!</string>
+    <string name="colorclash_choose_color">Scegli colore</string>
+    <string name="colorclash_swap_cards_with">Scambia le carte con...</string>
+    <string name="colorclash_not_your_turn">Non è il tuo turno!</string>
+    <string name="colorclash_cannot_play_card">Non puoi giocare questa carta</string>
+    <string name="colorclash_card_not_in_hand">Carta non in mano</string>
+    <string name="colorclash_card_no_longer_in_hand">La carta non è più in mano</string>
+    <string name="colorclash_error">Errore: %1$s</string>
+    <string name="colorclash_draw">PESCA</string>
+    <string name="colorclash_last_card">ULTIMA CARTA!</string>
+    <string name="colorclash_next_round">PROSSIMO ROUND</string>
+    <string name="colorclash_your_hand">Le tue carte</string>
+    <string name="colorclash_top_card_default">In cima: </string>
+    <string name="colorclash_draw_pile_default">Pesca: 0</string>
+    <string name="colorclash_waiting_players">In attesa dei giocatori...</string>
+    <string name="colorclash_game_started">Partita iniziata!</string>
+    <string name="colorclash_game_over">Partita terminata!</string>
+    <string name="colorclash_connecting">Connessione...</string>
+    <string name="colorclash_connection_error">Errore di connessione</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Impostazioni Mafia</string>
+    <string name="mafia_role_count">Ruoli (0 = disattivato)</string>
+    <string name="mafia_timer">Usa i timer (altrimenti solo conferma manuale di prontezza)</string>
+    <string name="mafia_night_length">Durata della notte (s)</string>
+    <string name="mafia_day_length">Durata del giorno (s)</string>
+    <string name="mafia_trial_length">Durata del processo (s)</string>
+    <string name="mafia_neutral_size">Numero di giocatori neutrali</string>
+    <string name="mafia_neutral">Giocatori neutrali</string>
+    <string name="mafia_town_role">Ruoli della città (max 1 ciascuno)</string>
+    <string name="mafia_mafia">Giocatori della Mafia</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">Civile</string>
+    <string name="mafia_role_mafia">Mafia</string>
+    <string name="mafia_role_detective">Detective</string>
+    <string name="mafia_role_doctor">Dottore</string>
+    <string name="mafia_role_vigilante">Vigilante</string>
+    <string name="mafia_role_mayor">Sindaco</string>
+    <string name="mafia_role_jester">Giullare</string>
+    <string name="mafia_role_serial_killer">Serial Killer</string>
+    <string name="mafia_skip">Salta</string>
+    <string name="mafia_vote_button_label">Vota</string>
+    <string name="role_icon_desc">descrizione</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Guida ai ruoli</string>
+    <string name="mafia_role_dialog_close">Chiudi</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">Di notte, la Mafia sceglie collettivamente una vittima da uccidere. Conoscono gli altri membri della Mafia.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">Di notte, indaga su una persona e scopre se fa parte della Mafia.</string>
+    <string name="mafia_role_dialog_doctor">Di notte, protegge una persona dall\'essere uccisa.</string>
+    <string name="mafia_role_dialog_vigilante">Ha un solo proiettile per tutta la partita e può sparare a qualcuno durante la notte.</string>
+    <string name="mafia_role_dialog_mayor">Può rivelare la propria identità durante il giorno: il suo voto conta quindi doppio nelle nomination e nei processi.</string>
+    <string name="mafia_role_dialog_civilian">Non ha abilità speciali. Vota durante il giorno come qualsiasi altro membro della città.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Non ha azioni notturne. Vince immediatamente se la città decide di impiccarlo durante il giorno.</string>
+    <string name="mafia_role_dialog_serial_killer">Uccide da solo durante la notte, indipendentemente dalla Mafia. Vince quando è l\'unico giocatore ancora in vita.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Candidato</string>
+    <string name="mafia_phase">Fase: %s</string>
+    <string name="mafia_your_role">Il tuo ruolo: %s</string>
+    <string name="mafia_dead">MORTO</string>
+    <string name="mafia_voted_badge">HA VOTATO</string>
+    <string name="mafia_phase_label">Fase: %s</string>
+    <string name="mafia_your_role_label">Il tuo ruolo: %s</string>
+    <string name="mafia_game_started">Partita iniziata!</string>
+    <string name="mafia_host_ended_game">L\'host ha terminato la partita</string>
+    <string name="mafia_voting_unavailable">La votazione non è disponibile al momento</string>
+    <string name="mafia_night_result">Risultato della notte: %s</string>
+    <string name="mafia_someone_died">%s è morto</string>
+    <string name="mafia_no_one_died">Nessuno è morto</string>
+    <string name="mafia_nominated">Nominato: %s</string>
+    <string name="mafia_eliminated_by_day">Eliminato: %s</string>
+    <string name="mafia_unknown_player">Giocatore sconosciuto</string>
+    <string name="mafia_is_mafia">è Mafia!</string>
+    <string name="mafia_not_mafia">non è Mafia</string>
+    <string name="mafia_investigation_results">Risultati dell\'indagine</string>
+    <string name="mafia_ok">OK</string>
+    <string name="mafia_night_death_title">☠️ %s è morto durante la notte</string>
+    <string name="mafia_role_label">Ruolo: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s è stato eliminato dalla città</string>
+    <string name="mafia_notes_title">Note per %s</string>
+    <string name="mafia_no_notes">(nessuna nota)</string>
+    <string name="mafia_kill_confirm">Uccidere %s?</string>
+    <string name="mafia_save_confirm">Salvare %s?</string>
+    <string name="mafia_investigate_confirm">Indagare su %s?</string>
+    <string name="mafia_shoot_confirm">Sparare a %s?</string>
+    <string name="mafia_no_night_action">Non hai azioni notturne</string>
+    <string name="mafia_notes_hint">Scrivi qui le tue note...</string>
+    <string name="mafia_my_notes">Le mie note</string>
+    <string name="mafia_save">Salva</string>
+    <string name="mafia_cancel">Annulla</string>
+    <string name="mafia_confirm">Conferma</string>
+    <string name="mafia_yes">Sì</string>
+    <string name="mafia_no">No</string>
+    <string name="mafia_town_wins">🏛️ La città vince!</string>
+    <string name="mafia_mafia_wins">🔪 La Mafia vince!</string>
+    <string name="mafia_jester_wins">🤡 Il Giullare vince!</string>
+    <string name="mafia_serial_killer_wins">🔪 Il Serial Killer vince!</string>
+    <string name="mafia_waiting_for_host">\n\nIn attesa dell\'host per iniziare il prossimo round...</string>
+    <string name="mafia_new_round">Nuovo round</string>
+    <string name="mafia_end_game">Termina partita</string>
+    <string name="mafia_phase_label_short">Fase:</string>
+    <string name="mafia_role_info_button">Info ruolo</string>
+    <string name="mafia_notes_button">Note</string>
+    <string name="mafia_your_role_label_short">Il tuo ruolo:</string>
+    <string name="mafia_candidate_label">Candidato</string>
+    <string name="mafia_guilty_content_desc">Colpevole</string>
+    <string name="mafia_not_guilty_content_desc">Non colpevole</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">Giocatore non trovato: %s</string>
+    <string name="mafia_target_not_alive">Il bersaglio non è vivo</string>
+    <string name="mafia_cannot_target_self">Non puoi scegliere te stesso come bersaglio</string>
+    <string name="mafia_min_players">Mafia richiede almeno 4 giocatori</string>
+    <string name="mafia_need_mafia_role">È necessario configurare almeno 1 ruolo Mafia</string>
+    <string name="mafia_dead_cannot_act">I giocatori morti non possono agire</string>
+    <string name="mafia_notes_too_long">Note troppo lunghe (massimo 1000 caratteri)</string>
+    <string name="mafia_no_behavior">Nessun comportamento per il ruolo: %s</string>
+    <string name="mafia_unknown_action">Azione sconosciuta: %s</string>
+    <string name="mafia_game_inactive">La partita non è attualmente attiva</string>
+    <string name="mafia_game_over">La partita è terminata</string>
+    <string name="mafia_error_unknown_detective_action">Azione del detective sconosciuta</string>
+    <string name="mafia_error_unknown_doctor_action">Azione del dottore sconosciuta</string>
+    <string name="mafia_error_unknown_mafia_action">Azione della Mafia sconosciuta</string>
+    <string name="mafia_error_unknown_mayor_day_action">Azione diurna del sindaco sconosciuta</string>
+    <string name="mafia_error_unknown_sk_action">Azione del Serial Killer sconosciuta</string>
+    <string name="mafia_error_unknown_vigilante_action">Azione del Vigilante sconosciuta</string>
+    <string name="mafia_error_no_charges">Hai già usato il tuo unico proiettile</string>
+    <string name="mafia_error_no_special_day_action">Questo ruolo non ha azioni diurne speciali</string>
+    <string name="mafia_status_dead">MORTO</string>
+    <string name="mafia_config_count_negative">Il numero non può essere negativo</string>
+    <string name="mafia_config_role_at_most_1">%s può essere al massimo 1</string>
+    <string name="mafia_config_cannot_set_neutral_directly">Non è possibile impostare direttamente il numero di ruoli neutrali. Usa setNeutralCount e setAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">Il numero di neutrali (%1$d) supera il numero di classi neutrali consentite (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">Sono consentiti solo ruoli neutrali</string>
+    <string name="mafia_config_neutral_count_negative">Il numero di neutrali non può essere negativo</string>
+    <string name="mafia_config_roles_exceed_players">Sono configurati %1$d ruoli speciali, ma nella partita ci sono solo %2$d giocatori. Riduci il numero di ruoli o aggiungi altri giocatori.</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Esci</string>
+    <string name="leave_button_desc">Esci</string>
+    <string name="leave_confirm_title">Uscire?</string>
+    <string name="leave_confirm_message_host_lobby">Sei l\'host. Se esci ora, la lobby verrà chiusa per tutti.</string>
+    <string name="leave_confirm_message_host_game">Sei l\'host. Se esci ora, la partita terminerà per tutti.</string>
+    <string name="leave_confirm_message_player">Sei sicuro di voler uscire? Verrai disconnesso dalla partita.</string>
+    <string name="leave_confirm_positive">Esci</string>
+    <string name="leave_confirm_negative">Annulla</string>
+    <string name="host_ended_game">L\'host ha terminato la partita.</string>
+</resources>

@@ -33,6 +33,7 @@ import com.fizzycoyote.pockettable.engine.mafia.TimedMafiaGame;
 import com.fizzycoyote.pockettable.engine.poker.PokerGame;
 import com.fizzycoyote.pockettable.game.colorclash.ColorClashTableActivity;
 import com.fizzycoyote.pockettable.game.mafia.MafiaTableActivity;
+import com.fizzycoyote.pockettable.game.mafia.RoleInfoHelper;
 import com.fizzycoyote.pockettable.game.poker.PokerTableActivity;
 import com.fizzycoyote.pockettable.models.colorclash.ColorClashState;
 import com.fizzycoyote.pockettable.models.mafia.MafiaState;
@@ -98,6 +99,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
     private EditText etNightSeconds, etDaySeconds, etTrialSeconds;
     private CheckBox cbMafiaTimerEnabled;
     private MafiaGame mafiaGame;
+    private Button btnMafiaRoleInfo, btnRoleInfoLobby;
     //===========================
 
     private String roomCode;
@@ -155,6 +157,9 @@ public class LobbyActivity extends BaseImmersiveActivity {
         etDaySeconds = findViewById(R.id.etDaySeconds);
         etTrialSeconds = findViewById(R.id.etTrialSeconds);
         cbMafiaTimerEnabled = findViewById(R.id.cbMafiaTimerEnabled);
+        btnMafiaRoleInfo = findViewById(R.id.btnMafiaRoleInfo);
+        btnRoleInfoLobby = findViewById(R.id.btnRoleInfoLobby);
+        btnMafiaRoleInfo.setOnClickListener(v -> RoleInfoHelper.show(this));
 
         roomCode = getIntent().getStringExtra("roomCode");
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
@@ -187,6 +192,11 @@ public class LobbyActivity extends BaseImmersiveActivity {
                 confirmLeave();
             }
         });
+
+        if (gameType == GameType.MAFIA) {
+            btnRoleInfoLobby.setVisibility(View.VISIBLE);
+            btnRoleInfoLobby.setOnClickListener(v -> RoleInfoHelper.show(this));
+        }
 
         if (isHost) {
             String myIp = NetworkUtils.getLocalIpAddress();

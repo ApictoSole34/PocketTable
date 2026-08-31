@@ -1,0 +1,370 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Slapyvardis</string>
+    <string name="create_room">🃏 Sukurti kambarį</string>
+    <string name="join_room">🔗 Prisijungti naudojant kodą</string>
+    <string name="scan_qr">📷 Nuskaityti QR</string>
+    <string name="enter_nickname">Įveskite savo slapyvardį!</string>
+    <string name="join_host_title">Prisijungti prie šeimininko</string>
+    <string name="host_game_title">Sukurti žaidimą</string>
+    <string name="join_via_code">Prisijungti naudojant kodą</string>
+    <string name="game_poker">Pokeris</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">Parinktys</string>
+    <string name="options_title">Parinktys</string>
+    <string name="options_change_language">Keisti kalbą</string>
+    <string name="options_exit_app">Išeiti iš programėlės</string>
+    <string name="options_exit_confirm_title">Išeiti iš programėlės?</string>
+    <string name="options_exit_confirm_message">Ar tikrai norite išeiti iš PocketTable?</string>
+    <string name="options_exit_confirm_positive">Išeiti</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Kodas: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Žaidėjai: </string>
+    <string name="lobby_you"> (JŪS)</string>
+    <string name="show_qr">Rodyti QR</string>
+    <string name="start_game">PRADĖTI</string>
+    <string name="qr_title">Kambario QR kodas </string>
+    <string name="qr_error">QR kodo generavimo klaida</string>
+    <string name="ok">GERAI</string>
+    <string name="game_settings_title">Nustatymai</string>
+    <string name="lobby_toast_mafia_neutral">Pasirinkta per mažai neutralių vaidmenų, kad būtų galima pasiekti reikiamą neutralių žaidėjų skaičių.</string>
+    <string name="lobby_con_error">Ryšio klaida</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Prisijungti prie kambario</string>
+    <string name="join_hint">Įveskite kodą (pvz., ABC123)</string>
+    <string name="join_search">Ieškoti</string>
+    <string name="join_cancel">Atšaukti</string>
+    <string name="code_required">Kodas turi būti iš 6 simbolių!</string>
+    <string name="searching_host">Ieškoma šeimininko pagal kodą: </string>
+    <string name="host_found">Šeimininkas rastas!</string>
+    <string name="host_not_found">Šeimininkas su šiuo kodu nerastas: </string>
+    <string name="scan_qr_from_host">Nuskaitykite QR kodą šeimininko ekrane</string>
+    <string name="invalid_qr">Neteisingas QR kodas</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Žaidimo nustatymai</string>
+    <string name="small_blind_hint">Mažasis statymas (numatyta 50)</string>
+    <string name="big_blind_hint">Didysis statymas (numatyta 100)</string>
+    <string name="starting_chips_hint">Pradiniai žetonai (numatyta 1000)</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">Kaupti +2 / +4</string>
+    <string name="colorclash_jump_in">Įšokimas (žaisti identišką kortą ne savo ėjimo metu)</string>
+    <string name="colorclash_seven_swap">7 sukeičia kortas su pasirinktu žaidėju</string>
+    <string name="colorclash_zero_rotate">0 pasuka visų žaidėjų kortas aplink stalą</string>
+
+    <string name="color_red">RAUDONA</string>
+    <string name="color_yellow">GELTONA</string>
+    <string name="color_green">ŽALIA</string>
+    <string name="color_blue">MĖLYNA</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d korta</item>
+        <item quantity="few">%d kortos</item>
+        <item quantity="many">%d kortų</item>
+        <item quantity="other">%d kortų</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Pokeris</string>
+    <string name="pot_label">Bankas: </string>
+    <string name="pot_label_placeholder">Bankas: 0</string>
+    <string name="your_chips_label">Jūsų žetonai: %d</string>
+    <string name="your_chips_placeholder">Jūsų žetonai: 1000</string>
+    <string name="your_bet_label">Jūsų statymas šiame raunde: %d</string>
+    <string name="your_bet_placeholder">Jūsų statymas šiame raunde: 0</string>
+    <string name="your_turn">JŪSŲ ĖJIMAS!</string>
+    <string name="waiting_for_players">Laukiama žaidėjų...</string>
+    <string name="waiting_for_move">Laukiama ėjimo...</string>
+    <string name="new_hand">NAUJA PARTIJA</string>
+    <string name="game_started">Žaidimas pradėtas!</string>
+    <string name="game_over">Žaidimas baigtas!</string>
+    <string name="tie">Lygiosios</string>
+    <string name="you_are_host">Jūs esate šeimininkas. Žaidimas paruoštas!</string>
+    <string name="connected">Prisijungta!</string>
+    <string name="connecting">Jungiamasi prie šeimininko...</string>
+    <string name="connection_error">Ryšio klaida: %s</string>
+    <string name="no_connection">Nėra ryšio su žaidimu!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Klaida: %1$s</string>
+    <string name="reconnecting_message">Ryšys nutrūko, bandymas prisijungti iš naujo %1$d…</string>
+    <string name="reconnected_message">Prisijungta iš naujo!</string>
+    <string name="reconnect_failed_message">Nepavyko prisijungti iš naujo. Grįžkite į laukiamąjį.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">Žaidimas jau yra atidengtų kortų etape</string>
+    <string name="poker_error_not_your_turn">Šiuo metu ne šio žaidėjo ėjimas</string>
+    <string name="poker_error_already_folded">Žaidėjas jau pasitraukė</string>
+    <string name="poker_error_already_all_in">Žaidėjas jau atliko ALL-IN ir nebegali atlikti veiksmų</string>
+    <string name="poker_error_cannot_check">Negalima tikrinti, nes dabartinis statymas yra didesnis</string>
+    <string name="poker_error_cannot_bet_existing">Negalima statyti, kai jau yra atliktas statymas</string>
+    <string name="poker_error_bet_must_be_positive">Statymo suma turi būti teigiama</string>
+    <string name="poker_error_nothing_to_call">Nėra ko atsakyti</string>
+    <string name="poker_error_raise_too_low">Pakelimas turi būti didesnis už dabartinį statymą</string>
+    <string name="poker_error_already_bet_enough">Žaidėjas jau pastatė pakankamą sumą</string>
+    <string name="poker_error_no_eligible_players">Nėra tinkamų aktyvių žaidėjų</string>
+    <string name="poker_error_player_not_found">Žaidėjas nerastas</string>
+    <string name="poker_error_cannot_deal_river">Negalima dalinti riverio etapo metu %s</string>
+    <string name="poker_error_cannot_deal_turn">Negalima dalinti turno etapo metu %s</string>
+    <string name="poker_error_amount_must_be_positive">Suma turi būti teigiama</string>
+    <string name="poker_error_not_enough_chips">Nepakanka žetonų</string>
+    <string name="poker_error_amount_cannot_be_negative">Suma negali būti neigiama</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">Žaidimas jau baigtas</string>
+    <string name="colorclash_error_jumpin_disabled">Įšokimas išjungtas</string>
+    <string name="colorclash_error_jumpin_draw_active">Negalima įšokti, kai aktyvi traukimo seka</string>
+    <string name="colorclash_error_use_play">Tai jūsų ėjimas – naudokite PLAY</string>
+    <string name="colorclash_error_invalid_card_index">Neteisingas kortos indeksas</string>
+    <string name="colorclash_error_jumpin_requires_match">Įšokimui reikalinga identiška korta viršutinės krūvelės kortai</string>
+    <string name="colorclash_error_last_card_single_only">„Paskutinę kortą“ galite paskelbti tik tada, kai rankoje turite tik vieną kortą</string>
+    <string name="colorclash_error_cannot_catch_self">Negalite pagauti savęs</string>
+    <string name="colorclash_error_nothing_to_catch">%s šiuo metu nėra ko pagauti</string>
+    <string name="colorclash_error_not_your_turn">Šiuo metu ne šio žaidėjo ėjimas</string>
+    <string name="colorclash_error_player_eliminated">Žaidėjas pašalintas</string>
+    <string name="colorclash_error_card_cannot_be_played">Šios kortos negalima žaisti</string>
+    <string name="colorclash_error_choose_wild_color">Turite pasirinkti laukinės kortos spalvą</string>
+    <string name="colorclash_error_choose_swap_target">Pasirinkite žaidėją, su kuriuo norite sukeisti kortas</string>
+    <string name="colorclash_error_unknown_action">Nežinomas veiksmas: %s</string>
+    <string name="colorclash_error_player_not_found">Žaidėjas nerastas: %s</string>
+    <string name="colorclash_error_card_not_held">Žaidėjas neturi šios kortos</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Nežinomas</string>
+    <string name="colorclash_eliminated_suffix"> (pašalintas)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">TIKRINTI</string>
+    <string name="btn_call">ATSAKYTI</string>
+    <string name="btn_fold">PASITRAUKTI</string>
+    <string name="btn_bet">STATYTI</string>
+    <string name="btn_raise">KELTI</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Statymas</string>
+    <string name="raise_title">Kėlimas</string>
+    <string name="enter_amount_manually">Įvesti sumą rankiniu būdu</string>
+    <string name="half_pot">1/2 BANKO</string>
+    <string name="pot">BANKAS</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">Galite atlikti tik ALL-IN: %d</string>
+    <string name="confirm">Patvirtinti</string>
+    <string name="cancel">Atšaukti</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Žaidėjas</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">PASITRAUKĖ</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(Jūs)</string>
+    <string name="host_suffix">(Šeimininkas)</string>
+    <string name="winner">🏆 %s LAIMI! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">Aukščiausia korta</string>
+    <string name="hand_pair">Pora</string>
+    <string name="hand_two_pair">Dvi poros</string>
+    <string name="hand_three_of_a_kind">Trys vienodos</string>
+    <string name="hand_straight">Eilė</string>
+    <string name="hand_flush">Spalva</string>
+    <string name="hand_full_house">Pilna trobelė</string>
+    <string name="hand_four_of_a_kind">Keturios vienodos</string>
+    <string name="hand_straight_flush">Spalvinė eilė</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Laimėtojas (kiti pasitraukė)</string>
+    <string name="no_data">nėra duomenų</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Kai kurie įrenginiai agresyviai riboja fone veikiančias programėles</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">Jūs esate šeimininkas. Žaidimas paruoštas!</string>
+    <string name="colorclash_top_card_label">Viršuje: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Traukti: %1$d</string>
+    <string name="colorclash_waiting_for">Laukiama %1$s</string>
+    <string name="colorclash_draw_stack_info"> (traukti %1$d kort.)</string>
+    <string name="colorclash_winner_message">🏆 %1$s LAIMI! 🏆</string>
+    <string name="colorclash_catch_button">Pagauti!</string>
+    <string name="colorclash_choose_color">Pasirinkite spalvą</string>
+    <string name="colorclash_swap_cards_with">Sukeisti kortas su...</string>
+    <string name="colorclash_not_your_turn">Tai ne jūsų ėjimas!</string>
+    <string name="colorclash_cannot_play_card">Negalite žaisti šios kortos</string>
+    <string name="colorclash_card_not_in_hand">Kortos nėra rankoje</string>
+    <string name="colorclash_card_no_longer_in_hand">Kortos nebėra rankoje</string>
+    <string name="colorclash_error">Klaida: %1$s</string>
+    <string name="colorclash_draw">TRAUKTI</string>
+    <string name="colorclash_last_card">PASKUTINĖ KORTA!</string>
+    <string name="colorclash_next_round">KITAS RAUNDAS</string>
+    <string name="colorclash_your_hand">Jūsų kortos</string>
+    <string name="colorclash_top_card_default">Viršuje: </string>
+    <string name="colorclash_draw_pile_default">Traukti: 0</string>
+    <string name="colorclash_waiting_players">Laukiama žaidėjų...</string>
+    <string name="colorclash_game_started">Žaidimas pradėtas!</string>
+    <string name="colorclash_game_over">Žaidimas baigtas!</string>
+    <string name="colorclash_connecting">Jungiamasi...</string>
+    <string name="colorclash_connection_error">Ryšio klaida</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Mafia nustatymai</string>
+    <string name="mafia_role_count">Vaidmenys (0 = išjungta)</string>
+    <string name="mafia_timer">Naudoti laikmačius (kitu atveju tik rankinis pasiruošimas)</string>
+    <string name="mafia_night_length">Nakties trukmė (s)</string>
+    <string name="mafia_day_length">Dienos trukmė (s)</string>
+    <string name="mafia_trial_length">Teismo trukmė (s)</string>
+    <string name="mafia_neutral_size">Neutralių žaidėjų skaičius</string>
+    <string name="mafia_neutral">Neutralūs žaidėjai</string>
+    <string name="mafia_town_role">Miesto vaidmuo (daugiausia 1 kiekvieno)</string>
+    <string name="mafia_mafia">Mafia žaidėjai</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">Civilis</string>
+    <string name="mafia_role_mafia">Mafia</string>
+    <string name="mafia_role_detective">Detektyvas</string>
+    <string name="mafia_role_doctor">Gydytojas</string>
+    <string name="mafia_role_vigilante">Budėtojas</string>
+    <string name="mafia_role_mayor">Meras</string>
+    <string name="mafia_role_jester">Juokdarys</string>
+    <string name="mafia_role_serial_killer">Serijinis žudikas</string>
+    <string name="mafia_skip">Praleisti</string>
+    <string name="mafia_vote_button_label">Balsuoti</string>
+    <string name="role_icon_desc">aprašymas</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Vaidmenų vadovas</string>
+    <string name="mafia_role_dialog_close">Uždaryti</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">Naktį Mafia kartu pasirenka auką, kurią nužudyti. Jie žino kitus Mafia narius.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">Naktį ištiria vieną asmenį ir sužino, ar jis yra Mafia narys.</string>
+    <string name="mafia_role_dialog_doctor">Naktį apsaugo vieną asmenį nuo nužudymo.</string>
+    <string name="mafia_role_dialog_vigilante">Visam žaidimui turi tik vieną kulką ir gali naktį ką nors nušauti.</string>
+    <string name="mafia_role_dialog_mayor">Dieną gali atskleisti savo tapatybę – tada jo balsas skiriant kandidatą ir teisme skaičiuojamas kaip du balsai.</string>
+    <string name="mafia_role_dialog_civilian">Neturi specialių gebėjimų. Dieną balsuoja kaip ir kiti miesto gyventojai.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Neturi naktinio veiksmo. Iškart laimi, jei miestas nusprendžia jį dieną nulinčiuoti.</string>
+    <string name="mafia_role_dialog_serial_killer">Naktį žudo vienas, nepriklausomai nuo Mafia. Laimi, kai lieka vienintelis gyvas žaidėjas.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Kandidatas</string>
+    <string name="mafia_phase">Fazė: %s</string>
+    <string name="mafia_your_role">Jūsų vaidmuo: %s</string>
+    <string name="mafia_dead">MIRĘS</string>
+    <string name="mafia_voted_badge">BALSAVO</string>
+    <string name="mafia_phase_label">Fazė: %s</string>
+    <string name="mafia_your_role_label">Jūsų vaidmuo: %s</string>
+    <string name="mafia_game_started">Žaidimas pradėtas!</string>
+    <string name="mafia_host_ended_game">Šeimininkas baigė žaidimą</string>
+    <string name="mafia_voting_unavailable">Šiuo metu balsuoti negalima</string>
+    <string name="mafia_night_result">Nakties rezultatas: %s</string>
+    <string name="mafia_someone_died">%s mirė</string>
+    <string name="mafia_no_one_died">Niekas nemirė</string>
+    <string name="mafia_nominated">Nominuotas: %s</string>
+    <string name="mafia_eliminated_by_day">Pašalintas: %s</string>
+    <string name="mafia_unknown_player">Nežinomas žaidėjas</string>
+    <string name="mafia_is_mafia">yra Mafia!</string>
+    <string name="mafia_not_mafia">nėra Mafia</string>
+    <string name="mafia_investigation_results">Tyrimo rezultatai</string>
+    <string name="mafia_ok">GERAI</string>
+    <string name="mafia_night_death_title">☠️ %s mirė naktį</string>
+    <string name="mafia_role_label">Vaidmuo: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s buvo pašalintas miesto</string>
+    <string name="mafia_notes_title">%s pastabos</string>
+    <string name="mafia_no_notes">(pastabų nėra)</string>
+    <string name="mafia_kill_confirm">Nužudyti %s?</string>
+    <string name="mafia_save_confirm">Išgelbėti %s?</string>
+    <string name="mafia_investigate_confirm">Ištirti %s?</string>
+    <string name="mafia_shoot_confirm">Nušauti %s?</string>
+    <string name="mafia_no_night_action">Neturite naktinio veiksmo</string>
+    <string name="mafia_notes_hint">Rašykite savo pastabas čia...</string>
+    <string name="mafia_my_notes">Mano pastabos</string>
+    <string name="mafia_save">Išsaugoti</string>
+    <string name="mafia_cancel">Atšaukti</string>
+    <string name="mafia_confirm">Patvirtinti</string>
+    <string name="mafia_yes">Taip</string>
+    <string name="mafia_no">Ne</string>
+    <string name="mafia_town_wins">🏛️ Miestas laimi!</string>
+    <string name="mafia_mafia_wins">🔪 Mafia laimi!</string>
+    <string name="mafia_jester_wins">🤡 Juokdarys laimi!</string>
+    <string name="mafia_serial_killer_wins">🔪 Serijinis žudikas laimi!</string>
+    <string name="mafia_waiting_for_host">\n\nLaukiama, kol šeimininkas pradės kitą raundą...</string>
+    <string name="mafia_new_round">Naujas raundas</string>
+    <string name="mafia_end_game">Baigti žaidimą</string>
+    <string name="mafia_phase_label_short">Fazė:</string>
+    <string name="mafia_role_info_button">Vaidmens informacija</string>
+    <string name="mafia_notes_button">Pastabos</string>
+    <string name="mafia_your_role_label_short">Jūsų vaidmuo:</string>
+    <string name="mafia_candidate_label">Kandidatas</string>
+    <string name="mafia_guilty_content_desc">Kaltas</string>
+    <string name="mafia_not_guilty_content_desc">Nekaltas</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">Žaidėjas nerastas: %s</string>
+    <string name="mafia_target_not_alive">Taikinys nėra gyvas</string>
+    <string name="mafia_cannot_target_self">Negalite pasirinkti savęs kaip taikinio</string>
+    <string name="mafia_min_players">Mafia reikia bent 4 žaidėjų</string>
+    <string name="mafia_need_mafia_role">Reikia sukonfigūruoti bent 1 Mafia vaidmenį</string>
+    <string name="mafia_dead_cannot_act">Mirę žaidėjai negali veikti</string>
+    <string name="mafia_notes_too_long">Pastabos per ilgos (daugiausia 1000 simbolių)</string>
+    <string name="mafia_no_behavior">Šiam vaidmeniui nėra elgesio: %s</string>
+    <string name="mafia_unknown_action">Nežinomas veiksmas: %s</string>
+    <string name="mafia_game_inactive">Žaidimas šiuo metu neaktyvus</string>
+    <string name="mafia_game_over">Žaidimas baigtas</string>
+    <string name="mafia_error_unknown_detective_action">Nežinomas detektyvo veiksmas</string>
+    <string name="mafia_error_unknown_doctor_action">Nežinomas gydytojo veiksmas</string>
+    <string name="mafia_error_unknown_mafia_action">Nežinomas Mafia veiksmas</string>
+    <string name="mafia_error_unknown_mayor_day_action">Nežinomas mero dienos veiksmas</string>
+    <string name="mafia_error_unknown_sk_action">Nežinomas serijinio žudiko veiksmas</string>
+    <string name="mafia_error_unknown_vigilante_action">Nežinomas budėtojo veiksmas</string>
+    <string name="mafia_error_no_charges">Jau panaudojote savo vienintelę kulką</string>
+    <string name="mafia_error_no_special_day_action">Šis vaidmuo neturi specialaus dienos veiksmo</string>
+    <string name="mafia_status_dead">MIRĘS</string>
+    <string name="mafia_config_count_negative">Skaičius negali būti neigiamas</string>
+    <string name="mafia_config_role_at_most_1">%s gali būti daugiausia 1</string>
+    <string name="mafia_config_cannot_set_neutral_directly">Negalima tiesiogiai nustatyti neutralaus vaidmens skaičiaus. Naudokite setNeutralCount ir setAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">Neutralių žaidėjų skaičius (%1$d) viršija leidžiamų neutralių vaidmenų skaičių (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">Leidžiami tik neutralūs vaidmenys</string>
+    <string name="mafia_config_neutral_count_negative">Neutralių žaidėjų skaičius negali būti neigiamas</string>
+    <string name="mafia_config_roles_exceed_players">Sukonfigūruota %1$d specialių vaidmenų, tačiau žaidime yra tik %2$d žaidėjų. Sumažinkite vaidmenų skaičių arba pridėkite daugiau žaidėjų.</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Išeiti</string>
+    <string name="leave_button_desc">Išeiti</string>
+    <string name="leave_confirm_title">Išeiti?</string>
+    <string name="leave_confirm_message_host_lobby">Jūs esate šeimininkas. Jei išeisite dabar, laukiamasis bus uždarytas visiems.</string>
+    <string name="leave_confirm_message_host_game">Jūs esate šeimininkas. Jei išeisite dabar, žaidimas baigsis visiems.</string>
+    <string name="leave_confirm_message_player">Ar tikrai norite išeiti? Būsite atjungti nuo žaidimo.</string>
+    <string name="leave_confirm_positive">Išeiti</string>
+    <string name="leave_confirm_negative">Atšaukti</string>
+    <string name="host_ended_game">Šeimininkas baigė žaidimą.</string>
+</resources>

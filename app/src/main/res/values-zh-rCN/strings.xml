@@ -1,0 +1,368 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">昵称</string>
+    <string name="create_room">🃏 创建房间</string>
+    <string name="join_room">🔗 使用代码加入</string>
+    <string name="scan_qr">📷 扫描二维码</string>
+    <string name="enter_nickname">请输入您的昵称！</string>
+    <string name="join_host_title">加入主机</string>
+    <string name="host_game_title">创建游戏</string>
+    <string name="join_via_code">使用代码加入</string>
+    <string name="game_poker">扑克</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">选项</string>
+    <string name="options_title">选项</string>
+    <string name="options_change_language">更改语言</string>
+    <string name="options_exit_app">退出应用</string>
+    <string name="options_exit_confirm_title">退出应用？</string>
+    <string name="options_exit_confirm_message">确定要退出 PocketTable 吗？</string>
+    <string name="options_exit_confirm_positive">退出</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">代码： </string>
+    <string name="ip_label">IP： </string>
+    <string name="players_label">玩家： </string>
+    <string name="lobby_you">（你）</string>
+    <string name="show_qr">显示二维码</string>
+    <string name="start_game">开始</string>
+    <string name="qr_title">房间二维码 </string>
+    <string name="qr_error">二维码生成错误</string>
+    <string name="ok">确定</string>
+    <string name="game_settings_title">设置</string>
+    <string name="lobby_toast_mafia_neutral">为所需的中立角色数量选择的中立角色不足。</string>
+    <string name="lobby_con_error">连接错误</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">加入房间</string>
+    <string name="join_hint">输入代码（例如 ABC123）</string>
+    <string name="join_search">搜索</string>
+    <string name="join_cancel">取消</string>
+    <string name="code_required">代码必须为 6 个字符！</string>
+    <string name="searching_host">正在搜索代码为以下的主机： </string>
+    <string name="host_found">找到主机！</string>
+    <string name="host_not_found">未找到代码为以下的主机： </string>
+    <string name="scan_qr_from_host">扫描主机屏幕上的二维码</string>
+    <string name="invalid_qr">无效的二维码</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">游戏设置</string>
+    <string name="small_blind_hint">小盲注（默认 50）</string>
+    <string name="big_blind_hint">大盲注（默认 100）</string>
+    <string name="starting_chips_hint">初始筹码（默认 1000）</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">叠加 +2 / +4</string>
+    <string name="colorclash_jump_in">抢出（在非自己的回合打出相同的牌）</string>
+    <string name="colorclash_seven_swap">7：与指定玩家交换手牌</string>
+    <string name="colorclash_zero_rotate">0：所有玩家的手牌沿桌面轮换</string>
+
+    <string name="color_red">红色</string>
+    <string name="color_yellow">黄色</string>
+    <string name="color_green">绿色</string>
+    <string name="color_blue">蓝色</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d 张牌</item>
+        <item quantity="other">%d 张牌</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ 扑克</string>
+    <string name="pot_label">底池： </string>
+    <string name="pot_label_placeholder">底池：0</string>
+    <string name="your_chips_label">你的筹码：%d</string>
+    <string name="your_chips_placeholder">你的筹码：1000</string>
+    <string name="your_bet_label">本轮你的下注：%d</string>
+    <string name="your_bet_placeholder">本轮你的下注：0</string>
+    <string name="your_turn">轮到你了！</string>
+    <string name="waiting_for_players">等待玩家...</string>
+    <string name="waiting_for_move">等待操作...</string>
+    <string name="new_hand">新一手</string>
+    <string name="game_started">游戏开始！</string>
+    <string name="game_over">游戏结束！</string>
+    <string name="tie">平局</string>
+    <string name="you_are_host">你是主机。游戏已准备就绪！</string>
+    <string name="connected">已连接！</string>
+    <string name="connecting">正在连接主机...</string>
+    <string name="connection_error">连接错误：%s</string>
+    <string name="no_connection">无法连接到游戏！</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">错误：%1$s</string>
+    <string name="reconnecting_message">连接已断开，正在尝试重新连接（第 %1$d 次）…</string>
+    <string name="reconnected_message">已重新连接！</string>
+    <string name="reconnect_failed_message">无法重新连接。请返回大厅。</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">游戏已经进入摊牌阶段</string>
+    <string name="poker_error_not_your_turn">现在不是该玩家的回合</string>
+    <string name="poker_error_already_folded">玩家已经弃牌</string>
+    <string name="poker_error_already_all_in">玩家已经全押，无法进行操作</string>
+    <string name="poker_error_cannot_check">当前下注更高，无法过牌</string>
+    <string name="poker_error_cannot_bet_existing">已有下注时无法下注</string>
+    <string name="poker_error_bet_must_be_positive">下注金额必须为正数</string>
+    <string name="poker_error_nothing_to_call">没有需要跟注的金额</string>
+    <string name="poker_error_raise_too_low">加注金额必须高于当前下注</string>
+    <string name="poker_error_already_bet_enough">玩家已经下注足够的金额</string>
+    <string name="poker_error_no_eligible_players">没有符合条件的活跃玩家</string>
+    <string name="poker_error_player_not_found">未找到玩家</string>
+    <string name="poker_error_cannot_deal_river">在 %s 阶段无法发河牌</string>
+    <string name="poker_error_cannot_deal_turn">在 %s 阶段无法发转牌</string>
+    <string name="poker_error_amount_must_be_positive">金额必须为正数</string>
+    <string name="poker_error_not_enough_chips">筹码不足</string>
+    <string name="poker_error_amount_cannot_be_negative">金额不能为负数</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">游戏已经结束</string>
+    <string name="colorclash_error_jumpin_disabled">抢出功能已禁用</string>
+    <string name="colorclash_error_jumpin_draw_active">抽牌堆生效时无法使用抢出</string>
+    <string name="colorclash_error_use_play">轮到你了 – 请使用 PLAY</string>
+    <string name="colorclash_error_invalid_card_index">无效的卡牌索引</string>
+    <string name="colorclash_error_jumpin_requires_match">抢出需要与牌堆顶端完全相同的卡牌</string>
+    <string name="colorclash_error_last_card_single_only">只有手中恰好剩下一张牌时才能喊“最后一张牌”</string>
+    <string name="colorclash_error_cannot_catch_self">不能抓自己</string>
+    <string name="colorclash_error_nothing_to_catch">%s 目前没有可以抓的对象</string>
+    <string name="colorclash_error_not_your_turn">现在不是该玩家的回合</string>
+    <string name="colorclash_error_player_eliminated">玩家已被淘汰</string>
+    <string name="colorclash_error_card_cannot_be_played">无法打出这张牌</string>
+    <string name="colorclash_error_choose_wild_color">你必须为万能牌选择一种颜色</string>
+    <string name="colorclash_error_choose_swap_target">选择一名玩家交换手牌</string>
+    <string name="colorclash_error_unknown_action">未知操作：%s</string>
+    <string name="colorclash_error_player_not_found">未找到玩家：%s</string>
+    <string name="colorclash_error_card_not_held">玩家没有这张牌</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">未知</string>
+    <string name="colorclash_eliminated_suffix">（已淘汰）</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">过牌</string>
+    <string name="btn_call">跟注</string>
+    <string name="btn_fold">弃牌</string>
+    <string name="btn_bet">下注</string>
+    <string name="btn_raise">加注</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">下注</string>
+    <string name="raise_title">加注</string>
+    <string name="enter_amount_manually">手动输入金额</string>
+    <string name="half_pot">底池的 1/2</string>
+    <string name="pot">底池</string>
+    <string name="all_in">全押</string>
+    <string name="all_in_only">你只能全押：%d</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">玩家</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">弃牌</string>
+    <string name="status_all_in">全押</string>
+    <string name="you_suffix">（你）</string>
+    <string name="host_suffix">（主机）</string>
+    <string name="winner">🏆 %s 获胜！🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">高牌</string>
+    <string name="hand_pair">一对</string>
+    <string name="hand_two_pair">两对</string>
+    <string name="hand_three_of_a_kind">三条</string>
+    <string name="hand_straight">顺子</string>
+    <string name="hand_flush">同花</string>
+    <string name="hand_full_house">葫芦</string>
+    <string name="hand_four_of_a_kind">四条</string>
+    <string name="hand_straight_flush">同花顺</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">获胜者（其他玩家弃牌）</string>
+    <string name="no_data">无数据</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">部分设备会严格限制后台运行的应用</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">你是主机。游戏已准备就绪！</string>
+    <string name="colorclash_top_card_label">顶部：%1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">抽牌：%1$d</string>
+    <string name="colorclash_waiting_for">等待 %1$s</string>
+    <string name="colorclash_draw_stack_info">（抽 %1$d 张牌）</string>
+    <string name="colorclash_winner_message">🏆 %1$s 获胜！🏆</string>
+    <string name="colorclash_catch_button">抓牌！</string>
+    <string name="colorclash_choose_color">选择颜色</string>
+    <string name="colorclash_swap_cards_with">与...交换手牌</string>
+    <string name="colorclash_not_your_turn">还没轮到你！</string>
+    <string name="colorclash_cannot_play_card">你不能打出这张牌</string>
+    <string name="colorclash_card_not_in_hand">手中没有这张牌</string>
+    <string name="colorclash_card_no_longer_in_hand">这张牌已经不在手中</string>
+    <string name="colorclash_error">错误：%1$s</string>
+    <string name="colorclash_draw">抽牌</string>
+    <string name="colorclash_last_card">最后一张牌！</string>
+    <string name="colorclash_next_round">下一回合</string>
+    <string name="colorclash_your_hand">你的手牌</string>
+    <string name="colorclash_top_card_default">顶部： </string>
+    <string name="colorclash_draw_pile_default">抽牌：0</string>
+    <string name="colorclash_waiting_players">等待玩家...</string>
+    <string name="colorclash_game_started">游戏开始！</string>
+    <string name="colorclash_game_over">游戏结束！</string>
+    <string name="colorclash_connecting">正在连接...</string>
+    <string name="colorclash_connection_error">连接错误</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">黑手党设置</string>
+    <string name="mafia_role_count">角色（0 = 关闭）</string>
+    <string name="mafia_timer">使用计时器（否则仅手动确认准备状态）</string>
+    <string name="mafia_night_length">夜晚时长（秒）</string>
+    <string name="mafia_day_length">白天时长（秒）</string>
+    <string name="mafia_trial_length">审判时长（秒）</string>
+    <string name="mafia_neutral_size">中立玩家数量</string>
+    <string name="mafia_neutral">中立玩家</string>
+    <string name="mafia_town_role">平民阵营角色（每种最多 1 个）</string>
+    <string name="mafia_mafia">黑手党玩家</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">平民</string>
+    <string name="mafia_role_mafia">黑手党</string>
+    <string name="mafia_role_detective">侦探</string>
+    <string name="mafia_role_doctor">医生</string>
+    <string name="mafia_role_vigilante">治安官</string>
+    <string name="mafia_role_mayor">市长</string>
+    <string name="mafia_role_jester">小丑</string>
+    <string name="mafia_role_serial_killer">连环杀手</string>
+    <string name="mafia_skip">跳过</string>
+    <string name="mafia_vote_button_label">投票</string>
+    <string name="role_icon_desc">描述</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">角色指南</string>
+    <string name="mafia_role_dialog_close">关闭</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">夜晚时，黑手党共同选择一名受害者将其杀死。他们知道其他黑手党成员的身份。</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">夜晚时调查一名玩家，并得知其是否属于黑手党。</string>
+    <string name="mafia_role_dialog_doctor">夜晚时保护一名玩家，使其免于被杀。</string>
+    <string name="mafia_role_dialog_vigilante">整场游戏只有一发子弹——可以在夜晚射杀一名玩家。</string>
+    <string name="mafia_role_dialog_mayor">白天可以公开自己的身份——此后其投票在提名和审判中算作两票。</string>
+    <string name="mafia_role_dialog_civilian">没有特殊能力。白天像其他平民一样进行投票。</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">没有夜间行动。如果白天平民决定处决他，将立即获胜。</string>
+    <string name="mafia_role_dialog_serial_killer">夜晚独自杀人，不受黑手党影响。当自己成为唯一存活的玩家时获胜。</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">候选人</string>
+    <string name="mafia_phase">阶段：%s</string>
+    <string name="mafia_your_role">你的角色：%s</string>
+    <string name="mafia_dead">死亡</string>
+    <string name="mafia_voted_badge">已投票</string>
+    <string name="mafia_phase_label">阶段：%s</string>
+    <string name="mafia_your_role_label">你的角色：%s</string>
+    <string name="mafia_game_started">游戏开始！</string>
+    <string name="mafia_host_ended_game">主机结束了游戏</string>
+    <string name="mafia_voting_unavailable">当前无法投票</string>
+    <string name="mafia_night_result">夜晚结果：%s</string>
+    <string name="mafia_someone_died">%s 死亡</string>
+    <string name="mafia_no_one_died">无人死亡</string>
+    <string name="mafia_nominated">被提名：%s</string>
+    <string name="mafia_eliminated_by_day">被淘汰：%s</string>
+    <string name="mafia_unknown_player">未知玩家</string>
+    <string name="mafia_is_mafia">是黑手党！</string>
+    <string name="mafia_not_mafia">不是黑手党</string>
+    <string name="mafia_investigation_results">调查结果</string>
+    <string name="mafia_ok">确定</string>
+    <string name="mafia_night_death_title">☠️ %s 在夜晚死亡</string>
+    <string name="mafia_role_label">角色：%s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s 被平民淘汰</string>
+    <string name="mafia_notes_title">%s 的笔记</string>
+    <string name="mafia_no_notes">（无笔记）</string>
+    <string name="mafia_kill_confirm">杀死 %s？</string>
+    <string name="mafia_save_confirm">救 %s？</string>
+    <string name="mafia_investigate_confirm">调查 %s？</string>
+    <string name="mafia_shoot_confirm">射杀 %s？</string>
+    <string name="mafia_no_night_action">你没有夜间行动</string>
+    <string name="mafia_notes_hint">在这里写下你的笔记...</string>
+    <string name="mafia_my_notes">我的笔记</string>
+    <string name="mafia_save">保存</string>
+    <string name="mafia_cancel">取消</string>
+    <string name="mafia_confirm">确认</string>
+    <string name="mafia_yes">是</string>
+    <string name="mafia_no">否</string>
+    <string name="mafia_town_wins">🏛️ 平民阵营获胜！</string>
+    <string name="mafia_mafia_wins">🔪 黑手党获胜！</string>
+    <string name="mafia_jester_wins">🤡 小丑获胜！</string>
+    <string name="mafia_serial_killer_wins">🔪 连环杀手获胜！</string>
+    <string name="mafia_waiting_for_host">\n\n等待主机开始下一回合...</string>
+    <string name="mafia_new_round">新回合</string>
+    <string name="mafia_end_game">结束游戏</string>
+    <string name="mafia_phase_label_short">阶段：</string>
+    <string name="mafia_role_info_button">角色信息</string>
+    <string name="mafia_notes_button">笔记</string>
+    <string name="mafia_your_role_label_short">你的角色：</string>
+    <string name="mafia_candidate_label">候选人</string>
+    <string name="mafia_guilty_content_desc">有罪</string>
+    <string name="mafia_not_guilty_content_desc">无罪</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">未找到玩家：%s</string>
+    <string name="mafia_target_not_alive">目标已死亡</string>
+    <string name="mafia_cannot_target_self">不能选择自己作为目标</string>
+    <string name="mafia_min_players">黑手党游戏至少需要 4 名玩家</string>
+    <string name="mafia_need_mafia_role">至少需要配置 1 个黑手党角色</string>
+    <string name="mafia_dead_cannot_act">死亡玩家无法行动</string>
+    <string name="mafia_notes_too_long">笔记过长（最多 1000 个字符）</string>
+    <string name="mafia_no_behavior">角色没有对应的行为：%s</string>
+    <string name="mafia_unknown_action">未知操作：%s</string>
+    <string name="mafia_game_inactive">游戏当前未处于活动状态</string>
+    <string name="mafia_game_over">游戏已结束</string>
+    <string name="mafia_error_unknown_detective_action">未知的侦探操作</string>
+    <string name="mafia_error_unknown_doctor_action">未知的医生操作</string>
+    <string name="mafia_error_unknown_mafia_action">未知的黑手党操作</string>
+    <string name="mafia_error_unknown_mayor_day_action">未知的市长日间操作</string>
+    <string name="mafia_error_unknown_sk_action">未知的连环杀手操作</string>
+    <string name="mafia_error_unknown_vigilante_action">未知的治安官操作</string>
+    <string name="mafia_error_no_charges">你已经使用了唯一的一发子弹</string>
+    <string name="mafia_error_no_special_day_action">此角色没有特殊的日间行动</string>
+    <string name="mafia_status_dead">死亡</string>
+    <string name="mafia_config_count_negative">数量不能为负数</string>
+    <string name="mafia_config_role_at_most_1">%s 最多只能有 1 个</string>
+    <string name="mafia_config_cannot_set_neutral_directly">无法直接设置中立角色数量。请使用 setNeutralCount 和 setAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">中立玩家数量（%1$d）超过允许的中立角色数量（%2$d）</string>
+    <string name="mafia_config_only_neutral_allowed">只允许使用中立角色</string>
+    <string name="mafia_config_neutral_count_negative">中立玩家数量不能为负数</string>
+    <string name="mafia_config_roles_exceed_players">已配置 %1$d 个特殊角色，但游戏中只有 %2$d 名玩家。请减少角色数量或增加玩家。</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">离开</string>
+    <string name="leave_button_desc">离开</string>
+    <string name="leave_confirm_title">离开？</string>
+    <string name="leave_confirm_message_host_lobby">你是主机。现在离开将关闭所有人的大厅。</string>
+    <string name="leave_confirm_message_host_game">你是主机。现在离开将结束所有人的游戏。</string>
+    <string name="leave_confirm_message_player">确定要离开吗？你将与游戏断开连接。</string>
+    <string name="leave_confirm_positive">离开</string>
+    <string name="leave_confirm_negative">取消</string>
+    <string name="host_ended_game">主机结束了游戏。</string>
+</resources>

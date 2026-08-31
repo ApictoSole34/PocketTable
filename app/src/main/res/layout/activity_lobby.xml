@@ -55,6 +55,17 @@
                 android:textSize="16sp"
                 android:textColor="#AAAAAA"
                 android:layout_marginBottom="16dp"/>
+            <!-- mafia role for players -->
+            <Button
+                android:id="@+id/btnRoleInfoLobby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mafia_role_info_button"
+                android:textAllCaps="false"
+                android:background="@drawable/btn_mafia_rounded"
+                android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPlayers"
@@ -174,6 +185,16 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/btnMafiaRoleInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mafia_role_info_button"
+                    android:textAllCaps="false"
+                    android:background="@drawable/btn_mafia_rounded"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- mafia -->
                 <LinearLayout

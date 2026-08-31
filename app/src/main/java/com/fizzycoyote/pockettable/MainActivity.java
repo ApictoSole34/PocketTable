@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.fizzycoyote.pockettable.engine.common.GameType;
 import com.fizzycoyote.pockettable.lobby.LobbyActivity;
 import com.fizzycoyote.pockettable.network.common.DiscoveryService;
+import com.fizzycoyote.pockettable.utils.AppOptionsDialogHelper;
 import com.fizzycoyote.pockettable.utils.RoomCodeGenerator;
 import com.fizzycoyote.pockettable.BuildConfig;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -26,7 +27,7 @@ import java.util.UUID;
 public class MainActivity extends BaseImmersiveActivity {
 
     private EditText etNickname;
-    private Button btnJoinRoom, btnScanQR;
+    private Button btnJoinRoom, btnScanQR, btnOptions;
     private LinearLayout llPoker, llColorClash, llMafia;
 
     @Override
@@ -40,6 +41,9 @@ public class MainActivity extends BaseImmersiveActivity {
         llPoker = findViewById(R.id.llPoker);
         llColorClash = findViewById(R.id.llColorClash);
         llMafia = findViewById(R.id.llMafia);
+        btnOptions = findViewById(R.id.btnOptions);
+        applyTopInsetPadding(btnOptions);
+        btnOptions.setOnClickListener(v -> AppOptionsDialogHelper.show(this));
 
         String savedNick = getSharedPreferences("PocketTable", MODE_PRIVATE)
                 .getString("nickname", "");
