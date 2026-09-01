@@ -1,6 +1,5 @@
 package com.fizzycoyote.pockettable.game.mafia;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.Gravity;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.mafia.MafiaRole;
+import com.fizzycoyote.pockettable.utils.AppDialog;
 
 public final class RoleInfoHelper {
 
@@ -42,7 +42,7 @@ public final class RoleInfoHelper {
 
         scrollView.addView(container);
 
-        new AlertDialog.Builder(context)
+        AppDialog.builder(context)
                 .setTitle(context.getString(R.string.mafia_role_dialog_title))
                 .setView(scrollView)
                 .setPositiveButton(context.getString(R.string.mafia_role_dialog_close), null)

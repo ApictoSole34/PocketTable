@@ -11,6 +11,7 @@
         android:alpha="0.9"/>
 
     <LinearLayout
+        android:id="@+id/llPokerContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -24,16 +25,6 @@
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/tvGameTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/poker_title"
-                android:textSize="22sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"/>
-
-            <TextView
                 android:id="@+id/tvPot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,6 +32,19 @@
                 android:textSize="20sp"
                 android:textColor="#FFD700"
                 android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/btnLeave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_leave"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/btn_mafia_rounded"
+                android:contentDescription="@string/leave_button_desc"
+                android:layout_marginEnd="8dp"/>
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -237,17 +241,4 @@
         </LinearLayout>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/btnLeave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|start"
-        android:layout_margin="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/btn_leave"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:background="@drawable/btn_mafia_rounded"
-        android:contentDescription="@string/leave_button_desc"/>
 </FrameLayout>

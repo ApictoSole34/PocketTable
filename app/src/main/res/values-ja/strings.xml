@@ -325,6 +325,10 @@
     <string name="mafia_candidate_label">候補者</string>
     <string name="mafia_guilty_content_desc">有罪</string>
     <string name="mafia_not_guilty_content_desc">無罪</string>
+    <string name="mafia_phase_nomination">☀️ 朝</string>
+    <string name="mafia_phase_vote">⚖️ 裁判</string>
+    <string name="mafia_phase_night">🌙 夜</string>
+    <string name="mafia_phase_game_over">💀 ゲーム終了</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">プレイヤーが見つかりません: %s</string>
@@ -365,4 +369,21 @@
     <string name="leave_confirm_positive">退出</string>
     <string name="leave_confirm_negative">キャンセル</string>
     <string name="host_ended_game">ホストがゲームを終了しました。</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ 接続に問題がありますか？</string>
+    <string name="diagnostics_title">バックグラウンド制限</string>
+    <string name="diagnostics_tips_full">一部の端末では、バックグラウンドで動作するアプリが厳しく制限されます
+                                    （Xiaomi、Oppo、Realme、Huawei、Vivoなどの端末では、バックグラウンドでPocketTableが終了され、
+                                    ゲーム中に接続が切断される場合があります）。\n\n対処方法：\n
+                                        1. 設定 → バッテリー → アプリのバッテリー管理を開きます\n
+                                        2. PocketTableを探します\n
+                                        3. 「最適化しない」または「バックグラウンドでのアクティビティを許可」を選択します\n\n
+                                    Xiaomi (MIUI)：設定 → アプリ → アプリを管理 → PocketTableから「自動起動」も有効にしてください。\n
+                                    Oppo/Realme (ColorOS)：設定 → バッテリー → アプリのバッテリー管理 → PocketTable → バックグラウンドでのアクティビティを許可。\n
+                                    Huawei (EMUI)：設定 → バッテリー → アプリの起動 → PocketTable → 手動で管理に設定し、3つすべての項目を有効にしてください。\n
+                                    Vivo (FuntouchOS)：設定 → バッテリー → バックグラウンド電力消費の管理 → PocketTableを許可。</string>
+    <string name="diagnostics_battery_button">バッテリー設定を開く</string>
+    <string name="diagnostics_restart_button">アプリを再起動</string>
+
 </resources>

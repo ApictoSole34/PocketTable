@@ -25,8 +25,8 @@ public class MafiaClient extends GenericGameClient {
         void onActionError(String message);
     }
 
-    public MafiaClient(URI uri, UUID playerId, String playerName) {
-        super(uri, playerId, playerName);
+    public MafiaClient(URI uri, UUID playerId, String playerName, String roomCode) {
+        super(uri, playerId, playerName, roomCode);
         this.playerId = playerId;
     }
 

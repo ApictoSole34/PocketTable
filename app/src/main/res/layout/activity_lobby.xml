@@ -16,6 +16,7 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/llLobbyContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -30,6 +31,18 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnLeave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_leave"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/btn_mafia_rounded"
+                android:backgroundTint="@color/button_background"
+                android:contentDescription="@string/leave_button_desc"/>
 
             <TextView
                 android:id="@+id/tvHostIp"
@@ -186,16 +199,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
 
-                <Button
-                    android:id="@+id/btnMafiaRoleInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mafia_role_info_button"
-                    android:textAllCaps="false"
-                    android:background="@drawable/btn_mafia_rounded"
-                    android:textColor="@color/white"
-                    android:layout_marginBottom="12dp"/>
-
                 <!-- mafia -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -312,6 +315,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/mafia_timer"
                     android:textColor="#FFFFFF"
+                    android:checked="true"
                     android:layout_marginTop="8dp"/>
 
                 <LinearLayout
@@ -386,21 +390,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/start_game"
                 android:textSize="18sp"
-                android:backgroundTint="#6200EE"
+                android:backgroundTint="@color/button_background"
                 android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
-    <Button
-        android:id="@+id/btnLeave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|start"
-        android:layout_margin="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/btn_leave"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:background="@drawable/btn_mafia_rounded"
-        android:contentDescription="@string/leave_button_desc"/>
 </FrameLayout>

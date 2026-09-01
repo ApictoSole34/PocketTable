@@ -23,6 +23,7 @@ import com.fizzycoyote.pockettable.engine.mafia.MafiaRole;
 import com.fizzycoyote.pockettable.models.mafia.MafiaState;
 import com.fizzycoyote.pockettable.network.mafia.MafiaClient;
 import com.fizzycoyote.pockettable.network.mafia.MafiaHostServer;
+import com.fizzycoyote.pockettable.utils.AppDialog;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
 import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
@@ -101,7 +102,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         rvPlayers.setLayoutManager(new GridLayoutManager(this, GRID_COLUMNS));
         rvPlayers.setAdapter(adapter);
 
-        applyTopInsetPadding(btnLeave);
+        applyTopInsetPadding(findViewById(R.id.mainLayout));
         btnLeave.setOnClickListener(v -> confirmLeave());
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -152,8 +153,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
                 client.send("GET_STATE");
             } else {
                 try {
-                    client = new MafiaClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
-                    client.setListener(createListener());
+                    client = new MafiaClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName, roomCode);                    client.setListener(createListener());
                     client.connect();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -215,27 +215,69 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         }
 
         tvTimer.setVisibility(View.VISIBLE);
-        localTimer = new CountDownTimer(seconds * 1000L, 1000L) {
+        long totalMillis = seconds * 1000L;
+
+        localTimer = new CountDownTimer(totalMillis, 50L) {
             @Override
             public void onTick(long millisUntilFinished) {
-                int secLeft = (int) (millisUntilFinished / 1000);
-                tvTimer.setText(String.format("%02d:%02d", secLeft / 60, secLeft % 60));
+                updateTimerDisplay(millisUntilFinished);
             }
 
             @Override
             public void onFinish() {
-                tvTimer.setText("00:00");
+                updateTimerDisplay(0);
             }
         }.start();
     }
 
+    private static final long RED_THRESHOLD_MS = 10_000L;
+    private static final int TIMER_COLOR_NORMAL = android.graphics.Color.WHITE;
+    private static final int TIMER_COLOR_URGENT = android.graphics.Color.parseColor("#FF1744");
+
+    private void updateTimerDisplay(long millisUntilFinished) {
+        long totalCentis = millisUntilFinished / 10;
+        int minutes = (int) (totalCentis / 6000);
+        int secs = (int) ((totalCentis / 100) % 60);
+        int centis = (int) (totalCentis % 100);
+
+        tvTimer.setText(String.format("%02d:%02d:%02d", minutes, secs, centis));
+        tvTimer.setTextColor(millisUntilFinished <= RED_THRESHOLD_MS ? TIMER_COLOR_URGENT : TIMER_COLOR_NORMAL);
+    }
+
+    /**
+     * Updates the UI to reflect the current Mafia game state.
+     *
+     * <p>This method is called whenever a new state snapshot is received from the host.
+     * It updates:
+     * <ul>
+     *   <li>The phase label and timer</li>
+     *   <li>The player's role display</li>
+     *   <li>The list of players with their roles, status, and vote counts</li>
+     *   <li>The candidate panel during trials</li>
+     *   <li>Information messages (who died, who was nominated, etc.)</li>
+     *   <li>The background (day/night)</li>
+     * </ul>
+     *
+     * <p>This method also triggers dialogs for:
+     * <ul>
+     *   <li>Night death announcements</li>
+     *   <li>Day elimination announcements</li>
+     *   <li>Investigation results (for Detective)</li>
+     *   <li>Game over / win announcements</li>
+     * </ul>
+     *
+     * @param state the current game state snapshot, or {@code null} if no state is available
+     *
+     * @see #lastState
+     * @see #adapter
+     */
     private void updateUI(MafiaState state) {
         if (state == null) return;
         boolean isFirstUpdate = !firstStateReceived;
         firstStateReceived = true;
         lastState = state;
 
-        tvPhase.setText(getString(R.string.mafia_phase_label, state.phase().toString()));
+        tvPhase.setText(getPhaseDisplayName(state.phase()));
         if (state.viewerRole() != null) {
             tvRole.setText(getString(R.string.mafia_your_role_label, state.viewerRole().name()));
         }
@@ -306,6 +348,16 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         handleDialogs(state, isFirstUpdate);
     }
 
+    private String getPhaseDisplayName(MafiaPhase phase) {
+        switch (phase) {
+            case NIGHT:          return getString(R.string.mafia_phase_night);
+            case DAY_NOMINATION: return getString(R.string.mafia_phase_nomination);
+            case DAY_VOTE:       return getString(R.string.mafia_phase_vote);
+            case GAME_OVER:      return getString(R.string.mafia_phase_game_over);
+            default:             return phase.toString();
+        }
+    }
+
     private void handleDialogs(MafiaState state, boolean isFirstUpdate) {
         if (isFirstUpdate) {
             if (state.lastNight() != null) {
@@ -365,7 +417,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         String verdict = inv.isMafia()
                 ? getString(R.string.mafia_is_mafia)
                 : getString(R.string.mafia_not_mafia);
-        new AlertDialog.Builder(this)
+        AppDialog.builder(this)
                 .setTitle(R.string.mafia_investigation_results)
                 .setIcon(inv.isMafia() ? R.drawable.icon_mafia_mafia : R.drawable.icon_mafia_civilian)
                 .setMessage(name + " " + verdict)
@@ -374,7 +426,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
     }
 
     private void showNightDeathDialog(MafiaState.NightResult result) {
-        new AlertDialog.Builder(this)
+        AppDialog.builder(this)
                 .setTitle(getString(R.string.mafia_night_death_title, result.killedPlayer()))
                 .setIcon(MafiaPlayerAdapter.getIconForRole(result.killedRole()))
                 .setMessage(result.killedRole() != null
@@ -385,7 +437,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
     }
 
     private void showDayEliminationDialog(MafiaState.DayResult result) {
-        new AlertDialog.Builder(this)
+        AppDialog.builder(this)
                 .setTitle(getString(R.string.mafia_day_elimination_title, result.eliminatedPlayer()))
                 .setIcon(MafiaPlayerAdapter.getIconForRole(result.eliminatedRole()))
                 .setMessage(result.eliminatedRole() != null
@@ -399,7 +451,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         if (lastState == null || target.playerId().equals(playerId)) return;
 
         if (!target.alive() && target.notesRevealed()) {
-            new AlertDialog.Builder(this)
+            AppDialog.builder(this)
                     .setTitle(getString(R.string.mafia_notes_title, target.playerName()))
                     .setMessage(target.privateNotes().isEmpty()
                             ? getString(R.string.mafia_no_notes)
@@ -473,7 +525,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         input.setLayoutParams(params);
         container.addView(input);
 
-        new AlertDialog.Builder(this)
+        AppDialog.builder(this)
                 .setTitle(R.string.mafia_my_notes)
                 .setView(container)
                 .setPositiveButton(R.string.mafia_save, (d, w) ->
@@ -483,7 +535,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
     }
 
     private void showConfirm(String message, Runnable onConfirm) {
-        new AlertDialog.Builder(this)
+        AppDialog.builder(this)
                 .setTitle(R.string.mafia_confirm)
                 .setMessage(message)
                 .setPositiveButton(R.string.mafia_yes, (d, w) -> onConfirm.run())
@@ -491,6 +543,18 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
                 .show();
     }
 
+    /**
+     * Sends an action to the game engine.
+     *
+     * <p>If the player is the host, the action is executed locally and the state is broadcast
+     * to all clients. If the player is a client, the action is sent to the host via WebSocket.
+     *
+     * <p>Errors are caught and displayed as Toast messages.</p>
+     *
+     * @param action the action string in the format expected by {@link MafiaGame#performAction}
+     *
+     * @see MafiaGame#performAction(UUID, String, int)
+     */
     private void sendAction(String action) {
         if (isHost && game != null) {
             try {
@@ -526,7 +590,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
         String message = String.join("\n", info.winnerNames());
 
         if (isHost) {
-            new AlertDialog.Builder(this)
+            AppDialog.builder(this)
                     .setTitle(title)
                     .setIcon(iconRes)
                     .setMessage(message)
@@ -535,7 +599,7 @@ public class MafiaTableActivity extends BaseImmersiveActivity {
                     .setNegativeButton(R.string.mafia_end_game, (d, w) -> endSession())
                     .show();
         } else {
-            waitingForHostDialog = new AlertDialog.Builder(this)
+            waitingForHostDialog = AppDialog.builder(this)
                     .setTitle(title)
                     .setIcon(iconRes)
                     .setMessage(message + getString(R.string.mafia_waiting_for_host))

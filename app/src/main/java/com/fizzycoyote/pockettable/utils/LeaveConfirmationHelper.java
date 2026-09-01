@@ -1,6 +1,5 @@
 package com.fizzycoyote.pockettable.utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
 
 import com.fizzycoyote.pockettable.R;
@@ -19,7 +18,7 @@ public final class LeaveConfirmationHelper {
     }
 
     public static void show(Context context, int messageResId, OnConfirmLeave onConfirm) {
-        new AlertDialog.Builder(context)
+        AppDialog.builder(context)
                 .setTitle(R.string.leave_confirm_title)
                 .setMessage(messageResId)
                 .setPositiveButton(R.string.leave_confirm_positive, (dialog, which) -> onConfirm.onConfirmedLeave())

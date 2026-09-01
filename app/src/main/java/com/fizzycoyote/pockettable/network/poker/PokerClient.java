@@ -44,8 +44,8 @@ public class PokerClient extends GenericGameClient {
         void onActionError(String message);
     }
 
-    public PokerClient(URI uri, UUID playerId, String playerName) {
-        super(uri, playerId, playerName);
+    public PokerClient(URI uri, UUID playerId, String playerName, String roomCode) {
+        super(uri, playerId, playerName, roomCode);
         this.playerId = playerId;
     }
 

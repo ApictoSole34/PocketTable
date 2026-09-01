@@ -10,6 +10,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:screenOrientation="portrait"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
@@ -19,6 +20,7 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,10 +31,14 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
-        <activity android:name=".lobby.LobbyActivity" />
-        <activity android:name=".game.poker.PokerTableActivity" />
-        <activity android:name=".game.colorclash.ColorClashTableActivity" />
-        <activity android:name=".game.mafia.MafiaTableActivity" />
+        <activity android:name=".lobby.LobbyActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".game.poker.PokerTableActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".game.colorclash.ColorClashTableActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".game.mafia.MafiaTableActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

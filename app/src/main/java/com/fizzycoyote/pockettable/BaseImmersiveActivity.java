@@ -58,12 +58,13 @@ public abstract class BaseImmersiveActivity extends AppCompatActivity {
      */
     protected void applyTopInsetPadding(View view) {
         int baseLeft = view.getPaddingLeft();
+        int baseTop = view.getPaddingTop();
         int baseRight = view.getPaddingRight();
         int baseBottom = view.getPaddingBottom();
 
         ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(baseLeft, systemBars.top, baseRight, baseBottom);
+            v.setPadding(baseLeft, baseTop + systemBars.top, baseRight, baseBottom);
             return insets;
         });
     }

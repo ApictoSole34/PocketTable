@@ -17,6 +17,7 @@ import com.fizzycoyote.pockettable.engine.common.GameType;
 import com.fizzycoyote.pockettable.lobby.LobbyActivity;
 import com.fizzycoyote.pockettable.network.common.DiscoveryService;
 import com.fizzycoyote.pockettable.utils.AppOptionsDialogHelper;
+import com.fizzycoyote.pockettable.utils.DiagnosticsDialogHelper;
 import com.fizzycoyote.pockettable.utils.RoomCodeGenerator;
 import com.fizzycoyote.pockettable.BuildConfig;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -44,6 +45,8 @@ public class MainActivity extends BaseImmersiveActivity {
         btnOptions = findViewById(R.id.btnOptions);
         applyTopInsetPadding(btnOptions);
         btnOptions.setOnClickListener(v -> AppOptionsDialogHelper.show(this));
+        Button btnDiagnostics = findViewById(R.id.btnDiagnostics);
+        btnDiagnostics.setOnClickListener(v -> DiagnosticsDialogHelper.show(this));
 
         String savedNick = getSharedPreferences("PocketTable", MODE_PRIVATE)
                 .getString("nickname", "");

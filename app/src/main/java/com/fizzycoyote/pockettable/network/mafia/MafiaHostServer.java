@@ -28,8 +28,8 @@ public class MafiaHostServer extends GenericHostServer {
 
     private StateChangeListener stateListener;
 
-    public MafiaHostServer(int port, MafiaGame game, UUID hostPlayerId) {
-        super(port);
+    public MafiaHostServer(int port, MafiaGame game, UUID hostPlayerId, String roomCode) {
+        super(port, roomCode);
         this.game = game;
         this.hostPlayerId = hostPlayerId;
         setupTimerListener();

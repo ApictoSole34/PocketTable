@@ -1,0 +1,388 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Takma ad</string>
+    <string name="create_room">🃏 Oda Oluştur</string>
+    <string name="join_room">🔗 Kod ile Bağlan</string>
+    <string name="scan_qr">📷 QR Tara</string>
+    <string name="enter_nickname">Takma adınızı girin!</string>
+    <string name="join_host_title">Sunucuya Katıl</string>
+    <string name="host_game_title">Oyun Kur</string>
+    <string name="join_via_code">Kod ile Katıl</string>
+    <string name="game_poker">Poker</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">Seçenekler</string>
+    <string name="options_title">Seçenekler</string>
+    <string name="options_change_language">Dili değiştir</string>
+    <string name="options_exit_app">Uygulamadan çık</string>
+    <string name="options_exit_confirm_title">Uygulamadan çıkılsın mı?</string>
+    <string name="options_exit_confirm_message">PocketTable\'dan çıkmak istediğinizden emin misiniz?</string>
+    <string name="options_exit_confirm_positive">Çık</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Kod: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Oyuncular: </string>
+    <string name="lobby_you"> (SİZ)</string>
+    <string name="show_qr">QR Göster</string>
+    <string name="start_game">BAŞLAT</string>
+    <string name="qr_title">Oda için QR kodu </string>
+    <string name="qr_error">QR oluşturma hatası</string>
+    <string name="ok">TAMAM</string>
+    <string name="game_settings_title">Ayarlar</string>
+    <string name="lobby_toast_mafia_neutral">Gerekli tarafsız oyuncu sayısı için yeterli tarafsız rol seçilmedi.</string>
+    <string name="lobby_con_error">Bağlantı hatası</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Odaya Katıl</string>
+    <string name="join_hint">Kodu girin (örn. ABC123)</string>
+    <string name="join_search">Ara</string>
+    <string name="join_cancel">İptal</string>
+    <string name="code_required">Kod 6 karakter olmalıdır!</string>
+    <string name="searching_host">Şu kodla sunucu aranıyor: </string>
+    <string name="host_found">Sunucu bulundu!</string>
+    <string name="host_not_found">Şu kod için sunucu bulunamadı: </string>
+    <string name="scan_qr_from_host">Sunucunun ekranındaki QR kodunu tarayın</string>
+    <string name="invalid_qr">Geçersiz QR kodu</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Oyun ayarları</string>
+    <string name="small_blind_hint">Küçük Kör Bahis (varsayılan 50)</string>
+    <string name="big_blind_hint">Büyük Kör Bahis (varsayılan 100)</string>
+    <string name="starting_chips_hint">Başlangıç fişleri (varsayılan 1000)</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">+2 / +4 Biriktirme</string>
+    <string name="colorclash_jump_in">Araya Girme (sıra sizde değilken aynı kartı oynama)</string>
+    <string name="colorclash_seven_swap">7, seçilen bir oyuncuyla elindeki kartları değiştirir</string>
+    <string name="colorclash_zero_rotate">0, tüm elleri masa etrafında döndürür</string>
+
+    <string name="color_red">KIRMIZI</string>
+    <string name="color_yellow">SARI</string>
+    <string name="color_green">YEŞİL</string>
+    <string name="color_blue">MAVİ</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d kart</item>
+        <item quantity="other">%d kart</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Poker</string>
+    <string name="pot_label">Pot: </string>
+    <string name="pot_label_placeholder">Pot: 0</string>
+    <string name="your_chips_label">Fişleriniz: %d</string>
+    <string name="your_chips_placeholder">Fişleriniz: 1000</string>
+    <string name="your_bet_label">Bu turdaki bahsiniz: %d</string>
+    <string name="your_bet_placeholder">Bu turdaki bahsiniz: 0</string>
+    <string name="your_turn">SIRA SİZDE!</string>
+    <string name="waiting_for_players">Oyuncular bekleniyor...</string>
+    <string name="waiting_for_move">Hamle bekleniyor...</string>
+    <string name="new_hand">YENİ EL</string>
+    <string name="game_started">Oyun başladı!</string>
+    <string name="game_over">Oyun bitti!</string>
+    <string name="tie">Berabere</string>
+    <string name="you_are_host">Sunucusunuz. Oyun hazır!</string>
+    <string name="connected">Bağlandı!</string>
+    <string name="connecting">Sunucuya bağlanılıyor...</string>
+    <string name="connection_error">Bağlantı hatası: %s</string>
+    <string name="no_connection">Oyuna bağlantı yok!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Hata: %1$s</string>
+    <string name="reconnecting_message">Bağlantı kesildi, yeniden bağlanma denemesi %1$d…</string>
+    <string name="reconnected_message">Yeniden bağlandı!</string>
+    <string name="reconnect_failed_message">Yeniden bağlanılamadı. Lütfen lobiye dönün.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">Oyun zaten açık kart aşamasında</string>
+    <string name="poker_error_not_your_turn">Sıra bu oyuncuda değil</string>
+    <string name="poker_error_already_folded">Oyuncu zaten pas geçti</string>
+    <string name="poker_error_already_all_in">Oyuncu zaten all-in yaptı ve hamle yapamaz</string>
+    <string name="poker_error_cannot_check">Mevcut bahis daha yüksek olduğu için check yapılamaz</string>
+    <string name="poker_error_cannot_bet_existing">Zaten bir bahis varken bahis yapılamaz</string>
+    <string name="poker_error_bet_must_be_positive">Bahis miktarı pozitif olmalıdır</string>
+    <string name="poker_error_nothing_to_call">Görülecek bir bahis yok</string>
+    <string name="poker_error_raise_too_low">Artırma mevcut bahisten yüksek olmalıdır</string>
+    <string name="poker_error_already_bet_enough">Oyuncu zaten yeterince bahis yaptı</string>
+    <string name="poker_error_no_eligible_players">Uygun aktif oyuncu yok</string>
+    <string name="poker_error_player_not_found">Oyuncu bulunamadı</string>
+    <string name="poker_error_cannot_deal_river">%s sırasında river dağıtılamaz</string>
+    <string name="poker_error_cannot_deal_turn">%s sırasında turn dağıtılamaz</string>
+    <string name="poker_error_amount_must_be_positive">Miktar pozitif olmalıdır</string>
+    <string name="poker_error_not_enough_chips">Yeterli fiş yok</string>
+    <string name="poker_error_amount_cannot_be_negative">Miktar negatif olamaz</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">Oyun zaten bitti</string>
+    <string name="colorclash_error_jumpin_disabled">Araya girme devre dışı</string>
+    <string name="colorclash_error_jumpin_draw_active">Kart çekme birikimi aktifken araya girilemez</string>
+    <string name="colorclash_error_use_play">Sıra sizde – PLAY kullanın</string>
+    <string name="colorclash_error_invalid_card_index">Geçersiz kart indeksi</string>
+    <string name="colorclash_error_jumpin_requires_match">Araya girmek için destenin üstündeki kartla aynı kart gerekir</string>
+    <string name="colorclash_error_last_card_single_only">Son Kart çağrısını yalnızca elinizde tam olarak bir kart varken yapabilirsiniz</string>
+    <string name="colorclash_error_cannot_catch_self">Kendinizi yakalayamazsınız</string>
+    <string name="colorclash_error_nothing_to_catch">%s şu anda yakalanacak bir durumda değil</string>
+    <string name="colorclash_error_not_your_turn">Sıra bu oyuncuda değil</string>
+    <string name="colorclash_error_player_eliminated">Oyuncu elendi</string>
+    <string name="colorclash_error_card_cannot_be_played">Kart oynanamaz</string>
+    <string name="colorclash_error_choose_wild_color">Joker kart için bir renk seçmelisiniz</string>
+    <string name="colorclash_error_choose_swap_target">Kartları değiştirmek için bir oyuncu seçin</string>
+    <string name="colorclash_error_unknown_action">Bilinmeyen işlem: %s</string>
+    <string name="colorclash_error_player_not_found">Oyuncu bulunamadı: %s</string>
+    <string name="colorclash_error_card_not_held">Oyuncunun elinde bu kart yok</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Bilinmiyor</string>
+    <string name="colorclash_eliminated_suffix"> (elendi)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">GÖR</string>
+    <string name="btn_fold">PAS</string>
+    <string name="btn_bet">BAHİS</string>
+    <string name="btn_raise">ARTIR</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Bahis</string>
+    <string name="raise_title">Artır</string>
+    <string name="enter_amount_manually">Miktarı manuel gir</string>
+    <string name="half_pot">POTUN 1/2\'Sİ</string>
+    <string name="pot">POT</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">Yalnızca ALL-IN yapabilirsiniz: %d</string>
+    <string name="confirm">Onayla</string>
+    <string name="cancel">İptal</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Oyuncu</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">PAS</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(Siz)</string>
+    <string name="host_suffix">(Sunucu)</string>
+    <string name="winner">🏆 %s KAZANDI! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">Yüksek Kart</string>
+    <string name="hand_pair">Per</string>
+    <string name="hand_two_pair">Döper</string>
+    <string name="hand_three_of_a_kind">Üçlü</string>
+    <string name="hand_straight">Kent</string>
+    <string name="hand_flush">Renk</string>
+    <string name="hand_full_house">Full</string>
+    <string name="hand_four_of_a_kind">Kare</string>
+    <string name="hand_straight_flush">Renkli Kent</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Kazanan (diğerleri pas geçti)</string>
+    <string name="no_data">veri yok</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Bazı cihazlar arka plandaki uygulamaları agresif şekilde kısıtlar</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">Sunucusunuz. Oyun hazır!</string>
+    <string name="colorclash_top_card_label">Üst: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Çekilecek: %1$d</string>
+    <string name="colorclash_waiting_for">%1$s bekleniyor</string>
+    <string name="colorclash_draw_stack_info"> (%1$d kart çek)</string>
+    <string name="colorclash_winner_message">🏆 %1$s KAZANDI! 🏆</string>
+    <string name="colorclash_catch_button">Yakala!</string>
+    <string name="colorclash_choose_color">Renk seç</string>
+    <string name="colorclash_swap_cards_with">Kartları şununla değiştir...</string>
+    <string name="colorclash_not_your_turn">Sıra sizde değil!</string>
+    <string name="colorclash_cannot_play_card">Bu kartı oynayamazsınız</string>
+    <string name="colorclash_card_not_in_hand">Kart elinizde değil</string>
+    <string name="colorclash_card_no_longer_in_hand">Kart artık elinizde değil</string>
+    <string name="colorclash_error">Hata: %1$s</string>
+    <string name="colorclash_draw">ÇEK</string>
+    <string name="colorclash_last_card">SON KART!</string>
+    <string name="colorclash_next_round">SONRAKİ TUR</string>
+    <string name="colorclash_your_hand">Eliniz</string>
+    <string name="colorclash_top_card_default">Üst: </string>
+    <string name="colorclash_draw_pile_default">Çekilecek: 0</string>
+    <string name="colorclash_waiting_players">Oyuncular bekleniyor...</string>
+    <string name="colorclash_game_started">Oyun başladı!</string>
+    <string name="colorclash_game_over">Oyun bitti!</string>
+    <string name="colorclash_connecting">Bağlanılıyor...</string>
+    <string name="colorclash_connection_error">Bağlantı hatası</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Mafya Ayarları</string>
+    <string name="mafia_role_count">Roller (0 = kapalı)</string>
+    <string name="mafia_timer">Zamanlayıcıları kullan (aksi halde yalnızca manuel hazır olma onayı)</string>
+    <string name="mafia_night_length">Gece süresi (sn)</string>
+    <string name="mafia_day_length">Gündüz süresi (sn)</string>
+    <string name="mafia_trial_length">Yargılama süresi (sn)</string>
+    <string name="mafia_neutral_size">Kaç tarafsız oyuncu</string>
+    <string name="mafia_neutral">Tarafsız oyuncular</string>
+    <string name="mafia_town_role">Şehir Rolü (her birinden en fazla 1)</string>
+    <string name="mafia_mafia">Mafya oyuncuları</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">Sivil</string>
+    <string name="mafia_role_mafia">Mafya</string>
+    <string name="mafia_role_detective">Dedektif</string>
+    <string name="mafia_role_doctor">Doktor</string>
+    <string name="mafia_role_vigilante">Vigilante</string>
+    <string name="mafia_role_mayor">Belediye Başkanı</string>
+    <string name="mafia_role_jester">Soytarı</string>
+    <string name="mafia_role_serial_killer">Seri Katil</string>
+    <string name="mafia_skip">Atla</string>
+    <string name="mafia_vote_button_label">Oy Ver</string>
+    <string name="role_icon_desc">açıklama</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Rol Rehberi</string>
+    <string name="mafia_role_dialog_close">Kapat</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">Gece, mafya öldürülecek bir kurbanı birlikte seçer. Diğer mafya üyelerinin kim olduğunu bilirler.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">Gece bir kişiyi araştırır ve onun mafya olup olmadığını öğrenir.</string>
+    <string name="mafia_role_dialog_doctor">Gece bir kişiyi öldürülmekten korur.</string>
+    <string name="mafia_role_dialog_vigilante">Tüm oyun boyunca yalnızca bir mermisi vardır – gece birini vurabilir.</string>
+    <string name="mafia_role_dialog_mayor">Gündüz kimliğini açıklayabilir – bundan sonra aday gösterme ve yargılama sırasında oyu iki oy sayılır.</string>
+    <string name="mafia_role_dialog_civilian">Özel yeteneği yoktur. Gündüz diğer şehir üyeleri gibi oy kullanır.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Gece eylemi yoktur. Şehir gündüz onu idam etmeye karar verirse hemen kazanır.</string>
+    <string name="mafia_role_dialog_serial_killer">Gece mafyadan bağımsız olarak tek başına öldürür. Hayatta kalan tek oyuncu olduğunda kazanır.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Aday</string>
+    <string name="mafia_phase">Aşama: %s</string>
+    <string name="mafia_your_role">Rolünüz: %s</string>
+    <string name="mafia_dead">ÖLÜ</string>
+    <string name="mafia_voted_badge">OY VERDİ</string>
+    <string name="mafia_phase_label">Aşama: %s</string>
+    <string name="mafia_your_role_label">Rolünüz: %s</string>
+    <string name="mafia_game_started">Oyun başladı!</string>
+    <string name="mafia_host_ended_game">Sunucu oyunu bitirdi</string>
+    <string name="mafia_voting_unavailable">Şu anda oylama kullanılamıyor</string>
+    <string name="mafia_night_result">Gece sonucu: %s</string>
+    <string name="mafia_someone_died">%s öldü</string>
+    <string name="mafia_no_one_died">Kimse ölmedi</string>
+    <string name="mafia_nominated">Aday gösterildi: %s</string>
+    <string name="mafia_eliminated_by_day">Elendi: %s</string>
+    <string name="mafia_unknown_player">Bilinmeyen oyuncu</string>
+    <string name="mafia_is_mafia">Mafya!</string>
+    <string name="mafia_not_mafia">Mafya değil</string>
+    <string name="mafia_investigation_results">Soruşturma Sonuçları</string>
+    <string name="mafia_ok">TAMAM</string>
+    <string name="mafia_night_death_title">☠️ %s gece öldü</string>
+    <string name="mafia_role_label">Rol: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s şehir tarafından elendi</string>
+    <string name="mafia_notes_title">%s için notlar</string>
+    <string name="mafia_no_notes">(not yok)</string>
+    <string name="mafia_kill_confirm">%s öldürülsün mü?</string>
+    <string name="mafia_save_confirm">%s kurtarılsın mı?</string>
+    <string name="mafia_investigate_confirm">%s araştırılsın mı?</string>
+    <string name="mafia_shoot_confirm">%s vurulsun mu?</string>
+    <string name="mafia_no_night_action">Gece eyleminiz yok</string>
+    <string name="mafia_notes_hint">Notlarınızı buraya yazın...</string>
+    <string name="mafia_my_notes">Notlarım</string>
+    <string name="mafia_save">Kaydet</string>
+    <string name="mafia_cancel">İptal</string>
+    <string name="mafia_confirm">Onayla</string>
+    <string name="mafia_yes">Evet</string>
+    <string name="mafia_no">Hayır</string>
+    <string name="mafia_town_wins">🏛️ Şehir Kazandı!</string>
+    <string name="mafia_mafia_wins">🔪 Mafya Kazandı!</string>
+    <string name="mafia_jester_wins">🤡 Soytarı Kazandı!</string>
+    <string name="mafia_serial_killer_wins">🔪 Seri Katil Kazandı!</string>
+    <string name="mafia_waiting_for_host">\n\nSunucunun sonraki turu başlatması bekleniyor...</string>
+    <string name="mafia_new_round">Yeni Tur</string>
+    <string name="mafia_end_game">Oyunu Bitir</string>
+    <string name="mafia_phase_label_short">Aşama:</string>
+    <string name="mafia_role_info_button">Rol Bilgisi</string>
+    <string name="mafia_notes_button">Notlar</string>
+    <string name="mafia_your_role_label_short">Rolünüz:</string>
+    <string name="mafia_candidate_label">Aday</string>
+    <string name="mafia_guilty_content_desc">Suçlu</string>
+    <string name="mafia_not_guilty_content_desc">Suçsuz</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">Oyuncu bulunamadı: %s</string>
+    <string name="mafia_target_not_alive">Hedef hayatta değil</string>
+    <string name="mafia_cannot_target_self">Kendinizi hedef alamazsınız</string>
+    <string name="mafia_min_players">Mafya için en az 4 oyuncu gerekir</string>
+    <string name="mafia_need_mafia_role">En az 1 Mafya rolü yapılandırılmalıdır</string>
+    <string name="mafia_dead_cannot_act">Ölü oyuncular hareket edemez</string>
+    <string name="mafia_notes_too_long">Notlar çok uzun (maks. 1000 karakter)</string>
+    <string name="mafia_no_behavior">Rol için davranış bulunamadı: %s</string>
+    <string name="mafia_unknown_action">Bilinmeyen eylem: %s</string>
+    <string name="mafia_game_inactive">Oyun şu anda aktif değil</string>
+    <string name="mafia_game_over">Oyun bitti</string>
+    <string name="mafia_error_unknown_detective_action">Bilinmeyen dedektif eylemi</string>
+    <string name="mafia_error_unknown_doctor_action">Bilinmeyen doktor eylemi</string>
+    <string name="mafia_error_unknown_mafia_action">Bilinmeyen mafya eylemi</string>
+    <string name="mafia_error_unknown_mayor_day_action">Bilinmeyen belediye başkanı gündüz eylemi</string>
+    <string name="mafia_error_unknown_sk_action">Bilinmeyen seri katil eylemi</string>
+    <string name="mafia_error_unknown_vigilante_action">Bilinmeyen vigilante eylemi</string>
+    <string name="mafia_error_no_charges">Tek merminizi zaten kullandınız</string>
+    <string name="mafia_error_no_special_day_action">Bu rolün özel bir gündüz eylemi yok</string>
+    <string name="mafia_status_dead">ÖLÜ</string>
+    <string name="mafia_config_count_negative">Sayı negatif olamaz</string>
+    <string name="mafia_config_role_at_most_1">%s en fazla 1 olabilir</string>
+    <string name="mafia_config_cannot_set_neutral_directly">Tarafsız rol sayısı doğrudan ayarlanamaz. setNeutralCount ve setAllowedNeutralRoles kullanın</string>
+    <string name="mafia_config_neutral_count_exceeds">Tarafsız oyuncu sayısı (%1$d), izin verilen tarafsız rol sayısını (%2$d) aşıyor</string>
+    <string name="mafia_config_only_neutral_allowed">Yalnızca tarafsız rollere izin veriliyor</string>
+    <string name="mafia_config_neutral_count_negative">Tarafsız oyuncu sayısı negatif olamaz</string>
+    <string name="mafia_config_roles_exceed_players">%1$d özel rol yapılandırıldı, ancak oyunda yalnızca %2$d oyuncu var. Rol sayısını azaltın veya daha fazla oyuncu ekleyin.</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Ayrıl</string>
+    <string name="leave_button_desc">Ayrıl</string>
+    <string name="leave_confirm_title">Ayrıl?</string>
+    <string name="leave_confirm_message_host_lobby">Siz sunucusunuz. Şimdi ayrılırsanız herkes için lobi kapanacak.</string>
+    <string name="leave_confirm_message_host_game">Siz sunucusunuz. Şimdi ayrılırsanız herkes için oyun sona erecek.</string>
+    <string name="leave_confirm_message_player">Ayrılmak istediğinizden emin misiniz? Oyunun bağlantısı kesilecek.</string>
+    <string name="leave_confirm_positive">Ayrıl</string>
+    <string name="leave_confirm_negative">İptal</string>
+    <string name="host_ended_game">Sunucu oyunu bitirdi.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Bağlantı sorunları mı var?</string>
+    <string name="diagnostics_title">Arka plan kısıtlamaları</string>
+    <string name="diagnostics_tips_full">Bazı cihazlar arka planda çalışan uygulamaları agresif bir şekilde kısıtlar
+(Xiaomi, Oppo, Realme, Huawei, Vivo ve diğerleri PocketTable\'ı arka planda kapatabilir,
+bu da oyun sırasında bağlantının kesilmesine neden olabilir).
+
+Çözüm:
+1. Ayarlar → Pil → Uygulama pil yönetimi bölümüne gidin
+2. PocketTable\'ı bulun
+3. "Optimize etme" veya "Arka plan etkinliğine izin ver" seçeneğini seçin
+
+Xiaomi (MIUI): Ayarlar → Uygulamalar → Uygulamaları yönet bölümünde PocketTable için "Otomatik başlatma" seçeneğini de etkinleştirin.
+Oppo/Realme (ColorOS): Ayarlar → Pil → Uygulama Pil Yönetimi → PocketTable → Arka plan etkinliğine izin ver.
+Huawei (EMUI): Ayarlar → Pil → Uygulama başlatma → PocketTable → Manuel yönet seçeneğini belirleyin ve 3 seçeneğin tamamını etkinleştirin.
+Vivo (FuntouchOS): Ayarlar → Pil → Arka plan güç tüketimi yönetimi → PocketTable\'a izin verin.</string>
+    <string name="diagnostics_battery_button">Pil ayarlarını aç</string>
+    <string name="diagnostics_restart_button">Uygulamayı yeniden başlat</string>
+
+</resources>

@@ -11,6 +11,7 @@
         android:alpha="0.9"/>
 
     <LinearLayout
+        android:id="@+id/llColorClashContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -22,14 +23,17 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tvTopCard"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/btnLeave"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/colorclash_top_card_default"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/btn_leave"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/btn_mafia_rounded"
+                android:contentDescription="@string/leave_button_desc"
+                android:layout_marginEnd="8dp"/>
 
             <TextView
                 android:id="@+id/tvDrawPile"
@@ -140,17 +144,4 @@
         </LinearLayout>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/btnLeave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|start"
-        android:layout_margin="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/btn_leave"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:background="@drawable/btn_mafia_rounded"
-        android:contentDescription="@string/leave_button_desc"/>
 </FrameLayout>

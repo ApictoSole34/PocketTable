@@ -325,6 +325,10 @@
     <string name="mafia_candidate_label">Kandidat</string>
     <string name="mafia_guilty_content_desc">Schuldig</string>
     <string name="mafia_not_guilty_content_desc">Nicht schuldig</string>
+    <string name="mafia_phase_nomination">☀️ Morgen</string>
+    <string name="mafia_phase_vote">⚖️ Verhandlung</string>
+    <string name="mafia_phase_night">🌙 Nacht</string>
+    <string name="mafia_phase_game_over">💀 Spiel vorbei</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">Spieler nicht gefunden: %s</string>
@@ -365,4 +369,21 @@
     <string name="leave_confirm_positive">Verlassen</string>
     <string name="leave_confirm_negative">Abbrechen</string>
     <string name="host_ended_game">Der Host hat das Spiel beendet.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Verbindungsprobleme?</string>
+    <string name="diagnostics_title">Hintergrundbeschränkungen</string>
+    <string name="diagnostics_tips_full">Einige Geräte beschränken Hintergrund-Apps sehr aggressiv
+                                    (Xiaomi, Oppo, Realme, Huawei, Vivo und andere können PocketTable im
+                                    Hintergrund beenden, was während des Spiels zu Verbindungsabbrüchen führen kann).\n\nLösung:\n
+                                        1. Gehe zu Einstellungen → Akku → Akkuverwaltung für Apps\n
+                                        2. Suche nach PocketTable\n
+                                        3. Wähle \"Nicht optimieren\" oder \"Hintergrundaktivität zulassen\"\n\n
+                                    Xiaomi (MIUI): Aktiviere außerdem \"Autostart\" für PocketTable unter Einstellungen → Apps → Apps verwalten.\n
+                                    Oppo/Realme (ColorOS): Einstellungen → Akku → Akkuverwaltung für Apps → PocketTable → Hintergrundaktivität zulassen.\n
+                                    Huawei (EMUI): Einstellungen → Akku → App-Start → PocketTable → auf Manuell verwalten stellen und alle 3 Optionen aktivieren.\n
+                                    Vivo (FuntouchOS): Einstellungen → Akku → Verwaltung des Hintergrund-Energieverbrauchs → PocketTable zulassen.</string>
+    <string name="diagnostics_battery_button">Akku-Einstellungen öffnen</string>
+    <string name="diagnostics_restart_button">App neu starten</string>
+
 </resources>

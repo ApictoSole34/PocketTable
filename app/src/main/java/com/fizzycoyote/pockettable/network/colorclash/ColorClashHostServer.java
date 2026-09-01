@@ -21,8 +21,8 @@ public class ColorClashHostServer extends GenericHostServer {
     }
     private StateChangeListener stateListener;
 
-    public ColorClashHostServer(int port, ColorClashGame game, UUID hostPlayerId) {
-        super(port);
+    public ColorClashHostServer(int port, ColorClashGame game, UUID hostPlayerId, String roomCode) {
+        super(port, roomCode);
         this.game = game;
         this.hostPlayerId = hostPlayerId;
     }

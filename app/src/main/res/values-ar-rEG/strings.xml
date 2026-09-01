@@ -351,6 +351,10 @@
     <string name="mafia_candidate_label">المرشح</string>
     <string name="mafia_guilty_content_desc">مذنب</string>
     <string name="mafia_not_guilty_content_desc">غير مذنب</string>
+    <string name="mafia_phase_nomination">☀️ الصبح</string>
+    <string name="mafia_phase_vote">⚖️ المحاكمة</string>
+    <string name="mafia_phase_night">🌙 بالليل</string>
+    <string name="mafia_phase_game_over">💀 اللعبة خلصت</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">اللاعب مش موجود: %s</string>
@@ -392,5 +396,21 @@
     <string name="leave_confirm_positive">مغادرة</string>
     <string name="leave_confirm_negative">إلغاء</string>
     <string name="host_ended_game">المضيف أنهى اللعبة.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ في مشكلة في الاتصال؟</string>
+    <string name="diagnostics_title">قيود التشغيل في الخلفية</string>
+    <string name="diagnostics_tips_full">بعض الموبايلات بتقفل التطبيقات اللي شغالة في الخلفية بشكل جامد
+                                    (زي Xiaomi وOppo وRealme وHuawei وVivo وغيرهم ممكن يقفلوا PocketTable في الخلفية،
+                                    وده ممكن يسبب فصل الاتصال أثناء اللعب).\n\nالحل:\n
+                                        1. ادخل على الإعدادات → البطارية → إدارة بطارية التطبيقات\n
+                                        2. دور على PocketTable\n
+                                        3. اختار \"عدم التحسين\" أو \"السماح بالنشاط في الخلفية\"\n\n
+                                    Xiaomi (MIUI): كمان فعّل \"التشغيل التلقائي\" لـ PocketTable من الإعدادات → التطبيقات → إدارة التطبيقات.\n
+                                    Oppo/Realme (ColorOS): الإعدادات → البطارية → إدارة بطارية التطبيقات → PocketTable → السماح بالنشاط في الخلفية.\n
+                                    Huawei (EMUI): الإعدادات → البطارية → تشغيل التطبيقات → PocketTable → اختار الإدارة اليدوية وفعّل التلات اختيارات كلهم.\n
+                                    Vivo (FuntouchOS): الإعدادات → البطارية → إدارة استهلاك الطاقة في الخلفية → اسمح لـ PocketTable يشتغل.</string>
+    <string name="diagnostics_battery_button">افتح إعدادات البطارية</string>
+    <string name="diagnostics_restart_button">أعد تشغيل اللعبة</string>
 
 </resources>

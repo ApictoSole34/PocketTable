@@ -10,4 +10,6 @@
     <color name="grey">#AAAAAA</color>
     <color name="blue">#0000FF</color>
     <color name="gold">#FFD700</color>
+    <color name="dialog_background">#25382D</color>
+    <color name="button_background">#084D0D</color>
 </resources>

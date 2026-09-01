@@ -79,17 +79,17 @@ public class PokerGame implements GameEngine {
         return "?";
     }
 
-    public int getSmallBlind() { return smallBlind; }
-    public int getBigBlind() { return bigBlind; }
-    public int getStartingChips() { return startingChips; }
-    public boolean isTournamentOver() { return tournamentOver; }
+    public synchronized int getSmallBlind() { return smallBlind; }
+    public synchronized int getBigBlind() { return bigBlind; }
+    public synchronized int getStartingChips() { return startingChips; }
+    public synchronized boolean isTournamentOver() { return tournamentOver; }
 
-    public UUID getChampionId() {
+    public synchronized UUID getChampionId() {
         if (!tournamentOver || players.isEmpty()) return null;
         return players.get(0).getPlayerId();
     }
 
-    public void applySettings(int smallBlind, int bigBlind, int startingChips) {
+    public synchronized void applySettings(int smallBlind, int bigBlind, int startingChips) {
         this.smallBlind = smallBlind;
         this.bigBlind = bigBlind;
         this.startingChips = startingChips;
@@ -99,7 +99,7 @@ public class PokerGame implements GameEngine {
     }
 
     @Override
-    public void startGame() {
+    public synchronized void startGame() {
         removeEliminatedPlayers();
         startNewHand();
     }
@@ -114,14 +114,14 @@ public class PokerGame implements GameEngine {
      * @throws IllegalArgumentException if amount is invalid
      */
     @Override
-    public void performAction(UUID playerId, String action, int amount) {
-        PokerPlayer player = getPlayer(playerId);
+    public synchronized void performAction(UUID playerId, String action, int amount) {
+        PokerPlayer player = getPlayerInternal(playerId);
 
         if (round == PokerRound.SHOWDOWN) {
             throw new IllegalStateException(getString(R.string.poker_error_showdown_already));
         }
 
-        if (!getCurrentPlayer().getPlayerId().equals(playerId)) {
+        if (!getCurrentPlayerInternal().getPlayerId().equals(playerId)) {
             throw new IllegalStateException(getString(R.string.poker_error_not_your_turn));
         }
 
@@ -214,26 +214,26 @@ public class PokerGame implements GameEngine {
             return;
         }
 
-        if (allPlayersActed()) {
+        if (allPlayersActedInternal()) {
             advanceUntilActionOrShowdown();
         } else {
-            nextPlayer();
+            nextPlayerInternal();
         }
     }
 
     @Override
-    public Object getState(UUID viewerId) {
+    public synchronized Object getState(UUID viewerId) {
         return PokerGameState.fromGame(this, viewerId);
     }
 
     @Override
-    public boolean isGameOver() {
+    public synchronized boolean isGameOver() {
         return gameOver;
     }
 
     private void advanceUntilActionOrShowdown() {
         while (true) {
-            advanceRound();
+            advanceRoundInternal();
 
             if (round == PokerRound.SHOWDOWN) {
                 finishGame();
@@ -279,7 +279,7 @@ public class PokerGame implements GameEngine {
             return;
         }
 
-        List<SidePot> sidePots = buildSidePots();
+        List<SidePot> sidePots = buildSidePotsInternal();
         if (sidePots.isEmpty()) {
             SidePot mainPot = new SidePot(totalPot, activePlayers.stream()
                     .map(PokerPlayer::getPlayerId)
@@ -290,10 +290,10 @@ public class PokerGame implements GameEngine {
         for (SidePot pot : sidePots) {
             List<PokerPlayer> eligible = new ArrayList<>();
             for (UUID id : pot.getEligiblePlayerIds()) {
-                eligible.add(getPlayer(id));
+                eligible.add(getPlayerInternal(id));
             }
 
-            WinnerResult result = determineWinnerWithHand(eligible);
+            WinnerResult result = determineWinnerWithHandInternal(eligible);
             PokerPlayer winner = result.player();
             PokerHand hand = result.hand();
 
@@ -311,7 +311,11 @@ public class PokerGame implements GameEngine {
 
     public record WinnerResult(PokerPlayer player, PokerHand hand) {}
 
-    public WinnerResult determineWinnerWithHand(List<PokerPlayer> eligiblePlayers) {
+    public synchronized WinnerResult determineWinnerWithHand(List<PokerPlayer> eligiblePlayers) {
+        return determineWinnerWithHandInternal(eligiblePlayers);
+    }
+
+    private WinnerResult determineWinnerWithHandInternal(List<PokerPlayer> eligiblePlayers) {
         PokerPlayer winner = null;
         PokerHand bestHand = null;
 
@@ -342,11 +346,11 @@ public class PokerGame implements GameEngine {
         gameOver = true;
     }
 
-    public UUID getWinnerId() {return winnerId;}
+    public synchronized UUID getWinnerId() {return winnerId;}
 
-    public String getWinnerHandDescription() {return winnerHandDesc;}
+    public synchronized String getWinnerHandDescription() {return winnerHandDesc;}
 
-    public List<Card> getCommunityCards() {
+    public synchronized List<Card> getCommunityCards() {
         return new ArrayList<>(communityCards);
     }
 
@@ -356,12 +360,20 @@ public class PokerGame implements GameEngine {
         this.communityCards.addAll(cards);
     }
 
-    public PokerPlayer getCurrentPlayer() {
+    public synchronized PokerPlayer getCurrentPlayer() {
+        return getCurrentPlayerInternal();
+    }
+
+    private PokerPlayer getCurrentPlayerInternal() {
         if (players.isEmpty()) return null;
         return players.get(currentPlayerIndex);
     }
 
-    public void nextPlayer() {
+    public synchronized void nextPlayer() {
+        nextPlayerInternal();
+    }
+
+    private void nextPlayerInternal() {
         int size = players.size();
         for (int step = 1; step <= size; step++) {
             int idx = (currentPlayerIndex + step) % size;
@@ -373,20 +385,20 @@ public class PokerGame implements GameEngine {
         }
     }
 
-    public int getCurrentBet() {
+    public synchronized int getCurrentBet() {
         return currentBet;
     }
 
-    public PokerRound getRound() {
+    public synchronized PokerRound getRound() {
         return round;
     }
 
-    public PokerPlayer getDealer() {
+    public synchronized PokerPlayer getDealer() {
         if (players.isEmpty()) return null;
         return players.get(dealerIndex);
     }
 
-    public void dealFlop() {
+    public synchronized void dealFlop() {
         deck.draw();
         for (int i = 0; i < 3; i++) {
             communityCards.add(deck.draw());
@@ -394,7 +406,7 @@ public class PokerGame implements GameEngine {
         round = PokerRound.FLOP;
     }
 
-    public void dealRiver() {
+    public synchronized void dealRiver() {
         if (round != PokerRound.TURN) {
             throw new IllegalStateException(getString(R.string.poker_error_cannot_deal_river, round));
         }
@@ -403,7 +415,7 @@ public class PokerGame implements GameEngine {
         round = PokerRound.RIVER;
     }
 
-    public void dealTurn() {
+    public synchronized void dealTurn() {
         if (round != PokerRound.FLOP) {
             throw new IllegalStateException(getString(R.string.poker_error_cannot_deal_turn, round));
         }
@@ -412,15 +424,19 @@ public class PokerGame implements GameEngine {
         round = PokerRound.TURN;
     }
 
-    public List<PokerPlayer> getPlayers() {
+    public synchronized List<PokerPlayer> getPlayers() {
         return new ArrayList<>(players);
     }
 
-    public void addPlayer(PokerPlayer player) {
+    public synchronized void addPlayer(PokerPlayer player) {
         players.add(player);
     }
 
-    public PokerPlayer getPlayer(UUID playerId) {
+    public synchronized PokerPlayer getPlayer(UUID playerId) {
+        return getPlayerInternal(playerId);
+    }
+
+    private PokerPlayer getPlayerInternal(UUID playerId) {
         for (PokerPlayer p : players) {
             if (p.getPlayerId().equals(playerId)) {
                 return p;
@@ -429,11 +445,11 @@ public class PokerGame implements GameEngine {
         throw new IllegalArgumentException(getString(R.string.poker_error_player_not_found));
     }
 
-    public void setCurrentBet(int currentBet) {
+    public synchronized void setCurrentBet(int currentBet) {
         this.currentBet = currentBet;
     }
 
-    public void dealInitialCards() {
+    public synchronized void dealInitialCards() {
         for (int i = 0; i < 2; i++) {
             for (PokerPlayer player : players) {
                 player.addCard(deck.draw());
@@ -441,7 +457,11 @@ public class PokerGame implements GameEngine {
         }
     }
 
-    public boolean allPlayersActed() {
+    public synchronized boolean allPlayersActed() {
+        return allPlayersActedInternal();
+    }
+
+    private boolean allPlayersActedInternal() {
         for (PokerPlayer player : players) {
             if (!player.isFolded()) {
                 if (!player.hasActed() && !player.isAllIn()) {
@@ -459,7 +479,7 @@ public class PokerGame implements GameEngine {
         currentBet = 0;
     }
 
-    public void resetActedExcept(PokerPlayer player) {
+    public synchronized void resetActedExcept(PokerPlayer player) {
         for (PokerPlayer p : players) {
             if (p != player) {
                 p.resetActed();
@@ -467,7 +487,11 @@ public class PokerGame implements GameEngine {
         }
     }
 
-    public void advanceRound() {
+    public synchronized void advanceRound() {
+        advanceRoundInternal();
+    }
+
+    private void advanceRoundInternal() {
         System.out.println("ADVANCE ROUND: from " + round + " to next");
         switch (round) {
             case PRE_FLOP:
@@ -514,7 +538,7 @@ public class PokerGame implements GameEngine {
         }
     }
 
-    public void postBlinds() {
+    public synchronized void postBlinds() {
         int smallBlindIndex;
         int bigBlindIndex;
 
@@ -541,7 +565,7 @@ public class PokerGame implements GameEngine {
         currentPlayerIndex = (bigBlindIndex + 1) % players.size();
     }
 
-    public void moveDealer() {
+    public synchronized void moveDealer() {
         dealerIndex++;
         if (dealerIndex >= players.size()) {
             dealerIndex = 0;
@@ -560,7 +584,7 @@ public class PokerGame implements GameEngine {
         }
     }
 
-    public void resetForNewHand() {
+    public synchronized void resetForNewHand() {
         removeEliminatedPlayers();
         if (tournamentOver) return;
 
@@ -589,23 +613,27 @@ public class PokerGame implements GameEngine {
         startNewHand();
     }
 
-    public void startNewHand() {
+    public synchronized void startNewHand() {
         postBlinds();
         dealInitialCards();
     }
 
-    public void addToPot(int amount) {
+    public synchronized void addToPot(int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException(getString(R.string.poker_error_amount_must_be_positive));
         }
         this.totalPot += amount;
     }
 
-    public int getTotalPot() {
+    public synchronized int getTotalPot() {
         return totalPot;
     }
 
-    public List<SidePot> buildSidePots() {
+    public synchronized List<SidePot> buildSidePots() {
+        return buildSidePotsInternal();
+    }
+
+    private List<SidePot> buildSidePotsInternal() {
         List<SidePot> sidePots = new ArrayList<>();
 
         List<PokerPlayer> activePlayers = new ArrayList<>();

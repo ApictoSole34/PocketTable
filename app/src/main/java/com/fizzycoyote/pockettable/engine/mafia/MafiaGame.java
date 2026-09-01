@@ -464,6 +464,118 @@ public class MafiaGame implements GameEngine {
         resetActionsForNewPhase();
     }
 
+    /**
+     * Executes a player's action in the Mafia game.
+     *
+     * <p>Actions are phase-dependent. The following formats are supported:</p>
+     *
+     * <h3>Night Phase ({@link MafiaPhase#NIGHT})</h3>
+     * <table border="1" style="border-collapse: collapse; width: 100%;">
+     *   <tr style="background: #f0f0f0;">
+     *     <th style="padding: 8px;">Role</th>
+     *     <th style="padding: 8px;">Action Format</th>
+     *     <th style="padding: 8px;">Description</th>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Mafia</td>
+     *     <td style="padding: 8px;"><code>NIGHT_KILL:{uuid}</code></td>
+     *     <td style="padding: 8px;">Votes to kill the target player.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Doctor</td>
+     *     <td style="padding: 8px;"><code>NIGHT_SAVE:{uuid}</code></td>
+     *     <td style="padding: 8px;">Protects the target player from being killed.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Detective</td>
+     *     <td style="padding: 8px;"><code>NIGHT_INVESTIGATE:{uuid}</code></td>
+     *     <td style="padding: 8px;">Investigates whether the target player is Mafia.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Vigilante</td>
+     *     <td style="padding: 8px;"><code>NIGHT_VIGILANTE_KILL:{uuid}</code></td>
+     *     <td style="padding: 8px;">Shoots the target player (1 charge per game).</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Serial Killer</td>
+     *     <td style="padding: 8px;"><code>NIGHT_SK_KILL:{uuid}</code></td>
+     *     <td style="padding: 8px;">Kills the target player.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Any</td>
+     *     <td style="padding: 8px;"><code>NIGHT_PASS</code></td>
+     *     <td style="padding: 8px;">Skips the night action.</td>
+     *   </tr>
+     * </table>
+     *
+     * <h3>Day Nomination Phase ({@link MafiaPhase#DAY_NOMINATION})</h3>
+     * <table border="1" style="border-collapse: collapse; width: 100%;">
+     *   <tr style="background: #f0f0f0;">
+     *     <th style="padding: 8px;">Action</th>
+     *     <th style="padding: 8px;">Format</th>
+     *     <th style="padding: 8px;">Description</th>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Nominate</td>
+     *     <td style="padding: 8px;"><code>DAY_NOMINATE:{uuid}</code></td>
+     *     <td style="padding: 8px;">Nominates the target player for elimination.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Skip</td>
+     *     <td style="padding: 8px;"><code>DAY_NOMINATE:SKIP</code></td>
+     *     <td style="padding: 8px;">Votes to skip nomination (no one is nominated).</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Mayor Reveal</td>
+     *     <td style="padding: 8px;"><code>DAY_REVEAL:MAYOR</code></td>
+     *     <td style="padding: 8px;">Reveals the player as Mayor (doubles their vote weight).</td>
+     *   </tr>
+     * </table>
+     *
+     * <h3>Day Vote Phase ({@link MafiaPhase#DAY_VOTE})</h3>
+     * <table border="1" style="border-collapse: collapse; width: 100%;">
+     *   <tr style="background: #f0f0f0;">
+     *     <th style="padding: 8px;">Action</th>
+     *     <th style="padding: 8px;">Format</th>
+     *     <th style="padding: 8px;">Description</th>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Guilty</td>
+     *     <td style="padding: 8px;"><code>DAY_VOTE:YES</code></td>
+     *     <td style="padding: 8px;">Votes to eliminate the nominated candidate.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Not Guilty</td>
+     *     <td style="padding: 8px;"><code>DAY_VOTE:NO</code></td>
+     *     <td style="padding: 8px;">Votes to spare the nominated candidate.</td>
+     *   </tr>
+     * </table>
+     *
+     * <h3>Utility Actions (any phase)</h3>
+     * <table border="1" style="border-collapse: collapse; width: 100%;">
+     *   <tr style="background: #f0f0f0;">
+     *     <th style="padding: 8px;">Action</th>
+     *     <th style="padding: 8px;">Format</th>
+     *     <th style="padding: 8px;">Description</th>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;">Set Notes</td>
+     *     <td style="padding: 8px;"><code>SET_NOTES:{text}</code></td>
+     *     <td style="padding: 8px;">Sets or updates the player's private notes.</td>
+     *   </tr>
+     * </table>
+     *
+     * <p><b>Thread-safety:</b> This method is {@code synchronized} on the game instance
+     * to prevent concurrent modifications from both the UI thread and the timer thread.</p>
+     *
+     * @param playerId the UUID of the player performing the action
+     * @param action   the action string in one of the formats described above
+     * @param amount   numeric parameter (unused in Mafia – always 0)
+     * @throws IllegalStateException    if the game is not active, the player is dead,
+     *                                  or the action is invalid for the current phase
+     * @throws IllegalArgumentException if the action format is invalid, the target doesn't exist,
+     *                                  or the player tries to target themselves
+     */
     @Override
     public synchronized void performAction(UUID playerId, String action, int amount) {
         if (gameOver || phase == null) {

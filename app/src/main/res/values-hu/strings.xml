@@ -325,6 +325,10 @@
     <string name="mafia_candidate_label">Jelölt</string>
     <string name="mafia_guilty_content_desc">Bűnös</string>
     <string name="mafia_not_guilty_content_desc">Nem bűnös</string>
+    <string name="mafia_phase_nomination">☀️ Reggel</string>
+    <string name="mafia_phase_vote">⚖️ Tárgyalás</string>
+    <string name="mafia_phase_night">🌙 Éjszaka</string>
+    <string name="mafia_phase_game_over">💀 Játék vége</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">A játékos nem található: %s</string>
@@ -365,4 +369,21 @@
     <string name="leave_confirm_positive">Kilépés</string>
     <string name="leave_confirm_negative">Mégse</string>
     <string name="host_ended_game">A házigazda befejezte a játékot.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Kapcsolati problémák?</string>
+    <string name="diagnostics_title">Háttérben futó alkalmazások korlátozása</string>
+    <string name="diagnostics_tips_full">Egyes eszközök agresszívan korlátozzák a háttérben futó alkalmazásokat
+                                    (a Xiaomi, Oppo, Realme, Huawei, Vivo és más gyártók készülékei leállíthatják a PocketTable-t a háttérben,
+                                    ami megszakadásokat okozhat játék közben).\n\nMegoldás:\n
+                                        1. Nyisd meg a Beállítások → Akkumulátor → Alkalmazások akkumulátor-kezelése menüpontot\n
+                                        2. Keresd meg a PocketTable alkalmazást\n
+                                        3. Válaszd a \"Ne optimalizálja\" vagy a \"Háttértevékenység engedélyezése\" lehetőséget\n\n
+                                    Xiaomi (MIUI): engedélyezd az \"Automatikus indítás\" lehetőséget is a PocketTable számára a Beállítások → Alkalmazások → Alkalmazások kezelése menüpontban.\n
+                                    Oppo/Realme (ColorOS): Beállítások → Akkumulátor → Alkalmazások akkumulátor-kezelése → PocketTable → Háttértevékenység engedélyezése.\n
+                                    Huawei (EMUI): Beállítások → Akkumulátor → Alkalmazásindítás → PocketTable → válaszd a Kézi kezelés lehetőséget, és engedélyezd mindhárom kapcsolót.\n
+                                    Vivo (FuntouchOS): Beállítások → Akkumulátor → Háttérben történő energiafogyasztás kezelése → engedélyezd a PocketTable-t.</string>
+    <string name="diagnostics_battery_button">Akkumulátor-beállítások megnyitása</string>
+    <string name="diagnostics_restart_button">Alkalmazás újraindítása</string>
+
 </resources>

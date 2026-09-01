@@ -25,6 +25,7 @@ import com.fizzycoyote.pockettable.models.poker.PokerActionRequest;
 import com.fizzycoyote.pockettable.models.poker.PokerGameState;
 import com.fizzycoyote.pockettable.network.poker.PokerClient;
 import com.fizzycoyote.pockettable.network.poker.PokerHostServer;
+import com.fizzycoyote.pockettable.utils.AppDialog;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
 import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
@@ -117,7 +118,7 @@ public class PokerTableActivity extends BaseImmersiveActivity {
         btnRaise.setOnClickListener(v -> showRaiseDialog());
         btnNextHand.setOnClickListener(v -> startNextHand());
 
-        applyTopInsetPadding(btnLeave);
+        applyTopInsetPadding(findViewById(R.id.llPokerContent));
         btnLeave.setOnClickListener(v -> confirmLeave());
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -203,8 +204,7 @@ public class PokerTableActivity extends BaseImmersiveActivity {
                 tvTurnInfo.setText(getString(R.string.connected));
             } else {
                 try {
-                    client = new PokerClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
-                    client.setListener(listener);
+                    client = new PokerClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName, roomCode);                    client.setListener(listener);
                     client.connectBlocking();
                     client.send("GET_STATE");
                     tvTurnInfo.setText(getString(R.string.connected));
@@ -234,6 +234,29 @@ public class PokerTableActivity extends BaseImmersiveActivity {
         runOnUiThread(() -> updateUI(state));
     }
 
+    /**
+     * Updates the UI to reflect the current Poker game state.
+     *
+     * <p>This method is called whenever a new state snapshot is received from the host
+     * (or after the host processes an action locally). It updates:
+     * <ul>
+     *   <li>The pot size</li>
+     *   <li>The community cards</li>
+     *   <li>The player's hole cards, chips, and current bet</li>
+     *   <li>The list of players with their status (folded, all-in, etc.)</li>
+     *   <li>The current turn indicator</li>
+     *   <li>Action button availability</li>
+     *   <li>The "Next Hand" button (for the host)</li>
+     *   <li>Showdown results</li>
+     * </ul>
+     *
+     * <p>During SHOWDOWN, this method displays the winner's name and hand description.</p>
+     *
+     * @param state the current game state snapshot, or {@code null} if no state is available
+     *
+     * @see #lastState
+     * @see #tablePlayerAdapter
+     */
     private void updateUI(PokerGameState state) {
         if (state == null) return;
 
@@ -321,6 +344,19 @@ public class PokerTableActivity extends BaseImmersiveActivity {
         btnRaise.setEnabled(enabled);
     }
 
+    /**
+     * Sends an action to the game engine.
+     *
+     * <p>If the player is the host, the action is executed locally and the state is broadcast
+     * to all clients. If the player is a client, the action is sent to the host via WebSocket.
+     *
+     * <p>For BET and RAISE actions, the {@code amount} parameter must be specified.</p>
+     *
+     * @param action the action type ({@link PokerAction})
+     * @param amount the bet/raise amount (ignored for CHECK, CALL, FOLD)
+     *
+     * @see PokerGame#performAction(UUID, String, int)
+     */
     private void sendAction(PokerAction action, int amount) {
         if (isHost && game != null && hostServer != null) {
             try {
@@ -373,7 +409,7 @@ public class PokerTableActivity extends BaseImmersiveActivity {
         int pot = lastState != null ? lastState.totalPot() : 0;
 
         if (max <= min) {
-            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+            android.app.AlertDialog.Builder builder = AppDialog.builder(this);
             builder.setTitle(title);
             builder.setMessage(String.format(getString(R.string.all_in_only), max));
             builder.setPositiveButton(getString(R.string.all_in), (dialog, which) -> sendAction(action, max));
@@ -460,7 +496,7 @@ public class PokerTableActivity extends BaseImmersiveActivity {
             updatingProgrammatically[0] = false;
         });
 
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        android.app.AlertDialog.Builder builder = AppDialog.builder(this);
         builder.setTitle(title);
         builder.setView(dialogView);
         builder.setPositiveButton(getString(R.string.confirm), (dialog, which) -> {

@@ -327,6 +327,10 @@
     <string name="mafia_candidate_label">Kandidát</string>
     <string name="mafia_guilty_content_desc">Vinen</string>
     <string name="mafia_not_guilty_content_desc">Nevinen</string>
+    <string name="mafia_phase_nomination">☀️ Ráno</string>
+    <string name="mafia_phase_vote">⚖️ Soud</string>
+    <string name="mafia_phase_night">🌙 Noc</string>
+    <string name="mafia_phase_game_over">💀 Konec hry</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">Hráč nebyl nalezen: %s</string>
@@ -367,4 +371,21 @@
     <string name="leave_confirm_positive">Opustit</string>
     <string name="leave_confirm_negative">Zrušit</string>
     <string name="host_ended_game">Hostitel ukončil hru.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Problémy s připojením?</string>
+    <string name="diagnostics_title">Omezení aplikací na pozadí</string>
+    <string name="diagnostics_tips_full">Některá zařízení velmi agresivně omezují aplikace běžící na pozadí
+                                    (Xiaomi, Oppo, Realme, Huawei, Vivo a další mohou PocketTable ukončit na pozadí,
+                                    což způsobuje odpojování během hry).\n\nŘešení:\n
+                                        1. Přejděte do Nastavení → Baterie → Správa baterie aplikací\n
+                                        2. Najděte PocketTable\n
+                                        3. Vyberte \"Neoptimalizovat\" nebo \"Povolit aktivitu na pozadí\"\n\n
+                                    Xiaomi (MIUI): také povolte \"Automatické spuštění\" pro PocketTable v Nastavení → Aplikace → Správa aplikací.\n
+                                    Oppo/Realme (ColorOS): Nastavení → Baterie → Správa baterie aplikací → PocketTable → Povolit aktivitu na pozadí.\n
+                                    Huawei (EMUI): Nastavení → Baterie → Spouštění aplikací → PocketTable → nastavte na Ručně spravovat a povolte všechny 3 možnosti.\n
+                                    Vivo (FuntouchOS): Nastavení → Baterie → Správa spotřeby energie na pozadí → povolte PocketTable.</string>
+    <string name="diagnostics_battery_button">Otevřít nastavení baterie</string>
+    <string name="diagnostics_restart_button">Restartovat aplikaci</string>
+
 </resources>

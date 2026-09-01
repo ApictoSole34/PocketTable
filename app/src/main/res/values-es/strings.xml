@@ -325,6 +325,10 @@
     <string name="mafia_candidate_label">Candidato</string>
     <string name="mafia_guilty_content_desc">Culpable</string>
     <string name="mafia_not_guilty_content_desc">No culpable</string>
+    <string name="mafia_phase_nomination">☀️ Mañana</string>
+    <string name="mafia_phase_vote">⚖️ Juicio</string>
+    <string name="mafia_phase_night">🌙 Noche</string>
+    <string name="mafia_phase_game_over">💀 Fin del juego</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">Jugador no encontrado: %s</string>
@@ -365,4 +369,21 @@
     <string name="leave_confirm_positive">Salir</string>
     <string name="leave_confirm_negative">Cancelar</string>
     <string name="host_ended_game">El anfitrión terminó la partida.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ ¿Problemas de conexión?</string>
+    <string name="diagnostics_title">Restricciones en segundo plano</string>
+    <string name="diagnostics_tips_full">Algunos dispositivos restringen agresivamente las aplicaciones en segundo plano
+                                    (Xiaomi, Oppo, Realme, Huawei, Vivo y otros pueden cerrar PocketTable en segundo plano,
+                                    provocando desconexiones durante la partida).\n\nSolución:\n
+                                        1. Ve a Ajustes → Batería → Gestión de batería de aplicaciones\n
+                                        2. Busca PocketTable\n
+                                        3. Selecciona \"No optimizar\" o \"Permitir actividad en segundo plano\"\n\n
+                                    Xiaomi (MIUI): activa también \"Inicio automático\" para PocketTable en Ajustes → Aplicaciones → Gestionar aplicaciones.\n
+                                    Oppo/Realme (ColorOS): Ajustes → Batería → Gestión de batería de aplicaciones → PocketTable → Permitir actividad en segundo plano.\n
+                                    Huawei (EMUI): Ajustes → Batería → Inicio de aplicaciones → PocketTable → selecciona Gestionar manualmente y activa las 3 opciones.\n
+                                    Vivo (FuntouchOS): Ajustes → Batería → Gestión del consumo de energía en segundo plano → permite PocketTable.</string>
+    <string name="diagnostics_battery_button">Abrir ajustes de batería</string>
+    <string name="diagnostics_restart_button">Reiniciar aplicación</string>
+
 </resources>

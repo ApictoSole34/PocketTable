@@ -26,8 +26,8 @@ public class ColorClashClient extends GenericGameClient {
         void onActionError(String message);
     }
 
-    public ColorClashClient(URI uri, UUID playerId, String playerName) {
-        super(uri, playerId, playerName);
+    public ColorClashClient(URI uri, UUID playerId, String playerName, String roomCode) {
+        super(uri, playerId, playerName, roomCode);
         this.playerId = playerId;
     }
 

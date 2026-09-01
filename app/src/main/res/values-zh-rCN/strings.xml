@@ -325,6 +325,10 @@
     <string name="mafia_candidate_label">候选人</string>
     <string name="mafia_guilty_content_desc">有罪</string>
     <string name="mafia_not_guilty_content_desc">无罪</string>
+    <string name="mafia_phase_nomination">☀️ 白天</string>
+    <string name="mafia_phase_vote">⚖️ 审判</string>
+    <string name="mafia_phase_night">🌙 夜晚</string>
+    <string name="mafia_phase_game_over">💀 游戏结束</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">未找到玩家：%s</string>
@@ -365,4 +369,21 @@
     <string name="leave_confirm_positive">离开</string>
     <string name="leave_confirm_negative">取消</string>
     <string name="host_ended_game">主机结束了游戏。</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ 连接有问题？</string>
+    <string name="diagnostics_title">后台运行限制</string>
+    <string name="diagnostics_tips_full">部分设备会严格限制后台应用
+                                    （Xiaomi、Oppo、Realme、Huawei、Vivo等设备可能会在后台关闭PocketTable，
+                                    从而导致游戏过程中断开连接）。\n\n解决方法：\n
+                                        1. 前往 设置 → 电池 → 应用电池管理\n
+                                        2. 找到 PocketTable\n
+                                        3. 选择“不优化”或“允许后台活动”\n\n
+                                    Xiaomi (MIUI)：还需要在 设置 → 应用 → 管理应用 中为PocketTable启用“自动启动”。\n
+                                    Oppo/Realme (ColorOS)：设置 → 电池 → 应用电池管理 → PocketTable → 允许后台活动。\n
+                                    Huawei (EMUI)：设置 → 电池 → 应用启动 → PocketTable → 设置为手动管理，并启用全部3个选项。\n
+                                    Vivo (FuntouchOS)：设置 → 电池 → 后台耗电管理 → 允许PocketTable运行。</string>
+    <string name="diagnostics_battery_button">打开电池设置</string>
+    <string name="diagnostics_restart_button">重启应用</string>
+
 </resources>

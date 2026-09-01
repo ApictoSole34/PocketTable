@@ -29,7 +29,7 @@ public final class AppOptionsDialogHelper {
                 activity.getString(R.string.options_exit_app)
         };
 
-        new AlertDialog.Builder(activity)
+        AppDialog.builder(activity)
                 .setTitle(R.string.options_title)
                 .setItems(options, (dialog, which) -> {
                     if (which == 0) {
@@ -60,14 +60,14 @@ public final class AppOptionsDialogHelper {
                 activity.getString(R.string.language_turkish)
         };
 
-        new AlertDialog.Builder(activity)
+        AppDialog.builder(activity)
                 .setTitle(R.string.options_change_language)
                 .setItems(languageLabels, (dialog, which) -> LanguageManager.setLanguage(LANGUAGE_TAGS[which]))
                 .show();
     }
 
     private static void confirmExit(Activity activity) {
-        new AlertDialog.Builder(activity)
+        AppDialog.builder(activity)
                 .setTitle(R.string.options_exit_confirm_title)
                 .setMessage(R.string.options_exit_confirm_message)
                 .setPositiveButton(R.string.options_exit_confirm_positive, (dialog, which) -> {

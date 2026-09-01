@@ -1,0 +1,389 @@
+<resources>
+    <!-- ==================== APP ==================== -->
+    <string name="app_name">PocketTable</string>
+
+    <!-- ==================== MAIN ACTIVITY ==================== -->
+    <string name="nickname_hint">Bijnaam</string>
+    <string name="create_room">🃏 Kamer maken</string>
+    <string name="join_room">🔗 Verbinden met code</string>
+    <string name="scan_qr">📷 QR scannen</string>
+    <string name="enter_nickname">Voer je bijnaam in!</string>
+    <string name="join_host_title">Deelnemen aan host</string>
+    <string name="host_game_title">Spel hosten</string>
+    <string name="join_via_code">Deelnemen met code</string>
+    <string name="game_poker">Poker</string>
+    <string name="game_colorclash">Color Clash</string>
+
+    <!-- ==================== APP OPTIONS ==================== -->
+    <string name="options_icon" translatable="false">⚙</string>
+    <string name="options_button_desc">Opties</string>
+    <string name="options_title">Opties</string>
+    <string name="options_change_language">Taal wijzigen</string>
+    <string name="options_exit_app">App afsluiten</string>
+    <string name="options_exit_confirm_title">App afsluiten?</string>
+    <string name="options_exit_confirm_message">Weet je zeker dat je PocketTable wilt afsluiten?</string>
+    <string name="options_exit_confirm_positive">Afsluiten</string>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_french" translatable="false">Français</string>
+    <string name="language_spanish" translatable="false">Español</string>
+    <string name="language_german" translatable="false">Deutsch</string>
+    <string name="language_czech" translatable="false">Čeština</string>
+    <string name="language_arabic_egypt" translatable="false">العربية المصرية</string>
+    <string name="language_slovak" translatable="false">Slovenčina</string>
+    <string name="language_lithuanian" translatable="false">Lietuvių</string>
+    <string name="language_dutch" translatable="false">Nederlands</string>
+    <string name="language_japanese" translatable="false">日本語</string>
+    <string name="language_chinese_simplified" translatable="false">简体中文</string>
+    <string name="language_portuguese_brazil" translatable="false">Português (Brasil)</string>
+    <string name="language_hungarian" translatable="false">Magyar</string>
+    <string name="language_turkish" translatable="false">Türkçe</string>
+
+    <!-- ==================== LOBBY ==================== -->
+    <string name="code_label">Code: </string>
+    <string name="ip_label">IP: </string>
+    <string name="players_label">Spelers: </string>
+    <string name="lobby_you"> (JIJ)</string>
+    <string name="show_qr">QR tonen</string>
+    <string name="start_game">START</string>
+    <string name="qr_title">QR-code voor kamer </string>
+    <string name="qr_error">Fout bij het genereren van QR-code</string>
+    <string name="ok">OK</string>
+    <string name="game_settings_title">Instellingen</string>
+    <string name="lobby_toast_mafia_neutral">Er zijn niet genoeg neutrale rollen geselecteerd voor het vereiste aantal neutrale spelers.</string>
+    <string name="lobby_con_error">Verbindingsfout</string>
+
+    <!-- ==================== JOIN DIALOG ==================== -->
+    <string name="join_title">Deelnemen aan kamer</string>
+    <string name="join_hint">Voer code in (bijv. ABC123)</string>
+    <string name="join_search">Zoeken</string>
+    <string name="join_cancel">Annuleren</string>
+    <string name="code_required">Code moet 6 tekens bevatten!</string>
+    <string name="searching_host">Host zoeken met code: </string>
+    <string name="host_found">Host gevonden!</string>
+    <string name="host_not_found">Geen host gevonden voor code: </string>
+    <string name="scan_qr_from_host">Scan de QR-code op het hostscherm</string>
+    <string name="invalid_qr">Ongeldige QR-code</string>
+
+    <!-- ==================== GAME SETTINGS ==================== -->
+    <string name="game_settings">Spelinstellingen</string>
+    <string name="small_blind_hint">Small Blind (standaard 50)</string>
+    <string name="big_blind_hint">Big Blind (standaard 100)</string>
+    <string name="starting_chips_hint">Startfiches (standaard 1000)</string>
+
+    <!-- ==================== COLOR CLASH SETTINGS ==================== -->
+    <string name="colorclash_stacking">+2 / +4 stapelen</string>
+    <string name="colorclash_jump_in">Invalbeurt (een identieke kaart spelen buiten je beurt)</string>
+    <string name="colorclash_seven_swap">7 wisselt kaarten met een gekozen speler</string>
+    <string name="colorclash_zero_rotate">0 draait alle handen rond de tafel</string>
+
+    <string name="color_red">ROOD</string>
+    <string name="color_yellow">GEEL</string>
+    <string name="color_green">GROEN</string>
+    <string name="color_blue">BLAUW</string>
+
+    <plurals name="card_count">
+        <item quantity="one">%d kaart</item>
+        <item quantity="other">%d kaarten</item>
+    </plurals>
+
+    <!-- ==================== POKER TABLE ==================== -->
+    <string name="poker_title">♠️ Poker</string>
+    <string name="pot_label">Pot: </string>
+    <string name="pot_label_placeholder">Pot: 0</string>
+    <string name="your_chips_label">Jouw fiches: %d</string>
+    <string name="your_chips_placeholder">Jouw fiches: 1000</string>
+    <string name="your_bet_label">Jouw inzet deze ronde: %d</string>
+    <string name="your_bet_placeholder">Jouw inzet deze ronde: 0</string>
+    <string name="your_turn">JIJ BENT AAN DE BEURT!</string>
+    <string name="waiting_for_players">Wachten op spelers...</string>
+    <string name="waiting_for_move">Wachten op zet...</string>
+    <string name="new_hand">NIEUWE HAND</string>
+    <string name="game_started">Spel gestart!</string>
+    <string name="game_over">Spel afgelopen!</string>
+    <string name="tie">Gelijkspel</string>
+    <string name="you_are_host">Je bent de host. Het spel is klaar!</string>
+    <string name="connected">Verbonden!</string>
+    <string name="connecting">Verbinden met host...</string>
+    <string name="connection_error">Verbindingsfout: %s</string>
+    <string name="no_connection">Geen verbinding met het spel!</string>
+    <string name="error_prefix" translatable="false">ERROR:  %s</string>
+
+    <string name="action_error_label">Fout: %1$s</string>
+    <string name="reconnecting_message">Verbinding verbroken, poging %1$d om opnieuw te verbinden…</string>
+    <string name="reconnected_message">Opnieuw verbonden!</string>
+    <string name="reconnect_failed_message">Opnieuw verbinden mislukt. Ga terug naar de lobby.</string>
+
+    <!-- ==================== POKER GAME ERRORS ==================== -->
+    <string name="poker_error_showdown_already">Het spel is al in de showdown</string>
+    <string name="poker_error_not_your_turn">Deze speler is niet aan de beurt</string>
+    <string name="poker_error_already_folded">Speler heeft al gepast</string>
+    <string name="poker_error_already_all_in">Speler is al all-in en kan niet meer handelen</string>
+    <string name="poker_error_cannot_check">Je kunt niet checken zolang de huidige inzet hoger is</string>
+    <string name="poker_error_cannot_bet_existing">Je kunt niet inzetten als er al een inzet is</string>
+    <string name="poker_error_bet_must_be_positive">Inzet moet positief zijn</string>
+    <string name="poker_error_nothing_to_call">Er valt niets te callen</string>
+    <string name="poker_error_raise_too_low">Raise moet hoger zijn dan de huidige inzet</string>
+    <string name="poker_error_already_bet_enough">Speler heeft al genoeg ingezet</string>
+    <string name="poker_error_no_eligible_players">Geen geschikte actieve spelers</string>
+    <string name="poker_error_player_not_found">Speler niet gevonden</string>
+    <string name="poker_error_cannot_deal_river">River kan niet worden gedeeld tijdens %s</string>
+    <string name="poker_error_cannot_deal_turn">Turn kan niet worden gedeeld tijdens %s</string>
+    <string name="poker_error_amount_must_be_positive">Bedrag moet positief zijn</string>
+    <string name="poker_error_not_enough_chips">Niet genoeg fiches</string>
+    <string name="poker_error_amount_cannot_be_negative">Bedrag kan niet negatief zijn</string>
+
+    <!-- ==================== COLOR CLASH GAME ERRORS ==================== -->
+    <string name="colorclash_error_game_over">Het spel is al afgelopen</string>
+    <string name="colorclash_error_jumpin_disabled">Invalbeurt is uitgeschakeld</string>
+    <string name="colorclash_error_jumpin_draw_active">Je kunt geen invalbeurt doen wanneer de trekstapel actief is</string>
+    <string name="colorclash_error_use_play">Je bent aan de beurt – gebruik PLAY</string>
+    <string name="colorclash_error_invalid_card_index">Ongeldige kaartindex</string>
+    <string name="colorclash_error_jumpin_requires_match">Voor een invalbeurt is een identieke kaart als de bovenste kaart nodig</string>
+    <string name="colorclash_error_last_card_single_only">Je kunt alleen Last Card roepen als je precies één kaart in je hand hebt</string>
+    <string name="colorclash_error_cannot_catch_self">Je kunt jezelf niet pakken</string>
+    <string name="colorclash_error_nothing_to_catch">%s kan momenteel niet worden gepakt</string>
+    <string name="colorclash_error_not_your_turn">Deze speler is niet aan de beurt</string>
+    <string name="colorclash_error_player_eliminated">Speler is uitgeschakeld</string>
+    <string name="colorclash_error_card_cannot_be_played">Kaart kan niet worden gespeeld</string>
+    <string name="colorclash_error_choose_wild_color">Je moet een kleur kiezen voor de jokerkaart</string>
+    <string name="colorclash_error_choose_swap_target">Kies een speler om kaarten mee te ruilen</string>
+    <string name="colorclash_error_unknown_action">Onbekende actie: %s</string>
+    <string name="colorclash_error_player_not_found">Speler niet gevonden: %s</string>
+    <string name="colorclash_error_card_not_held">Speler heeft deze kaart niet</string>
+
+    <!-- ==================== MISC UI ==================== -->
+    <string name="unknown_player">Onbekend</string>
+    <string name="colorclash_eliminated_suffix"> (uitgeschakeld)</string>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <string name="btn_check">CHECK</string>
+    <string name="btn_call">CALL</string>
+    <string name="btn_fold">FOLD</string>
+    <string name="btn_bet">INZETTEN</string>
+    <string name="btn_raise">RAISE</string>
+
+    <!-- ==================== BET/RAISE DIALOG ==================== -->
+    <string name="bet_title">Inzet</string>
+    <string name="raise_title">Raise</string>
+    <string name="enter_amount_manually">Bedrag handmatig invoeren</string>
+    <string name="half_pot">1/2 POT</string>
+    <string name="pot">POT</string>
+    <string name="all_in">ALL-IN</string>
+    <string name="all_in_only">Je kunt alleen ALL-IN gaan: %d</string>
+    <string name="confirm">Bevestigen</string>
+    <string name="cancel">Annuleren</string>
+
+    <!-- ==================== PLAYER STATUS ==================== -->
+    <string name="player_name_default">Speler</string>
+    <string name="dealer_badge">D</string>
+    <string name="status_folded">FOLD</string>
+    <string name="status_all_in">ALL-IN</string>
+    <string name="you_suffix">(Jij)</string>
+    <string name="host_suffix">(Host)</string>
+    <string name="winner">🏆 %s WINT! 🏆</string>
+
+    <!-- ==================== HAND NAMES ==================== -->
+    <string name="hand_high_card">Hoge kaart</string>
+    <string name="hand_pair">Paar</string>
+    <string name="hand_two_pair">Twee paar</string>
+    <string name="hand_three_of_a_kind">Three of a kind</string>
+    <string name="hand_straight">Straight</string>
+    <string name="hand_flush">Flush</string>
+    <string name="hand_full_house">Full house</string>
+    <string name="hand_four_of_a_kind">Four of a kind</string>
+    <string name="hand_straight_flush">Straight flush</string>
+
+    <!-- ==================== WINNER DESCRIPTIONS ==================== -->
+    <string name="winner_others_folded">Winnaar (anderen hebben gepast)</string>
+    <string name="no_data">geen gegevens</string>
+
+    <!-- ==================== README ==================== -->
+    <string name="warning_background_apps">Sommige apparaten beperken apps op de achtergrond zeer streng</string>
+
+    <!-- ==================== COLOR CLASH TABLE ==================== -->
+    <string name="colorclash_host_ready">Je bent de host. Het spel is klaar!</string>
+    <string name="colorclash_top_card_label">Bovenste: %1$s %2$s</string>
+    <string name="colorclash_draw_pile_label">Trekken: %1$d</string>
+    <string name="colorclash_waiting_for">Wachten op %1$s</string>
+    <string name="colorclash_draw_stack_info"> (Trek %1$d kaarten)</string>
+    <string name="colorclash_winner_message">🏆 %1$s WINT! 🏆</string>
+    <string name="colorclash_catch_button">Pakken!</string>
+    <string name="colorclash_choose_color">Kies een kleur</string>
+    <string name="colorclash_swap_cards_with">Kaarten ruilen met...</string>
+    <string name="colorclash_not_your_turn">Je bent niet aan de beurt!</string>
+    <string name="colorclash_cannot_play_card">Je kunt deze kaart niet spelen</string>
+    <string name="colorclash_card_not_in_hand">Kaart niet in je hand</string>
+    <string name="colorclash_card_no_longer_in_hand">Kaart zit niet meer in je hand</string>
+    <string name="colorclash_error">Fout: %1$s</string>
+    <string name="colorclash_draw">TREKKEN</string>
+    <string name="colorclash_last_card">LAATSTE KAART!</string>
+    <string name="colorclash_next_round">VOLGENDE RONDE</string>
+    <string name="colorclash_your_hand">Jouw hand</string>
+    <string name="colorclash_top_card_default">Bovenste: </string>
+    <string name="colorclash_draw_pile_default">Trekken: 0</string>
+    <string name="colorclash_waiting_players">Wachten op spelers...</string>
+    <string name="colorclash_game_started">Spel gestart!</string>
+    <string name="colorclash_game_over">Spel afgelopen!</string>
+    <string name="colorclash_connecting">Verbinden...</string>
+    <string name="colorclash_connection_error">Verbindingsfout</string>
+
+    <!-- ==================== Mafia ==================== -->
+    <string name="mafia_settings_title">Maffia-instellingen</string>
+    <string name="mafia_role_count">Rollen (0 = uit)</string>
+    <string name="mafia_timer">Timers gebruiken (anders alleen handmatig gereedmaken)</string>
+    <string name="mafia_night_length">Duur van de nacht (sec.)</string>
+    <string name="mafia_day_length">Duur van de dag (sec.)</string>
+    <string name="mafia_trial_length">Duur van het proces (sec.)</string>
+    <string name="mafia_neutral_size">Aantal neutrale spelers</string>
+    <string name="mafia_neutral">Neutrale spelers</string>
+    <string name="mafia_town_role">Dorpsrol (max. 1 per rol)</string>
+    <string name="mafia_mafia">Maffiaspelers</string>
+
+    <!-- role -->
+    <string name="mafia_role_civilian">Burger</string>
+    <string name="mafia_role_mafia">Maffia</string>
+    <string name="mafia_role_detective">Detective</string>
+    <string name="mafia_role_doctor">Dokter</string>
+    <string name="mafia_role_vigilante">Vigilante</string>
+    <string name="mafia_role_mayor">Burgemeester</string>
+    <string name="mafia_role_jester">Nar</string>
+    <string name="mafia_role_serial_killer">Seriemoordenaar</string>
+    <string name="mafia_skip">Overslaan</string>
+    <string name="mafia_vote_button_label">Stem</string>
+    <string name="role_icon_desc">beschrijving</string>
+
+    <!-- role dialog -->
+    <string name="mafia_role_dialog_title">Rollenhandleiding</string>
+    <string name="mafia_role_dialog_close">Sluiten</string>
+
+    <!-- mafia -->
+    <string name="mafia_role_dialog_mafia">Tijdens de nacht kiest de maffia gezamenlijk een slachtoffer om te doden. Ze kennen de andere maffialeden.</string>
+
+    <!-- town -->
+    <string name="mafia_role_dialog_detective">Onderzoekt \'s nachts één persoon en ontdekt of die persoon bij de maffia hoort.</string>
+    <string name="mafia_role_dialog_doctor">Beschermt \'s nachts één persoon tegen een moordaanslag.</string>
+    <string name="mafia_role_dialog_vigilante">Heeft slechts één kogel voor het hele spel – mag \'s nachts iemand neerschieten.</string>
+    <string name="mafia_role_dialog_mayor">Kan zich overdag bekendmaken – zijn stem telt daarna dubbel bij nominaties en processen.</string>
+    <string name="mafia_role_dialog_civilian">Heeft geen speciale vaardigheden. Stemt overdag zoals elk ander dorpslid.</string>
+
+    <!-- neutral -->
+    <string name="mafia_role_dialog_jester">Heeft geen nachtactie. Wint onmiddellijk als het dorp besluit hem overdag te lynchen.</string>
+    <string name="mafia_role_dialog_serial_killer">Doodt \'s nachts alleen, onafhankelijk van de maffia. Wint wanneer hij de enige levende speler is.</string>
+
+    <!-- Mafia Table Activity -->
+    <string name="mafia_candidate">Kandidaat</string>
+    <string name="mafia_phase">Fase: %s</string>
+    <string name="mafia_your_role">Jouw rol: %s</string>
+    <string name="mafia_dead">DOOD</string>
+    <string name="mafia_voted_badge">GESTEMD</string>
+    <string name="mafia_phase_label">Fase: %s</string>
+    <string name="mafia_your_role_label">Jouw rol: %s</string>
+    <string name="mafia_game_started">Spel gestart!</string>
+    <string name="mafia_host_ended_game">De host heeft het spel beëindigd</string>
+    <string name="mafia_voting_unavailable">Stemmen is momenteel niet beschikbaar</string>
+    <string name="mafia_night_result">Resultaat van de nacht: %s</string>
+    <string name="mafia_someone_died">%s is gestorven</string>
+    <string name="mafia_no_one_died">Niemand is gestorven</string>
+    <string name="mafia_nominated">Genomineerd: %s</string>
+    <string name="mafia_eliminated_by_day">Uitgeschakeld: %s</string>
+    <string name="mafia_unknown_player">Onbekende speler</string>
+    <string name="mafia_is_mafia">is maffia!</string>
+    <string name="mafia_not_mafia">is geen maffia</string>
+    <string name="mafia_investigation_results">Onderzoeksresultaten</string>
+    <string name="mafia_ok">OK</string>
+    <string name="mafia_night_death_title">☠️ %s stierf tijdens de nacht</string>
+    <string name="mafia_role_label">Rol: %s</string>
+    <string name="mafia_day_elimination_title">⚖️ %s werd door het dorp uitgeschakeld</string>
+    <string name="mafia_notes_title">Notities voor %s</string>
+    <string name="mafia_no_notes">(geen notities)</string>
+    <string name="mafia_kill_confirm">%s doden?</string>
+    <string name="mafia_save_confirm">%s redden?</string>
+    <string name="mafia_investigate_confirm">%s onderzoeken?</string>
+    <string name="mafia_shoot_confirm">%s neerschieten?</string>
+    <string name="mafia_no_night_action">Je hebt geen nachtactie</string>
+    <string name="mafia_notes_hint">Schrijf hier je notities...</string>
+    <string name="mafia_my_notes">Mijn notities</string>
+    <string name="mafia_save">Opslaan</string>
+    <string name="mafia_cancel">Annuleren</string>
+    <string name="mafia_confirm">Bevestigen</string>
+    <string name="mafia_yes">Ja</string>
+    <string name="mafia_no">Nee</string>
+    <string name="mafia_town_wins">🏛️ Het dorp wint!</string>
+    <string name="mafia_mafia_wins">🔪 De maffia wint!</string>
+    <string name="mafia_jester_wins">🤡 De nar wint!</string>
+    <string name="mafia_serial_killer_wins">🔪 De seriemoordenaar wint!</string>
+    <string name="mafia_waiting_for_host">\n\nWachten tot de host de volgende ronde start...</string>
+    <string name="mafia_new_round">Nieuwe ronde</string>
+    <string name="mafia_end_game">Spel beëindigen</string>
+    <string name="mafia_phase_label_short">Fase:</string>
+    <string name="mafia_role_info_button">Rolinformatie</string>
+    <string name="mafia_notes_button">Notities</string>
+    <string name="mafia_your_role_label_short">Jouw rol:</string>
+    <string name="mafia_candidate_label">Kandidaat</string>
+    <string name="mafia_guilty_content_desc">Schuldig</string>
+    <string name="mafia_not_guilty_content_desc">Onschuldig</string>
+    <string name="mafia_phase_nomination">☀️ Ochtend</string>
+    <string name="mafia_phase_vote">⚖️ Proces</string>
+    <string name="mafia_phase_night">🌙 Nacht</string>
+    <string name="mafia_phase_game_over">💀 Spel afgelopen</string>
+
+    <!-- Mafia Game Errors -->
+    <string name="mafia_player_not_found">Speler niet gevonden: %s</string>
+    <string name="mafia_target_not_alive">Doelwit leeft niet</string>
+    <string name="mafia_cannot_target_self">Je kunt jezelf niet als doelwit kiezen</string>
+    <string name="mafia_min_players">Maffia heeft minimaal 4 spelers nodig</string>
+    <string name="mafia_need_mafia_role">Er moet minimaal 1 Maffia-rol zijn ingesteld</string>
+    <string name="mafia_dead_cannot_act">Dode spelers kunnen niet handelen</string>
+    <string name="mafia_notes_too_long">Notities te lang (max. 1000 tekens)</string>
+    <string name="mafia_no_behavior">Geen gedrag voor rol: %s</string>
+    <string name="mafia_unknown_action">Onbekende actie: %s</string>
+    <string name="mafia_game_inactive">Het spel is momenteel niet actief</string>
+    <string name="mafia_game_over">Het spel is afgelopen</string>
+    <string name="mafia_error_unknown_detective_action">Onbekende detectiveactie</string>
+    <string name="mafia_error_unknown_doctor_action">Onbekende doktersactie</string>
+    <string name="mafia_error_unknown_mafia_action">Onbekende maffia-actie</string>
+    <string name="mafia_error_unknown_mayor_day_action">Onbekende dagactie van de burgemeester</string>
+    <string name="mafia_error_unknown_sk_action">Onbekende actie van de seriemoordenaar</string>
+    <string name="mafia_error_unknown_vigilante_action">Onbekende vigilanteactie</string>
+    <string name="mafia_error_no_charges">Je hebt je enige kogel al gebruikt</string>
+    <string name="mafia_error_no_special_day_action">Deze rol heeft geen speciale dagactie</string>
+    <string name="mafia_status_dead">DOOD</string>
+    <string name="mafia_config_count_negative">Aantal kan niet negatief zijn</string>
+    <string name="mafia_config_role_at_most_1">%s kan maximaal 1 zijn</string>
+    <string name="mafia_config_cannot_set_neutral_directly">Het aantal neutrale rollen kan niet rechtstreeks worden ingesteld. Gebruik setNeutralCount en setAllowedNeutralRoles</string>
+    <string name="mafia_config_neutral_count_exceeds">Aantal neutrale spelers (%1$d) overschrijdt het aantal toegestane neutrale rollen (%2$d)</string>
+    <string name="mafia_config_only_neutral_allowed">Alleen neutrale rollen zijn toegestaan</string>
+    <string name="mafia_config_neutral_count_negative">Aantal neutrale spelers kan niet negatief zijn</string>
+    <string name="mafia_config_roles_exceed_players">%1$d speciale rollen ingesteld, maar er zijn slechts %2$d spelers in het spel. Verminder het aantal rollen of voeg meer spelers toe.</string>
+
+    <!-- Leave / disconnect confirmation -->
+    <string name="btn_leave">Verlaten</string>
+    <string name="leave_button_desc">Verlaten</string>
+    <string name="leave_confirm_title">Verlaten?</string>
+    <string name="leave_confirm_message_host_lobby">Je bent de host. Als je nu vertrekt, wordt de lobby voor iedereen gesloten.</string>
+    <string name="leave_confirm_message_host_game">Je bent de host. Als je nu vertrekt, wordt het spel voor iedereen beëindigd.</string>
+    <string name="leave_confirm_message_player">Weet je zeker dat je wilt vertrekken? Je wordt van het spel losgekoppeld.</string>
+    <string name="leave_confirm_positive">Verlaten</string>
+    <string name="leave_confirm_negative">Annuleren</string>
+    <string name="host_ended_game">De host heeft het spel beëindigd.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Verbindingsproblemen?</string>
+    <string name="diagnostics_title">Beperkingen voor apps op de achtergrond</string>
+    <string name="diagnostics_tips_full">Sommige apparaten beperken apps op de achtergrond zeer streng
+                                    (Xiaomi, Oppo, Realme, Huawei, Vivo en andere kunnen PocketTable op de achtergrond sluiten,
+                                    waardoor de verbinding tijdens het spelen kan worden verbroken).\n\nOplossing:\n
+                                        1. Ga naar Instellingen → Batterij → Batterijbeheer voor apps\n
+                                        2. Zoek PocketTable\n
+                                        3. Selecteer \"Niet optimaliseren\" of \"Achtergrondactiviteit toestaan\"\n\n
+                                    Xiaomi (MIUI): schakel ook \"Automatisch starten\" in voor PocketTable via Instellingen → Apps → Apps beheren.\n
+                                    Oppo/Realme (ColorOS): Instellingen → Batterij → Batterijbeheer voor apps → PocketTable → Achtergrondactiviteit toestaan.\n
+                                    Huawei (EMUI): Instellingen → Batterij → App starten → PocketTable → stel in op Handmatig beheren en schakel alle 3 opties in.\n
+                                    Vivo (FuntouchOS): Instellingen → Batterij → Beheer van energieverbruik op de achtergrond → sta PocketTable toe.</string>
+    <string name="diagnostics_battery_button">Batterij-instellingen openen</string>
+    <string name="diagnostics_restart_button">App opnieuw starten</string>
+
+</resources>

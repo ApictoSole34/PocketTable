@@ -127,8 +127,8 @@
 
                     <ImageView
                         android:id="@+id/ivPoker"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:src="@drawable/icon_poker"
                         android:scaleType="fitCenter"/>
 
@@ -149,8 +149,8 @@
 
                     <ImageView
                         android:id="@+id/ivColorClash"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:src="@drawable/icon_colorclash"
                         android:scaleType="fitCenter"/>
                 </LinearLayout>
@@ -169,8 +169,8 @@
 
                     <ImageView
                         android:id="@+id/ivMafia"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:src="@drawable/icon_mafia"
                         android:scaleType="fitCenter"/>
                 </LinearLayout>
@@ -197,4 +197,15 @@
         android:text="@string/options_icon"
         android:background="@drawable/bg_icon_circle"
         android:contentDescription="@string/options_button_desc"/>
+
+    <Button
+        android:id="@+id/btnDiagnostics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:text="@string/diagnostics_button"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/button_background"
+        android:textColor="@color/white"/>
 </FrameLayout>

@@ -33,8 +33,8 @@ public class PokerHostServer extends GenericHostServer {
     }
     private StateChangeListener stateListener;
 
-    public PokerHostServer(int port, PokerGame game, UUID hostPlayerId) {
-        super(port);
+    public PokerHostServer(int port, PokerGame game, UUID hostPlayerId, String roomCode) {
+        super(port, roomCode);
         this.game = game;
         this.hostPlayerId = hostPlayerId;
     }

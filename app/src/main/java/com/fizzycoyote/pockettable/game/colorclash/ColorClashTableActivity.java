@@ -27,6 +27,7 @@ import com.fizzycoyote.pockettable.engine.colorclash.ColorClashRules;
 import com.fizzycoyote.pockettable.models.colorclash.ColorClashState;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashClient;
 import com.fizzycoyote.pockettable.network.colorclash.ColorClashHostServer;
+import com.fizzycoyote.pockettable.utils.AppDialog;
 import com.fizzycoyote.pockettable.utils.ClientHolder;
 import com.fizzycoyote.pockettable.utils.GameHolder;
 import com.fizzycoyote.pockettable.utils.LeaveConfirmationHelper;
@@ -76,7 +77,6 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
         isHost = getIntent().getBooleanExtra("isHost", false);
         serverIp = getIntent().getStringExtra("serverIp");
 
-        tvTopCard = findViewById(R.id.tvTopCard);
         tvDrawPile = findViewById(R.id.tvDrawPile);
         tvTurnInfo = findViewById(R.id.tvTurnInfo);
         imgTopCard = findViewById(R.id.imgTopCard);
@@ -106,7 +106,7 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
             }
         });
 
-        applyTopInsetPadding(btnLeave);
+        applyTopInsetPadding(findViewById(R.id.llColorClashContent));
         btnLeave.setOnClickListener(v -> confirmLeave());
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -122,8 +122,7 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
                 List<UUID> playerIds = new ArrayList<>();
                 playerIds.add(playerId);
                 game = new ColorClashGame(this, playerIds);
-                hostServer = new ColorClashHostServer(8888, game, playerId);
-                try { hostServer.start(); } catch (Exception e) { e.printStackTrace(); }
+                hostServer = new ColorClashHostServer(8888, game, playerId, roomCode);                try { hostServer.start(); } catch (Exception e) { e.printStackTrace(); }
             }
             hostServer.setStateListener(state -> runOnUiThread(() -> updateUI(state)));
             updateUI(ColorClashState.fromGame(game, playerId));
@@ -164,8 +163,7 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
                 client.send("GET_STATE");
             } else {
                 try {
-                    client = new ColorClashClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
-                    client.setListener(listener);
+                    client = new ColorClashClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName, roomCode);                    client.setListener(listener);
                     client.connect();
                     tvTurnInfo.setText(getString(R.string.colorclash_connecting));
                 } catch (Exception e) {
@@ -190,6 +188,25 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
         finish();
     }
 
+    /**
+     * Updates the UI to reflect the current game state.
+     *
+     * <p>This method is called whenever a new state snapshot is received from the host
+     * (or after the host processes an action locally). It updates:
+     * <ul>
+     *   <li>The top card and draw pile size</li>
+     *   <li>The player's hand (via {@code handAdapter})</li>
+     *   <li>The current turn indicator</li>
+     *   <li>The opponents' bar with their card counts and status</li>
+     *   <li>The "Last Card" button visibility</li>
+     *   <li>The winner announcement and "Next Round" button (for the host)</li>
+     * </ul>
+     *
+     * @param state the current game state snapshot, or {@code null} if no state is available
+     *
+     * @see #lastState
+     * @see #handAdapter
+     */
     private void updateUI(ColorClashState state) {
         if (state == null) return;
         lastState = state;
@@ -330,7 +347,7 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
         }
         if (ids.isEmpty()) return;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = AppDialog.builder(this);
         builder.setTitle(getString(R.string.colorclash_swap_cards_with));
         builder.setCancelable(false);
         builder.setItems(names.toArray(new String[0]), (dialog, which) -> onTargetChosen.accept(ids.get(which)));
@@ -406,7 +423,7 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
                 getString(R.string.color_green),
                 getString(R.string.color_blue)
         };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = AppDialog.builder(this);
         builder.setTitle(getString(R.string.colorclash_choose_color));
         builder.setItems(displayLabels, (dialog, which) -> {
             chosenColor = colorValues[which];
@@ -419,6 +436,19 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
         sendAction("DRAW");
     }
 
+    /**
+     * Sends an action to the game engine.
+     *
+     * <p>If the player is the host, the action is executed locally and the state is broadcast
+     * to all clients. If the player is a client, the action is sent to the host via WebSocket.
+     *
+     * <p>This method is safe to call from any thread; it runs the action on the appropriate thread.
+     * The UI is updated automatically when the state changes.</p>
+     *
+     * @param action the action string in the format expected by {@link ColorClashGame#performAction}
+     *
+     * @see ColorClashGame#performAction(UUID, String, int)
+     */
     private void sendAction(String action) {
         if (isHost && game != null) {
             try {

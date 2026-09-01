@@ -11,6 +11,27 @@ import com.fizzycoyote.pockettable.engine.poker.PokerGame;
 import com.fizzycoyote.pockettable.engine.poker.PokerPlayer;
 import com.fizzycoyote.pockettable.engine.poker.PokerRound;
 
+/**
+ * Immutable snapshot of the current Poker game state.
+ *
+ * <p>This state is sent from the host to all connected clients after every action.
+ * The viewer sees only their own hole cards; other players' hands are {@code null}.</p>
+ *
+ * @param round             current betting round ({@link PokerRound})
+ * @param currentBet        the current bet amount that players must match to stay in the hand
+ * @param totalPot          total chips in the pot
+ * @param communityCards    the community cards on the table (size depends on the round)
+ * @param players           map of player IDs to their state ({@link PlayerState})
+ * @param currentPlayerId   the UUID of the player whose turn it currently is
+ * @param dealerId          the UUID of the current dealer (button holder)
+ * @param viewerId          the UUID of the player who requested this state snapshot
+ * @param winnerId          the UUID of the winning player, or {@code null} if the hand is not over
+ * @param winnerHandDesc    description of the winning hand (e.g., "FLUSH", "PAIR"), or {@code null}
+ * @param turnamentOver     {@code true} if the tournament has ended (all but one player eliminated)
+ * @param championId        the UUID of the tournament champion (only valid when {@code tournamentOver} is true)
+ *
+ * @see #fromGame(PokerGame, UUID)
+ */
 public record PokerGameState(
         PokerRound round,
         int currentBet,

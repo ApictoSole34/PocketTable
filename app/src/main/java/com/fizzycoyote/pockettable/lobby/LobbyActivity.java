@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fizzycoyote.pockettable.utils.AppDialog;
 import com.fizzycoyote.pockettable.BaseImmersiveActivity;
 import com.fizzycoyote.pockettable.R;
 import com.fizzycoyote.pockettable.engine.colorclash.ColorClashGame;
@@ -99,7 +100,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
     private EditText etNightSeconds, etDaySeconds, etTrialSeconds;
     private CheckBox cbMafiaTimerEnabled;
     private MafiaGame mafiaGame;
-    private Button btnMafiaRoleInfo, btnRoleInfoLobby;
+    private Button btnRoleInfoLobby;
     //===========================
 
     private String roomCode;
@@ -157,9 +158,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
         etDaySeconds = findViewById(R.id.etDaySeconds);
         etTrialSeconds = findViewById(R.id.etTrialSeconds);
         cbMafiaTimerEnabled = findViewById(R.id.cbMafiaTimerEnabled);
-        btnMafiaRoleInfo = findViewById(R.id.btnMafiaRoleInfo);
         btnRoleInfoLobby = findViewById(R.id.btnRoleInfoLobby);
-        btnMafiaRoleInfo.setOnClickListener(v -> RoleInfoHelper.show(this));
 
         roomCode = getIntent().getStringExtra("roomCode");
         playerId = UUID.fromString(getIntent().getStringExtra("playerId"));
@@ -184,7 +183,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
         rvPlayers.setAdapter(adapter);
 
-        applyTopInsetPadding(btnLeave);
+        applyTopInsetPadding(findViewById(R.id.llLobbyContent));
         btnLeave.setOnClickListener(v -> confirmLeave());
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -255,7 +254,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
         try {
             if (gameType == GameType.POKER) {
                 PokerClient pokerClient = new PokerClient(
-                        new URI("ws://" + serverIp + ":8888"), playerId, playerName);
+                        new URI("ws://" + serverIp + ":8888"), playerId, playerName, roomCode);
 
                 pokerClient.setListener(new PokerClient.GameMessageListener() {
                     @Override
@@ -280,7 +279,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
 
             } else if (gameType == GameType.COLOR_CLASH){
                 ColorClashClient colorClient = new ColorClashClient(
-                        new URI("ws://" + serverIp + ":8888"), playerId, playerName);
+                        new URI("ws://" + serverIp + ":8888"), playerId, playerName, roomCode);
 
                 colorClient.setListener(new ColorClashClient.MessageListener() {
                     @Override
@@ -303,8 +302,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
                 colorClient.connectBlocking();
                 client = colorClient;
             } else if (gameType == GameType.MAFIA) {
-                MafiaClient mafiaClient = new MafiaClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName);
-                mafiaClient.setListener(new MafiaClient.MessageListener() {
+                MafiaClient mafiaClient = new MafiaClient(new URI("ws://" + serverIp + ":8888"), playerId, playerName, roomCode);                mafiaClient.setListener(new MafiaClient.MessageListener() {
                     @Override public void onState(MafiaState state) { runOnUiThread(() -> updatePlayersFromMafiaState(state)); }
                     @Override public void onGameStarted() { runOnUiThread(() -> startGameActivity(GameType.MAFIA.name())); }
                     @Override public void onGameOver() {}
@@ -331,8 +329,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
             pokerGame.getPlayer(playerId).setPlayerName(playerName);
             game = pokerGame;
 
-            PokerHostServer server = new PokerHostServer(8888, pokerGame, playerId);
-            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromPokerState(state)));
+            PokerHostServer server = new PokerHostServer(8888, pokerGame, playerId, roomCode);            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromPokerState(state)));
             hostServer = server;
 
         } else if (gameType == GameType.COLOR_CLASH) {
@@ -340,16 +337,14 @@ public class LobbyActivity extends BaseImmersiveActivity {
             colorClashGame.getPlayer(playerId).setPlayerName(playerName);
             game = colorClashGame;
 
-            ColorClashHostServer server = new ColorClashHostServer(8888, colorClashGame, playerId);
-            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromColorClashState(state)));
+            ColorClashHostServer server = new ColorClashHostServer(8888, colorClashGame, playerId, roomCode);            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromColorClashState(state)));
             hostServer = server;
         }   else if (gameType == GameType.MAFIA) {
             mafiaGame = new TimedMafiaGame(this, List.of(playerId));
             mafiaGame.getPlayer(playerId).setPlayerName(playerName);
             game = mafiaGame;
 
-            MafiaHostServer server = new MafiaHostServer(8888, mafiaGame, playerId);
-            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromMafiaState(state)));
+            MafiaHostServer server = new MafiaHostServer(8888, mafiaGame, playerId, roomCode);            server.setStateListener(state -> runOnUiThread(() -> updatePlayersFromMafiaState(state)));
             hostServer = server;
         }
 
@@ -451,7 +446,7 @@ public class LobbyActivity extends BaseImmersiveActivity {
             qrView.setLayoutParams(params);
             layout.addView(qrView);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = AppDialog.builder(this);
             builder.setTitle(getString(R.string.qr_title) + roomCode);
             builder.setView(layout);
             builder.setPositiveButton(getString(R.string.ok), null);

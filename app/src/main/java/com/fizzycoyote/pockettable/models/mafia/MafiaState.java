@@ -11,6 +11,34 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Immutable snapshot of the current Mafia game state.
+ *
+ * <p>This state contains role-specific information – players see different things
+ * depending on their role (e.g., Mafia members see other Mafia members).</p>
+ *
+ * @param phase                 current game phase ({@link MafiaPhase})
+ * @param dayNumber             current day number (starts at 1, increments after each night)
+ * @param players               map of player IDs to their public information ({@link PlayerInfo})
+ * @param viewerId              the UUID of the player who requested this state snapshot
+ * @param viewerRole            the role of the viewer, or {@code null} if not known
+ * @param knownMafiaIds         list of Mafia member IDs visible to the viewer (only if viewer is Mafia)
+ * @param viewerPrivateNotes    the viewer's private notes (only visible to them)
+ * @param viewerNotesRevealed   {@code true} if the viewer's notes have been revealed after death
+ * @param lastNight             the result of the most recent night phase, or {@code null}
+ * @param lastDay               the result of the most recent day phase, or {@code null}
+ * @param viewerPendingTarget   the viewer's current action target, or {@code null} if none or already acted
+ * @param nominationCounts      current nomination vote counts (non-empty only in {@code DAY_NOMINATION} phase)
+ * @param currentYesVotes       number of "Guilty" votes in the current trial (only in {@code DAY_VOTE} phase)
+ * @param currentNoVotes        number of "Not Guilty" votes in the current trial (only in {@code DAY_VOTE} phase)
+ * @param myInvestigation       the result of the viewer's investigation (only if viewer is Detective and acted)
+ * @param winner                raw winner description string (deprecated – prefer {@code winnerInfo})
+ * @param winnerInfo            detailed win condition information, or {@code null} if game is not over
+ * @param timerEnabled          {@code true} if the game uses a timer for phase resolution
+ * @param remainingSeconds      seconds remaining in the current timer, or 0 if timer is disabled
+ *
+ * @see #fromGame(MafiaGame, UUID)
+ */
 public record MafiaState(
         MafiaPhase phase,
         int dayNumber,

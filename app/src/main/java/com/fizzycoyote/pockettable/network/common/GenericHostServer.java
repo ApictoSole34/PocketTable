@@ -27,6 +27,14 @@ import java.util.concurrent.TimeUnit;
  * what happens when a player joins, what happens if they don't reconnect in
  * time, and how to interpret incoming action messages.</p>
  *
+ * <p><b>Room code enforcement:</b> every connecting client must send the
+ * correct {@code roomCode} handshake header (see {@link GenericGameClient}).
+ * Connections presenting a missing or mismatched code are rejected in
+ * {@link #onOpen} before they're added to {@link #clientPlayerMap} or the
+ * game is told about them. Without this check, the 6-character room code
+ * only ever gated UDP discovery of the host's IP - anyone who reached the
+ * IP directly (e.g. by scanning the local subnet) could join any game.</p>
+ *
  * <p>Not tied to any particular game's rules or message format - each game
  * (poker, Color Clash, etc.) defines its own JSON payloads and passes them
  * through {@link #onClientMessage}.</p>
@@ -37,14 +45,18 @@ public abstract class GenericHostServer extends WebSocketServer {
 
     private static final int CONNECTION_LOST_TIMEOUT_SECONDS = 20;
     private static final int DISCONNECT_GRACE_PERIOD_SECONDS = 20;
+    private static final int INVALID_ROOM_CODE_CLOSE_CODE = 4001;
+
+    private final String expectedRoomCode;
 
     private final Set<WebSocket> clients = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final Map<WebSocket, UUID> clientPlayerMap = new ConcurrentHashMap<>();
     private final Map<UUID, ScheduledFuture<?>> pendingDisconnects = new ConcurrentHashMap<>();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-    protected GenericHostServer(int port) {
+    protected GenericHostServer(int port, String roomCode) {
         super(new InetSocketAddress(port));
+        this.expectedRoomCode = roomCode;
         setConnectionLostTimeout(CONNECTION_LOST_TIMEOUT_SECONDS);
     }
 
@@ -80,6 +92,18 @@ public abstract class GenericHostServer extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
+        String incomingRoomCode = handshake.getFieldValue("roomCode");
+        boolean roomCodeValid = expectedRoomCode == null
+                || expectedRoomCode.isEmpty()
+                || (incomingRoomCode != null && incomingRoomCode.equalsIgnoreCase(expectedRoomCode));
+
+        if (!roomCodeValid) {
+            System.out.println("REJECTED connection: room code mismatch (expected '"
+                    + expectedRoomCode + "', got '" + incomingRoomCode + "')");
+            conn.close(INVALID_ROOM_CODE_CLOSE_CODE, "Invalid room code");
+            return;
+        }
+
         clients.add(conn);
 
         String playerIdStr = handshake.getFieldValue("playerId");
@@ -198,6 +222,10 @@ public abstract class GenericHostServer extends WebSocketServer {
         broadcastRaw(json);
     }
 
+    /**
+     * Tells every connected client the session is over (e.g. the host chose
+     * to leave/end the game).
+     */
     public void broadcastGameOver() {
         GameMessage msg = new GameMessage(MessageType.GAME_OVER, null);
         String json = new Gson().toJson(msg);

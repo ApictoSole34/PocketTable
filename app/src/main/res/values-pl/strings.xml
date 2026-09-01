@@ -327,6 +327,10 @@
     <string name="mafia_candidate_label">Kandydat</string>
     <string name="mafia_guilty_content_desc">Winny</string>
     <string name="mafia_not_guilty_content_desc">Niewinny</string>
+    <string name="mafia_phase_nomination">☀️ Poranek</string>
+    <string name="mafia_phase_vote">⚖️ Proces</string>
+    <string name="mafia_phase_night">🌙 Noc</string>
+    <string name="mafia_phase_game_over">💀 Koniec gry</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">Nie znaleziono gracza: %s</string>
@@ -367,4 +371,21 @@
     <string name="leave_confirm_positive">Opuść</string>
     <string name="leave_confirm_negative">Anuluj</string>
     <string name="host_ended_game">Host zakończył grę.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Problemy z połączeniem?</string>
+    <string name="diagnostics_title">Ograniczenia działania w tle</string>
+    <string name="diagnostics_tips_full">Niektóre urządzenia bardzo agresywnie ograniczają działanie aplikacji w tle
+                                    (Xiaomi, Oppo, Realme, Huawei, Vivo i inne mogą zamykać PocketTable w tle,
+                                    powodując rozłączenia podczas gry).\n\nNaprawa:\n
+                                        1. Przejdź do Ustawienia → Bateria → Zarządzanie baterią aplikacji\n
+                                        2. Znajdź PocketTable\n
+                                        3. Wybierz \"Nie optymalizuj\" lub \"Zezwalaj na działanie w tle\"\n\n
+                                    Xiaomi (MIUI): włącz również \"Autostart\" dla PocketTable w Ustawienia → Aplikacje → Zarządzaj aplikacjami.\n
+                                    Oppo/Realme (ColorOS): Ustawienia → Bateria → Zarządzanie baterią aplikacji → PocketTable → Zezwalaj na działanie w tle.\n
+                                    Huawei (EMUI): Ustawienia → Bateria → Uruchamianie aplikacji → PocketTable → ustaw na Zarządzaj ręcznie i włącz wszystkie 3 opcje.\n
+                                    Vivo (FuntouchOS): Ustawienia → Bateria → Zarządzanie zużyciem energii w tle → zezwól na działanie PocketTable.</string>
+    <string name="diagnostics_battery_button">Otwórz ustawienia baterii</string>
+    <string name="diagnostics_restart_button">Uruchom aplikację ponownie</string>
+
 </resources>

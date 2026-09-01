@@ -327,6 +327,10 @@
     <string name="mafia_candidate_label">Kandidatas</string>
     <string name="mafia_guilty_content_desc">Kaltas</string>
     <string name="mafia_not_guilty_content_desc">Nekaltas</string>
+    <string name="mafia_phase_nomination">☀️ Rytas</string>
+    <string name="mafia_phase_vote">⚖️ Teismas</string>
+    <string name="mafia_phase_night">🌙 Naktis</string>
+    <string name="mafia_phase_game_over">💀 Žaidimas baigtas</string>
 
     <!-- Mafia Game Errors -->
     <string name="mafia_player_not_found">Žaidėjas nerastas: %s</string>
@@ -367,4 +371,21 @@
     <string name="leave_confirm_positive">Išeiti</string>
     <string name="leave_confirm_negative">Atšaukti</string>
     <string name="host_ended_game">Šeimininkas baigė žaidimą.</string>
+
+    <!-- Connection problem dialog -->
+    <string name="diagnostics_button">⚠️ Ryšio problemos?</string>
+    <string name="diagnostics_title">Foninių programėlių apribojimai</string>
+    <string name="diagnostics_tips_full">Kai kurie įrenginiai labai griežtai riboja fone veikiančias programėles
+                                    (Xiaomi, Oppo, Realme, Huawei, Vivo ir kiti įrenginiai gali uždaryti PocketTable fone,
+                                    todėl žaidimo metu gali nutrūkti ryšys).\n\nSprendimas:\n
+                                        1. Eikite į Nustatymai → Baterija → Programėlių baterijos valdymas\n
+                                        2. Raskite PocketTable\n
+                                        3. Pasirinkite „Neoptimizuoti“ arba „Leisti veiklą fone“\n\n
+                                    Xiaomi (MIUI): taip pat įjunkite „Automatinį paleidimą“ PocketTable programėlei per Nustatymai → Programėlės → Tvarkyti programėles.\n
+                                    Oppo/Realme (ColorOS): Nustatymai → Baterija → Programėlių baterijos valdymas → PocketTable → Leisti veiklą fone.\n
+                                    Huawei (EMUI): Nustatymai → Baterija → Programėlių paleidimas → PocketTable → pasirinkite Valdyti rankiniu būdu ir įjunkite visus 3 jungiklius.\n
+                                    Vivo (FuntouchOS): Nustatymai → Baterija → Fone naudojamos energijos valdymas → leiskite PocketTable veikti.</string>
+    <string name="diagnostics_battery_button">Atidaryti baterijos nustatymus</string>
+    <string name="diagnostics_restart_button">Paleisti programėlę iš naujo</string>
+
 </resources>

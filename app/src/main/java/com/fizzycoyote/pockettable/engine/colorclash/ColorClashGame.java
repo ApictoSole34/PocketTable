@@ -154,7 +154,7 @@ public class ColorClashGame implements GameEngine {
         p2.addCards(temp);
     }
 
-    public void dealCardsToPlayer(ColorClashPlayer player, int count) {
+    public synchronized void dealCardsToPlayer(ColorClashPlayer player, int count) {
         for (int i = 0; i < count; i++) {
             if (deck.isEmpty()) refillDeckIfNeeded();
             player.addCard(deck.draw());
@@ -178,24 +178,82 @@ public class ColorClashGame implements GameEngine {
         }
     }
 
-    public void setRules(ColorClashRules rules) {
+    public synchronized void setRules(ColorClashRules rules) {
         this.rules = rules != null ? rules : ColorClashRules.DEFAULT;
     }
 
-    public ColorClashRules getRules() {
+    public synchronized ColorClashRules getRules() {
         return rules;
     }
 
     @Override
-    public void startGame() {}
+    public synchronized void startGame() {}
 
+    /**
+     * Executes a player's action in the Color Clash game.
+     *
+     * <p>Supported action formats (the {@code action} parameter):
+     * <table border="1" style="border-collapse: collapse; width: 100%;">
+     *   <tr style="background: #f0f0f0;">
+     *     <th style="padding: 8px;">Action</th>
+     *     <th style="padding: 8px;">Format</th>
+     *     <th style="padding: 8px;">Description</th>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>PLAY</b></td>
+     *     <td style="padding: 8px;"><code>PLAY:{index}</code></td>
+     *     <td style="padding: 8px;">Plays the card at the given index in the player's hand.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>PLAY with color</b></td>
+     *     <td style="padding: 8px;"><code>PLAY:{index}:{color}</code></td>
+     *     <td style="padding: 8px;">Plays a wild card and chooses a color ({@code RED}, {@code YELLOW}, {@code GREEN}, {@code BLUE}).</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>PLAY with target</b></td>
+     *     <td style="padding: 8px;"><code>PLAY:{index}:TARGET:{uuid}</code></td>
+     *     <td style="padding: 8px;">Plays a 7 card and swaps hands with the target player (requires {@code sevenSwap} rule).</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>DRAW</b></td>
+     *     <td style="padding: 8px;"><code>DRAW</code></td>
+     *     <td style="padding: 8px;">Draws one card, or the entire draw stack if {@code drawStack > 0}.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>JUMP_IN</b></td>
+     *     <td style="padding: 8px;"><code>JUMP_IN:{index}</code></td>
+     *     <td style="padding: 8px;">Plays a card identical to the top card, outside your turn (requires {@code jumpIn} rule).</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>CATCH</b></td>
+     *     <td style="padding: 8px;"><code>CATCH:{uuid}</code></td>
+     *     <td style="padding: 8px;">Catches an opponent who has exactly one card and hasn't called {@code CALL_LAST_CARD}.</td>
+     *   </tr>
+     *   <tr>
+     *     <td style="padding: 8px;"><b>CALL_LAST_CARD</b></td>
+     *     <td style="padding: 8px;"><code>CALL_LAST_CARD</code></td>
+     *     <td style="padding: 8px;">Declares that the player has exactly one card left.</td>
+     *   </tr>
+     * </table>
+     *
+     * <p><b>Thread-safety:</b> This method is {@code synchronized} on the game instance
+     * to prevent concurrent modifications from multiple threads.</p>
+     *
+     * @param playerId the UUID of the player performing the action
+     * @param action   the action string in one of the formats described above
+     * @param amount   numeric parameter (unused in Color Clash – always 0)
+     * @throws IllegalStateException    if the game is already over, it's not the player's turn,
+     *                                  or the player has been eliminated
+     * @throws IllegalArgumentException if the action is unknown, the card index is out of bounds,
+     *                                  the card cannot be played, or required parameters are missing
+     */
     @Override
-    public void performAction(UUID playerId, String action, int amount) {
+    public synchronized void performAction(UUID playerId, String action, int amount) {
         if (gameOver) {
             throw new IllegalStateException(getString(R.string.colorclash_error_game_over));
         }
 
-        ColorClashPlayer player = getPlayer(playerId);
+        ColorClashPlayer player = getPlayerInternal(playerId);
 
         if (action.startsWith("JUMP_IN:")) {
             if (!rules.jumpIn()) {
@@ -204,7 +262,7 @@ public class ColorClashGame implements GameEngine {
             if (drawStack > 0) {
                 throw new IllegalStateException(getString(R.string.colorclash_error_jumpin_draw_active));
             }
-            if (getCurrentPlayer().getPlayerId().equals(playerId)) {
+            if (getCurrentPlayerInternal().getPlayerId().equals(playerId)) {
                 throw new IllegalStateException(getString(R.string.colorclash_error_use_play));
             }
             int index = Integer.parseInt(action.substring("JUMP_IN:".length()));
@@ -240,18 +298,18 @@ public class ColorClashGame implements GameEngine {
             if (targetId.equals(playerId)) {
                 throw new IllegalArgumentException(getString(R.string.colorclash_error_cannot_catch_self));
             }
-            ColorClashPlayer target = getPlayer(targetId);
+            ColorClashPlayer target = getPlayerInternal(targetId);
             if (target.getHandSize() != 1 || target.isCalledLastCard()) {
                 throw new IllegalArgumentException(
                         getString(R.string.colorclash_error_nothing_to_catch, target.getPlayerName())
                 );
             }
-            dealCardsToPlayer(target, 2);
+            dealCardsToPlayerInternal(target, 2);
             target.callLastCard();
             return;
         }
 
-        if (!getCurrentPlayer().getPlayerId().equals(playerId)) {
+        if (!getCurrentPlayerInternal().getPlayerId().equals(playerId)) {
             throw new IllegalStateException(getString(R.string.colorclash_error_not_your_turn));
         }
         if (player.isEliminated()) {
@@ -307,7 +365,7 @@ public class ColorClashGame implements GameEngine {
             }
 
             if (isSeven && rules.sevenSwap() && swapTarget != null && !player.hasWon()) {
-                ColorClashPlayer target = getPlayer(swapTarget);
+                ColorClashPlayer target = getPlayerInternal(swapTarget);
                 swapHands(player, target);
             }
 
@@ -359,16 +417,16 @@ public class ColorClashGame implements GameEngine {
     }
 
     @Override
-    public Object getState(UUID viewerId) {
+    public synchronized Object getState(UUID viewerId) {
         return ColorClashState.fromGame(this, viewerId);
     }
 
     @Override
-    public boolean isGameOver() {
+    public synchronized boolean isGameOver() {
         return gameOver;
     }
 
-    public void resetForNewRound() {
+    public synchronized void resetForNewRound() {
         gameOver = false;
         winnerId = null;
         drawStack = 0;
@@ -391,52 +449,67 @@ public class ColorClashGame implements GameEngine {
         currentColor = topCard.color();
     }
 
-    public List<ColorClashPlayer> getPlayers() {
+    public synchronized List<ColorClashPlayer> getPlayers() {
         return new ArrayList<>(players);
     }
 
-    public ColorClashPlayer getPlayer(UUID playerId) {
+    public synchronized ColorClashPlayer getPlayer(UUID playerId) {
+        return getPlayerInternal(playerId);
+    }
+
+    private ColorClashPlayer getPlayerInternal(UUID playerId) {
         for (ColorClashPlayer p : players) {
             if (p.getPlayerId().equals(playerId)) return p;
         }
         throw new IllegalArgumentException(getString(R.string.colorclash_error_player_not_found, playerId));
     }
 
-    public ColorClashPlayer getCurrentPlayer() {
+    public synchronized ColorClashPlayer getCurrentPlayer() {
+        return getCurrentPlayerInternal();
+    }
+
+    private ColorClashPlayer getCurrentPlayerInternal() {
         if (players.isEmpty()) return null;
         return players.get(currentPlayerIndex);
     }
 
-    public ColorClashCard getTopCard() {
+    public synchronized ColorClashCard getTopCard() {
         return topCard;
     }
 
-    public CardColor getCurrentColor() {
+    public synchronized CardColor getCurrentColor() {
         return currentColor;
     }
 
-    public int getDrawStack() {
+    public synchronized int getDrawStack() {
         return drawStack;
     }
 
-    public boolean isClockwise() {
+    public synchronized boolean isClockwise() {
         return clockwise;
     }
 
-    public ColorClashDeck getDeck() {
+    public synchronized ColorClashDeck getDeck() {
         return deck;
     }
 
-    public UUID getWinnerId() {
+    public synchronized UUID getWinnerId() {
         return winnerId;
     }
 
-    public void addPlayer(ColorClashPlayer player) {
+    public synchronized void addPlayer(ColorClashPlayer player) {
         players.add(player);
     }
 
-    public boolean hasCalledLastCard(UUID playerId) {
-        return getPlayer(playerId).isCalledLastCard();
+    public synchronized boolean hasCalledLastCard(UUID playerId) {
+        return getPlayerInternal(playerId).isCalledLastCard();
+    }
+
+    private void dealCardsToPlayerInternal(ColorClashPlayer player, int count) {
+        for (int i = 0; i < count; i++) {
+            if (deck.isEmpty()) refillDeckIfNeeded();
+            player.addCard(deck.draw());
+        }
     }
 
     // ============= for testing ========================

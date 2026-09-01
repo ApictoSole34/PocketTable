@@ -36,6 +36,21 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
+            <Button
+                android:id="@+id/btnLeave"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="@string/btn_leave"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:background="@drawable/btn_mafia_rounded"
+                android:textColor="@color/white"
+                android:layout_marginEnd="8dp"/>
+
             <TextView
                 android:id="@+id/tvPhase"
                 android:layout_width="0dp"
@@ -223,17 +238,4 @@
                 android:layout_marginEnd="4dp"/>
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/btnLeave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_margin="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/btn_leave"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:background="@drawable/btn_mafia_rounded"
-        android:contentDescription="@string/leave_button_desc"/>
 </FrameLayout>
