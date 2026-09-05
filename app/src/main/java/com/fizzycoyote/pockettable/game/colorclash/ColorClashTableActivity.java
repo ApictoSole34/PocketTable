@@ -41,7 +41,7 @@ import java.util.function.Consumer;
 
 public class ColorClashTableActivity extends BaseImmersiveActivity {
 
-    private TextView tvTopCard, tvDrawPile, tvTurnInfo;
+    private TextView tvDrawPile, tvTurnInfo;
     private ImageView imgTopCard, imgDrawPile;
     private RecyclerView rvHand;
     private Button btnDraw, btnNextRound, btnLastCard;
@@ -213,7 +213,6 @@ public class ColorClashTableActivity extends BaseImmersiveActivity {
 
         ColorClashCard topCard = state.topCard();
         if (topCard != null) {
-            tvTopCard.setText(getString(R.string.colorclash_top_card_label, topCard.color().name(), topCard.type().name()));
             imgTopCard.setImageResource(ColorClashCardResourceHelper.getCardResource(this, topCard));
         }
         tvDrawPile.setText(getString(R.string.colorclash_draw_pile_label, state.drawPileSize()));

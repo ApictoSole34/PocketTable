@@ -19,6 +19,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fizzycoyote.pockettable.BuildConfig;
 import com.fizzycoyote.pockettable.utils.AppDialog;
 import com.fizzycoyote.pockettable.BaseImmersiveActivity;
 import com.fizzycoyote.pockettable.R;
@@ -198,10 +199,14 @@ public class LobbyActivity extends BaseImmersiveActivity {
         }
 
         if (isHost) {
-            String myIp = NetworkUtils.getLocalIpAddress();
-            tvIp.setText(getString(R.string.ip_label) + myIp);
             tvIp.setVisibility(View.VISIBLE);
-
+            String myIp = NetworkUtils.getLocalIpAddress();
+            if (BuildConfig.DEBUG) {
+                tvIp.setText(getString(R.string.ip_label) + myIp);
+                tvIp.setVisibility(View.VISIBLE);
+            } else {
+                tvIp.setVisibility(View.GONE);
+            }
             DiscoveryService.broadcastHost(roomCode, myIp, gameType.name());
 
             if (gameType == GameType.POKER) {
